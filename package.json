@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "create-dashboard-users": "node --env-file=.env.local scripts/create-dashboard-users.mjs"
   },
   "dependencies": {
     "@react-pdf/renderer": "^3.4.4",

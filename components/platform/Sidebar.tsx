@@ -15,37 +15,22 @@ const nav = [
 export function Sidebar() {
   const pathname = usePathname();
   return (
-    <aside
-      className="w-60 flex-shrink-0 flex flex-col border-r overflow-y-auto"
-      style={{
-        background: "rgba(4,4,10,.55)",
-        backdropFilter: "blur(28px)",
-        borderColor: "rgba(255,255,255,.12)",
-      }}
-    >
-      <div
-        className="p-5 border-b flex items-center gap-2 flex-shrink-0"
-        style={{ borderColor: "var(--glass-border)" }}
-      >
-        <Link
-          href="/dashboard"
-          className="font-[family-name:var(--font-syne)] text-base font-extrabold tracking-tight"
-          style={{ fontFamily: "var(--font-syne)" }}
-        >
-          <span className="chrome-text">BRANSOL</span>
+    <aside className="dashboard-sidebar">
+      <div className="dashboard-sidebar-logo">
+        <Link href="/dashboard" style={{ textDecoration: "none", color: "inherit" }}>
+          <span className="chrome-text">BRAN</span>
+          <span style={{ color: "var(--text-pri)" }}>SOL</span>
         </Link>
+        <span className="dashboard-role-tag">Client</span>
       </div>
-      <nav className="p-3 flex-1">
+      <nav className="dashboard-nav-section" style={{ flex: 1 }}>
         {nav.map(({ href, label }) => {
-          const active = pathname === href || (href !== "/dashboard" && pathname.startsWith(href));
+          const active = pathname === href || (href !== "/dashboard" && pathname?.startsWith(href));
           return (
             <Link
               key={href}
               href={href}
-              className={`block py-2.5 px-3 rounded-md text-sm mb-0.5 transition-colors ${
-                active ? "bg-[rgba(124,131,229,.15)] border border-[rgba(124,131,229,.35)]" : "border border-transparent"
-              }`}
-              style={{ color: active ? "var(--iris)" : "var(--text-sec)" }}
+              className={`dashboard-nav-item ${active ? "active" : ""}`}
             >
               {label}
             </Link>

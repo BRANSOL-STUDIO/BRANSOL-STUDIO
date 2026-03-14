@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
-import { DeliverableCard } from "@/components/platform/DeliverableCard";
 import { fmtDate } from "@/lib/utils";
+import { DeliverableRow } from "@/components/platform/DeliverableRow";
 
 export default async function DeliverablesPage() {
   const supabase = await createClient();
@@ -10,33 +10,31 @@ export default async function DeliverablesPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <div className="space-y-8">
-      <h1
-        className="text-2xl font-bold tracking-tight"
-        style={{ fontFamily: "var(--font-syne)", color: "var(--text-pri)" }}
-      >
-        Deliverables
-      </h1>
-      <ul className="space-y-4">
+    <div className="space-y-6">
+      <header className="dashboard-page-header">
+        <h2>Deliverables</h2>
+        <p>Review and approve work from BRANSOL</p>
+      </header>
+      <div className="dashboard-card">
+        <div className="dashboard-card-header">
+          <span className="dashboard-card-title">All Deliverables</span>
+        </div>
         {(deliverables ?? []).map((d) => (
-          <li key={d.id}>
-            <DeliverableCard
-              id={d.id}
-              name={d.name}
-              fileType={d.file_type}
-              version={d.version}
-              status={d.status}
-              approvedDate={d.approved_date}
-              createdAt={d.created_at}
-            />
-          </li>
+          <DeliverableRow
+            key={d.id}
+            id={d.id}
+            name={d.name}
+            fileType={d.file_type}
+            version={d.version}
+            status={d.status}
+            approvedDate={d.approved_date}
+            createdAt={d.created_at}
+          />
         ))}
-      </ul>
-      {(!deliverables || deliverables.length === 0) && (
-        <p className="p-8 rounded-xl border border-dashed" style={{ color: "var(--text-ter)", borderColor: "var(--border)" }}>
-          No deliverables yet
-        </p>
-      )}
+        {(!deliverables || deliverables.length === 0) && (
+          <p className="py-4 text-sm" style={{ color: "var(--text-ter)" }}>No deliverables yet</p>
+        )}
+      </div>
     </div>
   );
 }
