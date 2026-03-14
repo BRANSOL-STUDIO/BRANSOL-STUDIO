@@ -3,17 +3,28 @@ import { createClient } from "@/lib/supabase/server";
 import { fmtDate } from "@/lib/utils";
 
 export default async function DashboardPage() {
-  const supabase = await createClient();
-  const { data: projects } = await supabase
-    .from("projects")
-    .select("id, title, status, progress, due_date")
-    .order("created_at", { ascending: false })
-    .limit(5);
-  const { data: deliverables } = await supabase
-    .from("deliverables")
-    .select("id, name, status, created_at")
-    .order("created_at", { ascending: false })
-    .limit(5);
+  let projects: { id: string; title: string; status: string; progress: number; due_date: string | null }[] | null = null;
+  let deliverables: { id: string; name: string; status: string; created_at: string }[] | null = null;
+
+  try {
+    const supabase = await createClient();
+    const [projRes, delivRes] = await Promise.all([
+      supabase
+        .from("projects")
+        .select("id, title, status, progress, due_date")
+        .order("created_at", { ascending: false })
+        .limit(5),
+      supabase
+        .from("deliverables")
+        .select("id, name, status, created_at")
+        .order("created_at", { ascending: false })
+        .limit(5),
+    ]);
+    projects = projRes.data ?? null;
+    deliverables = delivRes.data ?? null;
+  } catch {
+    // Missing env or Supabase unreachable: show empty state instead of 500
+  }
 
   return (
     <div className="space-y-10">
