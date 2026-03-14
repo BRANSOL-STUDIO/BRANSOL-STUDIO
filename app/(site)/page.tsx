@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HomePageBg } from "@/components/site/HomePageBg";
 import { HomeHero } from "@/components/site/HomeHero";
 import { DisciplineTicker } from "@/components/site/DisciplineTicker";
 import { WorkScrollSection } from "@/components/site/WorkScrollSection";
@@ -30,6 +31,7 @@ const diffCards = [
 export default function HomePage() {
   return (
     <>
+      <HomePageBg />
       <HomeHero />
       <DisciplineTicker />
 

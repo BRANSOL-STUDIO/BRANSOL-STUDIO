@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 const links = [
@@ -11,15 +12,25 @@ const links = [
 ];
 
 export function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <nav
       id="nav"
-      className="fixed top-0 left-0 right-0 z-[50] grid grid-cols-[1fr_auto_1fr] items-center px-6 md:px-[72px] border-b border-white/5"
+      className={`nav fixed top-0 left-0 right-0 z-[50] grid grid-cols-[1fr_auto_1fr] items-center px-6 md:px-[72px] border-b border-white/5 ${scrolled ? "scrolled" : ""}`}
       style={{
-        height: "var(--nav-h)",
+        height: scrolled ? "58px" : "var(--nav-h)",
         paddingLeft: "calc(var(--pad-x) + 3px)",
-        background: "rgba(6,6,8,.65)",
-        backdropFilter: "blur(20px)",
+        background: scrolled ? "rgba(6,6,8,.92)" : "rgba(6,6,8,.65)",
+        backdropFilter: scrolled ? "blur(28px)" : "blur(20px)",
+        borderColor: scrolled ? "var(--border)" : "rgba(255,255,255,0.05)",
+        transition: "background 0.4s ease, border-color 0.35s ease, height 0.3s ease",
       }}
     >
       <Link
