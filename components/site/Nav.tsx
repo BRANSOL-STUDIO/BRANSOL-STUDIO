@@ -8,45 +8,62 @@ const links = [
   { href: "/platform", label: "Platform" },
   { href: "/studio", label: "Studio" },
   { href: "/perspectives", label: "Perspectives" },
-  { href: "/begin", label: "Begin" },
 ];
 
 export function Nav() {
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-[100] flex justify-between items-center px-6 py-5 md:px-[72px] border-b border-[var(--border)]"
+      id="nav"
+      className="fixed top-0 left-0 right-0 z-[50] grid grid-cols-[1fr_auto_1fr] items-center px-6 md:px-[72px] border-b border-white/5"
       style={{
-        background: "rgba(6,6,8,0.7)",
+        height: "var(--nav-h)",
+        paddingLeft: "calc(var(--pad-x) + 3px)",
+        background: "rgba(6,6,8,.65)",
         backdropFilter: "blur(20px)",
       }}
     >
       <Link
         href="/"
-        className="font-[family-name:var(--font-syne)] text-lg font-extrabold tracking-tight"
+        className="nav-logo justify-self-start font-[family-name:var(--font-syne)] text-lg font-extrabold tracking-tight flex-shrink-0 no-underline"
         style={{ fontFamily: "var(--font-syne)" }}
       >
-        <span className="chrome-text">BRANSOL</span>
+        <span className="chrome-text">BRAN</span>
+        <span style={{ color: "var(--text-pri)" }}>SOL</span>
       </Link>
-      <ul className="hidden md:flex gap-8 list-none">
+      <ul className="hidden md:flex items-center gap-8 list-none justify-self-center">
         {links.map(({ href, label }) => (
           <li key={href}>
             <Link
               href={href}
-              className="text-[10px] tracking-[0.2em] uppercase transition-colors hover:opacity-100"
-              style={{ color: "var(--text-ter)" }}
+              className="text-[9px] tracking-[0.28em] uppercase no-underline transition-colors"
+              style={{ color: "var(--ter)" }}
             >
               {label}
             </Link>
           </li>
         ))}
       </ul>
-      <Link
-        href="/auth/login"
-        className="text-[10px] tracking-[0.2em] uppercase"
-        style={{ color: "var(--text-ter)" }}
-      >
-        Client login
-      </Link>
+      <div className="flex items-center gap-6 justify-self-end">
+        <Link
+          href="/auth/login"
+          className="text-[9px] tracking-[0.28em] uppercase no-underline transition-colors hover:opacity-90"
+          style={{ color: "var(--sub)" }}
+        >
+          Login
+        </Link>
+        <Link
+          href="/begin"
+          className="nav-cta text-[9px] tracking-[0.28em] uppercase px-6 py-2.5 no-underline whitespace-nowrap"
+          style={{
+            color: "#060608",
+            background: "var(--chrome)",
+            backgroundSize: "300% 300%",
+            animation: "cSpin 4s ease infinite",
+          }}
+        >
+          Begin
+        </Link>
+      </div>
     </nav>
   );
 }

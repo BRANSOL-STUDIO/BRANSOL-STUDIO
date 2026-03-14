@@ -1,0 +1,367 @@
+/* ── Work page (from bransol-work.html) ── */
+
+/* Hero */
+.work-hero {
+  position: relative;
+  z-index: 1;
+  padding: calc(var(--nav-h) + 80px) var(--pad-x) 0 calc(var(--pad-x) + 3px);
+  overflow: hidden;
+}
+.work-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 70% at 80% 30%, rgba(124, 131, 229, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 5% 70%, rgba(6, 214, 160, 0.12) 0%, transparent 55%);
+}
+.work-hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: flex-end;
+  padding-bottom: 64px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+.work-hero-eyebrow {
+  font-family: var(--font-dm-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: rgba(240, 239, 245, 0.4);
+  display: block;
+  margin-bottom: 20px;
+}
+.work-hero-title {
+  font-family: var(--font-syne), sans-serif;
+  font-size: clamp(52px, 7vw, 112px);
+  font-weight: 800;
+  letter-spacing: -0.055em;
+  line-height: 0.85;
+  color: var(--text-pri);
+}
+.work-hero-desc {
+  font-size: 16px;
+  color: var(--sub);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+.work-hero-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-dm-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ter);
+  padding: 9px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+/* Filter bar */
+.work-filter-section {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 40;
+  background: rgba(4, 4, 10, 0.55);
+  backdrop-filter: blur(28px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.3);
+  padding: 0 var(--pad-x) 0 calc(var(--pad-x) + 3px);
+}
+.work-filter-inner {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.work-filter-inner::-webkit-scrollbar {
+  display: none;
+}
+.work-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 16px 0;
+  border-right: 1px solid var(--border);
+  padding-right: 24px;
+  margin-right: 24px;
+  flex-shrink: 0;
+}
+.work-filter-group:last-child {
+  border-right: none;
+  margin-right: 0;
+}
+.work-filter-group-label {
+  font-family: var(--font-dm-mono), monospace;
+  font-size: 8px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ter);
+  margin-right: 14px;
+  white-space: nowrap;
+}
+.work-filter-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+.work-filter-btn {
+  font-family: var(--font-dm-mono), monospace;
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--ter);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.work-filter-btn:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--sub);
+}
+.work-filter-btn.active {
+  background: rgba(124, 131, 229, 0.18);
+  color: var(--iris);
+  border-color: rgba(124, 131, 229, 0.4);
+}
+.work-filter-count {
+  margin-left: auto;
+  padding: 16px 0;
+  flex-shrink: 0;
+}
+.work-count-label {
+  font-family: var(--font-dm-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--ter);
+}
+.work-count-num {
+  color: var(--sub);
+}
+
+/* Archive */
+.work-archive {
+  position: relative;
+  z-index: 1;
+  padding: 64px var(--pad-x) 120px calc(var(--pad-x) + 3px);
+}
+.work-archive::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 20% 20%, rgba(124, 131, 229, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 35% at 80% 70%, rgba(6, 214, 160, 0.07) 0%, transparent 55%);
+}
+.work-project-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+/* Project card */
+.work-project-card {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  margin-bottom: 2px;
+  overflow: hidden;
+  display: block;
+  position: relative;
+  text-decoration: none;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  transition: border-color 0.3s, background 0.3s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+}
+.work-project-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  z-index: 1;
+  pointer-events: none;
+}
+.work-project-card:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.07);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+.work-project-card:hover .work-pc-visual {
+  transform: scale(1.04);
+}
+.work-project-card:hover .work-pc-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+.work-project-card:hover .work-pc-overlay {
+  opacity: 1;
+}
+
+.work-pc-visual-wrap {
+  overflow: hidden;
+  position: relative;
+  display: block;
+}
+.work-pc-visual {
+  width: 100%;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.work-pc-visual svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: top;
+}
+.work-pc-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(6, 6, 8, 0.7));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+}
+.work-pc-overlay-hint {
+  font-family: var(--font-dm-mono), monospace;
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(240, 239, 245, 0.7);
+}
+
+.work-pc-info {
+  padding: 20px 22px 24px;
+}
+.work-pc-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.work-pc-sector {
+  font-family: var(--font-dm-mono), monospace;
+  font-size: 7px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid;
+  border-radius: 0;
+}
+.work-pc-num {
+  font-family: var(--font-dm-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--ter);
+}
+.work-pc-name {
+  font-family: var(--font-syne), sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 6px;
+  color: var(--text-pri);
+}
+.work-pc-discipline {
+  font-family: var(--font-dm-mono), monospace;
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ter);
+  margin-bottom: 12px;
+}
+.work-pc-excerpt {
+  font-size: 12px;
+  color: rgba(240, 239, 245, 0.55);
+  line-height: 1.65;
+}
+.work-pc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+.work-pc-year {
+  font-family: var(--font-dm-mono), monospace;
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  color: var(--ter);
+}
+.work-pc-arrow {
+  font-family: var(--font-dm-mono), monospace;
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  color: var(--sub);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.2s, transform 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.work-pc-arrow svg {
+  width: 12px;
+  height: 12px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+}
+
+/* Card size variants */
+.work-pc-large .work-pc-visual {
+  aspect-ratio: 4 / 3;
+}
+.work-pc-large .work-pc-name {
+  font-size: 22px;
+}
+.work-pc-medium .work-pc-visual {
+  aspect-ratio: 3 / 2;
+}
+.work-pc-medium .work-pc-name {
+  font-size: 18px;
+}
+.work-pc-small .work-pc-visual {
+  aspect-ratio: 16 / 9;
+}
+.work-pc-small .work-pc-name {
+  font-size: 16px;
+}
+
+@media (max-width: 1100px) {
+  .work-project-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .work-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .work-project-grid {
+    grid-template-columns: 1fr;
+  }
+}

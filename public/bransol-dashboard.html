@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRANSOL — Client Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --void:#060608;--deep:#0a0a10;--surface:#111118;--lift:#18181f;--panel:#1e1e27;
+  --border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.14);
+  --text:#f0eff5;--sub:rgba(240,239,245,.75);--ter:rgba(240,239,245,.45);
+  --iris:#7c83e5;--aqua:#06d6a0;--violet:#c77dff;--rose:#ff6b9d;
+  --gold:#ffd166;--sky:#45b7d1;--ember:#ff8c42;
+  --chrome:linear-gradient(135deg,#ff6b9d,#ff8c42,#ffd166,#06d6a0,#4ecdc4,#45b7d1,#7c83e5,#c77dff);
+  --glass-bg:rgba(255,255,255,.045);
+  --glass-bg-hover:rgba(255,255,255,.07);
+  --glass-border:rgba(255,255,255,.1);
+  --glass-strong:rgba(255,255,255,.06);
+  --sidebar-w:240px;--topbar-h:60px;
+}
+html,body{height:100%;overflow:hidden;}
+body{
+  background:#04040a;
+  color:var(--text);font-family:'DM Sans',sans-serif;
+  display:flex;flex-direction:column;
+  position:relative;
+}
+body::before{
+  content:'';
+  position:fixed;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 50% 50% at 75% 10%, rgba(124,131,229,.60) 0%, transparent 60%),
+    radial-gradient(ellipse 38% 52% at 5%  78%, rgba(6,214,160,.48)   0%, transparent 58%),
+    radial-gradient(ellipse 46% 40% at 94% 88%, rgba(199,125,255,.42) 0%, transparent 58%),
+    radial-gradient(ellipse 32% 28% at 42% 52%, rgba(255,107,157,.22) 0%, transparent 52%),
+    radial-gradient(ellipse 28% 24% at 18% 18%, rgba(69,183,209,.26)  0%, transparent 48%),
+    radial-gradient(ellipse 70% 70% at 50% 50%, rgba(4,4,10,.92)      0%, transparent 100%);
+  pointer-events:none;
+}
+#app,#loginScreen{position:relative;z-index:2;}
+
+@keyframes cSpin{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes orbDrift1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(60px,-40px) scale(1.08)}66%{transform:translate(-30px,50px) scale(.94)}}
+@keyframes orbDrift2{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(-70px,30px) scale(1.05)}75%{transform:translate(40px,-60px) scale(.96)}}
+@keyframes orbDrift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(50px,40px) scale(1.07)}}
+
+/* ── ORBS ── */
+.orb-layer{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);}
+.orb1{width:560px;height:480px;top:-80px;right:10%;background:rgba(124,131,229,.45);animation:orbDrift1 18s ease-in-out infinite;}
+.orb2{width:440px;height:520px;bottom:-60px;left:-60px;background:rgba(6,214,160,.38);animation:orbDrift2 22s ease-in-out infinite;}
+.orb3{width:380px;height:360px;bottom:5%;right:-40px;background:rgba(199,125,255,.36);animation:orbDrift3 16s ease-in-out infinite;}
+.orb4{width:260px;height:260px;top:40%;left:30%;background:rgba(255,107,157,.18);animation:orbDrift1 26s ease-in-out infinite reverse;}
+.orb5{width:300px;height:280px;top:15%;left:5%;background:rgba(69,183,209,.22);animation:orbDrift2 20s ease-in-out infinite reverse;}
+
+.chrome-text{background:var(--chrome);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:cSpin 5s ease infinite;}
+.chrome-bg{background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;}
+
+/* ══════════════════════════════════════════
+   LOGIN SCREEN
+══════════════════════════════════════════ */
+#loginScreen{
+  position:fixed;inset:0;z-index:1000;
+  background:var(--void);
+  background-image:
+    radial-gradient(ellipse 60% 55% at 65% 25%, rgba(124,131,229,.55) 0%, transparent 62%),
+    radial-gradient(ellipse 45% 48% at 15% 80%, rgba(6,214,160,.42) 0%, transparent 58%),
+    radial-gradient(ellipse 35% 30% at 85% 75%, rgba(199,125,255,.35) 0%, transparent 55%);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+}
+.login-box{
+  width:420px;
+  background:rgba(8,8,16,.45);
+  backdrop-filter:blur(48px) saturate(200%);
+  -webkit-backdrop-filter:blur(48px) saturate(200%);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 32px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.05) inset, inset 0 1px 0 rgba(255,255,255,.15);
+  padding:48px;
+  animation:fadeUp .6s ease;
+}
+.login-logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:36px;display:block;}
+.login-title{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;letter-spacing:-.04em;margin-bottom:6px;}
+.login-sub{font-size:14px;color:var(--sub);margin-bottom:32px;}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+.field label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--ter);}
+.field input{
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--glass-border);
+  color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;
+  padding:12px 14px;outline:none;transition:border-color .2s;
+  backdrop-filter:blur(8px);
+}
+.field input:focus{border-color:var(--iris);background:rgba(124,131,229,.07);}
+.login-roles{display:flex;gap:8px;margin-bottom:24px;}
+.role-btn{
+  flex:1;padding:9px;border:1px solid var(--glass-border);
+  background:rgba(255,255,255,.03);
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ter);cursor:pointer;transition:all .18s;
+}
+.role-btn:hover{background:rgba(255,255,255,.06);color:var(--sub);}
+.role-btn.active{background:rgba(124,131,229,.15);border-color:rgba(124,131,229,.5);color:var(--iris);}
+.login-btn{
+  width:100%;padding:14px;background:var(--chrome);background-size:300% 300%;
+  animation:cSpin 4s ease infinite;border:none;color:#060608;
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+  cursor:pointer;font-weight:700;transition:opacity .2s;
+}
+.login-btn:hover{opacity:.88;}
+.login-hint{font-size:12px;color:var(--ter);text-align:center;margin-top:16px;}
+
+/* ══════════════════════════════════════════
+   APP SHELL
+══════════════════════════════════════════ */
+#app{display:none;flex:1;overflow:hidden;flex-direction:row;}
+
+/* SIDEBAR — glass panel */
+.sidebar{
+  width:var(--sidebar-w);flex-shrink:0;
+  background:rgba(4,4,10,.55);
+  backdrop-filter:blur(28px) saturate(180%);
+  -webkit-backdrop-filter:blur(28px) saturate(180%);
+  border-right:1px solid rgba(255,255,255,.12);
+  display:flex;flex-direction:column;
+  height:100vh;overflow-y:auto;
+}
+.sidebar-logo{
+  padding:20px 20px 16px;
+  font-family:'Syne',sans-serif;font-size:16px;font-weight:800;letter-spacing:-.02em;
+  border-bottom:1px solid var(--glass-border);
+  display:flex;align-items:center;gap:8px;flex-shrink:0;
+}
+.sidebar-logo .role-tag{
+  font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;
+  padding:3px 7px;background:rgba(124,131,229,.15);border:1px solid rgba(124,131,229,.35);
+  color:var(--iris);margin-left:auto;
+}
+.sidebar-logo .role-tag.admin{background:rgba(255,107,157,.1);border-color:rgba(255,107,157,.35);color:var(--rose);}
+
+.nav-section{padding:12px 10px 4px;flex-shrink:0;}
+.nav-item{
+  display:flex;align-items:center;gap:10px;padding:10px 12px;
+  font-size:13.5px;font-weight:400;color:var(--sub);cursor:pointer;
+  border-radius:6px;transition:all .15s;margin-bottom:2px;
+  border:1px solid transparent;user-select:none;
+}
+.nav-item:hover{background:var(--glass-bg-hover);color:var(--text);border-color:var(--glass-border);}
+.nav-item.active{
+  background:rgba(124,131,229,.12);
+  border-color:rgba(124,131,229,.25);
+  color:var(--text);font-weight:500;
+  box-shadow:inset 0 0 20px rgba(124,131,229,.05);
+}
+.nav-item.active .nav-icon{color:var(--iris);}
+.nav-icon{font-size:14px;width:18px;text-align:center;flex-shrink:0;opacity:.8;}
+.nav-badge{margin-left:auto;font-family:'DM Mono',monospace;font-size:8px;
+  background:var(--rose);color:#fff;padding:2px 6px;border-radius:999px;font-weight:700;}
+
+.sidebar-footer{margin-top:auto;padding:16px;border-top:1px solid var(--glass-border);flex-shrink:0;}
+.user-chip{display:flex;align-items:center;gap:10px;}
+.user-avatar{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-size:11px;font-weight:800;color:#060608;flex-shrink:0;
+}
+.user-name{font-size:13px;font-weight:500;color:var(--text);}
+.user-org{font-size:11px;color:var(--ter);}
+.logout-btn{margin-left:auto;font-size:12px;color:var(--ter);cursor:pointer;padding:4px;}
+.logout-btn:hover{color:var(--rose);}
+
+/* MAIN */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+
+/* TOPBAR — glass */
+.topbar{
+  height:var(--topbar-h);flex-shrink:0;
+  border-bottom:1px solid var(--glass-border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 32px;
+  background:rgba(4,4,10,.45);
+  backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);
+}
+.topbar-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;letter-spacing:-.03em;}
+.topbar-actions{display:flex;align-items:center;gap:10px;}
+.tb-btn{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  padding:9px 18px;border:1px solid var(--glass-border);
+  background:var(--glass-bg);color:var(--sub);cursor:pointer;transition:all .18s;
+  backdrop-filter:blur(8px);border-radius:4px;
+}
+.tb-btn:hover{background:var(--glass-bg-hover);border-color:var(--border2);color:var(--text);}
+.tb-btn.primary{background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;color:#060608;border-color:transparent;font-weight:700;}
+
+/* CONTENT */
+.content{flex:1;overflow-y:auto;padding:32px;}
+.content.hidden{display:none;}
+
+/* ══════════════════════════════════════════
+   COMMON COMPONENTS
+══════════════════════════════════════════ */
+.page-header{margin-bottom:28px;animation:fadeUp .4s ease;}
+.page-header h2{font-family:'Syne',sans-serif;font-size:23px;font-weight:800;letter-spacing:-.04em;margin-bottom:5px;}
+.page-header p{font-size:14px;color:var(--sub);}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+
+/* ── CARDS: no more white boxes — transparent sections ── */
+.card{
+  background:transparent;
+  border:none;
+  border-top:1px solid rgba(255,255,255,.06);
+  padding:24px 0;
+  animation:fadeIn .4s ease;
+}
+.card.boxed{
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid rgba(255,255,255,.14) !important;
+  padding:20px;
+  box-shadow:0 8px 32px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.1);
+}
+.card-sm{padding:16px 0;}
+.card-sm.boxed{padding:14px 18px;}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.card-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--ter);}
+.card-action{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--iris);cursor:pointer;}
+.card-action:hover{color:var(--text);}
+
+/* STAT CARDS — coloured left-border, no box */
+.stat-card{padding:16px 0 16px 18px;border-left:2px solid;animation:fadeIn .4s ease;}
+.stat-card.c-aqua{border-color:var(--aqua);}
+.stat-card.c-iris{border-color:var(--iris);}
+.stat-card.c-rose{border-color:var(--rose);}
+.stat-card.c-gold{border-color:var(--gold);}
+.stat-val{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:4px;}
+.stat-label{font-size:13px;color:var(--sub);}
+.stat-delta{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--aqua);margin-top:8px;}
+.stat-delta.warn{color:var(--gold);}
+.stat-delta.neg{color:var(--rose);}
+
+/* STATUS PILLS — for non-task contexts */
+.pill{display:inline-flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;padding:4px 10px;border:1px solid;}
+.pill.active{border-color:rgba(6,214,160,.35);color:var(--aqua);background:rgba(6,214,160,.09);}
+.pill.pending{border-color:rgba(255,209,102,.35);color:var(--gold);background:rgba(255,209,102,.09);}
+.pill.review{border-color:rgba(124,131,229,.35);color:var(--iris);background:rgba(124,131,229,.09);}
+.pill.overdue{border-color:rgba(255,107,157,.35);color:var(--rose);background:rgba(255,107,157,.09);}
+.pill.complete{border-color:rgba(255,255,255,.14);color:var(--sub);background:rgba(255,255,255,.05);}
+.pill-dot{width:5px;height:5px;border-radius:50%;background:currentColor;animation:pulse 2s infinite;}
+
+/* ── STATUS-COLOURED TASK ROWS ── */
+.task-row{display:flex;align-items:center;gap:0;margin-bottom:8px;overflow:hidden;transition:transform .15s;position:relative;}
+.task-row:hover{transform:translateX(3px);}
+.task-bar{width:3px;flex-shrink:0;align-self:stretch;min-height:62px;}
+.task-row.s-active .task-bar{background:var(--aqua);}
+.task-row.s-pending .task-bar{background:var(--gold);}
+.task-row.s-review .task-bar{background:var(--iris);}
+.task-row.s-overdue .task-bar{background:var(--rose);}
+.task-row.s-complete .task-bar{background:rgba(255,255,255,.15);}
+.task-body{
+  flex:1;padding:14px 18px;
+  backdrop-filter:blur(18px) saturate(160%);
+  -webkit-backdrop-filter:blur(18px) saturate(160%);
+  border-top:1px solid rgba(255,255,255,.1);
+  border-right:1px solid rgba(255,255,255,.1);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 4px 20px rgba(0,0,0,.25);
+  display:flex;align-items:center;gap:16px;
+}
+.task-row.s-active .task-body{background:rgba(6,214,160,.08);}
+.task-row.s-pending .task-body{background:rgba(255,209,102,.08);}
+.task-row.s-review .task-body{background:rgba(124,131,229,.10);}
+.task-row.s-overdue .task-body{background:rgba(255,107,157,.10);}
+.task-row.s-complete .task-body{background:rgba(255,255,255,.04);}
+.task-main{flex:1;}
+.task-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:3px;}
+.task-sub{font-size:12px;color:var(--sub);}
+.task-status-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;flex-shrink:0;}
+.task-row.s-active .task-status-label{color:var(--aqua);}
+.task-row.s-pending .task-status-label{color:var(--gold);}
+.task-row.s-review .task-status-label{color:var(--iris);}
+.task-row.s-overdue .task-status-label{color:var(--rose);}
+.task-row.s-complete .task-status-label{color:var(--ter);}
+
+/* CLIENT ROWS */
+.client-row{display:flex;align-items:center;gap:0;margin-bottom:6px;overflow:hidden;transition:transform .15s;}
+.client-row:hover{transform:translateX(3px);}
+.client-bar{width:3px;flex-shrink:0;align-self:stretch;min-height:54px;}
+.client-row.s-active .client-bar{background:var(--aqua);}
+.client-row.s-pending .client-bar{background:var(--gold);}
+.client-row.s-overdue .client-bar{background:var(--rose);}
+.client-body{flex:1;padding:12px 16px;display:flex;align-items:center;gap:14px;backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);border-top:1px solid rgba(255,255,255,.1);border-right:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.06);box-shadow:inset 0 1px 0 rgba(255,255,255,.07), 0 4px 16px rgba(0,0,0,.2);}
+.client-row.s-active .client-body{background:rgba(6,214,160,.08);}
+ .client-row.s-pending .client-body{background:rgba(255,209,102,.08);}
+.client-row.s-overdue .client-body{background:rgba(255,107,157,.10);}
+
+/* INVOICE ROWS */
+.inv-row{display:flex;align-items:center;gap:0;margin-bottom:6px;overflow:hidden;}
+.inv-bar{width:3px;flex-shrink:0;align-self:stretch;min-height:48px;}
+.inv-row.i-paid .inv-bar{background:var(--aqua);}
+.inv-row.i-pending .inv-bar{background:var(--gold);}
+.inv-body{flex:1;padding:12px 16px;display:flex;align-items:center;gap:16px;backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);border-top:1px solid rgba(255,255,255,.1);border-right:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.06);box-shadow:inset 0 1px 0 rgba(255,255,255,.07), 0 4px 16px rgba(0,0,0,.2);}
+.inv-row.i-paid .inv-body{background:rgba(6,214,160,.08);}
+.inv-row.i-pending .inv-body{background:rgba(255,209,102,.08);}
+
+/* PROGRESS BAR */
+.progress-track{height:3px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;margin-top:10px;}
+.progress-fill{height:100%;border-radius:999px;background:var(--chrome);background-size:300% 100%;animation:cSpin 4s linear infinite;transition:width .6s ease;}
+
+/* TABLE — glass rows */
+.tbl{width:100%;border-collapse:collapse;}
+.tbl th{
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--sub);padding:12px 14px;border-bottom:1px solid var(--glass-border);
+  text-align:left;font-weight:500;
+}
+.tbl td{padding:14px 14px;font-size:14px;color:var(--sub);border-bottom:1px solid rgba(255,255,255,.05);line-height:1.45;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:rgba(255,255,255,.03);}
+.tbl .td-main{color:var(--text);font-weight:500;font-size:14px;}
+.tbl-action{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--iris);cursor:pointer;background:none;border:none;padding:0;}
+.tbl-action:hover{color:var(--text);}
+
+/* MILESTONE LIST */
+.milestone{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.milestone:last-child{border-bottom:none;}
+.ms-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.ms-dot.done{background:var(--aqua);}
+.ms-dot.active{background:var(--iris);box-shadow:0 0 0 3px rgba(124,131,229,.25);animation:pulse 2s infinite;}
+.ms-dot.upcoming{background:transparent;border:1px solid rgba(255,255,255,.2);}
+.ms-title{font-size:14px;font-weight:500;color:var(--text);margin-bottom:2px;}
+.ms-date{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--ter);}
+
+/* FILE ROW — glass */
+.file-row{
+  display:flex;align-items:center;gap:12px;padding:12px 14px;
+  border:1px solid var(--glass-border);margin-bottom:6px;
+  background:var(--glass-bg);transition:all .15s;cursor:pointer;
+  backdrop-filter:blur(8px);
+}
+.file-row:hover{border-color:var(--border2);background:var(--glass-bg-hover);}
+.file-icon{width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-size:17px;background:rgba(255,255,255,.06);flex-shrink:0;border-radius:4px;}
+.file-name{font-size:14px;font-weight:500;color:var(--text);flex:1;}
+.file-meta{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;color:var(--ter);}
+
+/* INVOICE */
+.inv-amount{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text);}
+
+/* MODAL — frosted glass */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(8px);z-index:500;display:none;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{
+  background:rgba(6,6,12,.5);
+  backdrop-filter:blur(52px) saturate(200%);
+  -webkit-backdrop-filter:blur(52px) saturate(200%);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 40px 80px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.15), inset 0 0 60px rgba(124,131,229,.04);
+  width:540px;max-height:85vh;overflow-y:auto;animation:fadeUp .3s ease;
+}
+.modal-header{padding:24px 28px 18px;border-bottom:1px solid var(--glass-border);display:flex;align-items:center;justify-content:space-between;}
+.modal-title{font-family:'Syne',sans-serif;font-size:19px;font-weight:800;letter-spacing:-.03em;}
+.modal-close{background:none;border:none;color:var(--ter);font-size:22px;cursor:pointer;line-height:1;padding:0 4px;}
+.modal-close:hover{color:var(--text);}
+.modal-body{padding:24px 28px;font-size:14px;color:var(--sub);}
+.modal-footer{padding:16px 28px;border-top:1px solid var(--glass-border);display:flex;gap:10px;justify-content:flex-end;}
+
+/* FORM */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.form-field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+.form-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--sub);}
+.form-input,.form-select,.form-textarea{
+  background:rgba(255,255,255,.05);border:1px solid var(--glass-border);color:var(--text);
+  font-family:'DM Sans',sans-serif;font-size:14px;
+  padding:11px 13px;outline:none;transition:border-color .2s,background .2s;width:100%;
+}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--iris);background:rgba(124,131,229,.06);}
+.form-input::placeholder{color:var(--ter);}
+.form-textarea{resize:vertical;min-height:80px;line-height:1.6;}
+.form-select option{background:var(--deep);}
+
+/* BTN */
+.btn{
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  padding:11px 22px;border:1px solid var(--glass-border);
+  background:var(--glass-bg);color:var(--sub);cursor:pointer;transition:all .18s;
+  backdrop-filter:blur(8px);
+}
+.btn:hover{background:var(--glass-bg-hover);border-color:var(--border2);color:var(--text);}
+.btn.primary{background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;color:#060608;border-color:transparent;font-weight:700;}
+.btn.danger{border-color:rgba(255,107,157,.3);color:var(--rose);}
+.btn.danger:hover{background:rgba(255,107,157,.1);}
+
+/* SUBSCRIPTION CARD */
+.sub-card{background:var(--glass-bg);border:1px solid var(--glass-border);padding:20px;position:relative;backdrop-filter:blur(16px);}
+.sub-tier{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;letter-spacing:-.03em;margin-bottom:4px;}
+.sub-price{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;letter-spacing:-.04em;margin:12px 0 4px;}
+.sub-price span{font-size:14px;font-weight:400;color:var(--sub);font-family:'DM Sans',sans-serif;}
+.sub-features{list-style:none;margin:14px 0;}
+.sub-features li{font-size:13px;color:var(--sub);padding:6px 0;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,.05);}
+.sub-features li:last-child{border-bottom:none;}
+.sub-features li::before{content:'→';color:var(--iris);font-size:10px;flex-shrink:0;}
+
+/* CHROME EDGE */
+.chrome-edge{position:fixed;left:0;top:0;bottom:0;width:3px;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;z-index:100;}
+
+/* TOAST — glass */
+.toast{
+  position:fixed;bottom:24px;right:24px;
+  background:rgba(20,20,28,.85);
+  backdrop-filter:blur(24px);
+  border:1px solid var(--glass-border);
+  box-shadow:0 8px 32px rgba(0,0,0,.4);
+  padding:14px 20px;font-size:13px;color:var(--text);
+  z-index:9999;animation:fadeUp .3s ease;display:none;
+}
+.toast.show{display:block;}
+
+/* UPLOAD ZONE — glass */
+.upload-zone{
+  border:1px dashed rgba(255,255,255,.15);padding:32px;text-align:center;cursor:pointer;
+  transition:all .2s;margin-bottom:16px;background:var(--glass-bg);backdrop-filter:blur(8px);
+}
+.upload-zone:hover{border-color:var(--iris);background:rgba(124,131,229,.06);}
+.upload-zone p{font-size:13px;color:var(--sub);margin-top:8px;}
+.upload-zone .upload-icon{font-size:28px;margin-bottom:8px;}
+
+/* APPROVE BTN */
+.approve-btn{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;
+  padding:7px 14px;border:1px solid rgba(6,214,160,.35);color:var(--aqua);
+  background:rgba(6,214,160,.05);cursor:pointer;transition:all .18s;
+}
+.approve-btn:hover{background:rgba(6,214,160,.12);border-color:rgba(6,214,160,.5);}
+.approve-btn.approved{border-color:rgba(255,255,255,.1);color:var(--ter);cursor:default;background:transparent;}
+
+/* ACTIVITY FEED */
+.activity-item{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.activity-item:last-child{border-bottom:none;}
+.activity-dot{width:8px;height:8px;border-radius:50%;background:var(--iris);flex-shrink:0;margin-top:5px;}
+.activity-text{font-size:13px;color:var(--sub);line-height:1.55;}
+.activity-text strong{color:var(--text);}
+.activity-time{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--ter);margin-top:3px;}
+
+/* NOTE CARD — glass */
+.note{background:rgba(255,209,102,.06);border:1px solid rgba(255,209,102,.15);padding:14px;margin-bottom:8px;backdrop-filter:blur(8px);}
+.note-meta{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--ter);margin-bottom:6px;}
+.note-text{font-size:14px;color:var(--sub);line-height:1.65;}
+
+/* ONBOARDING STEPS */
+.ob-step{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.ob-step:last-child{border-bottom:none;}
+.ob-num{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:9px;font-weight:700;flex-shrink:0;}
+.ob-num.done{background:var(--aqua);color:#060608;}
+.ob-num.current{background:var(--iris);color:#fff;}
+.ob-num.todo{background:var(--lift);border:1px solid var(--border);color:var(--ter);}
+.ob-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px;}
+.ob-desc{font-size:12px;color:var(--ter);}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:2px;}
+</style>
+</head>
+<body>
+
+<div class="chrome-edge"></div>
+
+<!-- ── DEPTH ORBS — glass blurs against these ── -->
+<div class="orb-layer" aria-hidden="true">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="orb orb4"></div>
+  <div class="orb orb5"></div>
+</div>
+<div id="toast" class="toast"></div>
+
+<!-- ══ LOGIN ══ -->
+<div id="loginScreen">
+  <div class="login-box">
+    <span class="login-logo"><span class="chrome-text">BRAN</span>SOL</span>
+    <div class="login-title">Client Platform</div>
+    <p class="login-sub">Sign in to your workspace</p>
+    <div style="margin-bottom:20px;">
+      <div class="form-label" style="margin-bottom:8px;">Sign in as</div>
+      <div class="login-roles">
+        <button class="role-btn active" onclick="setRole('client',this)">Client</button>
+        <button class="role-btn" onclick="setRole('admin',this)">Studio Admin</button>
+        <button class="role-btn" onclick="setRole('superadmin',this)">Super Admin</button>
+      </div>
+    </div>
+    <div class="field"><label>Email</label><input type="email" id="loginEmail" placeholder="you@organisation.com" value="naledi@client.co.za"></div>
+    <div class="field"><label>Password</label><input type="password" id="loginPass" placeholder="••••••••" value="password"></div>
+    <button class="login-btn" onclick="doLogin()">Sign In →</button>
+    <p class="login-hint">Demo: select a role above and click Sign In</p>
+  </div>
+</div>
+
+<!-- ══ APP ══ -->
+<div id="app" style="display:none;flex:1;overflow:hidden;flex-direction:row;height:100vh;">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar"></div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title" id="topbarTitle">Dashboard</div>
+      <div class="topbar-actions" id="topbarActions"></div>
+    </div>
+    <div class="content" id="contentArea"></div>
+  </div>
+</div>
+
+<!-- ══ MODALS ══ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalBox">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle"></div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-footer" id="modalFooter"></div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════
+let currentRole = 'client';
+let currentUser = null;
+let currentView = 'dashboard';
+
+const users = {
+  client: { name:'Sipho Dlamini', org:'National Communications Agency', avatar:'SD', role:'client', tier:'Enterprise', tierColor:'#7c83e5' },
+  admin:  { name:'Thabo Molefe', org:'BRANSOL Studio', avatar:'TM', role:'admin', tier:'', tierColor:'' },
+  superadmin: { name:'Naledi Khumalo', org:'BRANSOL Studio', avatar:'NK', role:'superadmin', tier:'', tierColor:'' },
+};
+
+const clients = [
+  { id:1, name:'National Communications Agency', contact:'Sipho Dlamini', email:'sipho@nca.gov.za', sector:'Government', tier:'Enterprise', tierColor:'#7c83e5', mrr:38500, status:'active', joined:'Jan 2025', renewal:'Jan 2026', projects:3, balance:0 },
+  { id:2, name:'Listed Asset Management Group', contact:'Priya Naidoo', email:'priya@lamg.co.za', sector:'Financial Services', tier:'Professional', tierColor:'#06d6a0', mrr:22000, status:'active', joined:'Mar 2025', renewal:'Mar 2026', projects:2, balance:22000 },
+  { id:3, name:'Pan-African Law Practice', contact:'Kwame Boateng', email:'kwame@palp.com', sector:'Professional Services', tier:'Essential', tierColor:'#ffd166', mrr:12000, status:'pending', joined:'—', renewal:'—', projects:1, balance:0 },
+  { id:4, name:'Infrastructure Fund Manager', contact:'Zanele Mokoena', email:'zanele@ifm.co.za', sector:'Financial Services', tier:'Professional', tierColor:'#06d6a0', mrr:22000, status:'overdue', joined:'Jun 2024', renewal:'Jun 2025', projects:2, balance:44000 },
+  { id:5, name:'Property Development Consortium', contact:'Ruan de Villiers', email:'ruan@pdc.co.za', sector:'Infrastructure', tier:'Enterprise', tierColor:'#7c83e5', mrr:38500, status:'active', joined:'Sep 2024', renewal:'Sep 2025', projects:4, balance:0 },
+];
+
+const projects = [
+  { id:1, client:'National Communications Agency', title:'Brand Identity Refresh', status:'active', progress:65, milestone:'Visual Language — In Review', due:'15 Aug 2025', deliverables:4, approved:2 },
+  { id:2, client:'National Communications Agency', title:'Annual Report 2025', status:'active', progress:30, milestone:'Content Structure — In Progress', due:'30 Sep 2025', deliverables:2, approved:0 },
+  { id:3, client:'National Communications Agency', title:'Digital Design System', status:'pending', progress:0, milestone:'Briefing — Scheduled', due:'Oct 2025', deliverables:0, approved:0 },
+  { id:4, client:'Listed Asset Management Group', title:'Investor Deck Series', status:'active', progress:80, milestone:'Final Revisions', due:'1 Aug 2025', deliverables:6, approved:5 },
+  { id:5, client:'Infrastructure Fund Manager', title:'Fund Brand Identity', status:'review', progress:100, milestone:'Awaiting Client Approval', due:'Overdue', deliverables:8, approved:6 },
+];
+
+const milestones = [
+  { title:'Discovery & Brief', date:'12 Feb 2025', done:true },
+  { title:'Brand Strategy Workshop', date:'28 Feb 2025', done:true },
+  { title:'Visual Identity Concepts', date:'20 Mar 2025', done:true },
+  { title:'Visual Language — In Review', date:'15 Jul 2025', done:false, active:true },
+  { title:'Design System Build', date:'15 Aug 2025', done:false },
+  { title:'Final Delivery & Handoff', date:'30 Aug 2025', done:false },
+];
+
+const deliverables = [
+  { id:1, name:'Brand Strategy Document', type:'PDF', size:'2.4 MB', date:'28 Feb 2025', status:'approved', project:'Brand Identity Refresh' },
+  { id:2, name:'Logo System — Primary Marks', type:'ZIP', size:'8.1 MB', date:'20 Mar 2025', status:'approved', project:'Brand Identity Refresh' },
+  { id:3, name:'Colour & Typography Guide', type:'PDF', size:'4.2 MB', date:'5 Apr 2025', status:'review', project:'Brand Identity Refresh' },
+  { id:4, name:'Brand Applications Deck', type:'PDF', size:'12.8 MB', date:'10 Jun 2025', status:'review', project:'Brand Identity Refresh' },
+  { id:5, name:'Annual Report Structure', type:'PDF', size:'1.1 MB', date:'1 Jul 2025', status:'review', project:'Annual Report 2025' },
+];
+
+const invoices = [
+  { id:'BSL-2501', desc:'Retainer — January 2025', amount:38500, status:'paid', date:'1 Jan 2025' },
+  { id:'BSL-2502', desc:'Retainer — February 2025', amount:38500, status:'paid', date:'1 Feb 2025' },
+  { id:'BSL-2503', desc:'Retainer — March 2025', amount:38500, status:'paid', date:'1 Mar 2025' },
+  { id:'BSL-2504', desc:'Retainer — April 2025', amount:38500, status:'paid', date:'1 Apr 2025' },
+  { id:'BSL-2505', desc:'Retainer — May 2025', amount:38500, status:'paid', date:'1 May 2025' },
+  { id:'BSL-2506', desc:'Retainer — June 2025', amount:38500, status:'paid', date:'1 Jun 2025' },
+  { id:'BSL-2507', desc:'Retainer — July 2025', amount:38500, status:'pending', date:'1 Jul 2025' },
+];
+
+const notes = [
+  { author:'Thabo Molefe', date:'8 Jul 2025', text:'Client expressed interest in expanding scope to include social media templates. Flagged for subscription upgrade conversation in Q3 review.' },
+  { author:'Naledi Khumalo', date:'2 Jul 2025', text:'Sipho confirmed the board presentation is on 20 Aug — we need the brand applications deck signed off by 10 Aug at the latest.' },
+  { author:'Thabo Molefe', date:'15 Jun 2025', text:'Strong positive reaction to the visual concepts. Primary mark approved in principle. Moving to full system build.' },
+];
+
+const activity = [
+  { text:'<strong>Thabo</strong> posted an update on Brand Identity Refresh', time:'2 hours ago' },
+  { text:'<strong>Sipho</strong> approved Logo System — Primary Marks', time:'Yesterday' },
+  { text:'<strong>Naledi</strong> uploaded Brand Applications Deck for review', time:'3 days ago' },
+  { text:'<strong>Sipho</strong> submitted a new brief for Digital Design System', time:'5 days ago' },
+  { text:'Invoice BSL-2506 marked as <strong>paid</strong>', time:'1 Jul 2025' },
+];
+
+const files_client = [
+  { name:'Company Brief — NCA Identity Project', type:'PDF', size:'890 KB', date:'10 Jan 2025', uploaded_by:'Sipho Dlamini' },
+  { name:'Reference Materials — Brand Direction', type:'ZIP', size:'34 MB', date:'15 Jan 2025', uploaded_by:'Sipho Dlamini' },
+  { name:'Stakeholder Feedback Round 1', type:'PDF', size:'2.1 MB', date:'5 Mar 2025', uploaded_by:'Sipho Dlamini' },
+];
+
+// ══════════════════════════════════════════
+// AUTH
+// ══════════════════════════════════════════
+function setRole(role, btn) {
+  currentRole = role;
+  document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function doLogin() {
+  currentUser = users[currentRole];
+  document.getElementById('loginScreen').style.display = 'none';
+  const app = document.getElementById('app');
+  app.style.display = 'flex';
+  renderSidebar();
+  navigate('dashboard');
+}
+
+function logout() {
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('app').style.display = 'none';
+  currentRole = 'client';
+  document.querySelectorAll('.role-btn').forEach((b,i) => { b.classList.toggle('active', i===0); });
+}
+
+// ══════════════════════════════════════════
+// SIDEBAR
+// ══════════════════════════════════════════
+const navClient = [
+  { id:'dashboard', icon:'◈', label:'Dashboard' },
+  { id:'projects', icon:'◻', label:'Projects' },
+  { id:'deliverables', icon:'◑', label:'Deliverables', badge:2 },
+  { id:'files', icon:'⊞', label:'Files' },
+  { id:'invoices', icon:'◎', label:'Invoices & Billing' },
+  { id:'subscription', icon:'◇', label:'Subscription' },
+];
+const navAdmin = [
+  { id:'dashboard', icon:'◈', label:'Overview' },
+  { id:'clients', icon:'◻', label:'Clients' },
+  { id:'projects', icon:'◑', label:'Projects' },
+  { id:'onboard', icon:'⊞', label:'Onboard Client' },
+  { id:'subscriptions', icon:'◎', label:'Subscriptions' },
+];
+const navSuper = [
+  { id:'dashboard', icon:'◈', label:'Overview' },
+  { id:'clients', icon:'◻', label:'Clients' },
+  { id:'projects', icon:'◑', label:'Projects' },
+  { id:'onboard', icon:'⊞', label:'Onboard Client' },
+  { id:'subscriptions', icon:'◎', label:'Subscriptions' },
+  { id:'team', icon:'◇', label:'Team & Admins' },
+];
+
+function renderSidebar() {
+  const nav = currentRole === 'client' ? navClient : currentRole === 'admin' ? navAdmin : navSuper;
+  const isAdmin = currentRole !== 'client';
+  const u = currentUser;
+  document.getElementById('sidebar').innerHTML = `
+    <div class="sidebar-logo">
+      <span><span class="chrome-text">BRAN</span>SOL</span>
+      <span class="role-tag ${isAdmin?'admin':''}">${isAdmin?'Studio':'Client'}</span>
+    </div>
+    ${nav.map(n => `
+      <div class="nav-section" style="padding-bottom:0;${n===nav[0]?'padding-top:16px;':'padding-top:0;'}">
+        <div class="nav-item${n.id===currentView?' active':''}" onclick="navigate('${n.id}')">
+          <span class="nav-icon">${n.icon}</span>
+          <span>${n.label}</span>
+          ${n.badge ? `<span class="nav-badge">${n.badge}</span>` : ''}
+        </div>
+      </div>`).join('')}
+    <div class="sidebar-footer">
+      <div class="user-chip">
+        <div class="user-avatar">${u.avatar}</div>
+        <div><div class="user-name">${u.name}</div><div class="user-org">${u.org}</div></div>
+        <div class="logout-btn" onclick="logout()" title="Sign out">⏻</div>
+      </div>
+    </div>`;
+}
+
+// ══════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════
+function navigate(view) {
+  currentView = view;
+  renderSidebar();
+  const area = document.getElementById('contentArea');
+  area.innerHTML = '';
+  area.scrollTop = 0;
+
+  const views = {
+    dashboard: currentRole === 'client' ? renderClientDashboard : renderAdminDashboard,
+    projects: currentRole === 'client' ? renderClientProjects : renderAdminProjects,
+    deliverables: renderClientDeliverables,
+    files: renderClientFiles,
+    invoices: renderClientInvoices,
+    subscription: renderClientSubscription,
+    clients: renderAdminClients,
+    onboard: renderOnboard,
+    subscriptions: renderAdminSubscriptions,
+    team: renderTeam,
+  };
+
+  const titles = {
+    dashboard:'Dashboard', projects:'Projects', deliverables:'Deliverables',
+    files:'Files', invoices:'Invoices & Billing', subscription:'Subscription',
+    clients:'Clients', onboard:'Onboard Client', subscriptions:'Subscriptions', team:'Team & Admins',
+  };
+
+  document.getElementById('topbarTitle').textContent = titles[view] || view;
+
+  // Topbar actions
+  const actions = {
+    files: `<button class="tb-btn primary" onclick="openUploadModal()">+ Upload File</button>`,
+    clients: `<button class="tb-btn primary" onclick="navigate('onboard')">+ New Client</button>`,
+    onboard: ``,
+    projects: currentRole!=='client' ? `<button class="tb-btn primary" onclick="openNewProjectModal()">+ New Project</button>` : '',
+    team: `<button class="tb-btn primary" onclick="openInviteAdmin()">+ Invite Admin</button>`,
+    subscriptions: `<button class="tb-btn primary" onclick="openNewSubModal()">+ New Subscription</button>`,
+  };
+  document.getElementById('topbarActions').innerHTML = actions[view] || '';
+
+  if(views[view]) views[view]();
+}
+
+// ══════════════════════════════════════════
+// CLIENT VIEWS
+// ══════════════════════════════════════════
+function renderClientDashboard() {
+  const area = document.getElementById('contentArea');
+  const u = currentUser;
+  const pending = deliverables.filter(d=>d.status==='review').length;
+  area.innerHTML = `
+    <div class="page-header">
+      <h2>Welcome back, ${u.name.split(' ')[0]}.</h2>
+      <p>${u.org} · ${u.tier} Subscription</p>
+    </div>
+    <div class="grid-4" style="margin-bottom:32px;">
+      <div class="stat-card c-iris"><div class="card-title" style="margin-bottom:10px;">Active Projects</div><div class="stat-val">2</div><div class="stat-delta">↑ 1 this quarter</div></div>
+      <div class="stat-card c-gold"><div class="card-title" style="margin-bottom:10px;">Pending Approval</div><div class="stat-val chrome-text">${pending}</div><div class="stat-delta warn">Awaiting your review</div></div>
+      <div class="stat-card c-aqua"><div class="card-title" style="margin-bottom:10px;">Files Uploaded</div><div class="stat-val">${files_client.length}</div><div class="stat-delta">By your team</div></div>
+      <div class="stat-card c-rose"><div class="card-title" style="margin-bottom:10px;">Next Invoice</div><div class="stat-val">R38,500</div><div class="stat-delta warn">Due 1 Aug 2025</div></div>
+    </div>
+    <div class="grid-2" style="margin-bottom:16px;">
+      <div class="card">
+        <div class="card-header"><span class="card-title">Active Project</span><span class="card-action" onclick="navigate('projects')">All projects →</span></div>
+        <div class="task-row s-active">
+          <div class="task-bar"></div>
+          <div class="task-body">
+            <div class="task-main">
+              <div class="task-title">Brand Identity Refresh</div>
+              <div class="task-sub">Visual Language — In Review · Due 15 Aug 2025</div>
+              <div class="progress-track" style="margin-top:8px;max-width:260px;"><div class="progress-fill" style="width:65%"></div></div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;">
+              <div class="task-status-label">In Progress</div>
+              <div style="font-size:11px;color:var(--ter);margin-top:4px;">65%</div>
+            </div>
+          </div>
+        </div>
+        <div class="task-row s-pending" style="margin-top:4px;">
+          <div class="task-bar"></div>
+          <div class="task-body">
+            <div class="task-main">
+              <div class="task-title">Annual Report 2025</div>
+              <div class="task-sub">Content Structure — In Progress · Due 30 Sep 2025</div>
+            </div>
+            <div class="task-status-label">Pending</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-title">Recent Activity</span></div>
+        ${activity.slice(0,4).map(a=>`
+          <div class="activity-item">
+            <div class="activity-dot"></div>
+            <div><div class="activity-text">${a.text}</div><div class="activity-time">${a.time}</div></div>
+          </div>`).join('')}
+      </div>
+    </div>
+    ${pending>0?`
+    <div class="card">
+      <div class="card-header"><span class="card-title">Awaiting Your Approval</span><span class="card-action" onclick="navigate('deliverables')">View all →</span></div>
+      ${deliverables.filter(d=>d.status==='review').map(d=>`
+        <div class="task-row s-review" style="margin-bottom:6px;">
+          <div class="task-bar"></div>
+          <div class="task-body">
+            <div class="file-icon" style="margin-right:4px;">${d.type==='PDF'?'📄':'📦'}</div>
+            <div class="task-main"><div class="task-title">${d.name}</div><div class="task-sub">${d.type} · ${d.size} · ${d.date}</div></div>
+            <div class="task-status-label" style="margin-right:12px;">Review</div>
+            <button class="approve-btn" onclick="approveDeliverable(${d.id},this)">Approve</button>
+          </div>
+        </div>`).join('')}
+    </div>`:''}`;
+}
+
+function renderClientProjects() {
+  const area = document.getElementById('contentArea');
+  const myProjects = projects.filter(p=>p.client==='National Communications Agency');
+  area.innerHTML = `
+    <div class="page-header"><h2>Projects</h2><p>Your active and upcoming commissions</p></div>
+    ${myProjects.map(p=>`
+      <div class="task-row s-${p.status}" style="margin-bottom:10px;align-items:stretch;">
+        <div class="task-bar" style="min-height:auto;"></div>
+        <div class="task-body" style="flex-direction:column;align-items:stretch;gap:12px;">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;">
+            <div>
+              <div class="task-title" style="font-size:15px;margin-bottom:4px;">${p.title}</div>
+              <div class="task-status-label">${p.status.charAt(0).toUpperCase()+p.status.slice(1)}</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;">
+              <div class="file-meta">Due ${p.due}</div>
+              <div style="font-size:11px;color:var(--ter);margin-top:3px;">${p.deliverables} deliverables · ${p.approved} approved</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.16em;color:var(--ter);margin-bottom:5px;">CURRENT MILESTONE</div>
+            <div style="font-size:13px;color:var(--sub);">${p.milestone}</div>
+          </div>
+          ${p.progress>0?`
+            <div>
+              <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--ter);margin-bottom:4px;">PROGRESS · ${p.progress}%</div>
+              <div class="progress-track"><div class="progress-fill" style="width:${p.progress}%"></div></div>
+            </div>`:''}
+          ${p.id===1?`
+            <div style="padding-top:12px;border-top:1px solid rgba(255,255,255,.06);">
+              <div class="card-title" style="margin-bottom:10px;">Milestones</div>
+              ${milestones.map(m=>`
+                <div class="milestone">
+                  <div class="ms-dot ${m.done?'done':m.active?'active':'upcoming'}"></div>
+                  <div><div class="ms-title">${m.title}</div><div class="ms-date">${m.date}</div></div>
+                </div>`).join('')}
+            </div>`:''}
+        </div>
+      </div>`).join('')}`;
+}
+
+function renderClientDeliverables() {
+  const area = document.getElementById('contentArea');
+  area.innerHTML = `
+    <div class="page-header"><h2>Deliverables</h2><p>Review and approve work from BRANSOL</p></div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">All Deliverables</span></div>
+      ${deliverables.map(d=>{
+        const s = d.status==='approved'?'s-complete':'s-review';
+        return `<div class="task-row ${s}" style="margin-bottom:7px;">
+          <div class="task-bar"></div>
+          <div class="task-body">
+            <div style="font-size:18px;flex-shrink:0;">${d.type==='PDF'?'📄':'📦'}</div>
+            <div class="task-main">
+              <div class="task-title">${d.name}</div>
+              <div class="task-sub">${d.project} · ${d.type} · ${d.size} · ${d.date}</div>
+            </div>
+            <div class="task-status-label" style="margin-right:12px;">${d.status==='approved'?'Approved':'Awaiting Review'}</div>
+            <button class="approve-btn ${d.status==='approved'?'approved':''}" onclick="approveDeliverable(${d.id},this)" ${d.status==='approved'?'disabled':''}>${d.status==='approved'?'✓ Approved':'Approve'}</button>
+          </div>
+        </div>`;}).join('')}
+    </div>`;
+}
+
+function renderClientFiles() {
+  const area = document.getElementById('contentArea');
+  area.innerHTML = `
+    <div class="page-header"><h2>Files</h2><p>Upload briefs, references, and supporting materials</p></div>
+    <div class="upload-zone" onclick="openUploadModal()">
+      <div class="upload-icon">⊞</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ter);">Click to Upload</div>
+      <p>PDF, ZIP, DOCX, JPG — up to 100MB per file</p>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Your Uploads</span></div>
+      ${files_client.map(f=>`
+        <div class="file-row">
+          <div class="file-icon">${f.type==='PDF'?'📄':'📦'}</div>
+          <div style="flex:1;"><div class="file-name">${f.name}</div><div class="file-meta">${f.type} · ${f.size}</div></div>
+          <div class="file-meta">${f.date}</div>
+        </div>`).join('')}
+    </div>`;
+}
+
+function renderClientInvoices() {
+  const area = document.getElementById('contentArea');
+  const total_paid = invoices.filter(i=>i.status==='paid').reduce((a,i)=>a+i.amount,0);
+  const pending = invoices.filter(i=>i.status==='pending').reduce((a,i)=>a+i.amount,0);
+  area.innerHTML = `
+    <div class="page-header"><h2>Invoices & Billing</h2><p>National Communications Agency · Enterprise Subscription</p></div>
+    <div class="grid-3" style="margin-bottom:32px;">
+      <div class="stat-card c-aqua"><div class="card-title" style="margin-bottom:10px;">Total Paid (2025)</div><div class="stat-val">R${(total_paid/1000).toFixed(0)}k</div><div class="stat-delta">6 invoices</div></div>
+      <div class="stat-card c-gold"><div class="card-title" style="margin-bottom:10px;">Outstanding</div><div class="stat-val" style="color:var(--gold)">R${(pending/1000).toFixed(0)}k</div><div class="stat-delta warn">1 invoice pending</div></div>
+      <div class="stat-card c-iris"><div class="card-title" style="margin-bottom:10px;">Monthly Retainer</div><div class="stat-val">R38,500</div><div class="stat-delta">Billed 1st of month</div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Invoice History</span></div>
+      ${invoices.map(i=>`
+        <div class="inv-row ${i.status==='paid'?'i-paid':'i-pending'}">
+          <div class="inv-bar"></div>
+          <div class="inv-body">
+            <div style="flex:1;">
+              <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;">${i.id} — ${i.desc}</div>
+              <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;color:var(--ter);">${i.date}</div>
+            </div>
+            <div class="inv-amount">R${i.amount.toLocaleString()}</div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:${i.status==='paid'?'var(--aqua)':'var(--gold)'};width:64px;text-align:right;">${i.status==='paid'?'Paid':'Pending'}</div>
+            <div>${i.status==='pending'?`<button class="approve-btn" onclick="showToast('Payment link sent to sipho@nca.gov.za')">Pay Now</button>`:`<button class="tbl-action">Download</button>`}</div>
+          </div>
+        </div>`).join('')}
+    </div>`;
+}
+
+function renderClientSubscription() {
+  const area = document.getElementById('contentArea');
+  area.innerHTML = `
+    <div class="page-header"><h2>Subscription</h2><p>Manage your BRANSOL retainer</p></div>
+    <div class="grid-2" style="margin-bottom:16px;">
+      <div class="card" style="border-color:rgba(124,131,229,.25);">
+        <div class="card-header"><span class="card-title">Current Plan</span><span class="pill active" style="font-size:8px;"><span class="pill-dot"></span>Active</span></div>
+        <div class="sub-tier"><span class="chrome-text">Enterprise</span></div>
+        <div class="sub-price">R38,500<span>/month</span></div>
+        <ul class="sub-features">
+          <li>Unlimited active projects</li>
+          <li>Dedicated Creative Director</li>
+          <li>Priority turnaround</li>
+          <li>Monthly strategy session</li>
+          <li>Full platform access</li>
+          <li>Dedicated account manager</li>
+        </ul>
+        <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.18em;color:var(--ter);margin-top:8px;">RENEWS 1 JAN 2026</div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:12px;">
+          <div class="card-header"><span class="card-title">Subscription Details</span></div>
+          ${[['Client','National Communications Agency'],['Tier','Enterprise'],['Monthly','R38,500'],['Billing','1st of each month'],['Start','January 2025'],['Renewal','January 2026'],['Status','Active']].map(([k,v])=>`
+            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);">
+              <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ter);">${k}</span>
+              <span style="font-size:13px;color:var(--text);">${v}</span>
+            </div>`).join('')}
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <button class="btn" onclick="showToast('Renewal confirmation sent to sipho@nca.gov.za')">Renew Subscription →</button>
+          <button class="btn" onclick="openModal('Request Changes','<div class=form-field><label class=form-label>Message to BRANSOL</label><textarea class=form-textarea placeholder=\"Describe the changes you need...\"></textarea></div>','Send Request')">Request Plan Changes</button>
+          <button class="btn danger" onclick="showToast('Cancellation request submitted. A team member will be in touch.')">Request Cancellation</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+// ══════════════════════════════════════════
+// ADMIN VIEWS
+// ══════════════════════════════════════════
+function renderAdminDashboard() {
+  const area = document.getElementById('contentArea');
+  const totalMRR = clients.filter(c=>c.status==='active').reduce((a,c)=>a+c.mrr,0);
+  const outstanding = clients.reduce((a,c)=>a+c.balance,0);
+  area.innerHTML = `
+    <div class="page-header"><h2>Studio Overview</h2><p>BRANSOL · ${new Date().toLocaleDateString('en-ZA',{month:'long',year:'numeric'})}</p></div>
+    <div class="grid-4" style="margin-bottom:32px;">
+      <div class="stat-card c-iris"><div class="card-title" style="margin-bottom:10px;">Monthly Recurring</div><div class="stat-val chrome-text">R${(totalMRR/1000).toFixed(0)}k</div><div class="stat-delta">3 active clients</div></div>
+      <div class="stat-card c-aqua"><div class="card-title" style="margin-bottom:10px;">Active Projects</div><div class="stat-val">5</div><div class="stat-delta">↑ 2 this month</div></div>
+      <div class="stat-card c-rose"><div class="card-title" style="margin-bottom:10px;">Outstanding</div><div class="stat-val" style="color:var(--rose)">R${(outstanding/1000).toFixed(0)}k</div><div class="stat-delta neg">2 clients overdue</div></div>
+      <div class="stat-card c-gold"><div class="card-title" style="margin-bottom:10px;">Pending Onboard</div><div class="stat-val" style="color:var(--gold)">1</div><div class="stat-delta warn">Pan-African Law</div></div>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header"><span class="card-title">Client Status</span><span class="card-action" onclick="navigate('clients')">All clients →</span></div>
+        ${clients.slice(0,4).map(c=>`
+          <div class="client-row s-${c.status}">
+            <div class="client-bar"></div>
+            <div class="client-body">
+              <div style="flex:1;">
+                <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;">${c.name}</div>
+                <div style="font-size:11px;color:var(--ter);">${c.tier} · R${c.mrr.toLocaleString()}/mo</div>
+              </div>
+              <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:${c.status==='active'?'var(--aqua)':c.status==='overdue'?'var(--rose)':'var(--gold)'};">${c.status}</div>
+            </div>
+          </div>`).join('')}
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-title">Recent Activity</span></div>
+        ${activity.map(a=>`
+          <div class="activity-item">
+            <div class="activity-dot"></div>
+            <div><div class="activity-text">${a.text}</div><div class="activity-time">${a.time}</div></div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+}
+
+function renderAdminClients() {
+  const area = document.getElementById('contentArea');
+  area.innerHTML = `
+    <div class="page-header"><h2>Clients</h2><p>${clients.length} total · ${clients.filter(c=>c.status==='active').length} active</p></div>
+    ${clients.map(c=>`
+      <div class="client-row s-${c.status}" style="margin-bottom:8px;">
+        <div class="client-bar"></div>
+        <div class="client-body" style="gap:20px;">
+          <div style="flex:2;min-width:0;">
+            <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px;">${c.name}</div>
+            <div style="font-size:11px;color:var(--ter);">${c.contact} · ${c.sector}</div>
+          </div>
+          <div style="flex-shrink:0;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.14em;color:${c.tierColor};">${c.tier}</div>
+          <div style="flex-shrink:0;font-weight:600;color:var(--text);font-size:13px;">R${c.mrr.toLocaleString()}<span style="font-size:10px;color:var(--ter);font-weight:400;">/mo</span></div>
+          <div style="flex-shrink:0;font-size:12px;color:var(--sub);">${c.projects} projects</div>
+          <div style="flex-shrink:0;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:${c.status==='active'?'var(--aqua)':c.status==='overdue'?'var(--rose)':'var(--gold)'};">${c.status}</div>
+          <div style="flex-shrink:0;font-family:'DM Mono',monospace;font-size:9px;color:var(--ter);">${c.renewal}</div>
+          <button class="tbl-action" onclick="openClientDetail(${c.id})">Manage →</button>
+        </div>
+      </div>`).join('')}`;
+}
+
+function openClientDetail(id) {
+  const c = clients.find(x=>x.id===id);
+  openModal(`${c.name}`,`
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;">
+      ${[['Contact',c.contact],['Email',c.email],['Sector',c.sector],['Tier',c.tier],['MRR','R'+c.mrr.toLocaleString()],['Status',c.status],['Joined',c.joined],['Renewal',c.renewal]].map(([k,v])=>`
+        <div style="background:var(--lift);padding:10px 12px;">
+          <div style="font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.24em;text-transform:uppercase;color:var(--ter);margin-bottom:3px;">${k}</div>
+          <div style="font-size:13px;color:var(--text);">${v}</div>
+        </div>`).join('')}
+    </div>
+    <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:var(--ter);margin-bottom:10px;">INTERNAL NOTES</div>
+    ${id===1?notes.map(n=>`<div class="note"><div class="note-meta">${n.author} · ${n.date}</div><div class="note-text">${n.text}</div></div>`).join(''):
+    '<div style="font-size:13px;color:var(--ter);padding:12px 0;">No notes yet.</div>'}
+    <div class="form-field" style="margin-top:12px;"><label class="form-label">Add Note</label><textarea class="form-textarea" placeholder="Internal note visible to studio only..."></textarea></div>`,
+    'Save Note', () => showToast('Note saved'));
+}
+
+function renderAdminProjects() {
+  const area = document.getElementById('contentArea');
+  area.innerHTML = `
+    <div class="page-header"><h2>All Projects</h2><p>${projects.length} projects across ${clients.filter(c=>c.status==='active').length} clients</p></div>
+    ${projects.map(p=>`
+      <div class="task-row s-${p.status}" style="margin-bottom:10px;align-items:stretch;">
+        <div class="task-bar" style="min-height:auto;"></div>
+        <div class="task-body" style="gap:12px;flex-wrap:wrap;">
+          <div class="task-main">
+            <div class="task-title">${p.title}</div>
+            <div class="task-sub">${p.client} · ${p.milestone}</div>
+            ${p.progress>0?`<div class="progress-track" style="margin-top:8px;max-width:280px;"><div class="progress-fill" style="width:${p.progress}%"></div></div>`:''}
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;flex-shrink:0;">
+            <div style="text-align:right;">
+              <div class="task-status-label">${p.status}</div>
+              <div style="font-size:11px;color:var(--ter);margin-top:2px;">Due ${p.due}</div>
+            </div>
+            <button class="tb-btn" onclick="openProjectUpdate(${p.id})">Post Update</button>
+          </div>
+        </div>
+      </div>`).join('')}`;
+}
+
+function openProjectUpdate(id) {
+  const p = projects.find(x=>x.id===id);
+  openModal(`Post Update — ${p.title}`,`
+    <div class="form-field"><label class="form-label">Update / Milestone</label><input class="form-input" placeholder="e.g. Visual Language review completed" value="${p.milestone}"></div>
+    <div class="form-row">
+      <div class="form-field" style="margin-bottom:0;"><label class="form-label">Progress %</label><input class="form-input" type="number" min="0" max="100" value="${p.progress}"></div>
+      <div class="form-field" style="margin-bottom:0;"><label class="form-label">Status</label>
+        <select class="form-select"><option>active</option><option>review</option><option>pending</option><option>complete</option></select>
+      </div>
+    </div>
+    <div class="form-field" style="margin-top:12px;"><label class="form-label">Note to Client (optional)</label><textarea class="form-textarea" placeholder="Message visible to the client..."></textarea></div>`,
+  'Post Update', () => showToast('Project update posted — client notified'));
+}
+
+function renderOnboard() {
+  const area = document.getElementById('contentArea');
+  area.innerHTML = `
+    <div class="page-header"><h2>Onboard New Client</h2><p>Set up a client workspace and subscription</p></div>
+    <div class="grid-2">
+      <div>
+        <div class="card" style="margin-bottom:12px;">
+          <div class="card-header"><span class="card-title">Onboarding Steps</span></div>
+          ${[
+            {n:1,s:'done',t:'Commission accepted',d:'Begin form submitted and reviewed'},
+            {n:2,s:'done',t:'NDA & agreement signed',d:'Legal docs executed'},
+            {n:3,s:'current',t:'Client workspace created',d:'Set up account and subscription below'},
+            {n:4,s:'todo',t:'Welcome email sent',d:'Platform access and onboarding kit'},
+            {n:5,s:'todo',t:'Kick-off scheduled',d:'Discovery session booked'},
+          ].map(s=>`
+            <div class="ob-step">
+              <div class="ob-num ${s.s}">${s.s==='done'?'✓':s.n}</div>
+              <div><div class="ob-title">${s.t}</div><div class="ob-desc">${s.d}</div></div>
+            </div>`).join('')}
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <div class="card-header"><span class="card-title">Create Workspace</span></div>
+          <div class="form-field"><label class="form-label">Organisation Name</label><input class="form-input" placeholder="e.g. Pan-African Law Practice"></div>
+          <div class="form-row">
+            <div class="form-field" style="margin-bottom:0;"><label class="form-label">Contact Name</label><input class="form-input" placeholder="Full name"></div>
+            <div class="form-field" style="margin-bottom:0;"><label class="form-label">Role / Title</label><input class="form-input" placeholder="e.g. Managing Partner"></div>
+          </div>
+          <div class="form-field" style="margin-top:12px;"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="client@organisation.com"></div>
+          <div class="form-field"><label class="form-label">Sector</label>
+            <select class="form-select"><option>Financial Services</option><option>Government</option><option>Professional Services</option><option>Infrastructure</option><option>Healthcare</option><option>Education</option></select>
+          </div>
+          <div style="border-top:1px solid var(--border);padding-top:16px;margin-top:4px;">
+            <div class="card-title" style="margin-bottom:12px;">Subscription</div>
+            <div class="form-row">
+              <div class="form-field" style="margin-bottom:0;"><label class="form-label">Tier Name</label><input class="form-input" placeholder="e.g. Enterprise"></div>
+              <div class="form-field" style="margin-bottom:0;"><label class="form-label">Monthly (ZAR)</label><input class="form-input" type="number" placeholder="38500"></div>
+            </div>
+            <div class="form-field" style="margin-top:12px;"><label class="form-label">Included Services</label><textarea class="form-textarea" placeholder="e.g. Brand Identity, Credentials, Digital Design — up to 3 active projects"></textarea></div>
+            <div class="form-row">
+              <div class="form-field" style="margin-bottom:0;"><label class="form-label">Start Date</label><input class="form-input" type="date"></div>
+              <div class="form-field" style="margin-bottom:0;"><label class="form-label">Billing Day</label><input class="form-input" type="number" placeholder="1" min="1" max="28"></div>
+            </div>
+          </div>
+          <div style="margin-top:16px;">
+            <button class="btn primary" style="width:100%;" onclick="showToast('Workspace created — welcome email sent to client')">Create Workspace & Send Invite →</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderAdminSubscriptions() {
+  const area = document.getElementById('contentArea');
+  const totalMRR = clients.filter(c=>c.status==='active').reduce((a,c)=>a+c.mrr,0);
+  area.innerHTML = `
+    <div class="page-header"><h2>Subscriptions</h2><p>Manage client retainer plans</p></div>
+    <div class="grid-3" style="margin-bottom:32px;">
+      <div class="stat-card c-iris"><div class="card-title" style="margin-bottom:10px;">Total MRR</div><div class="stat-val chrome-text">R${(totalMRR/1000).toFixed(0)}k</div><div class="stat-delta">3 active subscriptions</div></div>
+      <div class="stat-card c-gold"><div class="card-title" style="margin-bottom:10px;">Renewals This Month</div><div class="stat-val">1</div><div class="stat-delta warn">Property Dev. Consortium</div></div>
+      <div class="stat-card c-rose"><div class="card-title" style="margin-bottom:10px;">Outstanding Balance</div><div class="stat-val" style="color:var(--rose)">R66k</div><div class="stat-delta neg">2 clients overdue</div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">All Subscriptions</span></div>
+      ${clients.map(c=>`
+        <div class="client-row s-${c.status}" style="margin-bottom:7px;">
+          <div class="client-bar"></div>
+          <div class="client-body" style="gap:20px;">
+            <div style="flex:2;min-width:0;">
+              <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;">${c.name}</div>
+              <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.14em;color:${c.tierColor};">${c.tier}</div>
+            </div>
+            <div style="font-weight:600;color:var(--text);font-size:14px;flex-shrink:0;">R${c.mrr.toLocaleString()}<span style="font-size:10px;color:var(--ter);font-weight:400;">/mo</span></div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ter);flex-shrink:0;">Renews ${c.renewal}</div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;flex-shrink:0;color:${c.status==='active'?'var(--aqua)':c.status==='overdue'?'var(--rose)':'var(--gold)'};">${c.status}</div>
+            <button class="tbl-action" onclick="openEditSub(${c.id})">Edit →</button>
+          </div>
+        </div>`).join('')}
+    </div>`;
+}
+
+function openEditSub(id) {
+  const c = clients.find(x=>x.id===id);
+  openModal(`Edit Subscription — ${c.name}`,`
+    <div class="form-row">
+      <div class="form-field" style="margin-bottom:0;"><label class="form-label">Tier Name</label><input class="form-input" value="${c.tier}"></div>
+      <div class="form-field" style="margin-bottom:0;"><label class="form-label">Monthly (ZAR)</label><input class="form-input" type="number" value="${c.mrr}"></div>
+    </div>
+    <div class="form-field" style="margin-top:12px;"><label class="form-label">Status</label>
+      <select class="form-select"><option ${c.status==='active'?'selected':''}>active</option><option ${c.status==='pending'?'selected':''}>pending</option><option ${c.status==='overdue'?'selected':''}>overdue</option></select>
+    </div>
+    <div class="form-field"><label class="form-label">Renewal Date</label><input class="form-input" value="${c.renewal}"></div>
+    <div class="form-field"><label class="form-label">Notes</label><textarea class="form-textarea" placeholder="Internal subscription notes..."></textarea></div>`,
+  'Save Changes', () => showToast('Subscription updated'));
+}
+
+function renderTeam() {
+  const area = document.getElementById('contentArea');
+  const team = [
+    { name:'Naledi Khumalo', role:'Founding Director', email:'naledi@bransol.co.za', access:'Super Admin', avatar:'NK' },
+    { name:'Thabo Molefe', role:'Creative Director', email:'thabo@bransol.co.za', access:'Admin', avatar:'TM' },
+    { name:'Siyanda Buthelezi', role:'Environmental Designer', email:'siyanda@bransol.co.za', access:'Admin', avatar:'SB' },
+    { name:'Lerato Nkosi', role:'Credentials & Presentations', email:'lerato@bransol.co.za', access:'Admin', avatar:'LN' },
+    { name:'Kagiso Dlamini', role:'Operations', email:'kagiso@bransol.co.za', access:'Admin', avatar:'KD' },
+  ];
+  area.innerHTML = `
+    <div class="page-header"><h2>Team & Admins</h2><p>Manage studio access levels</p></div>
+    <div class="card">
+      <table class="tbl">
+        <thead><tr><th>Team Member</th><th>Role</th><th>Access</th><th></th></tr></thead>
+        <tbody>
+          ${team.map(t=>`<tr>
+            <td>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:28px;height:28px;border-radius:50%;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#060608;flex-shrink:0;">${t.avatar}</div>
+                <div><div class="td-main">${t.name}</div><div style="font-size:11px;color:var(--ter);">${t.email}</div></div>
+              </div>
+            </td>
+            <td>${t.role}</td>
+            <td><span class="pill ${t.access==='Super Admin'?'overdue':'review'}">${t.access}</span></td>
+            <td>
+              ${t.access!=='Super Admin'?`
+              <select class="form-select" style="width:auto;padding:4px 8px;font-size:11px;" onchange="showToast('Access level updated')">
+                <option>Admin</option><option>Super Admin</option><option>View Only</option>
+              </select>`:'<span style="font-size:11px;color:var(--ter);">Owner</span>'}
+            </td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+// ══════════════════════════════════════════
+// MODALS & UTILITIES
+// ══════════════════════════════════════════
+function openModal(title, bodyHTML, btnLabel, onConfirm) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalBody').innerHTML = bodyHTML;
+  document.getElementById('modalFooter').innerHTML = `
+    <button class="btn" onclick="closeModal()">Cancel</button>
+    ${btnLabel?`<button class="btn primary" onclick="${onConfirm?'confirmModal()':'closeModal()'}">${btnLabel}</button>`:''}`;
+  window._modalConfirm = onConfirm;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+function confirmModal(){if(window._modalConfirm)window._modalConfirm();closeModal();}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open');}
+document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+
+function openUploadModal() {
+  openModal('Upload File',`
+    <div class="upload-zone" style="margin-bottom:12px;">
+      <div class="upload-icon">⊞</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ter);">Drop files here or click to browse</div>
+      <p>PDF, ZIP, DOCX, JPG — up to 100MB</p>
+    </div>
+    <div class="form-field"><label class="form-label">Related Project (optional)</label>
+      <select class="form-select"><option value="">— None —</option>${projects.filter(p=>p.client===currentUser.org).map(p=>`<option>${p.title}</option>`).join('')}</select>
+    </div>
+    <div class="form-field"><label class="form-label">Note</label><input class="form-input" placeholder="Brief description of this file..."></div>`,
+  'Upload', ()=>showToast('File uploaded successfully'));
+}
+
+function openNewProjectModal() {
+  openModal('New Project',`
+    <div class="form-field"><label class="form-label">Project Title</label><input class="form-input" placeholder="e.g. Brand Identity Refresh"></div>
+    <div class="form-field"><label class="form-label">Client</label>
+      <select class="form-select">${clients.map(c=>`<option>${c.name}</option>`).join('')}</select>
+    </div>
+    <div class="form-row">
+      <div class="form-field" style="margin-bottom:0;"><label class="form-label">Due Date</label><input class="form-input" type="date"></div>
+      <div class="form-field" style="margin-bottom:0;"><label class="form-label">Status</label>
+        <select class="form-select"><option>active</option><option>pending</option></select>
+      </div>
+    </div>
+    <div class="form-field" style="margin-top:12px;"><label class="form-label">Brief / Scope</label><textarea class="form-textarea" placeholder="Project brief visible to client..."></textarea></div>`,
+  'Create Project', ()=>showToast('Project created and client notified'));
+}
+
+function openInviteAdmin() {
+  openModal('Invite Admin',`
+    <div class="form-field"><label class="form-label">Full Name</label><input class="form-input" placeholder="Team member name"></div>
+    <div class="form-field"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="name@bransol.co.za"></div>
+    <div class="form-field"><label class="form-label">Role</label><input class="form-input" placeholder="e.g. Senior Designer"></div>
+    <div class="form-field"><label class="form-label">Access Level</label>
+      <select class="form-select"><option>Admin</option><option>Super Admin</option><option>View Only</option></select>
+    </div>`,
+  'Send Invite', ()=>showToast('Invite sent'));
+}
+
+function openNewSubModal() {
+  openModal('New Subscription',`
+    <div class="form-field"><label class="form-label">Client</label>
+      <select class="form-select">${clients.map(c=>`<option>${c.name}</option>`).join('')}</select>
+    </div>
+    <div class="form-row">
+      <div class="form-field" style="margin-bottom:0;"><label class="form-label">Tier Name</label><input class="form-input" placeholder="e.g. Professional"></div>
+      <div class="form-field" style="margin-bottom:0;"><label class="form-label">Monthly (ZAR)</label><input class="form-input" type="number" placeholder="22000"></div>
+    </div>
+    <div class="form-field" style="margin-top:12px;"><label class="form-label">Included Services</label><textarea class="form-textarea" placeholder="Describe what's included..."></textarea></div>
+    <div class="form-row">
+      <div class="form-field" style="margin-bottom:0;"><label class="form-label">Start Date</label><input class="form-input" type="date"></div>
+      <div class="form-field" style="margin-bottom:0;"><label class="form-label">Billing Day</label><input class="form-input" type="number" value="1" min="1" max="28"></div>
+    </div>`,
+  'Create Subscription', ()=>showToast('Subscription created'));
+}
+
+function approveDeliverable(id, btn) {
+  btn.textContent = '✓ Approved';
+  btn.classList.add('approved');
+  btn.disabled = true;
+  const d = deliverables.find(x=>x.id===id);
+  if(d) d.status = 'approved';
+  showToast('Deliverable approved — BRANSOL notified');
+}
+
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>

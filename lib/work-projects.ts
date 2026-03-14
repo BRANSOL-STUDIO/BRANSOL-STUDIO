@@ -1,0 +1,339 @@
+/**
+ * Work archive project data (from bransol-work.html reference).
+ * Used by /work page and project cards; detail pages can extend with overview/deliverables.
+ */
+export interface WorkProject {
+  id: string;
+  num: string;
+  name: string;
+  sector: string;
+  disciplines: string[];
+  disciplineLabel: string;
+  year: string;
+  size: "large" | "medium" | "small";
+  accentColor: string;
+  accentHex: string;
+  bgStop1: string;
+  bgStop2: string;
+  excerpt: string;
+}
+
+export const SECTORS = [
+  "All",
+  "Government",
+  "Financial Services",
+  "Infrastructure",
+  "Professional Services",
+  "Healthcare",
+  "Energy",
+  "Education",
+] as const;
+
+export const DISCIPLINES = [
+  "All",
+  "Identity",
+  "Digital",
+  "Campaign",
+  "Credentials",
+  "Spatial",
+] as const;
+
+/** Map discipline labels in data to filter pill values */
+export const disciplineToFilter: Record<string, string> = {
+  "Brand Identity": "Identity",
+  "Digital Design": "Digital",
+  Campaign: "Campaign",
+  Credentials: "Credentials",
+  Spatial: "Spatial",
+};
+
+export const PROJECTS: WorkProject[] = [
+  {
+    id: "national-communications-agency",
+    num: "01",
+    name: "National Communications Agency",
+    sector: "Government",
+    disciplines: ["Brand Identity", "Digital Design"],
+    disciplineLabel: "Brand Identity · Design System",
+    year: "2025",
+    size: "large",
+    accentColor: "var(--iris)",
+    accentHex: "#7c83e5",
+    bgStop1: "rgba(124,131,229,.18)",
+    bgStop2: "rgba(199,125,255,.06)",
+    excerpt:
+      "Complete brand overhaul for a national government communications body — from identity foundations to a 200-page design system deployed across 14 provincial offices.",
+  },
+  {
+    id: "listed-asset-management-group",
+    num: "02",
+    name: "Listed Asset Management Group",
+    sector: "Financial Services",
+    disciplines: ["Credentials", "Digital Design"],
+    disciplineLabel: "Design System · Investor Decks",
+    year: "2024",
+    size: "medium",
+    accentColor: "var(--aqua)",
+    accentHex: "#06d6a0",
+    bgStop1: "rgba(6,214,160,.15)",
+    bgStop2: "rgba(69,183,209,.05)",
+    excerpt:
+      "Investor-grade presentation system and quarterly reporting suite for a JSE-listed asset manager with R42bn AUM. Designed to survive the CFO, the board, and the institutional investor in the same room.",
+  },
+  {
+    id: "property-development-consortium",
+    num: "03",
+    name: "Property Development Consortium",
+    sector: "Infrastructure",
+    disciplines: ["Spatial", "Brand Identity"],
+    disciplineLabel: "Spatial Identity · Wayfinding",
+    year: "2024",
+    size: "large",
+    accentColor: "var(--gold)",
+    accentHex: "#ffd166",
+    bgStop1: "rgba(255,209,102,.14)",
+    bgStop2: "rgba(255,140,66,.06)",
+    excerpt:
+      "Wayfinding and environmental identity for a 340-hectare mixed-use development on the KZN North Coast — from site entrance to individual building identification.",
+  },
+  {
+    id: "regional-medical-foundation",
+    num: "04",
+    name: "Regional Medical Foundation",
+    sector: "Healthcare",
+    disciplines: ["Campaign", "Brand Identity"],
+    disciplineLabel: "Campaign Creative · Print",
+    year: "2023",
+    size: "small",
+    accentColor: "var(--violet)",
+    accentHex: "#c77dff",
+    bgStop1: "rgba(199,125,255,.14)",
+    bgStop2: "rgba(124,131,229,.05)",
+    excerpt:
+      "Public health awareness campaign targeting rural KZN communities — designed to function across print, radio, and community health worker kits with no electricity required.",
+  },
+  {
+    id: "pan-african-law-practice",
+    num: "05",
+    name: "Pan-African Law Practice",
+    sector: "Professional Services",
+    disciplines: ["Brand Identity", "Credentials"],
+    disciplineLabel: "Brand Identity · Credentials",
+    year: "2025",
+    size: "medium",
+    accentColor: "var(--sky)",
+    accentHex: "#45b7d1",
+    bgStop1: "rgba(69,183,209,.14)",
+    bgStop2: "rgba(78,205,196,.05)",
+    excerpt:
+      "Brand identity and business development materials for a 12-office pan-African law firm expanding into East African markets — built to carry authority across 6 jurisdictions.",
+  },
+  {
+    id: "renewable-energy-ipp",
+    num: "06",
+    name: "Renewable Energy IPP",
+    sector: "Energy",
+    disciplines: ["Digital Design", "Credentials"],
+    disciplineLabel: "Digital Design · Pitch Deck",
+    year: "2023",
+    size: "small",
+    accentColor: "var(--aqua)",
+    accentHex: "#06d6a0",
+    bgStop1: "rgba(6,214,160,.12)",
+    bgStop2: "rgba(78,205,196,.04)",
+    excerpt:
+      "REIPPPP bid documentation and investor pitch deck for a 140MW solar development — designed to meet Department of Energy submission standards while outperforming on visual quality.",
+  },
+  {
+    id: "university-advancement-office",
+    num: "07",
+    name: "University Advancement Office",
+    sector: "Education",
+    disciplines: ["Brand Identity", "Campaign"],
+    disciplineLabel: "Donor Campaign · Fundraising Materials",
+    year: "2024",
+    size: "medium",
+    accentColor: "var(--violet)",
+    accentHex: "#c77dff",
+    bgStop1: "rgba(199,125,255,.14)",
+    bgStop2: "rgba(124,131,229,.06)",
+    excerpt:
+      "Donor recognition system and capital campaign identity for a university's R800m fundraising drive — from naming rights frameworks to individual donor wall design.",
+  },
+  {
+    id: "development-finance-institution",
+    num: "08",
+    name: "Development Finance Institution",
+    sector: "Financial Services",
+    disciplines: ["Brand Identity", "Digital Design"],
+    disciplineLabel: "Brand Identity · Digital Presence",
+    year: "2022",
+    size: "large",
+    accentColor: "var(--iris)",
+    accentHex: "#7c83e5",
+    bgStop1: "rgba(124,131,229,.16)",
+    bgStop2: "rgba(69,183,209,.06)",
+    excerpt:
+      "Full rebrand of a state-supported DFI — repositioning from a perceived grant-giving body to a commercially credible development finance partner for private sector investment.",
+  },
+  {
+    id: "mining-services-group",
+    num: "09",
+    name: "Mining Services Group",
+    sector: "Infrastructure",
+    disciplines: ["Brand Identity", "Credentials"],
+    disciplineLabel: "Brand Architecture · Subsidiary System",
+    year: "2023",
+    size: "small",
+    accentColor: "var(--gold)",
+    accentHex: "#ffd166",
+    bgStop1: "rgba(255,209,102,.13)",
+    bgStop2: "rgba(255,140,66,.05)",
+    excerpt:
+      "Brand architecture rationalisation for a mining services group with 9 subsidiary entities — from 9 unrelated identities to a coherent endorsed brand structure.",
+  },
+  {
+    id: "public-health-department",
+    num: "10",
+    name: "Provincial Health Department",
+    sector: "Government",
+    disciplines: ["Campaign", "Spatial"],
+    disciplineLabel: "Public Health Campaign · Clinic Rollout",
+    year: "2022",
+    size: "medium",
+    accentColor: "var(--aqua)",
+    accentHex: "#06d6a0",
+    bgStop1: "rgba(6,214,160,.13)",
+    bgStop2: "rgba(78,205,196,.05)",
+    excerpt:
+      "Patient experience campaign rolled out across 240 public health clinics — environmental graphics, patient communication materials, and staff identity systems.",
+  },
+  {
+    id: "infrastructure-fund-manager",
+    num: "11",
+    name: "Infrastructure Fund Manager",
+    sector: "Financial Services",
+    disciplines: ["Credentials", "Digital Design"],
+    disciplineLabel: "Fund Credentials · Investor Relations",
+    year: "2025",
+    size: "small",
+    accentColor: "var(--sky)",
+    accentHex: "#45b7d1",
+    bgStop1: "rgba(69,183,209,.13)",
+    bgStop2: "rgba(78,205,196,.05)",
+    excerpt:
+      "Investor relations design system for a specialist infrastructure fund manager — built to communicate complex project pipelines to pension fund trustees and institutional allocators.",
+  },
+  {
+    id: "national-ports-authority",
+    num: "12",
+    name: "National Ports Authority",
+    sector: "Government",
+    disciplines: ["Spatial", "Brand Identity"],
+    disciplineLabel: "Environmental Identity · Port Signage",
+    year: "2021",
+    size: "large",
+    accentColor: "var(--ember)",
+    accentHex: "#ff8c42",
+    bgStop1: "rgba(255,140,66,.14)",
+    bgStop2: "rgba(255,107,157,.05)",
+    excerpt:
+      "Wayfinding and environmental identity system for three major South African port facilities — designed to meet international maritime signage standards while expressing national identity.",
+  },
+  {
+    id: "private-equity-house",
+    num: "13",
+    name: "Private Equity House",
+    sector: "Financial Services",
+    disciplines: ["Brand Identity", "Credentials"],
+    disciplineLabel: "Brand Identity · Deal Materials",
+    year: "2024",
+    size: "small",
+    accentColor: "var(--violet)",
+    accentHex: "#c77dff",
+    bgStop1: "rgba(199,125,255,.13)",
+    bgStop2: "rgba(124,131,229,.05)",
+    excerpt:
+      "Brand identity and deal document system for a Johannesburg-based private equity house focusing on healthcare and education sector investments across Sub-Saharan Africa.",
+  },
+  {
+    id: "technical-vocational-college",
+    num: "14",
+    name: "Technical Vocational College Network",
+    sector: "Education",
+    disciplines: ["Brand Identity", "Campaign"],
+    disciplineLabel: "Brand Identity · Student Recruitment",
+    year: "2022",
+    size: "medium",
+    accentColor: "var(--rose)",
+    accentHex: "#ff6b9d",
+    bgStop1: "rgba(255,107,157,.13)",
+    bgStop2: "rgba(255,140,66,.05)",
+    excerpt:
+      "Network-wide identity and student recruitment campaign for a group of 6 TVET colleges — repositioning vocational education as an aspirational career pathway.",
+  },
+  {
+    id: "insurance-group-rebrand",
+    num: "15",
+    name: "Insurance Group — Brand Refresh",
+    sector: "Financial Services",
+    disciplines: ["Brand Identity", "Digital Design"],
+    disciplineLabel: "Brand Refresh · Digital Overhaul",
+    year: "2023",
+    size: "small",
+    accentColor: "var(--teal)",
+    accentHex: "#4ecdc4",
+    bgStop1: "rgba(78,205,196,.13)",
+    bgStop2: "rgba(6,214,160,.05)",
+    excerpt:
+      "Brand refresh and digital overhaul for an established short-term insurer — modernising without alienating a 30-year client base.",
+  },
+  {
+    id: "water-utility-authority",
+    num: "16",
+    name: "Water Utility Authority",
+    sector: "Government",
+    disciplines: ["Campaign", "Spatial"],
+    disciplineLabel: "Public Awareness · Infrastructure Campaign",
+    year: "2021",
+    size: "medium",
+    accentColor: "var(--sky)",
+    accentHex: "#45b7d1",
+    bgStop1: "rgba(69,183,209,.14)",
+    bgStop2: "rgba(6,214,160,.05)",
+    excerpt:
+      "Water conservation awareness campaign and infrastructure facility identity for a provincial water utility — designed for a population in active water scarcity.",
+  },
+  {
+    id: "logistics-group-identity",
+    num: "17",
+    name: "Pan-African Logistics Group",
+    sector: "Infrastructure",
+    disciplines: ["Brand Identity", "Digital Design"],
+    disciplineLabel: "Brand Identity · Digital Platform",
+    year: "2025",
+    size: "large",
+    accentColor: "var(--gold)",
+    accentHex: "#ffd166",
+    bgStop1: "rgba(255,209,102,.14)",
+    bgStop2: "rgba(255,140,66,.06)",
+    excerpt:
+      "Brand identity and customer-facing digital platform design for a logistics group operating across 12 African markets — built to work on low-bandwidth connections.",
+  },
+  {
+    id: "affordable-housing-developer",
+    num: "18",
+    name: "Affordable Housing Developer",
+    sector: "Infrastructure",
+    disciplines: ["Spatial", "Campaign"],
+    disciplineLabel: "Development Identity · Sales Campaign",
+    year: "2024",
+    size: "small",
+    accentColor: "var(--rose)",
+    accentHex: "#ff6b9d",
+    bgStop1: "rgba(255,107,157,.12)",
+    bgStop2: "rgba(199,125,255,.05)",
+    excerpt:
+      "Development identity and sales campaign for a 1,200-unit affordable housing scheme on the KZN South Coast — helping first-time buyers see a home, not a housing unit.",
+  },
+];
