@@ -313,6 +313,10 @@ const ARTICLE_CONTENT: ArticleContent[] = [
   },
 ];
 
+export function getArticleSlugs(): string[] {
+  return ARTICLE_CONTENT.map((a) => a.slug);
+}
+
 export function getArticleBySlug(slug: string): ArticleContent | null {
   return ARTICLE_CONTENT.find((a) => a.slug === slug) ?? null;
 }

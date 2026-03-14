@@ -56,6 +56,8 @@ export function ArticlePageView({ article, related }: ArticlePageViewProps) {
   const [shareLabel, setShareLabel] = useState("Share");
   const proseRef = useRef<HTMLDivElement>(null);
 
+  const toc = article?.toc ?? [];
+
   useEffect(() => {
     function updateProgress() {
       const doc = document.documentElement;
@@ -64,7 +66,7 @@ export function ArticlePageView({ article, related }: ArticlePageViewProps) {
       const pct = scrollHeight > 0 ? Math.round((scrollTop / scrollHeight) * 100) : 0;
       setProgress(pct);
 
-      article.toc.forEach((t) => {
+      toc.forEach((t) => {
         const el = document.getElementById(t.id);
         if (el) {
           const rect = el.getBoundingClientRect();
@@ -75,7 +77,7 @@ export function ArticlePageView({ article, related }: ArticlePageViewProps) {
     window.addEventListener("scroll", updateProgress, { passive: true });
     updateProgress();
     return () => window.removeEventListener("scroll", updateProgress);
-  }, [article.toc]);
+  }, [toc]);
 
   function handleShare() {
     navigator.clipboard.writeText(typeof window !== "undefined" ? window.location.href : "").catch(() => {});
@@ -174,7 +176,7 @@ export function ArticlePageView({ article, related }: ArticlePageViewProps) {
             <div className="article-sidebar-panel">
               <span className="article-sidebar-label">In this article</span>
               <ul className="article-toc-list">
-                {article.toc.map((t) => (
+                {toc.map((t) => (
                   <li key={t.id} className={`article-toc-item ${activeToc === t.id ? "active" : ""}`}>
                     <a href={`#${t.id}`}>{t.label}</a>
                   </li>
