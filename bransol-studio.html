@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CHY7B35XNP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CHY7B35XNP');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio — BRANSOL</title>
+<meta name="description" content="BRANSOL is a Ballito-based strategic design studio on the KwaZulu-Natal North Coast. We work with a small number of organisations each year — selectively, deeply, and without compromise.">
+<link rel="canonical" href="https://bransol.com/studio">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --void:#060608; --deep:#0d0d12; --surface:#111118; --lift:#18181f;
+  --panel:#1e1e27; --ghost:#2a2a35; --border:rgba(255,255,255,0.07);
+  --text:#f0eff5; --sub:rgba(240,239,245,0.6); --ter:rgba(240,239,245,0.28); --dim:rgba(240,239,245,0.1);
+  --iris:#7c83e5; --aqua:#06d6a0; --violet:#c77dff; --rose:#ff6b9d;
+  --gold:#ffd166; --sky:#45b7d1; --teal:#4ecdc4; --ember:#ff8c42;
+  --chrome:linear-gradient(135deg,#ff6b9d,#ff8c42,#ffd166,#06d6a0,#4ecdc4,#45b7d1,#7c83e5,#c77dff);
+  --nav-h:68px; --pad-x:72px;
+}
+
+html[data-theme="light"]{
+  --void:#f5f4f0; --deep:#eeede8; --surface:#e8e7e1; --lift:#dddcd5;
+  --panel:#d4d3cb; --ghost:#c4c3ba; --border:rgba(0,0,0,0.09);
+  --text:#0e0e12; --sub:rgba(14,14,18,0.62); --ter:rgba(14,14,18,0.38); --dim:rgba(14,14,18,0.1);
+}
+html[data-theme="light"] body{background:var(--void);color:var(--text);}
+html[data-theme="light"] nav{background:rgba(245,244,240,.85);border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] nav.scrolled{background:rgba(245,244,240,.97);}
+html[data-theme="light"] .nav-links a{color:var(--sub);}
+html[data-theme="light"] .nav-links a:hover{color:var(--text);}
+html[data-theme="light"] .bg-grid{background-image:linear-gradient(rgba(0,0,0,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.03) 1px,transparent 1px);}
+html[data-theme="light"] .team-card{background:rgba(255,255,255,.65);border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] .team-card:hover{background:rgba(255,255,255,.9);}
+html[data-theme="light"] .value-row{border-color:rgba(0,0,0,.07);}
+html[data-theme="light"] .model-block{background:rgba(255,255,255,.6);border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] .client-strip{background:rgba(255,255,255,.5);border-color:rgba(0,0,0,.07);}
+html[data-theme="light"] .stat-tile{border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] .pull-quote{border-color:rgba(0,0,0,.1);}
+html[data-theme="light"] .manifesto-line{border-color:rgba(0,0,0,.06);}
+html[data-theme="light"] .tt-track{background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.12);}
+html[data-theme="light"] .theme-toggle:hover{border-color:rgba(0,0,0,.2);color:var(--text);}
+html[data-theme="light"] footer{background:var(--deep);border-color:rgba(0,0,0,.08);}
+
+/* TRANSITIONS */
+body{transition:background-color .4s ease,color .35s ease;}
+nav{transition:background .4s ease,border-color .35s ease,height .3s ease!important;}
+.team-card,.model-block,.value-row{transition:background .3s ease,border-color .25s ease;}
+.nav-links a,.theme-toggle{transition:color .2s,border-color .2s;}
+.tt-track{transition:background .3s ease,border-color .3s ease;}
+.tt-thumb{transition:transform .3s cubic-bezier(.16,1,.3,1);}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* BASE */
+body{background:var(--void);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.65;cursor:none;overflow-x:hidden;}
+html{scroll-behavior:smooth;}
+
+/* CURSOR */
+.cur{position:fixed;width:7px;height:7px;border-radius:50%;background:var(--chrome);background-size:300% 300%;animation:cSpin 3s linear infinite;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .18s,height .18s;}
+.cur-ring{position:fixed;width:30px;height:30px;border-radius:50%;border:1px solid rgba(124,131,229,.32);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .15s,height .15s,border-color .2s;}
+
+/* KEYFRAMES */
+@keyframes cSpin{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes orbPulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes scanDown{0%{opacity:0;top:0}5%{opacity:1}95%{opacity:1}100%{opacity:0;top:100%}}
+@keyframes lineReveal{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* UTILS */
+.chrome-text{background:var(--chrome);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:cSpin 5s ease infinite;}
+.italic{font-style:italic;}
+
+/* BG */
+.bg-fixed{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.013) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.013) 1px,transparent 1px);background-size:80px 80px;}
+.bg-orb{position:absolute;border-radius:50%;filter:blur(100px);animation:orbPulse 12s ease-in-out infinite;}
+.bg-orb-1{width:900px;height:900px;top:-300px;right:-200px;background:radial-gradient(circle,rgba(124,131,229,.13) 0%,rgba(199,125,255,.04) 40%,transparent 70%);}
+.bg-orb-2{width:700px;height:700px;bottom:-100px;left:-200px;background:radial-gradient(circle,rgba(6,214,160,.09) 0%,transparent 70%);animation-delay:6s;}
+.bg-orb-3{width:400px;height:400px;top:55%;left:40%;background:radial-gradient(circle,rgba(255,141,66,.06) 0%,transparent 60%);animation-delay:3s;}
+.bg-scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(124,131,229,.15),rgba(6,214,160,.15),transparent);animation:scanDown 20s ease-in-out 2s infinite;}
+.chrome-edge{position:fixed;left:0;top:0;bottom:0;width:3px;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;z-index:100;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;height:var(--nav-h);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 var(--pad-x) 0 calc(var(--pad-x) + 3px);border-bottom:1px solid rgba(255,255,255,.05);background:rgba(6,6,8,.65);backdrop-filter:blur(20px);}
+nav.scrolled{background:rgba(6,6,8,.92);border-color:var(--border);height:58px;}
+.nav-logo{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;letter-spacing:-.02em;line-height:1;text-decoration:none;cursor:none;justify-self:start;}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none;justify-self:center;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--ter);text-decoration:none;cursor:none;white-space:nowrap;}
+.nav-links a:hover,.nav-links a.active{color:var(--sub);}
+.nav-end{display:flex;align-items:center;gap:12px;justify-self:end;}
+.nav-cta{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:#060608!important;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;padding:10px 24px;text-decoration:none;cursor:none;transition:opacity .2s!important;white-space:nowrap;}
+.nav-cta:hover{opacity:.85;}
+.theme-toggle{display:flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid var(--border);background:transparent;cursor:none;color:var(--ter);font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.22em;text-transform:uppercase;flex-shrink:0;}
+.theme-toggle:hover{border-color:rgba(255,255,255,.15);color:var(--sub);}
+.tt-track{width:28px;height:15px;border-radius:999px;border:1px solid var(--border);position:relative;flex-shrink:0;}
+.tt-thumb{position:absolute;top:2px;left:2px;width:9px;height:9px;border-radius:50%;background:var(--chrome);background-size:300% 300%;animation:cSpin 3s linear infinite;}
+html[data-theme="light"] .tt-thumb{transform:translateX(13px);}
+
+/* ═══════════════════════════════════════════
+   HERO — full-width editorial opening
+═══════════════════════════════════════════ */
+.hero{
+  position:relative;z-index:1;
+  padding:calc(var(--nav-h) + 120px) var(--pad-x) 100px calc(var(--pad-x) + 3px);
+  border-bottom:1px solid var(--border);
+  min-height:90vh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.38em;text-transform:uppercase;color:rgba(240,239,245,.4);display:block;margin-bottom:28px;animation:fadeIn .8s ease .2s both;}
+
+/* Giant stacked wordmark title */
+.hero-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(64px,10vw,160px);
+  font-weight:800;
+  letter-spacing:-.055em;
+  line-height:.85;
+  margin-bottom:64px;
+  animation:fadeUp .9s cubic-bezier(.16,1,.3,1) .3s both;
+}
+.hero-title em{
+  font-style:italic;
+  font-weight:400;
+  color:var(--sub);
+}
+
+/* Three-column intro below title */
+.hero-cols{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:0;
+  border-top:1px solid var(--border);
+  animation:fadeIn 1s ease .6s both;
+}
+.hero-col{padding:32px 0;padding-right:48px;}
+.hero-col:not(:last-child){border-right:1px solid var(--border);margin-right:48px;}
+.hc-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.32em;text-transform:uppercase;color:var(--ter);display:block;margin-bottom:12px;}
+.hc-text{font-size:15px;color:var(--sub);line-height:1.75;}
+
+/* ═══════════════════════════════════════════
+   STAT STRIP
+═══════════════════════════════════════════ */
+.stat-strip{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-bottom:1px solid var(--border);
+}
+.stat-tile{
+  padding:48px var(--pad-x);
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;gap:8px;
+}
+.stat-tile:last-child{border-right:none;}
+.st-val{font-family:'Syne',sans-serif;font-size:56px;font-weight:800;letter-spacing:-.05em;line-height:1;}
+.st-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--ter);}
+.st-sub{font-size:13px;color:var(--ter);line-height:1.5;margin-top:4px;}
+
+/* ═══════════════════════════════════════════
+   PHILOSOPHY — manifesto section
+═══════════════════════════════════════════ */
+.philosophy{
+  position:relative;z-index:1;
+  padding:120px var(--pad-x) 120px calc(var(--pad-x) + 3px);
+  border-bottom:1px solid var(--border);
+}
+.ph-inner{
+  display:grid;
+  grid-template-columns:280px 1fr;
+  gap:100px;
+}
+.ph-left{}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--ter);display:block;margin-bottom:20px;}
+.ph-label{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;letter-spacing:-.04em;line-height:1.05;margin-bottom:0;}
+.ph-right{}
+
+/* Manifesto lines */
+.manifesto-lines{display:flex;flex-direction:column;}
+.manifesto-line{
+  display:grid;
+  grid-template-columns:40px 1fr;
+  gap:32px;
+  align-items:baseline;
+  padding:28px 0;
+  border-bottom:1px solid var(--border);
+  cursor:default;
+}
+.manifesto-line:first-child{border-top:1px solid var(--border);}
+.ml-num{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--ter);}
+.ml-body{}
+.ml-statement{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(20px,2.2vw,28px);
+  font-weight:800;
+  letter-spacing:-.03em;
+  line-height:1.1;
+  margin-bottom:8px;
+  transition:color .2s;
+}
+.manifesto-line:hover .ml-statement{color:var(--text);}
+.ml-expand{font-size:14px;color:var(--ter);line-height:1.65;max-height:0;overflow:hidden;transition:max-height .4s ease,color .3s ease,opacity .3s ease;opacity:0;}
+.manifesto-line:hover .ml-expand{max-height:80px;opacity:1;color:var(--sub);}
+
+/* ═══════════════════════════════════════════
+   PULL QUOTE — large editorial moment
+═══════════════════════════════════════════ */
+.pull-quote-section{
+  position:relative;z-index:1;
+  padding:0 var(--pad-x);
+  border-bottom:1px solid var(--border);
+  overflow:hidden;
+}
+.pull-quote{
+  padding:100px 0;
+  border-left:none;
+  position:relative;
+}
+.pq-text{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(28px,4.5vw,72px);
+  font-weight:800;
+  letter-spacing:-.04em;
+  line-height:1.05;
+  max-width:1100px;
+}
+.pq-text em{
+  font-style:italic;
+  font-weight:400;
+  color:var(--sub);
+}
+.pq-source{
+  margin-top:32px;
+  font-family:'DM Mono',monospace;
+  font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--ter);
+  display:flex;align-items:center;gap:16px;
+}
+.pq-source::before{content:'';display:block;width:40px;height:1px;background:var(--border);}
+
+/* ═══════════════════════════════════════════
+   TEAM
+═══════════════════════════════════════════ */
+.team{
+  position:relative;z-index:1;
+  padding:100px var(--pad-x) 100px calc(var(--pad-x) + 3px);
+  border-bottom:1px solid var(--border);
+}
+.team-header{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:flex-end;
+  margin-bottom:64px;
+}
+.team-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--ter);display:block;margin-bottom:16px;}
+.team-title{font-family:'Syne',sans-serif;font-size:clamp(32px,4vw,56px);font-weight:800;letter-spacing:-.04em;line-height:.95;}
+.team-right p{font-size:15px;color:var(--sub);line-height:1.8;margin-bottom:12px;}
+
+/* Team grid */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.team-card{
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--border);
+  overflow:hidden;
+  cursor:none;
+  position:relative;
+}
+.team-card:hover{background:rgba(255,255,255,.04);}
+.team-card:hover .tc-overlay{opacity:1;}
+.team-card:hover .tc-avatar{filter:brightness(.7);}
+
+/* Avatar area */
+.tc-avatar{
+  width:100%;aspect-ratio:1;
+  position:relative;overflow:hidden;
+  transition:filter .4s ease;
+}
+.tc-avatar-bg{
+  position:absolute;inset:0;
+}
+/* Geometric placeholder portrait — each unique */
+.tc-initials{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-size:48px;font-weight:800;
+  letter-spacing:-.04em;color:rgba(240,239,245,.06);
+  z-index:1;
+}
+.tc-geo{position:absolute;inset:0;z-index:0;}
+
+/* Hover overlay */
+.tc-overlay{
+  position:absolute;inset:0;z-index:2;
+  background:rgba(6,6,8,.6);
+  backdrop-filter:blur(4px);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  gap:12px;padding:24px;
+  opacity:0;transition:opacity .35s ease;
+}
+.tc-overlay-quote{
+  font-family:'DM Sans',sans-serif;font-size:13px;font-style:italic;
+  color:var(--sub);text-align:center;line-height:1.65;
+}
+
+/* Card info */
+.tc-info{padding:24px 24px 28px;}
+.tc-name{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.03em;margin-bottom:2px;}
+.tc-role{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:var(--ter);margin-bottom:12px;}
+.tc-bio{font-size:13px;color:var(--sub);line-height:1.6;margin-bottom:16px;}
+.tc-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.tc-tag{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.18em;text-transform:uppercase;padding:4px 8px;border:1px solid var(--border);color:var(--ter);}
+
+/* ═══════════════════════════════════════════
+   VALUES
+═══════════════════════════════════════════ */
+.values{
+  position:relative;z-index:1;
+  padding:100px var(--pad-x) 100px calc(var(--pad-x) + 3px);
+  border-bottom:1px solid var(--border);
+}
+.values-header{margin-bottom:60px;}
+.values-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--ter);display:block;margin-bottom:16px;}
+.values-title{font-family:'Syne',sans-serif;font-size:clamp(28px,3.5vw,52px);font-weight:800;letter-spacing:-.04em;line-height:.95;}
+
+.value-rows{display:flex;flex-direction:column;}
+.value-row{
+  display:grid;grid-template-columns:80px 1fr 1fr;gap:48px;align-items:start;
+  padding:40px 0;border-bottom:1px solid var(--border);
+}
+.value-row:last-child{border-bottom:none;}
+.vr-num{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.22em;color:var(--ter);padding-top:6px;}
+.vr-title{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;letter-spacing:-.03em;line-height:1.1;}
+.vr-body{font-size:14px;color:var(--sub);line-height:1.75;}
+
+/* ═══════════════════════════════════════════
+   HOW WE WORK — operating model
+═══════════════════════════════════════════ */
+.model{
+  position:relative;z-index:1;
+  padding:100px var(--pad-x) 100px calc(var(--pad-x) + 3px);
+  border-bottom:1px solid var(--border);
+}
+.model-header{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:flex-end;
+  margin-bottom:64px;
+}
+.model-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--ter);display:block;margin-bottom:16px;}
+.model-title{font-family:'Syne',sans-serif;font-size:clamp(28px,3.5vw,52px);font-weight:800;letter-spacing:-.04em;line-height:.95;}
+.model-right p{font-size:15px;color:var(--sub);line-height:1.8;margin-bottom:12px;}
+
+.model-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.model-block{
+  padding:40px 36px;
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--border);
+  display:flex;flex-direction:column;gap:14px;
+}
+.mb-icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;}
+.mb-icon svg{width:16px;height:16px;fill:none;stroke-width:1.5;}
+.mb-num{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.22em;color:var(--ter);}
+.mb-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.03em;line-height:1.1;}
+.mb-body{font-size:13px;color:var(--sub);line-height:1.7;flex:1;}
+.mb-note{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--ter);padding-top:12px;border-top:1px solid var(--border);}
+
+/* ═══════════════════════════════════════════
+   CLIENT APPROACH
+═══════════════════════════════════════════ */
+.client-approach{
+  position:relative;z-index:1;
+  padding:100px var(--pad-x) 100px calc(var(--pad-x) + 3px);
+  border-bottom:1px solid var(--border);
+}
+.ca-inner{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:flex-start;}
+.ca-left{}
+.ca-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--ter);display:block;margin-bottom:20px;}
+.ca-title{font-family:'Syne',sans-serif;font-size:clamp(28px,3.5vw,52px);font-weight:800;letter-spacing:-.04em;line-height:.95;margin-bottom:32px;}
+.ca-body p{font-size:15px;color:var(--sub);line-height:1.8;margin-bottom:16px;}
+
+/* Client strip */
+.client-strip{
+  padding:28px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  margin-top:40px;
+}
+.cs-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--ter);margin-bottom:16px;display:block;}
+.cs-types{display:flex;flex-direction:column;gap:10px;}
+.cs-type{
+  display:flex;align-items:center;gap:12px;
+  font-size:14px;color:var(--sub);
+}
+.cs-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+
+.ca-right{
+  display:flex;flex-direction:column;gap:2px;
+  padding-top:80px;
+}
+.ca-principle{
+  padding:24px 0;border-bottom:1px solid var(--border);
+  display:grid;grid-template-columns:32px 1fr;gap:16px;align-items:baseline;
+}
+.ca-principle:first-child{border-top:1px solid var(--border);}
+.cap-num{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--ter);}
+.cap-body{}
+.cap-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;letter-spacing:-.025em;margin-bottom:6px;}
+.cap-text{font-size:13px;color:var(--ter);line-height:1.65;}
+
+/* ═══════════════════════════════════════════
+   LOCATION
+═══════════════════════════════════════════ */
+.location{
+  position:relative;z-index:1;
+  padding:100px var(--pad-x) 100px calc(var(--pad-x) + 3px);
+  border-bottom:1px solid var(--border);
+  display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center;
+}
+.loc-left{}
+.loc-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--ter);display:block;margin-bottom:16px;}
+.loc-title{font-family:'Syne',sans-serif;font-size:clamp(28px,3.5vw,52px);font-weight:800;letter-spacing:-.04em;line-height:.95;margin-bottom:28px;}
+.loc-body{font-size:15px;color:var(--sub);line-height:1.8;margin-bottom:24px;}
+.loc-detail{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--ter);}
+.loc-detail span{color:var(--sub);margin-left:8px;}
+
+/* Abstract Joburg map illustration */
+.loc-right{position:relative;display:flex;align-items:center;justify-content:center;}
+.loc-map{
+  width:100%;max-width:460px;
+  aspect-ratio:4/3;
+  position:relative;
+  border:1px solid var(--border);
+  background:var(--surface);
+  overflow:hidden;
+}
+.lm-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:24px 24px;}
+.lm-pin{
+  position:absolute;top:42%;left:54%;transform:translate(-50%,-50%);
+  display:flex;flex-direction:column;align-items:center;gap:0;
+  animation:floatY 4s ease-in-out infinite;
+}
+.lm-pin-dot{
+  width:14px;height:14px;border-radius:50%;
+  background:var(--chrome);background-size:300% 300%;animation:cSpin 3s linear infinite;
+  box-shadow:0 0 20px rgba(124,131,229,.5);
+}
+.lm-pin-ring{
+  position:absolute;width:40px;height:40px;border-radius:50%;
+  border:1px solid rgba(124,131,229,.2);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+}
+.lm-pin-ring-2{
+  position:absolute;width:70px;height:70px;border-radius:50%;
+  border:1px solid rgba(124,131,229,.1);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+}
+.lm-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.2em;color:var(--ter);margin-top:12px;white-space:nowrap;}
+
+/* Street lines for abstract map feel */
+.lm-streets{position:absolute;inset:0;opacity:.2;}
+
+/* ═══════════════════════════════════════════
+   CTA
+═══════════════════════════════════════════ */
+.page-cta{
+  position:relative;z-index:1;
+  padding:120px var(--pad-x);
+  display:grid;grid-template-columns:1fr auto;align-items:center;gap:60px;
+}
+.cta-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--ter);display:block;margin-bottom:16px;}
+.cta-title{font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,64px);font-weight:800;letter-spacing:-.05em;line-height:.92;}
+.cta-actions{display:flex;gap:12px;align-items:center;flex-shrink:0;}
+.cta-btn-primary{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:#060608;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;padding:16px 36px;text-decoration:none;cursor:none;transition:opacity .2s;white-space:nowrap;}
+.cta-btn-primary:hover{opacity:.85;}
+.cta-btn-ghost{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--ter);border:1px solid var(--border);padding:16px 32px;text-decoration:none;cursor:none;transition:color .2s,border-color .2s;white-space:nowrap;}
+.cta-btn-ghost:hover{color:var(--sub);border-color:rgba(255,255,255,.14);}
+
+/* FOOTER */
+footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid var(--border);padding:48px var(--pad-x) 32px calc(var(--pad-x) + 3px);}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;}
+.footer-copy{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--ter);}
+.footer-links{display:flex;gap:24px;}
+.footer-links a{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ter);text-decoration:none;cursor:none;transition:color .2s;}
+.footer-links a:hover{color:var(--sub);}
+
+/* RESPONSIVE */
+@media(max-width:1200px){
+  :root{--pad-x:40px;}
+  .hero-cols{grid-template-columns:1fr 1fr;gap:0;}
+  .hero-col:last-child{display:none;}
+  .ph-inner{grid-template-columns:1fr;gap:48px;}
+  .team-header,.model-header,.ca-inner,.location{grid-template-columns:1fr;gap:48px;}
+  .team-grid{grid-template-columns:1fr 1fr;}
+  .model-grid{grid-template-columns:1fr;}
+  .stat-strip{grid-template-columns:1fr 1fr;}
+  .stat-tile{border-bottom:1px solid var(--border);}
+  .value-row{grid-template-columns:60px 1fr;gap:24px;}
+  .vr-body{grid-column:2;}
+  .page-cta{grid-template-columns:1fr;gap:32px;}
+}
+@media(max-width:768px){
+  :root{--pad-x:24px;}
+  .nav-links{display:none;}
+  .hero-cols{grid-template-columns:1fr;}
+  .team-grid{grid-template-columns:1fr;}
+  .model-grid{grid-template-columns:1fr;}
+  .stat-strip{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+<div class="bg-fixed">
+  <div class="bg-grid"></div>
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb bg-orb-3"></div>
+  <div class="bg-scan"></div>
+</div>
+<div class="chrome-edge"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo"><span class="chrome-text">BRAN</span><span style="color:var(--text)">SOL</span></a>
+  <ul class="nav-links">
+    <li><a href="/work">Work</a></li>
+    <li><a href="/expertise">Expertise</a></li>
+    <li><a href="/platform">Platform</a></li>
+    <li><a href="/studio" class="active">Studio</a></li>
+    <li><a href="/perspectives">Perspectives</a></li>
+  </ul>
+  <div class="nav-end">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <div class="tt-track"><div class="tt-thumb"></div></div>
+      <span id="themeLabel">Light</span>
+    </button>
+    <a href="/begin" class="nav-cta">Begin</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <span class="hero-eyebrow">Studio</span>
+  <h1 class="hero-title">
+    We make<br>
+    <span class="chrome-text">design</span><br>
+    <em>that holds.</em>
+  </h1>
+  <div class="hero-cols">
+    <div class="hero-col">
+      <span class="hc-label">Who we are</span>
+      <p class="hc-text">BRANSOL is a strategic design studio based in Ballito, KwaZulu-Natal. We work with institutions, listed companies, government entities, and ambitious private organisations on commissions that require more than decoration.</p>
+    </div>
+    <div class="hero-col">
+      <span class="hc-label">How we work</span>
+      <p class="hc-text">Selectively. We take on a limited number of engagements each year — not because of capacity, but because depth requires choice. Every client gets the studio's full attention, not a fraction of it.</p>
+    </div>
+    <div class="hero-col">
+      <span class="hc-label">What we believe</span>
+      <p class="hc-text">That design is not decoration. That strategy without execution is just a conversation. That the best work happens when client and studio operate as genuine partners — not vendor and buyer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STATS ══ -->
+<div class="stat-strip">
+  <div class="stat-tile reveal">
+    <span class="st-val chrome-text">6+</span>
+    <span class="st-label">Years operating</span>
+    <span class="st-sub">Founded in Ballito. Built for the continent.</span>
+  </div>
+  <div class="stat-tile reveal" style="transition-delay:.08s">
+    <span class="st-val chrome-text">94%</span>
+    <span class="st-label">Client retention</span>
+    <span class="st-sub">Most clients commission again. That is the measure we care about.</span>
+  </div>
+  <div class="stat-tile reveal" style="transition-delay:.16s">
+    <span class="st-val chrome-text">1:3</span>
+    <span class="st-label">Commission win rate</span>
+    <span class="st-sub">We decline two in three enquiries. Selectivity is not arrogance — it's how we protect quality.</span>
+  </div>
+  <div class="stat-tile reveal" style="transition-delay:.24s">
+    <span class="st-val chrome-text">5</span>
+    <span class="st-label">Disciplines</span>
+    <span class="st-sub">Identity, digital, campaign, credentials, spatial. One studio. No outsourcing without disclosure.</span>
+  </div>
+</div>
+
+<!-- ══ PHILOSOPHY ══ -->
+<section class="philosophy">
+  <div class="ph-inner">
+    <div>
+      <span class="ph-eyebrow">Philosophy</span>
+      <h2 class="ph-label reveal">What we<br>actually<br>believe.</h2>
+    </div>
+    <div class="ph-right reveal" style="transition-delay:.1s">
+      <div class="manifesto-lines">
+        <div class="manifesto-line">
+          <span class="ml-num">01</span>
+          <div class="ml-body">
+            <div class="ml-statement">Design is a business argument, not a cosmetic one.</div>
+            <div class="ml-expand">Every design decision has a business consequence. We treat aesthetics as a strategic instrument — not the goal, but the vehicle through which strategy becomes visible and legible to the people who matter.</div>
+          </div>
+        </div>
+        <div class="manifesto-line">
+          <span class="ml-num">02</span>
+          <div class="ml-body">
+            <div class="ml-statement">The brief is half the work.</div>
+            <div class="ml-expand">A poorly defined brief produces expensive revisions, not good work. We invest more time in understanding the problem than most studios spend on the entire project. When the brief is right, the design almost writes itself.</div>
+          </div>
+        </div>
+        <div class="manifesto-line">
+          <span class="ml-num">03</span>
+          <div class="ml-body">
+            <div class="ml-statement">Selectivity is a form of respect.</div>
+            <div class="ml-expand">We decline commissions that are not right — wrong fit, wrong timing, or where we genuinely believe another studio would serve the client better. This is not a negotiating tactic. It is how we stay honest.</div>
+          </div>
+        </div>
+        <div class="manifesto-line">
+          <span class="ml-num">04</span>
+          <div class="ml-body">
+            <div class="ml-statement">Permanence over novelty.</div>
+            <div class="ml-expand">Design that chases trends ages in years. Design built on enduring principles ages in decades. We are not interested in what is fashionable. We are interested in what will still be correct when you look back on it in ten years.</div>
+          </div>
+        </div>
+        <div class="manifesto-line">
+          <span class="ml-num">05</span>
+          <div class="ml-body">
+            <div class="ml-statement">Craft is not optional.</div>
+            <div class="ml-expand">In a world where speed tools can produce passable work instantly, the distinction between passable and excellent has never been more valuable. We spend time on the details that most people will never consciously notice — because those details are felt.</div>
+          </div>
+        </div>
+        <div class="manifesto-line">
+          <span class="ml-num">06</span>
+          <div class="ml-body">
+            <div class="ml-statement">We tell clients when we disagree.</div>
+            <div class="ml-expand">A studio that only agrees is not a partner — it is a production house. We are hired for our judgement. If we believe a direction is wrong, we say so directly, explain why, and propose an alternative. Clients pay for that, whether they know it or not.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PULL QUOTE ══ -->
+<div class="pull-quote-section">
+  <div class="pull-quote reveal">
+    <p class="pq-text">
+      "The organisations that endure are the ones that understood, early, that how you <em>present</em> what you do is inseparable from what you <em>actually</em> do."
+    </p>
+    <div class="pq-source">BRANSOL — Studio Position, 2026</div>
+  </div>
+</div>
+
+<!-- ══ TEAM ══ -->
+<section class="team">
+  <div class="team-header">
+    <div>
+      <span class="team-eyebrow">The Team</span>
+      <h2 class="team-title reveal">Small<br><span class="chrome-text">by design.</span></h2>
+    </div>
+    <div class="reveal" style="transition-delay:.1s">
+      <p>We do not scale by adding bodies. Every senior team member works directly on client projects — not as oversight, but as execution. When you commission BRANSOL, you work with the people whose names are on the studio.</p>
+      <p>We bring in specialist collaborators when the work requires it — photographers, fabricators, developers — but always transparently, and always under BRANSOL direction.</p>
+    </div>
+  </div>
+
+  <div class="team-grid">
+    <!-- Card 1 -->
+    <div class="team-card reveal">
+      <div class="tc-avatar">
+        <div class="tc-avatar-bg">
+          <svg class="tc-geo" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="g1a" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#7c83e5" stop-opacity=".3"/>
+                <stop offset="100%" stop-color="#c77dff" stop-opacity=".1"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="400" fill="url(#g1a)"/>
+            <circle cx="200" cy="160" r="120" fill="none" stroke="#7c83e5" stroke-width=".5" opacity=".4"/>
+            <circle cx="200" cy="160" r="80" fill="none" stroke="#c77dff" stroke-width=".5" opacity=".3"/>
+            <line x1="0" y1="400" x2="400" y2="0" stroke="#7c83e5" stroke-width=".5" opacity=".2"/>
+            <line x1="80" y1="400" x2="480" y2="0" stroke="#7c83e5" stroke-width=".5" opacity=".15"/>
+            <!-- Abstract silhouette suggestion -->
+            <ellipse cx="200" cy="130" rx="55" ry="65" fill="#7c83e5" opacity=".12"/>
+            <ellipse cx="200" cy="280" rx="90" ry="70" fill="#7c83e5" opacity=".08"/>
+          </svg>
+        </div>
+        <div class="tc-initials">NK</div>
+        <div class="tc-overlay">
+          <div class="tc-overlay-quote">"Design that cannot survive a board room does not deserve to survive at all."</div>
+        </div>
+      </div>
+      <div class="tc-info">
+        <div class="tc-name">Naledi Khumalo</div>
+        <div class="tc-role">Founding Director · Brand Strategy</div>
+        <div class="tc-bio">15 years shaping institutional brand identities across government, financial services, and listed companies. Former creative lead at two of South Africa's largest design consultancies before founding BRANSOL.</div>
+        <div class="tc-tags">
+          <span class="tc-tag">Brand Strategy</span>
+          <span class="tc-tag">Identity</span>
+          <span class="tc-tag">Government</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="team-card reveal" style="transition-delay:.1s">
+      <div class="tc-avatar">
+        <div class="tc-avatar-bg">
+          <svg class="tc-geo" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="g2a" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#06d6a0" stop-opacity=".25"/>
+                <stop offset="100%" stop-color="#45b7d1" stop-opacity=".1"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="400" fill="url(#g2a)"/>
+            <rect x="60" y="60" width="280" height="280" fill="none" stroke="#06d6a0" stroke-width=".5" opacity=".3"/>
+            <rect x="120" y="120" width="160" height="160" fill="none" stroke="#45b7d1" stroke-width=".5" opacity=".25"/>
+            <line x1="0" y1="0" x2="400" y2="400" stroke="#06d6a0" stroke-width=".5" opacity=".2"/>
+            <ellipse cx="200" cy="130" rx="50" ry="62" fill="#06d6a0" opacity=".1"/>
+            <ellipse cx="200" cy="280" rx="85" ry="68" fill="#06d6a0" opacity=".07"/>
+          </svg>
+        </div>
+        <div class="tc-initials">TM</div>
+        <div class="tc-overlay">
+          <div class="tc-overlay-quote">"I am not interested in what looks good in a portfolio. I am interested in what works in the world."</div>
+        </div>
+      </div>
+      <div class="tc-info">
+        <div class="tc-name">Thabo Molefe</div>
+        <div class="tc-role">Creative Director · Digital &amp; Campaign</div>
+        <div class="tc-bio">A decade of digital design and integrated campaign work, with a particular focus on large-scale rollouts for regulated industries. Leads BRANSOL's digital design and campaign creative output.</div>
+        <div class="tc-tags">
+          <span class="tc-tag">Digital Design</span>
+          <span class="tc-tag">Campaign</span>
+          <span class="tc-tag">UI/UX</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="team-card reveal" style="transition-delay:.2s">
+      <div class="tc-avatar">
+        <div class="tc-avatar-bg">
+          <svg class="tc-geo" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="g3a" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#ffd166" stop-opacity=".22"/>
+                <stop offset="100%" stop-color="#ff8c42" stop-opacity=".1"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="400" fill="url(#g3a)"/>
+            <polygon points="200,40 360,340 40,340" fill="none" stroke="#ffd166" stroke-width=".5" opacity=".3"/>
+            <polygon points="200,100 300,300 100,300" fill="none" stroke="#ff8c42" stroke-width=".5" opacity=".2"/>
+            <line x1="400" y1="0" x2="0" y2="400" stroke="#ffd166" stroke-width=".5" opacity=".18"/>
+            <ellipse cx="200" cy="130" rx="52" ry="63" fill="#ffd166" opacity=".1"/>
+            <ellipse cx="200" cy="280" rx="88" ry="70" fill="#ffd166" opacity=".06"/>
+          </svg>
+        </div>
+        <div class="tc-initials">SB</div>
+        <div class="tc-overlay">
+          <div class="tc-overlay-quote">"Spatial design is the most honest form of communication — you cannot look away from it."</div>
+        </div>
+      </div>
+      <div class="tc-info">
+        <div class="tc-name">Siyanda Buthelezi</div>
+        <div class="tc-role">Senior Designer · Environmental &amp; Spatial</div>
+        <div class="tc-bio">Specialist in wayfinding systems, donor recognition environments, and large-format spatial identity. Has delivered signage programmes for public health, education, and government infrastructure projects across South Africa.</div>
+        <div class="tc-tags">
+          <span class="tc-tag">Environmental</span>
+          <span class="tc-tag">Wayfinding</span>
+          <span class="tc-tag">Spatial</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="team-card reveal" style="transition-delay:.1s">
+      <div class="tc-avatar">
+        <div class="tc-avatar-bg">
+          <svg class="tc-geo" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="g4a" x1="50%" y1="0%" x2="50%" y2="100%">
+                <stop offset="0%" stop-color="#ff6b9d" stop-opacity=".2"/>
+                <stop offset="100%" stop-color="#c77dff" stop-opacity=".08"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="400" fill="url(#g4a)"/>
+            <circle cx="200" cy="200" r="150" fill="none" stroke="#ff6b9d" stroke-width=".5" opacity=".25"/>
+            <circle cx="200" cy="200" r="100" fill="none" stroke="#c77dff" stroke-width=".5" opacity=".2"/>
+            <circle cx="200" cy="200" r="50" fill="none" stroke="#ff6b9d" stroke-width=".5" opacity=".15"/>
+            <ellipse cx="200" cy="130" rx="50" ry="62" fill="#ff6b9d" opacity=".1"/>
+            <ellipse cx="200" cy="280" rx="85" ry="68" fill="#ff6b9d" opacity=".07"/>
+          </svg>
+        </div>
+        <div class="tc-initials">LN</div>
+        <div class="tc-overlay">
+          <div class="tc-overlay-quote">"A credentials document is not a brochure. It is a closing argument."</div>
+        </div>
+      </div>
+      <div class="tc-info">
+        <div class="tc-name">Lerato Nkosi</div>
+        <div class="tc-role">Senior Designer · Credentials &amp; Presentations</div>
+        <div class="tc-bio">Specialises in investor presentations, annual reports, and procurement-facing credentials. Has designed materials used in JSE listings, DFI funding rounds, and government tender submissions across multiple sectors.</div>
+        <div class="tc-tags">
+          <span class="tc-tag">Credentials</span>
+          <span class="tc-tag">Investor Decks</span>
+          <span class="tc-tag">Annual Reports</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="team-card reveal" style="transition-delay:.2s">
+      <div class="tc-avatar">
+        <div class="tc-avatar-bg">
+          <svg class="tc-geo" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="g5a" x1="0%" y1="50%" x2="100%" y2="50%">
+                <stop offset="0%" stop-color="#45b7d1" stop-opacity=".25"/>
+                <stop offset="100%" stop-color="#4ecdc4" stop-opacity=".08"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="400" fill="url(#g5a)"/>
+            <rect x="40" y="40" width="320" height="320" rx="160" fill="none" stroke="#45b7d1" stroke-width=".5" opacity=".3"/>
+            <rect x="100" y="100" width="200" height="200" rx="100" fill="none" stroke="#4ecdc4" stroke-width=".5" opacity=".2"/>
+            <line x1="40" y1="200" x2="360" y2="200" stroke="#45b7d1" stroke-width=".5" opacity=".2"/>
+            <ellipse cx="200" cy="130" rx="52" ry="64" fill="#45b7d1" opacity=".1"/>
+            <ellipse cx="200" cy="280" rx="86" ry="68" fill="#45b7d1" opacity=".07"/>
+          </svg>
+        </div>
+        <div class="tc-initials">KD</div>
+        <div class="tc-overlay">
+          <div class="tc-overlay-quote">"Operations is the invisible design work. Nobody sees it when it works. Everybody feels it when it doesn't."</div>
+        </div>
+      </div>
+      <div class="tc-info">
+        <div class="tc-name">Kagiso Dlamini</div>
+        <div class="tc-role">Studio Operations &amp; Client Platform</div>
+        <div class="tc-bio">Manages client relationships, the BRANSOL platform, and the operational infrastructure that lets the creative team work without administrative friction. The person who makes sure everything lands on time.</div>
+        <div class="tc-tags">
+          <span class="tc-tag">Operations</span>
+          <span class="tc-tag">Client Relations</span>
+          <span class="tc-tag">Platform</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 — Join card -->
+    <div class="team-card reveal" style="transition-delay:.3s;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:48px 36px;min-height:480px;border-style:dashed;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--ter);margin-bottom:24px;">We are selective here too</div>
+      <div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;letter-spacing:-.035em;line-height:1.05;margin-bottom:16px;">We occasionally<br>work with<br><span class="chrome-text">exceptional people.</span></div>
+      <p style="font-size:14px;color:var(--ter);line-height:1.7;margin-bottom:32px;">Not internships. Not junior positions. If you have deep expertise in one of our disciplines and share our values, we want to hear from you.</p>
+      <a href="/cdn-cgi/l/email-protection#cfbcbbbaaba6a08fadbdaea1bca0a3e1aca0a2" style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--sub);border:1px solid var(--border);padding:12px 20px;text-decoration:none;cursor:none;transition:color .2s,border-color .2s;" onmouseenter="this.style.color='var(--text)';this.style.borderColor='rgba(255,255,255,.2)'" onmouseleave="this.style.color='var(--sub)';this.style.borderColor='var(--border)'"><span class="__cf_email__" data-cfemail="b8cbcccddcd1d7f8dacad9d6cbd7d496dbd7d5">[email&#160;protected]</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VALUES ══ -->
+<section class="values">
+  <div class="values-header reveal">
+    <span class="values-eyebrow">What we stand for</span>
+    <h2 class="values-title">Five principles.<br><span class="chrome-text">Non-negotiable.</span></h2>
+  </div>
+  <div class="value-rows">
+    <div class="value-row reveal">
+      <span class="vr-num">01</span>
+      <div class="vr-title">Honesty before harmony</div>
+      <div class="vr-body">We tell clients what we think, even when it is uncomfortable. We have lost commissions for this. We have kept clients for it. The clients we keep are the ones worth keeping.</div>
+    </div>
+    <div class="value-row reveal" style="transition-delay:.06s">
+      <span class="vr-num">02</span>
+      <div class="vr-title">Depth over volume</div>
+      <div class="vr-body">We are not trying to be the largest studio on the North Coast. We are trying to do the best work in our disciplines, for clients who understand the difference. Volume is the enemy of depth.</div>
+    </div>
+    <div class="value-row reveal" style="transition-delay:.12s">
+      <span class="vr-num">03</span>
+      <div class="vr-title">Accountability without excuses</div>
+      <div class="vr-body">If something goes wrong — and sometimes it does — we fix it, explain what happened, and apply what we learned. We do not blame briefs, budgets, or timelines. We own the output.</div>
+    </div>
+    <div class="value-row reveal" style="transition-delay:.18s">
+      <span class="vr-num">04</span>
+      <div class="vr-title">Senior involvement, always</div>
+      <div class="vr-body">Every commission is led by a senior practitioner with direct responsibility for the quality of the work. We do not have a layer of juniors working on client projects while seniors manage relationships.</div>
+    </div>
+    <div class="value-row reveal" style="transition-delay:.24s">
+      <span class="vr-num">05</span>
+      <div class="vr-title">Long relationships over quick wins</div>
+      <div class="vr-body">Our 94% client retention rate is the result of a simple commitment: we behave the same way at the end of a project as we did at the beginning. No drop in attention. No handover to a junior. No moving on.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW WE WORK ══ -->
+<section class="model">
+  <div class="model-header">
+    <div>
+      <span class="model-eyebrow">Operating Model</span>
+      <h2 class="model-title reveal">How we<br><span class="chrome-text">actually work.</span></h2>
+    </div>
+    <div class="reveal" style="transition-delay:.1s">
+      <p>Most agencies describe a process. We describe a set of commitments. These are the things that are true of every BRANSOL engagement — not aspirationally, but as a matter of how we are structured.</p>
+      <p>If any of these are not achievable for a given commission, we say so during the conversation before any work begins.</p>
+    </div>
+  </div>
+  <div class="model-grid">
+    <div class="model-block reveal">
+      <span class="mb-num">01</span>
+      <div class="mb-icon"><svg viewBox="0 0 16 16" stroke="var(--iris)"><path d="M2 4h12v9H2z"/><path d="M5 4V2h6v2"/><path d="M5 8h6M5 11h4"/></svg></div>
+      <div class="mb-title">One brief. Documented. Agreed.</div>
+      <div class="mb-body">Every commission begins with a structured brief that is written, reviewed, and signed off by both parties before design work begins. Verbal instructions do not exist in BRANSOL's workflow. Ambiguity is resolved before execution, not during it.</div>
+      <div class="mb-note">Enforced by platform · No exceptions</div>
+    </div>
+    <div class="model-block reveal" style="transition-delay:.08s">
+      <span class="mb-num">02</span>
+      <div class="mb-icon"><svg viewBox="0 0 16 16" stroke="var(--aqua)"><circle cx="8" cy="8" r="6"/><path d="M8 4v4l3 2"/></svg></div>
+      <div class="mb-title">Milestones, not months of silence.</div>
+      <div class="mb-body">Every project is broken into defined milestones with agreed deliverables and review dates. Clients see progress in the platform in real time — not at the end of a long black-box period when it is too late to redirect.</div>
+      <div class="mb-note">Synced to Asana · Visible on client platform</div>
+    </div>
+    <div class="model-block reveal" style="transition-delay:.16s">
+      <span class="mb-num">03</span>
+      <div class="mb-icon"><svg viewBox="0 0 16 16" stroke="var(--violet)"><path d="M2 11V5a1 1 0 011-1h10a1 1 0 011 1v5a1 1 0 01-1 1H5l-3 2z"/></svg></div>
+      <div class="mb-title">Feedback that lands.</div>
+      <div class="mb-body">Feedback is collected through structured channels — not email, not WhatsApp, not a voice note forwarded three times. Every comment is contextual, attributed, and resolved in writing. We close every feedback loop explicitly.</div>
+      <div class="mb-note">Structured · Documented · Resolved</div>
+    </div>
+    <div class="model-block reveal" style="transition-delay:.24s">
+      <span class="mb-num">04</span>
+      <div class="mb-icon"><svg viewBox="0 0 16 16" stroke="var(--gold)"><path d="M8 1v7M5 5l3-4 3 4"/><path d="M2 12h12v3H2z"/></svg></div>
+      <div class="mb-title">Delivery that is actually complete.</div>
+      <div class="mb-body">A project is not done when the design is done. It is done when the files are organised, correctly named, correctly formatted, permanently archived, and the client knows exactly what they have and how to use it. We stay until that is true.</div>
+      <div class="mb-note">Asset pack · Guidelines · Archive</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CLIENT APPROACH ══ -->
+<section class="client-approach">
+  <div class="ca-inner">
+    <div class="ca-left reveal">
+      <span class="ca-eyebrow">Who we work with</span>
+      <h2 class="ca-title">We are selective<br><span class="chrome-text">on purpose.</span></h2>
+      <div class="ca-body">
+        <p>We review every enquiry personally. We do not run a qualification funnel or a sales process. We have a conversation. If the commission is right — right fit, right timing, right client — we proceed. If it is not, we say so and we are honest about why.</p>
+        <p>We decline commissions when we believe another studio would serve the client better, when the timeline is incompatible with the quality required, or when the scope is outside our disciplines.</p>
+      </div>
+      <div class="client-strip">
+        <span class="cs-label">Sectors we regularly serve</span>
+        <div class="cs-types">
+          <div class="cs-type"><span class="cs-dot" style="background:var(--iris)"></span>Government departments and public entities</div>
+          <div class="cs-type"><span class="cs-dot" style="background:var(--aqua)"></span>State-owned enterprises and DFIs</div>
+          <div class="cs-type"><span class="cs-dot" style="background:var(--violet)"></span>JSE-listed companies and their subsidiaries</div>
+          <div class="cs-type"><span class="cs-dot" style="background:var(--gold)"></span>Financial services and asset management</div>
+          <div class="cs-type"><span class="cs-dot" style="background:var(--sky)"></span>Infrastructure, energy, and professional services</div>
+          <div class="cs-type"><span class="cs-dot" style="background:var(--rose)"></span>NGOs and foundations with institutional governance</div>
+        </div>
+      </div>
+    </div>
+    <div class="ca-right reveal" style="transition-delay:.12s">
+      <div class="ca-principle">
+        <span class="cap-num">01</span>
+        <div class="cap-body">
+          <div class="cap-title">We respond to every enquiry</div>
+          <div class="cap-text">Even when the answer is no. Within two working days. Always personally — not a form response.</div>
+        </div>
+      </div>
+      <div class="ca-principle">
+        <span class="cap-num">02</span>
+        <div class="cap-body">
+          <div class="cap-title">We do not negotiate on quality</div>
+          <div class="cap-text">We will negotiate scope. We will negotiate timeline. We will not produce work that we believe is below the standard that represents BRANSOL correctly — regardless of budget pressure.</div>
+        </div>
+      </div>
+      <div class="ca-principle">
+        <span class="cap-num">03</span>
+        <div class="cap-body">
+          <div class="cap-title">We disclose when we collaborate</div>
+          <div class="cap-text">If we bring in a specialist collaborator — a photographer, fabricator, or developer — we tell you. You know who is working on your project at every stage.</div>
+        </div>
+      </div>
+      <div class="ca-principle">
+        <span class="cap-num">04</span>
+        <div class="cap-body">
+          <div class="cap-title">We do not oversell the relationship</div>
+          <div class="cap-text">We do not tell every prospect that they are "exactly the kind of client we love to work with." If we say it, we mean it. Language is cheap. We let the work do the talking.</div>
+        </div>
+      </div>
+      <div class="ca-principle">
+        <span class="cap-num">05</span>
+        <div class="cap-body">
+          <div class="cap-title">The studio is accessible</div>
+          <div class="cap-text">Clients have direct access to the senior person leading their project — not an account manager who passes messages. Direct is faster, more honest, and produces better work.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LOCATION ══ -->
+<section class="location reveal">
+  <div class="loc-left">
+    <span class="loc-eyebrow">Where we are</span>
+    <h2 class="loc-title">Ballito,<br><span class="chrome-text">KwaZulu-Natal.</span></h2>
+    <p class="loc-body">We are a Ballito-based studio on the KZN North Coast. We work across South Africa and the African continent — but our home is here, where the Indian Ocean meets serious ambition. Distance has never been a limitation for how we work, and our platform means clients from Cape Town to Nairobi operate without friction.</p>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div class="loc-detail">Studio<span>Ballito, KwaZulu-Natal</span></div>
+      <div class="loc-detail">Contact<span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f083848594999fb09282919e839f9cde939f9d">[email&#160;protected]</a></span></div>
+      <div class="loc-detail">Hours<span>Monday – Friday, 08:00 – 17:00 SAST</span></div>
+    </div>
+  </div>
+  <div class="loc-right">
+    <div class="loc-map" style="border:1px solid var(--border);overflow:hidden;background:var(--surface);aspect-ratio:unset;height:420px;width:100%;max-width:100%;position:relative;">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28623.05!2d31.2141!3d-29.5469!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ef70b8f5bd5e28f%3A0xb5b0b5b0b5b0b5b0!2sBallito%2C%20KwaZulu-Natal!5e0!3m2!1sen!2sza!4v1"
+        width="100%"
+        height="100%"
+        style="border:0;filter:invert(90%) hue-rotate(180deg) saturate(0.4) brightness(0.85);display:block;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="BRANSOL Studio — Ballito, KwaZulu-Natal"
+      ></iframe>
+      <!-- Light mode: undo the inversion -->
+      <style>
+        html[data-theme="light"] .loc-map iframe{filter:saturate(0.5) brightness(1.05);}
+      </style>
+      <!-- Branded overlay badge -->
+      <div style="position:absolute;bottom:16px;left:16px;z-index:2;display:flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(6,6,8,.82);backdrop-filter:blur(12px);border:1px solid var(--border);">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--chrome);background-size:300% 300%;animation:cSpin 3s linear infinite;"></div>
+        <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--sub);">Ballito · KZN North Coast</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="page-cta reveal">
+  <div>
+    <span class="cta-eyebrow">Begin</span>
+    <h2 class="cta-title">If this sounds<br>like your kind<br>of <span class="chrome-text">studio.</span></h2>
+  </div>
+  <div class="cta-actions">
+    <a href="/begin" class="cta-btn-primary">Begin a commission</a>
+    <a href="/work" class="cta-btn-ghost">View our work</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 BRANSOL — Ballito, KwaZulu-Natal</span>
+    <div class="footer-links">
+      <a href="/expertise">Expertise</a>
+      <a href="/perspectives">Perspectives</a>
+      <a href="/begin">Begin</a>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── Cursor ──
+const cur=document.getElementById('cur'),ring=document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function tick(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick);})();
+document.addEventListener('mouseover',e=>{
+  const h=e.target.closest('a,button,.team-card,.manifesto-line,.value-row,.model-block');
+  cur.style.width=cur.style.height=h?'14px':'7px';
+  ring.style.width=ring.style.height=h?'44px':'30px';
+  ring.style.borderColor=h?'rgba(124,131,229,.5)':'rgba(124,131,229,.32)';
+});
+
+// ── Nav scroll ──
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+// ── Theme ──
+(function(){
+  const btn=document.getElementById('themeToggle'),label=document.getElementById('themeLabel'),html=document.documentElement;
+  const saved=localStorage.getItem('bransol-theme');
+  if(saved==='light'){html.setAttribute('data-theme','light');label.textContent='Dark';}
+  btn.addEventListener('click',()=>{
+    const isLight=html.getAttribute('data-theme')==='light';
+    if(isLight){html.removeAttribute('data-theme');label.textContent='Light';localStorage.setItem('bransol-theme','dark');}
+    else{html.setAttribute('data-theme','light');label.textContent='Dark';localStorage.setIte

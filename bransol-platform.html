@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CHY7B35XNP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CHY7B35XNP');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Platform — BRANSOL</title>
+<meta name="description" content="Every BRANSOL engagement includes a dedicated client workspace — brief management, live milestones, asset delivery and AI-assisted workflows. Included. No extra cost.">
+<link rel="canonical" href="https://bransol.com/platform">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --void:#060608;--deep:#0d0d12;--surface:#111118;--lift:#18181f;
+  --panel:#1e1e27;--ghost:#2a2a35;--border:rgba(255,255,255,0.07);
+  --text:#f0eff5;--sub:rgba(240,239,245,0.6);--ter:rgba(240,239,245,0.28);--dim:rgba(240,239,245,0.1);
+  --iris:#7c83e5;--aqua:#06d6a0;--violet:#c77dff;--rose:#ff6b9d;
+  --gold:#ffd166;--sky:#45b7d1;--teal:#4ecdc4;--ember:#ff8c42;
+  --chrome:linear-gradient(135deg,#ff6b9d,#ff8c42,#ffd166,#06d6a0,#4ecdc4,#45b7d1,#7c83e5,#c77dff);
+  --nav-h:68px;--pad-x:72px;
+}
+
+/* ── LIGHT THEME ── */
+html[data-theme="light"]{
+  --void:#f5f4f0;--deep:#eeede8;--surface:#e8e7e1;--lift:#dddcd5;
+  --panel:#d4d3cb;--ghost:#c4c3ba;--border:rgba(0,0,0,0.09);
+  --text:#0e0e12;--sub:rgba(14,14,18,0.62);--ter:rgba(14,14,18,0.38);--dim:rgba(14,14,18,0.1);
+}
+html[data-theme="light"] body{background:var(--void);color:var(--text);}
+html[data-theme="light"] nav{background:rgba(245,244,240,.85);border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] nav.scrolled{background:rgba(245,244,240,.97);}
+html[data-theme="light"] .nav-links a{color:var(--sub);}
+html[data-theme="light"] .nav-links a:hover{color:var(--text);}
+html[data-theme="light"] .bg-grid{background-image:linear-gradient(rgba(0,0,0,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.035) 1px,transparent 1px);}
+html[data-theme="light"] .feat-card{background:rgba(255,255,255,.65);border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] .feat-card:hover{background:rgba(255,255,255,.9);border-color:rgba(0,0,0,.15);}
+html[data-theme="light"] .integration-card{background:rgba(255,255,255,.6);border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] .integration-card:hover{background:rgba(255,255,255,.9);}
+html[data-theme="light"] .why-block{border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] .mock-shell{background:rgba(255,255,255,.8);border-color:rgba(0,0,0,.1);}
+html[data-theme="light"] .mock-sidebar{background:rgba(245,244,240,.9);border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] .mock-task{background:rgba(255,255,255,.9);border-color:rgba(0,0,0,.07);}
+html[data-theme="light"] .mock-header{background:rgba(245,244,240,.95);border-color:rgba(0,0,0,.07);}
+html[data-theme="light"] .ai-row{background:rgba(255,255,255,.6);border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] .ai-row:hover{background:rgba(255,255,255,.9);}
+html[data-theme="light"] .honest-panel{background:rgba(255,255,255,.55);border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] footer{background:var(--deep);border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] .tt-track{background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.12);}
+html[data-theme="light"] .theme-toggle:hover{border-color:rgba(0,0,0,.2);color:var(--text);}
+
+/* ── TRANSITIONS ── */
+body{transition:background-color .4s ease,color .35s ease;}
+nav{transition:background .4s ease,border-color .35s ease,height .3s ease!important;}
+.feat-card,.integration-card,.ai-row,.honest-panel{transition:background .3s ease,border-color .25s ease;}
+.nav-links a,.theme-toggle{transition:color .2s,border-color .2s;}
+.tt-track{transition:background .3s ease,border-color .3s ease;}
+.tt-thumb{transition:transform .3s cubic-bezier(.16,1,.3,1);}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ── BASE ── */
+body{background:var(--void);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.65;cursor:none;overflow-x:hidden;}
+html{scroll-behavior:smooth;}
+
+/* ── CURSOR ── */
+.cur{position:fixed;width:7px;height:7px;border-radius:50%;background:var(--chrome);background-size:300% 300%;animation:cSpin 3s linear infinite;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .18s,height .18s;}
+.cur-ring{position:fixed;width:30px;height:30px;border-radius:50%;border:1px solid rgba(124,131,229,.32);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .15s,height .15s,border-color .2s;}
+
+/* ── KEYFRAMES ── */
+@keyframes cSpin{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes orbPulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes scanDown{0%{opacity:0;top:0}5%{opacity:1}95%{opacity:1}100%{opacity:0;top:100%}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
+@keyframes flowRight{from{stroke-dashoffset:20}to{stroke-dashoffset:0}}
+@keyframes taskSlide{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:translateX(0)}}
+@keyframes checkPop{0%{transform:scale(0)}70%{transform:scale(1.3)}100%{transform:scale(1)}}
+
+/* ── UTILS ── */
+.chrome-text{background:var(--chrome);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:cSpin 5s ease infinite;}
+
+/* ── BG ── */
+.bg-fixed{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.013) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.013) 1px,transparent 1px);background-size:80px 80px;}
+.bg-orb{position:absolute;border-radius:50%;filter:blur(100px);animation:orbPulse 12s ease-in-out infinite;}
+.bg-orb-1{width:900px;height:900px;top:-300px;right:-200px;background:radial-gradient(circle,rgba(124,131,229,.14) 0%,rgba(6,214,160,.05) 40%,transparent 70%);}
+.bg-orb-2{width:700px;height:700px;bottom:-100px;left:-150px;background:radial-gradient(circle,rgba(6,214,160,.1) 0%,transparent 70%);animation-delay:6s;}
+.bg-orb-3{width:500px;height:500px;top:60%;right:5%;background:radial-gradient(circle,rgba(199,125,255,.08) 0%,transparent 60%);animation-delay:3s;}
+.bg-scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(124,131,229,.18),rgba(6,214,160,.18),transparent);animation:scanDown 18s ease-in-out 2s infinite;}
+.chrome-edge{position:fixed;left:0;top:0;bottom:0;width:3px;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;z-index:100;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;height:var(--nav-h);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 var(--pad-x) 0 calc(var(--pad-x) + 3px);border-bottom:1px solid rgba(255,255,255,.05);background:rgba(6,6,8,.65);backdrop-filter:blur(20px);}
+nav.scrolled{background:rgba(6,6,8,.92);border-color:var(--border);height:58px;}
+.nav-logo{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;letter-spacing:-.02em;line-height:1;text-decoration:none;cursor:none;justify-self:start;}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none;justify-self:center;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--ter);text-decoration:none;cursor:none;white-space:nowrap;}
+.nav-links a:hover,.nav-links a.active{color:var(--sub);}
+.nav-end{display:flex;align-items:center;gap:12px;justify-self:end;}
+.nav-cta{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:#060608!important;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;padding:10px 24px;text-decoration:none;cursor:none;transition:opacity .2s!important;white-space:nowrap;}
+.nav-cta:hover{opacity:.85;}
+.theme-toggle{display:flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid var(--border);background:transparent;cursor:none;color:var(--ter);font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.22em;text-transform:uppercase;flex-shrink:0;}
+.theme-toggle:hover{border-color:rgba(255,255,255,.15);color:var(--sub);}
+.tt-track{width:28px;height:15px;border-radius:999px;border:1px solid var(--border);position:relative;flex-shrink:0;}
+.tt-thumb{position:absolute;top:2px;left:2px;width:9px;height:9px;border-radius:50%;background:var(--chrome);background-size:300% 300%;animation:cSpin 3s linear infinite;}
+html[data-theme="light"] .tt-thumb{transform:translateX(13px);}
+
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+.hero{
+  position:relative;z-index:1;
+  padding:calc(var(--nav-h) + 100px) var(--pad-x) 0 calc(var(--pad-x) + 3px);
+}
+.hero-inner{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:flex-end;
+  padding-bottom:80px;border-bottom:1px solid var(--border);
+}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.38em;text-transform:uppercase;color:rgba(240,239,245,.45);display:block;margin-bottom:20px;animation:fadeIn .8s ease .2s both;}
+.hero-title{font-family:'Syne',sans-serif;font-size:clamp(44px,6vw,96px);font-weight:800;letter-spacing:-.05em;line-height:.88;animation:fadeUp .9s cubic-bezier(.16,1,.3,1) .3s both;}
+.hero-right{animation:fadeIn .9s ease .5s both;}
+.hero-desc{font-size:17px;color:var(--sub);line-height:1.8;margin-bottom:32px;}
+.hero-included{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:12px 20px;border:1px solid rgba(6,214,160,.25);
+  background:rgba(6,214,160,.05);margin-bottom:28px;
+}
+.hi-dot{width:7px;height:7px;border-radius:50%;background:var(--aqua);animation:pulse 2s ease-in-out infinite;}
+.hi-text{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--aqua);}
+
+/* Honest callout */
+.honest-callout{
+  padding:24px 28px;
+  border-left:2px solid var(--iris);
+  background:rgba(124,131,229,.04);
+}
+.hc-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--iris);display:block;margin-bottom:10px;}
+.hc-text{font-size:14px;color:var(--sub);line-height:1.7;}
+
+/* ══════════════════════════════════════════
+   PLATFORM MOCK UI
+══════════════════════════════════════════ */
+.mock-wrap{
+  position:relative;z-index:1;
+  padding:80px var(--pad-x) 80px calc(var(--pad-x) + 3px);
+  border-bottom:1px solid var(--border);
+}
+.mock-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--ter);margin-bottom:24px;display:flex;align-items:center;gap:10px;}
+.mock-label-dot{width:6px;height:6px;border-radius:50%;background:var(--aqua);animation:pulse 2s ease-in-out infinite;}
+
+.mock-shell{
+  background:var(--surface);
+  border:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.mock-shell::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;z-index:2;}
+
+/* Header bar */
+.mock-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 24px;background:var(--lift);border-bottom:1px solid var(--border);
+}
+.mh-logo{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;letter-spacing:-.02em;display:flex;align-items:center;gap:10px;}
+.mh-badge{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.18em;text-transform:uppercase;color:var(--ter);padding:3px 8px;border:1px solid var(--border);}
+.mh-right{display:flex;align-items:center;gap:8px;}
+.mh-avatar{width:26px;height:26px;border-radius:50%;background:var(--chrome);background-size:300% 300%;animation:cSpin 5s ease infinite;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:8px;color:#060608;font-weight:700;}
+.mh-org{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.12em;color:var(--ter);}
+
+/* Body */
+.mock-body{display:grid;grid-template-columns:220px 1fr 280px;min-height:460px;}
+
+/* Sidebar */
+.mock-sidebar{
+  border-right:1px solid var(--border);
+  padding:20px 0;
+  background:var(--deep);
+}
+.ms-section{padding:0 16px;margin-bottom:20px;}
+.ms-label{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--ter);padding:0 8px;margin-bottom:8px;display:block;}
+.ms-item{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 8px;font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:.1em;color:var(--ter);border-radius:0;cursor:none;
+}
+.ms-item.active{color:var(--text);background:rgba(255,255,255,.05);}
+.ms-item svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.5;flex-shrink:0;}
+.ms-asana{display:flex;align-items:center;gap:6px;padding:8px 8px;margin:0 0;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.1em;color:var(--ter);}
+.ms-asana-dot{width:8px;height:8px;border-radius:50%;background:#F06A6A;flex-shrink:0;}
+
+/* Main content */
+.mock-main{padding:24px 28px;overflow:hidden;}
+.mm-heading{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;letter-spacing:-.025em;margin-bottom:4px;}
+.mm-sub{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.15em;color:var(--ter);margin-bottom:20px;}
+
+/* Stat row */
+.mock-stats{display:flex;gap:0;border:1px solid var(--border);margin-bottom:20px;}
+.mock-stat{flex:1;padding:14px 16px;border-right:1px solid var(--border);}
+.mock-stat:last-child{border-right:none;}
+.ms-val{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.04em;}
+.ms-lbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.18em;color:var(--ter);display:block;margin-top:2px;}
+
+/* Tasks */
+.mock-tasks{display:flex;flex-direction:column;gap:8px;}
+.mock-task{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 14px;
+  background:var(--lift);border:1px solid var(--border);
+  animation:taskSlide .4s ease both;
+}
+.mt-check{
+  width:14px;height:14px;border-radius:50%;border:1px solid var(--border);
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+}
+.mt-check.done{background:var(--aqua);border-color:var(--aqua);}
+.mt-check.done svg{animation:checkPop .3s cubic-bezier(.34,1.56,.64,1) both;}
+.mt-check svg{width:7px;height:7px;stroke:#060608;fill:none;stroke-width:2;}
+.mt-text{flex:1;font-size:12px;color:var(--sub);}
+.mt-text.done{text-decoration:line-through;color:var(--ter);}
+.mt-tag{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.15em;padding:2px 7px;border:1px solid var(--border);color:var(--ter);}
+.mt-tag.iris{border-color:rgba(124,131,229,.35);color:var(--iris);}
+.mt-tag.aqua{border-color:rgba(6,214,160,.35);color:var(--aqua);}
+.mt-tag.gold{border-color:rgba(255,209,102,.35);color:var(--gold);}
+.mt-source{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.1em;color:var(--ter);display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.mt-source-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+
+/* Right panel — AI assistant */
+.mock-ai{
+  border-left:1px solid var(--border);
+  display:flex;flex-direction:column;
+}
+.mai-header{
+  padding:14px 16px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:8px;
+}
+.mai-icon{width:20px;height:20px;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.mai-icon svg{width:10px;height:10px;stroke:#060608;fill:none;stroke-width:2;}
+.mai-title{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--sub);}
+.mai-body{flex:1;padding:16px;display:flex;flex-direction:column;gap:10px;overflow:hidden;}
+.mai-msg{padding:10px 12px;font-size:11px;color:var(--sub);line-height:1.55;}
+.mai-msg.ai{background:rgba(124,131,229,.06);border:1px solid rgba(124,131,229,.12);}
+.mai-msg.user{background:rgba(255,255,255,.03);border:1px solid var(--border);text-align:right;color:var(--ter);}
+.mai-msg strong{color:var(--text);font-weight:500;}
+.mai-input{
+  padding:12px 14px;border-top:1px solid var(--border);
+  display:flex;align-items:center;gap:8px;
+}
+.mai-input-field{
+  flex:1;background:transparent;border:none;outline:none;
+  font-family:'DM Sans',sans-serif;font-size:11px;color:var(--ter);
+  cursor:none;
+}
+.mai-send{width:22px;height:22px;background:var(--iris);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.mai-send svg{width:10px;height:10px;stroke:#fff;fill:none;stroke-width:2;}
+
+/* ══════════════════════════════════════════
+   WHY IT MATTERS (HONEST CASE)
+══════════════════════════════════════════ */
+.why-section{
+  position:relative;z-index:1;
+  padding:100px var(--pad-x) 100px calc(var(--pad-x) + 3px);
+  border-bottom:1px solid var(--border);
+}
+.why-header{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:flex-end;
+  margin-bottom:64px;
+}
+.why-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--ter);display:block;margin-bottom:16px;}
+.why-title{font-family:'Syne',sans-serif;font-size:clamp(32px,4vw,60px);font-weight:800;letter-spacing:-.04em;line-height:.95;}
+.why-right p{font-size:15px;color:var(--sub);line-height:1.8;margin-bottom:14px;}
+.why-right p:last-child{margin-bottom:0;}
+
+/* Why blocks */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.why-block{
+  padding:36px 32px;
+  border:1px solid var(--border);
+  display:flex;flex-direction:column;gap:16px;
+}
+.wb-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center;}
+.wb-icon svg{width:20px;height:20px;fill:none;stroke-width:1.5;}
+.wb-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;letter-spacing:-.025em;}
+.wb-text{font-size:14px;color:var(--sub);line-height:1.7;}
+.wb-verdict{
+  margin-top:auto;padding-top:16px;border-top:1px solid var(--border);
+  font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;
+}
+
+/* ══════════════════════════════════════════
+   INTEGRATIONS
+══════════════════════════════════════════ */
+.integrations{
+  position:relative;z-index:1;
+  padding:100px var(--pad-x) 100px calc(var(--pad-x) + 3px);
+  border-bottom:1px solid var(--border);
+}
+.int-header{margin-bottom:60px;}
+.int-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--ter);display:block;margin-bottom:16px;}
+.int-title{font-family:'Syne',sans-serif;font-size:clamp(28px,3.5vw,52px);font-weight:800;letter-spacing:-.04em;line-height:.95;margin-bottom:16px;}
+.int-desc{font-size:15px;color:var(--sub);line-height:1.75;max-width:560px;}
+
+.int-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+
+.integration-card{
+  padding:40px 36px;
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--border);
+  display:flex;flex-direction:column;gap:24px;
+  cursor:none;
+}
+.integration-card:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1);}
+.ic-header{display:flex;align-items:flex-start;gap:18px;}
+.ic-logo{width:48px;height:48px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ic-meta{}
+.ic-name{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.03em;margin-bottom:4px;}
+.ic-type{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--ter);}
+.ic-desc{font-size:14px;color:var(--sub);line-height:1.75;}
+.ic-features{display:flex;flex-direction:column;gap:0;}
+.ic-feature{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:11px 0;border-bottom:1px solid var(--border);
+  font-size:13px;color:var(--sub);
+}
+.ic-feature:last-child{border-bottom:none;padding-bottom:0;}
+.ic-feat-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:6px;}
+.ic-badge{
+  display:inline-flex;align-items:center;gap:8px;margin-top:auto;
+  padding:8px 14px;border:1px solid var(--border);
+  font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--ter);
+}
+.ic-badge-dot{width:5px;height:5px;border-radius:50%;animation:pulse 2s ease-in-out infinite;}
+
+/* ══════════════════════════════════════════
+   AI WORKFLOWS
+══════════════════════════════════════════ */
+.ai-section{
+  position:relative;z-index:1;
+  padding:100px var(--pad-x) 100px calc(var(--pad-x) + 3px);
+  border-bottom:1px solid var(--border);
+}
+.ai-header{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:flex-end;
+  margin-bottom:60px;
+}
+.ai-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--ter);display:block;margin-bottom:16px;}
+.ai-title{font-family:'Syne',sans-serif;font-size:clamp(28px,3.5vw,52px);font-weight:800;letter-spacing:-.04em;line-height:.95;}
+.ai-right p{font-size:15px;color:var(--sub);line-height:1.8;margin-bottom:14px;}
+
+.ai-rows{display:flex;flex-direction:column;gap:2px;}
+.ai-row{
+  display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:28px;
+  padding:28px 32px;
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--border);
+}
+.ai-row:hover{background:rgba(255,255,255,.04);}
+.ar-num{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--ter);}
+.ar-body{}
+.ar-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;letter-spacing:-.025em;margin-bottom:4px;}
+.ar-desc{font-size:13px;color:var(--sub);line-height:1.6;}
+.ar-tools{display:flex;align-items:center;gap:8px;}
+.ar-tool{
+  display:flex;align-items:center;gap:6px;
+  padding:6px 10px;border:1px solid var(--border);
+  font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.14em;color:var(--ter);
+  white-space:nowrap;
+}
+.ar-tool-icon{width:14px;height:14px;flex-shrink:0;}
+
+/* ══════════════════════════════════════════
+   FEATURES GRID
+══════════════════════════════════════════ */
+.features{
+  position:relative;z-index:1;
+  padding:100px var(--pad-x) 100px calc(var(--pad-x) + 3px);
+  border-bottom:1px solid var(--border);
+}
+.feat-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--ter);display:block;margin-bottom:16px;}
+.feat-title{font-family:'Syne',sans-serif;font-size:clamp(28px,3.5vw,52px);font-weight:800;letter-spacing:-.04em;line-height:.95;margin-bottom:56px;}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.feat-card{
+  padding:36px 32px;
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--border);
+  display:flex;flex-direction:column;gap:14px;
+}
+.feat-card:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1);}
+.fc-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;}
+.fc-icon svg{width:18px;height:18px;fill:none;stroke-width:1.5;}
+.fc-name{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;letter-spacing:-.025em;}
+.fc-desc{font-size:13px;color:var(--sub);line-height:1.65;flex:1;}
+.fc-tag{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.2em;text-transform:uppercase;color:var(--ter);margin-top:auto;}
+
+/* ══════════════════════════════════════════
+   HONEST VERDICT
+══════════════════════════════════════════ */
+.verdict{
+  position:relative;z-index:1;
+  padding:100px var(--pad-x) 100px calc(var(--pad-x) + 3px);
+  border-bottom:1px solid var(--border);
+}
+.verdict-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;}
+.v-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--ter);display:block;margin-bottom:16px;}
+.v-title{font-family:'Syne',sans-serif;font-size:clamp(28px,3.5vw,52px);font-weight:800;letter-spacing:-.04em;line-height:.95;margin-bottom:24px;}
+.v-body{font-size:15px;color:var(--sub);line-height:1.8;}
+.v-body p{margin-bottom:16px;}
+.v-body p:last-child{margin-bottom:0;}
+.v-body strong{color:var(--text);font-weight:500;}
+
+.honest-panel{
+  padding:32px;
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--border);
+  display:flex;flex-direction:column;gap:20px;
+}
+.hp-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;letter-spacing:-.025em;}
+.hp-item{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);}
+.hp-item:last-child{border-bottom:none;padding-bottom:0;}
+.hp-icon{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.hp-icon svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2;}
+.hp-text{font-size:13px;color:var(--sub);line-height:1.6;}
+.hp-verdict{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;}
+
+/* ══════════════════════════════════════════
+   CTA
+══════════════════════════════════════════ */
+.page-cta{
+  position:relative;z-index:1;
+  padding:100px var(--pad-x) 100px calc(var(--pad-x) + 3px);
+  display:grid;grid-template-columns:1fr auto;align-items:center;gap:60px;
+}
+.cta-title{font-family:'Syne',sans-serif;font-size:clamp(28px,3.5vw,52px);font-weight:800;letter-spacing:-.04em;line-height:.95;}
+.cta-actions{display:flex;gap:12px;align-items:center;}
+.cta-btn-primary{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:#060608;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;padding:16px 36px;text-decoration:none;cursor:none;transition:opacity .2s;white-space:nowrap;}
+.cta-btn-primary:hover{opacity:.85;}
+.cta-btn-ghost{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--ter);border:1px solid var(--border);padding:16px 32px;text-decoration:none;cursor:none;transition:color .2s,border-color .2s;white-space:nowrap;}
+.cta-btn-ghost:hover{color:var(--sub);border-color:rgba(255,255,255,.14);}
+
+/* ── FOOTER ── */
+footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid var(--border);padding:48px var(--pad-x) 32px calc(var(--pad-x) + 3px);}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;}
+.footer-copy{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--ter);}
+.footer-links{display:flex;gap:24px;}
+.footer-links a{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ter);text-decoration:none;cursor:none;transition:color .2s;}
+.footer-links a:hover{color:var(--sub);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  :root{--pad-x:40px;}
+  .hero-inner,.why-header,.ai-header,.verdict-inner{grid-template-columns:1fr;gap:48px;}
+  .int-grid,.feat-grid,.why-grid{grid-template-columns:1fr 1fr;}
+  .page-cta{grid-template-columns:1fr;gap:32px;}
+  .mock-body{grid-template-columns:180px 1fr;}
+  .mock-ai{display:none;}
+}
+@media(max-width:768px){
+  :root{--pad-x:24px;}
+  .nav-links{display:none;}
+  .int-grid,.feat-grid,.why-grid{grid-template-columns:1fr;}
+  .ai-row{grid-template-columns:1fr;gap:16px;}
+  .ar-tools{flex-wrap:wrap;}
+  .mock-sidebar{display:none;}
+  .mock-body{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<div class="bg-fixed">
+  <div class="bg-grid"></div>
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb bg-orb-3"></div>
+  <div class="bg-scan"></div>
+</div>
+<div class="chrome-edge"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo"><span class="chrome-text">BRAN</span><span style="color:var(--text)">SOL</span></a>
+  <ul class="nav-links">
+    <li><a href="/work">Work</a></li>
+    <li><a href="/expertise">Expertise</a></li>
+    <li><a href="/platform" class="active">Platform</a></li>
+    <li><a href="/studio">Studio</a></li>
+    <li><a href="/perspectives">Perspectives</a></li>
+  </ul>
+  <div class="nav-end">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <div class="tt-track"><div class="tt-thumb"></div></div>
+      <span id="themeLabel">Light</span>
+    </button>
+    <a href="/begin" class="nav-cta">Begin</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="hero-eyebrow">Client Platform</span>
+      <h1 class="hero-title">Your work.<br><span class="chrome-text">One place.</span><br>Always.</h1>
+    </div>
+    <div class="hero-right">
+      <div class="hero-included">
+        <div class="hi-dot"></div>
+        <span class="hi-text">Included with every engagement — no extra cost</span>
+      </div>
+      <p class="hero-desc">Every BRANSOL commission includes a dedicated client workspace. Not a shared Dropbox. Not a CC'd email chain. A structured environment built for the way institutional work actually gets done — with full audit trails, AI-assisted workflows, and direct Asana integration.</p>
+      <div class="honest-callout">
+        <span class="hc-label">Honest assessment</span>
+        <p class="hc-text">Is a client platform worth it? For most studios, no. For organisations commissioning design through formal procurement channels — yes. We built this because our clients required it. We are sharing our thinking on this page.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MOCK UI ══ -->
+<div class="mock-wrap reveal">
+  <div class="mock-label">
+    <div class="mock-label-dot"></div>
+    Live Platform Preview — BRANSOL Client Workspace
+  </div>
+  <div class="mock-shell">
+    <!-- Header -->
+    <div class="mock-header">
+      <div class="mh-logo">
+        <span style="background:var(--chrome);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:cSpin 4s ease infinite;">BRAN</span><span>SOL</span>
+        <span class="mh-badge">Client Platform</span>
+      </div>
+      <div class="mh-right">
+        <span class="mh-org">National Communications Agency</span>
+        <div class="mh-avatar">NCA</div>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="mock-body">
+      <!-- Sidebar -->
+      <div class="mock-sidebar">
+        <div class="ms-section">
+          <span class="ms-label">Workspace</span>
+          <div class="ms-item active">
+            <svg viewBox="0 0 13 13"><rect x="1" y="1" width="5" height="5"/><rect x="7" y="1" width="5" height="5"/><rect x="1" y="7" width="5" height="5"/><rect x="7" y="7" width="5" height="5"/></svg>
+            Overview
+          </div>
+          <div class="ms-item">
+            <svg viewBox="0 0 13 13"><rect x="1" y="2" width="11" height="9" rx="1"/><path d="M4 5h5M4 8h3"/></svg>
+            Briefs
+          </div>
+          <div class="ms-item">
+            <svg viewBox="0 0 13 13"><circle cx="6.5" cy="6.5" r="5"/><path d="M6.5 3.5v3l2 1.5"/></svg>
+            Milestones
+          </div>
+          <div class="ms-item">
+            <svg viewBox="0 0 13 13"><path d="M2 9V3a1 1 0 011-1h7a1 1 0 011 1v5a1 1 0 01-1 1H4L2 11V9z"/></svg>
+            Feedback
+          </div>
+          <div class="ms-item">
+            <svg viewBox="0 0 13 13"><path d="M6.5 1.5v7M3.5 5.5l3 3 3-3"/><path d="M1.5 10.5h11"/></svg>
+            Assets
+          </div>
+        </div>
+        <div class="ms-section">
+          <span class="ms-label">Integrations</span>
+          <div class="ms-asana">
+            <div class="ms-asana-dot"></div>
+            Asana Sync
+          </div>
+          <div class="ms-item">
+            <svg viewBox="0 0 13 13"><path d="M6.5 2c-2.5 3-4 5.5-4 7.5 0 2 1.5 3 4 3.5"/><path d="M6.5 2c2.5 3 4 5.5 4 7.5 0 2-1.5 3-4 3.5"/></svg>
+            AI Assistant
+          </div>
+        </div>
+      </div>
+
+      <!-- Main -->
+      <div class="mock-main">
+        <div class="mm-heading">Brand Identity Redesign</div>
+        <div class="mm-sub">Active Engagement · Started Feb 2026 · 3 stakeholders</div>
+
+        <div class="mock-stats">
+          <div class="mock-stat">
+            <div class="ms-val chrome-text">68%</div>
+            <span class="ms-lbl">Complete</span>
+          </div>
+          <div class="mock-stat">
+            <div class="ms-val" style="color:var(--gold)">3</div>
+            <span class="ms-lbl">Pending review</span>
+          </div>
+          <div class="mock-stat">
+            <div class="ms-val" style="color:var(--aqua)">24</div>
+            <span class="ms-lbl">Assets delivered</span>
+          </div>
+          <div class="mock-stat">
+            <div class="ms-val" style="color:var(--iris)">5</div>
+            <span class="ms-lbl">Days to next milestone</span>
+          </div>
+        </div>
+
+        <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.18em;color:var(--ter);margin-bottom:12px;">CURRENT TASKS · SYNCED FROM ASANA</div>
+        <div class="mock-tasks">
+          <div class="mock-task" style="animation-delay:.05s">
+            <div class="mt-check done"><svg viewBox="0 0 7 7"><path d="M1 3.5l2 2 3-3"/></svg></div>
+            <span class="mt-text done">Logo system finalised — 3 variants delivered</span>
+            <span class="mt-tag aqua">Done</span>
+            <span class="mt-source"><span class="mt-source-dot" style="background:#F06A6A"></span>Asana</span>
+          </div>
+          <div class="mock-task" style="animation-delay:.12s">
+            <div class="mt-check done"><svg viewBox="0 0 7 7"><path d="M1 3.5l2 2 3-3"/></svg></div>
+            <span class="mt-text done">Brand guidelines v1 — shared for stakeholder review</span>
+            <span class="mt-tag aqua">Done</span>
+            <span class="mt-source"><span class="mt-source-dot" style="background:#F06A6A"></span>Asana</span>
+          </div>
+          <div class="mock-task" style="animation-delay:.19s">
+            <div class="mt-check"></div>
+            <span class="mt-text">Colour system refinement — awaiting CEO sign-off</span>
+            <span class="mt-tag gold">Review</span>
+            <span class="mt-source"><span class="mt-source-dot" style="background:#F06A6A"></span>Asana</span>
+          </div>
+          <div class="mock-task" style="animation-delay:.26s">
+            <div class="mt-check"></div>
+            <span class="mt-text">Stationery templates — in progress</span>
+            <span class="mt-tag iris">Active</span>
+            <span class="mt-source"><span class="mt-source-dot" style="background:#F06A6A"></span>Asana</span>
+          </div>
+          <div class="mock-task" style="animation-delay:.33s">
+            <div class="mt-check"></div>
+            <span class="mt-text">Digital brand guide PDF — scheduled for 14 March</span>
+            <span class="mt-tag" style="border-color:var(--border)">Upcoming</span>
+            <span class="mt-source"><span class="mt-source-dot" style="background:#D97757"></span>Claude</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Panel -->
+      <div class="mock-ai">
+        <div class="mai-header">
+          <div class="mai-icon"><svg viewBox="0 0 10 10"><path d="M5 1c-1.5 2.2-2 4-2 5.5 0 1.5.7 2.5 2 3"/><path d="M5 1c1.5 2.2 2 4 2 5.5 0 1.5-.7 2.5-2 3"/></svg></div>
+          <span class="mai-title">BRANSOL AI</span>
+        </div>
+        <div class="mai-body">
+          <div class="mai-msg ai"><strong>3 tasks are pending approval.</strong> CEO sign-off on the colour system was due yesterday. Would you like me to draft a follow-up message to your stakeholder?</div>
+          <div class="mai-msg user">Yes, keep it brief and professional.</div>
+          <div class="mai-msg ai">Done. Draft sent to your review queue. I've also flagged the stationery task — if sign-off takes more than 2 days, it may push your 14 March milestone.</div>
+        </div>
+        <div class="mai-input">
+          <input class="mai-input-field" placeholder="Ask BRANSOL AI…" readonly>
+          <div class="mai-send"><svg viewBox="0 0 10 10"><path d="M1 5h8M6 2l3 3-3 3"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ WHY IT MATTERS ══ -->
+<section class="why-section">
+  <div class="why-header reveal">
+    <div>
+      <span class="why-eyebrow">The Case For It</span>
+      <h2 class="why-title">Why a client<br><span class="chrome-text">platform matters</span><br>for serious work.</h2>
+    </div>
+    <div class="why-right">
+      <p>Most agencies manage projects over WhatsApp groups and shared Google Drives. That works fine for small, fast-turnaround work. It breaks down for institutional commissions where accountability, traceability, and documentation are not optional.</p>
+      <p>The BRANSOL platform was built specifically for the procurement realities our clients navigate: formal approval chains, audit requirements, multi-stakeholder reviews, and the need for a complete paper trail from brief to final delivery.</p>
+    </div>
+  </div>
+
+  <div class="why-grid">
+    <div class="why-block reveal">
+      <div class="wb-icon"><svg viewBox="0 0 20 20" stroke="var(--iris)"><path d="M2 14V6a1 1 0 011-1h14a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1z"/><path d="M5 9h10M5 12h7"/></svg></div>
+      <div class="wb-title">Audit Trails</div>
+      <div class="wb-text">Every approval, revision, and decision is timestamped and documented. For government and listed-company clients, this is not a nice-to-have — it is a procurement requirement.</div>
+      <div class="wb-verdict" style="color:var(--iris)">Critical for institutional clients</div>
+    </div>
+    <div class="why-block reveal" style="transition-delay:.1s">
+      <div class="wb-icon"><svg viewBox="0 0 20 20" stroke="var(--aqua)"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 3"/></svg></div>
+      <div class="wb-title">Real-Time Visibility</div>
+      <div class="wb-text">Clients see exactly where their project stands — without chasing. Live milestone tracking synced with our Asana workspace means you always have an accurate, current picture.</div>
+      <div class="wb-verdict" style="color:var(--aqua)">Removes the status-email cycle</div>
+    </div>
+    <div class="why-block reveal" style="transition-delay:.2s">
+      <div class="wb-icon"><svg viewBox="0 0 20 20" stroke="var(--gold)"><path d="M3 3h14v11H3z"/><path d="M7 17h6M10 14v3"/><path d="M7 7h6M7 10h4"/></svg></div>
+      <div class="wb-title">Structured Briefs</div>
+      <div class="wb-text">Ambiguous briefs are the leading cause of expensive revisions. Our platform enforces structured brief documentation — every scope, constraint, and success criterion agreed and signed off before work begins.</div>
+      <div class="wb-verdict" style="color:var(--gold)">Prevents scope creep</div>
+    </div>
+    <div class="why-block reveal" style="transition-delay:.1s">
+      <div class="wb-icon"><svg viewBox="0 0 20 20" stroke="var(--violet)"><path d="M10 2l2.5 5.5L18 8.5l-4 3.9 1 5.6L10 15l-5 3 1-5.6-4-3.9 5.5-.9L10 2z"/></svg></div>
+      <div class="wb-title">Multi-Stakeholder Access</div>
+      <div class="wb-text">CEOs, marketing heads, and procurement officers all need different levels of visibility. Role-based access means each stakeholder sees exactly what they need — nothing more.</div>
+      <div class="wb-verdict" style="color:var(--violet)">Built for committee decisions</div>
+    </div>
+    <div class="why-block reveal" style="transition-delay:.2s">
+      <div class="wb-icon"><svg viewBox="0 0 20 20" stroke="var(--rose)"><path d="M10 2v8M6 6l4-4 4 4"/><path d="M3 16h14v2H3z"/><path d="M5 10v6M10 10v6M15 10v6"/></svg></div>
+      <div class="wb-title">Permanent Asset Archive</div>
+      <div class="wb-text">Files delivered through the platform are permanently archived and versioned. Returning clients have full access to every asset ever produced — no hunting through old emails or outdated shared drives.</div>
+      <div class="wb-verdict" style="color:var(--rose)">No lost files, ever</div>
+    </div>
+    <div class="why-block reveal" style="transition-delay:.3s">
+      <div class="wb-icon"><svg viewBox="0 0 20 20" stroke="var(--sky)"><path d="M15 8a5 5 0 00-10 0c0 3.5 5 9 5 9s5-5.5 5-9z"/><circle cx="10" cy="8" r="2"/></svg></div>
+      <div class="wb-title">Continuity Across Projects</div>
+      <div class="wb-text">Your organisation's history, preferences, and brand context are stored permanently. Each new commission begins informed — not from a blank slate. For long-term clients, this compounds in value.</div>
+      <div class="wb-verdict" style="color:var(--sky)">The longer you work with us</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ INTEGRATIONS ══ -->
+<section class="integrations">
+  <div class="int-header reveal">
+    <span class="int-eyebrow">Integrations</span>
+    <h2 class="int-title">Built on tools<br><span class="chrome-text">you already trust.</span></h2>
+    <p class="int-desc">We do not ask clients to learn a new system. Our platform integrates directly with Asana for project management and Claude AI for intelligent workflow assistance — tools that are already best-in-class.</p>
+  </div>
+
+  <div class="int-grid">
+    <!-- Asana -->
+    <div class="integration-card reveal">
+      <div class="ic-header">
+        <div class="ic-logo">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="20" r="6" fill="#F06A6A"/>
+            <circle cx="8" cy="12" r="5" fill="#F06A6A" opacity=".7"/>
+            <circle cx="24" cy="12" r="5" fill="#F06A6A" opacity=".7"/>
+          </svg>
+        </div>
+        <div class="ic-meta">
+          <div class="ic-name">Asana</div>
+          <div class="ic-type">Project Management · Live Sync</div>
+        </div>
+      </div>
+      <p class="ic-desc">Every project milestone, task, and deadline managed in Asana — synced in real time to your client workspace. You see our project board. We see your feedback. No duplication, no gaps.</p>
+      <div class="ic-features">
+        <div class="ic-feature"><span class="ic-feat-dot" style="background:#F06A6A"></span>Live task status synced to your workspace dashboard</div>
+        <div class="ic-feature"><span class="ic-feat-dot" style="background:#F06A6A"></span>Milestone notifications sent directly to your preferred email</div>
+        <div class="ic-feature"><span class="ic-feat-dot" style="background:#F06A6A"></span>Approval workflows documented and timestamped in Asana</div>
+        <div class="ic-feature"><span class="ic-feat-dot" style="background:#F06A6A"></span>Client-facing view strips out internal studio notes automatically</div>
+        <div class="ic-feature"><span class="ic-feat-dot" style="background:#F06A6A"></span>Full project history exportable as PDF for procurement records</div>
+      </div>
+      <div class="ic-badge">
+        <div class="ic-badge-dot" style="background:#F06A6A"></div>
+        Live integration · Zero setup for clients
+      </div>
+    </div>
+
+    <!-- Claude AI -->
+    <div class="integration-card reveal" style="transition-delay:.1s">
+      <div class="ic-header">
+        <div class="ic-logo">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <path d="M16 4c-2.8 4.5-4.5 8.5-4.5 12 0 3.2 1.8 5.5 4.5 7" stroke="#D97757" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M16 4c2.8 4.5 4.5 8.5 4.5 12 0 3.2-1.8 5.5-4.5 7" stroke="#D97757" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="ic-meta">
+          <div class="ic-name">Claude AI</div>
+          <div class="ic-type">AI Workflow Assistant · Always On</div>
+        </div>
+      </div>
+      <p class="ic-desc">BRANSOL AI — powered by Claude — is embedded across our entire workflow. From brief analysis to stakeholder communication drafts, it handles the administrative and analytical work so our designers focus on design.</p>
+      <div class="ic-features">
+        <div class="ic-feature"><span class="ic-feat-dot" style="background:#D97757"></span>Brief analysis — flags ambiguities before work begins</div>
+        <div class="ic-feature"><span class="ic-feat-dot" style="background:#D97757"></span>Stakeholder update drafting — tone-matched to your organisation</div>
+        <div class="ic-feature"><span class="ic-feat-dot" style="background:#D97757"></span>Feedback summarisation — consolidates multi-stakeholder comments</div>
+        <div class="ic-feature"><span class="ic-feat-dot" style="background:#D97757"></span>Milestone risk flagging — predicts delays before they happen</div>
+        <div class="ic-feature"><span class="ic-feat-dot" style="background:#D97757"></span>Document generation — briefs, specs, reports, approval records</div>
+      </div>
+      <div class="ic-badge">
+        <div class="ic-badge-dot" style="background:#D97757"></div>
+        Anthropic Claude · Enterprise-grade privacy
+      </div>
+    </div>
+
+    <!-- Figma -->
+    <div class="integration-card reveal" style="transition-delay:.2s">
+      <div class="ic-header">
+        <div class="ic-logo">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <path d="M13 27a4 4 0 100-8 4 4 0 000 8z" fill="#1ABCFE"/>
+            <path d="M9 15a4 4 0 018 0 4 4 0 01-8 0z" fill="#FF7262"/>
+            <path d="M9 7a4 4 0 008 0 4 4 0 00-8 0z" fill="#F24E1E"/>
+            <path d="M17 7h4a4 4 0 110 8h-4V7z" fill="#FF7262"/>
+            <path d="M21 15a4 4 0 110 8 4 4 0 010-8z" fill="#A259FF"/>
+          </svg>
+        </div>
+        <div class="ic-meta">
+          <div class="ic-name">Figma</div>
+          <div class="ic-type">Design Review · Comment Sync</div>
+        </div>
+      </div>
+      <p class="ic-desc">Design deliverables shared directly via Figma — clients can view, comment, and approve without needing a Figma account. Comments feed back into the project record automatically.</p>
+      <div class="ic-features">
+        <div class="ic-feature"><span class="ic-feat-dot" style="background:#A259FF"></span>View-only client access — no account required</div>
+        <div class="ic-feature"><span class="ic-feat-dot" style="background:#A259FF"></span>Contextual comments pinned to specific design elements</div>
+        <div class="ic-feature"><span class="ic-feat-dot" style="background:#A259FF"></span>Version history showing every design iteration</div>
+        <div class="ic-feature"><span class="ic-feat-dot" style="background:#A259FF"></span>Approval status tracked and logged per deliverable</div>
+      </div>
+      <div class="ic-badge">
+        <div class="ic-badge-dot" style="background:#A259FF"></div>
+        No Figma account needed for clients
+      </div>
+    </div>
+
+    <!-- Email / Notifications -->
+    <div class="integration-card reveal" style="transition-delay:.3s">
+      <div class="ic-header">
+        <div class="ic-logo">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect x="4" y="8" width="24" height="17" rx="2" stroke="var(--sub)" stroke-width="1.6"/>
+            <path d="M4 12l12 8 12-8" stroke="var(--sub)" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="ic-meta">
+          <div class="ic-name">Smart Notifications</div>
+          <div class="ic-type">Email · Digest · Escalation</div>
+        </div>
+      </div>
+      <p class="ic-desc">Notifications configured to your organisation's preferences — daily digest, real-time alerts for approvals, or escalation triggers when milestones are at risk. You control the cadence.</p>
+      <div class="ic-features">
+        <div class="ic-feature"><span class="ic-feat-dot" style="background:var(--iris)"></span>Configurable digest — daily, weekly, or milestone-triggered</div>
+        <div class="ic-feature"><span class="ic-feat-dot" style="background:var(--iris)"></span>Approval reminders with AI-drafted follow-up messages</div>
+        <div class="ic-feature"><span class="ic-feat-dot" style="background:var(--iris)"></span>Escalation alerts when approval delays risk milestone dates</div>
+        <div class="ic-feature"><span class="ic-feat-dot" style="background:var(--iris)"></span>Multi-recipient support for complex stakeholder structures</div>
+      </div>
+      <div class="ic-badge">
+        <div class="ic-badge-dot" style="background:var(--iris)"></div>
+        Configured per engagement on setup
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ AI WORKFLOWS ══ -->
+<section class="ai-section">
+  <div class="ai-header reveal">
+    <div>
+      <span class="ai-eyebrow">AI Workflows</span>
+      <h2 class="ai-title">Where AI does<br><span class="chrome-text">the heavy lifting.</span></h2>
+    </div>
+    <div class="ai-right">
+      <p>We are honest about how we use AI. It does not design for us. It handles the operational and analytical work that used to consume hours of senior designer time — so that senior designer time goes to your work instead.</p>
+      <p>Every AI output is reviewed by a human before it reaches a client. Always.</p>
+    </div>
+  </div>
+
+  <div class="ai-rows">
+    <div class="ai-row reveal">
+      <span class="ar-num">01</span>
+      <div class="ar-body">
+        <div class="ar-title">Brief Analysis &amp; Ambiguity Detection</div>
+        <div class="ar-desc">When a brief arrives, Claude reads it and flags any ambiguous scope, missing constraints, or conflicting objectives — before any design work starts. Saves 2–3 revision rounds on average.</div>
+      </div>
+      <div class="ar-tools">
+        <div class="ar-tool">
+          <svg class="ar-tool-icon" viewBox="0 0 14 14" fill="none"><path d="M7 2c-1.4 2.2-2 4-2 5.5 0 1.5.7 2.5 2 3"/><path d="M7 2c1.4 2.2 2 4 2 5.5 0 1.5-.7 2.5-2 3"/></svg>
+          Claude
+        </div>
+        <div class="ar-tool">
+          <svg class="ar-tool-icon" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="4"/><circle cx="4" cy="7" r="3.5" fill="#F06A6A" opacity=".3"/><circle cx="10" cy="7" r="3.5" fill="#F06A6A" opacity=".3"/></svg>
+          Asana
+        </div>
+      </div>
+    </div>
+    <div class="ai-row reveal" style="transition-delay:.06s">
+      <span class="ar-num">02</span>
+      <div class="ar-body">
+        <div class="ar-title">Stakeholder Communication Drafting</div>
+        <div class="ar-desc">Update emails, approval requests, and follow-ups drafted in your organisation's tone. Our team reviews and sends. What used to take 20 minutes takes 2.</div>
+      </div>
+      <div class="ar-tools">
+        <div class="ar-tool">
+          <svg class="ar-tool-icon" viewBox="0 0 14 14" fill="none"><path d="M7 2c-1.4 2.2-2 4-2 5.5 0 1.5.7 2.5 2 3"/><path d="M7 2c1.4 2.2 2 4 2 5.5 0 1.5-.7 2.5-2 3"/></svg>
+          Claude
+        </div>
+      </div>
+    </div>
+    <div class="ai-row reveal" style="transition-delay:.12s">
+      <span class="ar-num">03</span>
+      <div class="ar-body">
+        <div class="ar-title">Multi-Stakeholder Feedback Consolidation</div>
+        <div class="ar-desc">When five people send five different sets of feedback, AI consolidates, de-duplicates, and identifies conflicts — delivering a single coherent instruction set to the design team.</div>
+      </div>
+      <div class="ar-tools">
+        <div class="ar-tool">
+          <svg class="ar-tool-icon" viewBox="0 0 14 14" fill="none"><path d="M7 2c-1.4 2.2-2 4-2 5.5 0 1.5.7 2.5 2 3"/><path d="M7 2c1.4 2.2 2 4 2 5.5 0 1.5-.7 2.5-2 3"/></svg>
+          Claude
+        </div>
+        <div class="ar-tool">
+          <svg class="ar-tool-icon" viewBox="0 0 14 14" fill="none"><path d="M7 1.5c-2.7 2.2-3.5 5-2.5 7.5"/><path d="M7 1.5c2.7 2.2 3.5 5 2.5 7.5"/><circle cx="7" cy="7" r="2" fill="#1ABCFE" opacity=".5"/></svg>
+          Figma
+        </div>
+      </div>
+    </div>
+    <div class="ai-row reveal" style="transition-delay:.18s">
+      <span class="ar-num">04</span>
+      <div class="ar-body">
+        <div class="ar-title">Milestone Risk Prediction</div>
+        <div class="ar-desc">By analysing approval velocity and task completion patterns, AI flags when a project is drifting before a deadline is actually missed — giving all parties time to act.</div>
+      </div>
+      <div class="ar-tools">
+        <div class="ar-tool">
+          <svg class="ar-tool-icon" viewBox="0 0 14 14" fill="none"><path d="M7 2c-1.4 2.2-2 4-2 5.5 0 1.5.7 2.5 2 3"/><path d="M7 2c1.4 2.2 2 4 2 5.5 0 1.5-.7 2.5-2 3"/></svg>
+          Claude
+        </div>
+        <div class="ar-tool">
+          <svg class="ar-tool-icon" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="4"/><circle cx="4" cy="7" r="3.5" fill="#F06A6A" opacity=".3"/><circle cx="10" cy="7" r="3.5" fill="#F06A6A" opacity=".3"/></svg>
+          Asana
+        </div>
+      </div>
+    </div>
+    <div class="ai-row reveal" style="transition-delay:.24s">
+      <span class="ar-num">05</span>
+      <div class="ar-body">
+        <div class="ar-title">AI-Assisted Design Research</div>
+        <div class="ar-desc">Competitor brand audits, sector visual analysis, and trend research — processed at speed. Human designers still make the creative judgements; AI gives them better raw material to judge against.</div>
+      </div>
+      <div class="ar-tools">
+        <div class="ar-tool">
+          <svg class="ar-tool-icon" viewBox="0 0 14 14" fill="none"><path d="M7 2c-1.4 2.2-2 4-2 5.5 0 1.5.7 2.5 2 3"/><path d="M7 2c1.4 2.2 2 4 2 5.5 0 1.5-.7 2.5-2 3"/></svg>
+          Claude
+        </div>
+        <div class="ar-tool">
+          <svg class="ar-tool-icon" viewBox="0 0 14 14" fill="none"><path d="M2 12L7 2l5 10H2z" stroke="white" stroke-width="1.2" fill="none"/></svg>
+          Midjourney
+        </div>
+      </div>
+    </div>
+    <div class="ai-row reveal" style="transition-delay:.3s">
+      <span class="ar-num">06</span>
+      <div class="ar-body">
+        <div class="ar-title">Automated Procurement Documentation</div>
+        <div class="ar-desc">For formal tender engagements: AI generates delivery schedules, compliance checklists, and project registers in the format required by procurement frameworks — ready for submission.</div>
+      </div>
+      <div class="ar-tools">
+        <div class="ar-tool">
+          <svg class="ar-tool-icon" viewBox="0 0 14 14" fill="none"><path d="M7 2c-1.4 2.2-2 4-2 5.5 0 1.5.7 2.5 2 3"/><path d="M7 2c1.4 2.2 2 4 2 5.5 0 1.5-.7 2.5-2 3"/></svg>
+          Claude
+        </div>
+        <div class="ar-tool">
+          <svg class="ar-tool-icon" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="4"/><circle cx="4" cy="7" r="3.5" fill="#F06A6A" opacity=".3"/><circle cx="10" cy="7" r="3.5" fill="#F06A6A" opacity=".3"/></svg>
+          Asana
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HONEST VERDICT ══ -->
+<section class="verdict">
+  <div class="verdict-inner">
+    <div class="reveal">
+      <span class="v-eyebrow">The Honest Verdict</span>
+      <h2 class="v-title">Is the platform<br><span class="chrome-text">worth it?</span></h2>
+      <div class="v-body">
+        <p>For organisations that commission design through formal procurement channels — government entities, state-owned enterprises, listed companies, professional services firms — <strong>yes, unambiguously.</strong></p>
+        <p>The platform exists because our clients needed it. We were repeatedly asked for documented approval trails, compliance-ready project records, and structured communication channels. We built rather than patched.</p>
+        <p>For a small business commissioning a once-off logo — <strong>it is probably more than you need.</strong> We would tell you that directly, and we would still deliver your project with the same care. The platform would simply sit unused.</p>
+        <p>The honest case: if your organisation has multiple stakeholders, a formal procurement process, or a need for documented deliverable sign-off — this platform removes friction that otherwise costs real time and real money.</p>
+      </div>
+    </div>
+    <div class="reveal" style="transition-delay:.1s">
+      <div class="honest-panel">
+        <div class="hp-title">Where it genuinely helps</div>
+        <div class="hp-item">
+          <div class="hp-icon" style="background:rgba(6,214,160,.1);color:var(--aqua)"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4"/></svg></div>
+          <div>
+            <div class="hp-verdict" style="color:var(--aqua);margin-bottom:4px;">Government &amp; Public Sector</div>
+            <div class="hp-text">Formal procurement requirements demand documented approvals, delivery schedules, and audit-ready project records. The platform generates these automatically.</div>
+          </div>
+        </div>
+        <div class="hp-item">
+          <div class="hp-icon" style="background:rgba(6,214,160,.1);color:var(--aqua)"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4"/></svg></div>
+          <div>
+            <div class="hp-verdict" style="color:var(--aqua);margin-bottom:4px;">Listed &amp; Regulated Companies</div>
+            <div class="hp-text">JSE-listed companies and regulated entities need version-controlled deliverables and documented change requests. The platform handles this without administrative overhead.</div>
+          </div>
+        </div>
+        <div class="hp-item">
+          <div class="hp-icon" style="background:rgba(6,214,160,.1);color:var(--aqua)"><svg viewBox="0 0 10 10"><path d="M2 5l2 2 4-4"/></svg></div>
+          <div>
+            <div class="hp-verdict" style="color:var(--aqua);margin-bottom:4px;">Multi-Stakeholder Commissions</div>
+            <div class="hp-text">When five people need to approve a direction, the platform consolidates feedback, tracks who has signed off, and prevents the same conversation happening in three different email threads.</div>
+          </div>
+        </div>
+        <div class="hp-item">
+          <div class="hp-icon" style="background:rgba(255,107,157,.08);color:var(--rose)"><svg viewBox="0 0 10 10"><path d="M2 8l6-6M8 8L2 2"/></svg></div>
+          <div>
+            <div class="hp-verdict" style="color:var(--rose);margin-bottom:4px;">Small once-off commissions</div>
+            <div class="hp-text">If you need a single deliverable with one decision-maker, the platform adds more structure than the project requires. We will still deliver well — the platform just will not see much use.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="page-cta reveal">
+  <div>
+    <h2 class="cta-title">Experience it<br><span class="chrome-text">on your commission.</span></h2>
+  </div>
+  <div class="cta-actions">
+    <a href="/begin" class="cta-btn-primary">Begin a commission</a>
+    <a href="/expertise" class="cta-btn-ghost">View expertise</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 BRANSOL — Ballito, KwaZulu-Natal</span>
+    <div class="footer-links">
+      <a href="/work">Work</a>
+      <a href="/expertise">Expertise</a>
+      <a href="/begin">Begin</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Cursor ──
+const cur=document.getElementById('cur'),ring=document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function tick(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick);})();
+document.addEventListener('mouseover',e=>{
+  const h=e.target.closest('a,button,.integration-card,.ai-row,.feat-card,.why-block');
+  cur.style.width=cur.style.height=h?'14px':'7px';
+  ring.style.width=ring.style.height=h?'44px':'30px';
+  ring.style.borderColor=h?'rgba(124,131,229,.5)':'rgba(124,131,229,.32)';
+});
+
+// ── Nav ──
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+// ── Theme ──
+(function(){
+  const btn=document.getElementById('themeToggle'),label=document.getElementById('themeLabel'),html=document.documentElement;
+  const saved=localStorage.getItem('bransol-theme');
+  if(saved==='light'){html.setAttribute('data-theme','light');label.textContent='Dark';}
+  btn.addEventListener('click',()=>{
+    const isLight=html.getAttribute('data-theme')==='light';
+    if(isLight){html.removeAttribute('data-theme');label.textContent='Light';localStorage.setItem('bransol-theme','dark');}
+    else{html.setAttribute('data-theme','light');label.textContent='Dark';localStorage.setItem('bransol-theme','light');}
+  });
+})();
+
+// ── Reveal ──
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:0.06,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// ── Animate mock tasks on enter ──
+const mockObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.mock-task').forEach((t,i)=>{
+        t.style.animationDelay=(i*0.07+0.1)+'s';
+        t.style.opacity='1';
+      });
+      mockObs.unobserve(e.target);
+    }
+  });
+},{threshold:0.1});
+const mockWrap=document.querySelector('.mock-wrap');
+if(mockWrap) mockObs.observe(mockWrap);
+</script>
+</body>
+</html>

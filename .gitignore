@@ -1,0 +1,31 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Next.js
+.next
+out
+
+# Env (never commit secrets)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Debug / IDE
+npm-debug.log*
+.DS_Store
+*.pem
+.idea
+.vscode
+
+# Vercel
+.vercel
+
+# TypeScript
+next-env.d.ts
+
+# Build
+dist
+build

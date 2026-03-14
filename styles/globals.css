@@ -1,0 +1,135 @@
+@import "./fonts.css";
+
+/* ── BRANSOL Brand tokens (do not use Tailwind colour classes) ── */
+:root {
+  --void: #060608;
+  --deep: #0d0d12;
+  --surface: #111118;
+  --lift: #18181f;
+  --panel: #1e1e27;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-hi: rgba(255, 255, 255, 0.14);
+  --text-pri: #f0eff5;
+  --text-sec: rgba(240, 239, 245, 0.55);
+  --text-ter: rgba(240, 239, 245, 0.28);
+
+  /* Rainbowchrome spectrum */
+  --r1: #ff6b9d;
+  --r2: #ff8c42;
+  --r3: #ffd166;
+  --r4: #06d6a0;
+  --r5: #4ecdc4;
+  --r6: #45b7d1;
+  --r7: #7c83e5;
+  --r8: #c77dff;
+  --iris: var(--r7);
+
+  --chrome: linear-gradient(
+    135deg,
+    var(--r1),
+    var(--r2),
+    var(--r3),
+    var(--r4),
+    var(--r5),
+    var(--r6),
+    var(--r7),
+    var(--r8)
+  );
+  --chrome-subtle: linear-gradient(
+    135deg,
+    rgba(255, 107, 157, 0.6),
+    rgba(255, 140, 66, 0.6),
+    rgba(255, 209, 102, 0.6),
+    rgba(6, 214, 160, 0.6),
+    rgba(78, 205, 196, 0.6),
+    rgba(69, 183, 209, 0.6),
+    rgba(124, 131, 229, 0.6),
+    rgba(199, 125, 255, 0.6)
+  );
+
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.09);
+  --glass-hi: rgba(255, 255, 255, 0.12);
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--void);
+  color: var(--text-pri);
+  font-family: var(--font-dm-mono), monospace;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ── Keyframes ── */
+@keyframes chromeCycle {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes floatUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+/* Chrome text utility */
+.chrome-text {
+  background: var(--chrome);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: chromeCycle 4s ease infinite;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--void);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--iris);
+  border-radius: 3px;
+}

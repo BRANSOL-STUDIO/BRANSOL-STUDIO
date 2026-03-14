@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRANSOL — Brand Identity System</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+
+/* ── ROOT ─────────────────────────────────────── */
+:root {
+  --void:      #060608;
+  --deep:      #0d0d12;
+  --surface:   #111118;
+  --lift:      #18181f;
+  --panel:     #1e1e27;
+  --border:    rgba(255,255,255,0.07);
+  --border-hi: rgba(255,255,255,0.14);
+  --text-pri:  #f0eff5;
+  --text-sec:  rgba(240,239,245,0.55);
+  --text-ter:  rgba(240,239,245,0.28);
+
+  /* Rainbowchrome spectrum */
+  --r1: #ff6b9d;  /* rose */
+  --r2: #ff8c42;  /* ember */
+  --r3: #ffd166;  /* gold */
+  --r4: #06d6a0;  /* aqua */
+  --r5: #4ecdc4;  /* teal */
+  --r6: #45b7d1;  /* sky */
+  --r7: #7c83e5;  /* iris */
+  --r8: #c77dff;  /* violet */
+
+  --chrome: linear-gradient(135deg, var(--r1), var(--r2), var(--r3), var(--r4), var(--r5), var(--r6), var(--r7), var(--r8));
+  --chrome-subtle: linear-gradient(135deg,
+    rgba(255,107,157,0.6), rgba(255,140,66,0.6), rgba(255,209,102,0.6),
+    rgba(6,214,160,0.6), rgba(78,205,196,0.6), rgba(69,183,209,0.6),
+    rgba(124,131,229,0.6), rgba(199,125,255,0.6));
+
+  --glass-bg: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.09);
+  --glass-hi: rgba(255,255,255,0.12);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--void);
+  color: var(--text-pri);
+  font-family: 'DM Mono', monospace;
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ───────────────────────────── */
+.cursor {
+  position: fixed;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--chrome);
+  background-size: 200% 200%;
+  animation: chromeCycle 3s linear infinite;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: transform 0.1s ease;
+}
+.cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: all 0.18s ease;
+}
+
+/* ── NOISE OVERLAY ───────────────────────────── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* ── ANIMATIONS ──────────────────────────────── */
+@keyframes chromeCycle {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes floatUp {
+  from { opacity:0; transform: translateY(24px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes rotateSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.9; }
+}
+
+@keyframes scanline {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+/* ── CHROME TEXT ─────────────────────────────── */
+.chrome-text {
+  background: var(--chrome);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: chromeCycle 4s ease infinite;
+}
+
+.chrome-shimmer {
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.1) 0%,
+    var(--r1) 20%, var(--r3) 40%, var(--r4) 60%, var(--r7) 80%,
+    rgba(255,255,255,0.1) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ── GLASSMORPHISM ───────────────────────────── */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-hi {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  border: 1px solid var(--glass-hi);
+}
+
+.glass-chrome {
+  position: relative;
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+.glass-chrome::before {
+  content: '';
+  position: absolute; inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--chrome);
+  background-size: 300% 300%;
+  animation: chromeCycle 4s ease infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ── LAYOUT ──────────────────────────────────── */
+.section {
+  position: relative;
+  z-index: 1;
+  padding: 80px 72px;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-meta {
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--text-ter);
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 700;
+  color: var(--text-pri);
+  margin-bottom: 48px;
+  letter-spacing: -0.02em;
+}
+
+/* ── HERO ────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 100px 72px;
+  z-index: 1;
+}
+
+/* Ambient orbs */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  animation: pulseGlow 6s ease-in-out infinite;
+}
+.orb-1 { width: 500px; height: 500px; top: -100px; right: -100px; background: radial-gradient(circle, rgba(124,131,229,0.12) 0%, transparent 70%); animation-delay: 0s; }
+.orb-2 { width: 400px; height: 400px; bottom: -80px; left: -80px; background: radial-gradient(circle, rgba(6,214,160,0.1) 0%, transparent 70%); animation-delay: 2s; }
+.orb-3 { width: 300px; height: 300px; top: 40%; left: 40%; background: radial-gradient(circle, rgba(199,125,255,0.08) 0%, transparent 70%); animation-delay: 4s; }
+
+/* Grid lines */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--text-ter);
+  margin-bottom: 32px;
+  animation: floatUp 0.8s ease both;
+}
+
+.hero-wordmark {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(72px, 12vw, 160px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  margin-bottom: 40px;
+  animation: floatUp 0.8s ease 0.1s both;
+}
+
+.hero-sub {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(18px, 2vw, 26px);
+  font-style: italic;
+  color: var(--text-sec);
+  max-width: 480px;
+  line-height: 1.5;
+  margin-bottom: 56px;
+  animation: floatUp 0.8s ease 0.2s both;
+}
+
+.hero-tags {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  animation: floatUp 0.8s ease 0.3s both;
+}
+
+.tag {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 2px;
+  color: var(--text-sec);
+}
+
+/* ── NAV ─────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 72px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(6,6,8,0.7);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-ter);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text-pri); }
+
+/* ── COLOUR PALETTE ──────────────────────────── */
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 2px;
+  margin-bottom: 48px;
+}
+
+.swatch {
+  position: relative;
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.swatch:hover { transform: scale(1.02); z-index: 2; }
+
+.swatch-label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.swatch-hex {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+}
+.swatch-name {
+  font-family: 'Instrument Serif', serif;
+  font-size: 15px;
+  font-style: italic;
+  margin-bottom: 6px;
+}
+
+.swatch-chrome {
+  background: var(--chrome);
+  background-size: 300% 300%;
+  animation: chromeCycle 4s ease infinite;
+  height: 240px;
+  border-radius: 0;
+}
+
+/* colour role swatches */
+.sw-void    { background: #060608; }
+.sw-deep    { background: #0d0d12; border: 1px solid var(--border); }
+.sw-surface { background: #111118; }
+.sw-lift    { background: #18181f; }
+.sw-panel   { background: #1e1e27; }
+.sw-text    { background: #f0eff5; }
+.sw-sub     { background: rgba(240,239,245,0.55); }
+
+/* chrome spectrum row */
+.spectrum-row {
+  display: grid;
+  grid-template-columns: repeat(8,1fr);
+  gap: 2px;
+  margin-bottom: 48px;
+}
+.spec-swatch {
+  height: 80px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: height 0.25s ease;
+}
+.spec-swatch:hover { height: 120px; }
+.spec-swatch .spec-hex {
+  position: absolute;
+  bottom: 10px;
+  left: 0; right: 0;
+  text-align: center;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: rgba(0,0,0,0.6);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.spec-swatch:hover .spec-hex { opacity: 1; }
+
+/* ── TYPOGRAPHY ──────────────────────────────── */
+.type-specimen {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 48px;
+}
+.type-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 120px;
+  align-items: center;
+  padding: 24px 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  gap: 32px;
+  transition: border-color 0.2s;
+}
+.type-row:hover { border-color: var(--border-hi); }
+.type-meta { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-ter); }
+.type-usage { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-ter); text-align: right; }
+
+/* ── GLASS COMPONENTS ────────────────────────── */
+.components-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+/* Glass card */
+.demo-card {
+  padding: 32px;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.25s ease;
+}
+.demo-card:hover { transform: translateY(-4px); }
+
+.demo-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+}
+
+.card-tag {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-ter);
+  margin-bottom: 12px;
+}
+.card-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.card-body {
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: var(--text-sec);
+}
+
+/* Buttons */
+.btn-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.btn {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+.btn-primary {
+  background: var(--chrome);
+  background-size: 300% 300%;
+  animation: chromeCycle 4s ease infinite;
+  color: #000;
+  font-weight: 500;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(124,131,229,0.3); }
+
+.btn-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  color: var(--text-pri);
+}
+.btn-glass:hover { background: var(--glass-hi); border-color: var(--border-hi); }
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-sec);
+}
+.btn-ghost:hover { border-color: var(--border-hi); color: var(--text-pri); }
+
+/* Input */
+.input-demo {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  color: var(--text-pri);
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  padding: 14px 20px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 12px;
+}
+.input-demo:focus { border-color: rgba(124,131,229,0.5); box-shadow: 0 0 0 3px rgba(124,131,229,0.1); }
+.input-demo::placeholder { color: var(--text-ter); }
+
+/* ── TONE OF VOICE ───────────────────────────── */
+.tone-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  background: var(--border);
+  margin-bottom: 48px;
+}
+.tone-card {
+  background: var(--surface);
+  padding: 36px 32px;
+  transition: background 0.2s;
+}
+.tone-card:hover { background: var(--lift); }
+.tone-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.tone-attr {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.tone-pill {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border: 1px solid var(--border);
+  color: var(--text-ter);
+}
+.tone-example {
+  font-family: 'Instrument Serif', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: var(--text-sec);
+  line-height: 1.65;
+  border-left: 2px solid var(--border);
+  padding-left: 16px;
+}
+.tone-bad {
+  font-size: 12px;
+  color: rgba(255,107,97,0.6);
+  margin-top: 12px;
+  text-decoration: line-through;
+}
+
+/* ── LOGO EXPLORATIONS ───────────────────────── */
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-bottom: 48px;
+}
+.logo-cell {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+.logo-cell:hover { border-color: var(--border-hi); }
+.logo-cell-dark { background: var(--void); }
+.logo-cell-mid { background: #f0eff5; }
+
+.logo-mark-1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+.logo-mark-2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.logo-mark-3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 44px;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.02em;
+}
+.logo-mark-4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.logo-mark-5 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-symbol {
+  width: 36px; height: 36px;
+  background: var(--chrome);
+  background-size: 300% 300%;
+  animation: chromeCycle 4s ease infinite;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+.logo-mark-5 span {
+  font-family: 'Syne', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.logo-variant-label {
+  position: absolute;
+  bottom: 14px;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-ter);
+}
+
+/* ── MOTION PRINCIPLES ───────────────────────── */
+.motion-demo {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 16px;
+  margin-bottom: 48px;
+}
+.motion-cell {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.motion-box {
+  width: 48px; height: 48px;
+  background: var(--chrome);
+  background-size: 300% 300%;
+  animation: chromeCycle 4s ease infinite;
+}
+.motion-cell:nth-child(1) .motion-box { animation: chromeCycle 4s ease infinite, fadeInUp 2s ease infinite alternate; }
+.motion-cell:nth-child(2) .motion-box { border-radius: 50%; animation: chromeCycle 4s ease infinite, rotateSlow 4s linear infinite; }
+.motion-cell:nth-child(3) .motion-box { clip-path: polygon(50%0,100%100%,0%100%); animation: chromeCycle 4s ease infinite, pulseGlow 2s ease infinite; }
+.motion-cell:nth-child(4) .motion-box { border-radius: 4px; animation: chromeCycle 4s ease infinite, shimmerSlide 2s ease infinite; }
+
+@keyframes fadeInUp {
+  from { transform: translateY(8px); opacity: 0.5; }
+  to   { transform: translateY(0);   opacity: 1; }
+}
+@keyframes shimmerSlide {
+  0%,100% { transform: scaleX(1); }
+  50%     { transform: scaleX(0.6); }
+}
+
+.motion-label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-ter);
+  text-align: center;
+}
+.motion-spec {
+  font-size: 10px;
+  color: var(--text-sec);
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ── DO / DON'T ──────────────────────────────── */
+.dodo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--border);
+  margin-bottom: 48px;
+}
+.do-col, .dont-col { padding: 32px; }
+.do-col { background: var(--surface); }
+.dont-col { background: var(--surface); }
+.do-col h3 { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.05em; color: var(--r4); margin-bottom: 20px; }
+.dont-col h3 { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.05em; color: var(--r1); margin-bottom: 20px; }
+.do-item, .dont-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-sec);
+}
+.do-item::before { content: '+'; color: var(--r4); font-weight: 700; flex-shrink: 0; }
+.dont-item::before { content: '×'; color: var(--r1); font-weight: 700; flex-shrink: 0; }
+
+/* ── FOOTER ──────────────────────────────────── */
+footer {
+  position: relative;
+  z-index: 1;
+  padding: 48px 72px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border);
+}
+footer .f-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+footer p {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-ter);
+}
+
+/* ── SCROLLBAR ───────────────────────────────── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--void); }
+::-webkit-scrollbar-thumb { background: var(--chrome); background-size: 300% 300%; animation: chromeCycle 4s ease infinite; }
+
+@media(max-width:900px){
+  nav,.hero,.section,footer { padding-left: 24px; padding-right: 24px; }
+  .hero-wordmark { font-size: 64px; }
+  .components-grid,.logo-grid,.tone-grid,.dodo-grid { grid-template-columns:1fr; }
+  .motion-demo { grid-template-columns: 1fr 1fr; }
+  .spectrum-row { grid-template-columns: repeat(4,1fr); }
+  .type-row { grid-template-columns: 1fr; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><span class="chrome-text">BRANSOL</span></div>
+  <ul class="nav-links">
+    <li><a href="#colours">Colour</a></li>
+    <li><a href="#type">Type</a></li>
+    <li><a href="#components">Glass</a></li>
+    <li><a href="#logo">Logo</a></li>
+    <li><a href="#voice">Voice</a></li>
+    <li><a href="#rules">Rules</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="hero-eyebrow">Brand Identity System · v1.0</div>
+  <div class="hero-wordmark">
+    <span class="chrome-text">BRAN</span><span style="color:var(--text-pri)">SOL</span>
+  </div>
+  <div class="hero-sub">Bold. Architectural. Rainbowchrome.</div>
+
+  <div class="hero-tags">
+    <span class="tag glass">Strategic Design</span>
+    <span class="tag glass">Premium Positioning</span>
+    <span class="tag glass">Glassmorphism</span>
+    <span class="tag glass">Dark Foundation</span>
+    <span class="tag glass">Iridescent Accent</span>
+  </div>
+</section>
+
+<!-- COLOUR SYSTEM -->
+<section class="section" id="colours">
+  <div class="section-meta">01 · Colour System</div>
+  <h2 class="section-title">The BRANSOL Palette</h2>
+
+  <!-- Chrome hero -->
+  <div style="margin-bottom:32px;">
+    <div class="swatch-chrome" style="border-radius:0;position:relative;overflow:hidden;">
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:32px;">
+        <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(0,0,0,0.5);margin-bottom:4px;">Primary Accent</div>
+        <div style="font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:#000;letter-spacing:-0.02em;margin-bottom:4px;">Rainbowchrome</div>
+        <div style="font-family:'DM Mono',monospace;font-size:12px;color:rgba(0,0,0,0.5);">Full spectrum iridescent — used for all primary actions, accents, and identity moments</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Spectrum breakdown -->
+  <div style="margin-bottom:12px;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--text-ter);">Spectrum Breakdown</div>
+  <div class="spectrum-row">
+    <div class="spec-swatch" style="background:#ff6b9d;"><div class="spec-hex">#FF6B9D<br>Rose</div></div>
+    <div class="spec-swatch" style="background:#ff8c42;"><div class="spec-hex">#FF8C42<br>Ember</div></div>
+    <div class="spec-swatch" style="background:#ffd166;"><div class="spec-hex">#FFD166<br>Gold</div></div>
+    <div class="spec-swatch" style="background:#06d6a0;"><div class="spec-hex">#06D6A0<br>Aqua</div></div>
+    <div class="spec-swatch" style="background:#4ecdc4;"><div class="spec-hex">#4ECDC4<br>Teal</div></div>
+    <div class="spec-swatch" style="background:#45b7d1;"><div class="spec-hex">#45B7D1<br>Sky</div></div>
+    <div class="spec-swatch" style="background:#7c83e5;"><div class="spec-hex">#7C83E5<br>Iris</div></div>
+    <div class="spec-swatch" style="background:#c77dff;"><div class="spec-hex">#C77DFF<br>Violet</div></div>
+  </div>
+
+  <!-- Foundation palette -->
+  <div style="margin-bottom:12px;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--text-ter);">Foundation — Dark Architecture</div>
+  <div class="palette-grid">
+    <div class="swatch sw-void">
+      <div class="swatch-label" style="color:var(--text-ter);">Void</div>
+      <div class="swatch-name" style="color:var(--text-sec);">The Depths</div>
+      <div class="swatch-hex" style="color:var(--text-ter);">#060608</div>
+    </div>
+    <div class="swatch sw-deep">
+      <div class="swatch-label" style="color:var(--text-ter);">Deep</div>
+      <div class="swatch-name" style="color:var(--text-sec);">Primary BG</div>
+      <div class="swatch-hex" style="color:var(--text-ter);">#0D0D12</div>
+    </div>
+    <div class="swatch sw-surface">
+      <div class="swatch-label" style="color:var(--text-ter);">Surface</div>
+      <div class="swatch-name" style="color:var(--text-sec);">Cards / Panels</div>
+      <div class="swatch-hex" style="color:var(--text-ter);">#111118</div>
+    </div>
+    <div class="swatch sw-lift">
+      <div class="swatch-label" style="color:var(--text-ter);">Lift</div>
+      <div class="swatch-name" style="color:var(--text-sec);">Raised elements</div>
+      <div class="swatch-hex" style="color:var(--text-ter);">#18181F</div>
+    </div>
+    <div class="swatch sw-panel">
+      <div class="swatch-label" style="color:var(--text-ter);">Panel</div>
+      <div class="swatch-name" style="color:var(--text-sec);">Active states</div>
+      <div class="swatch-hex" style="color:var(--text-ter);">#1E1E27</div>
+    </div>
+    <div class="swatch sw-text" style="position:relative;">
+      <div class="swatch-label" style="color:#0d0d12;">Primary Text</div>
+      <div class="swatch-name" style="color:#333;">Lunar White</div>
+      <div class="swatch-hex" style="color:#555;">#F0EFF5</div>
+    </div>
+  </div>
+
+  <!-- Glass layer -->
+  <div style="margin-bottom:12px;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--text-ter);">Glass Layer Values</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;">
+    <div style="background:rgba(255,255,255,0.04);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.09);padding:24px 20px;">
+      <div style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-ter);margin-bottom:8px;">Glass Default</div>
+      <div style="font-size:11px;color:var(--text-sec);">bg: rgba(255,255,255,0.04)<br>blur: 24px<br>border: rgba(255,255,255,0.09)</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.07);backdrop-filter:blur(32px);border:1px solid rgba(255,255,255,0.12);padding:24px 20px;">
+      <div style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-ter);margin-bottom:8px;">Glass Elevated</div>
+      <div style="font-size:11px;color:var(--text-sec);">bg: rgba(255,255,255,0.07)<br>blur: 32px<br>border: rgba(255,255,255,0.12)</div>
+    </div>
+    <div class="glass-chrome" style="padding:24px 20px;border-radius:0;">
+      <div style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-ter);margin-bottom:8px;">Glass Chrome</div>
+      <div style="font-size:11px;color:var(--text-sec);">bg: rgba(255,255,255,0.03)<br>blur: 20px<br>border: chrome gradient</div>
+    </div>
+  </div>
+</section>
+
+<!-- TYPOGRAPHY -->
+<section class="section" id="type">
+  <div class="section-meta">02 · Typography</div>
+  <h2 class="section-title">Type System</h2>
+
+  <div class="type-specimen">
+    <div class="type-row">
+      <div class="type-meta">Display<br>Syne 800</div>
+      <div style="font-family:'Syne',sans-serif;font-size:52px;font-weight:800;letter-spacing:-0.03em;line-height:1;">
+        <span class="chrome-text">BRANSOL</span>
+      </div>
+      <div class="type-usage">Wordmark<br>Hero Titles</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">Heading<br>Syne 700</div>
+      <div style="font-family:'Syne',sans-serif;font-size:36px;font-weight:700;letter-spacing:-0.02em;">Strategic Design Studio</div>
+      <div class="type-usage">Section heads<br>Card titles</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">Subhead<br>Syne 500</div>
+      <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:500;letter-spacing:-0.01em;color:var(--text-sec);">We work with organisations who lead.</div>
+      <div class="type-usage">Subheadings<br>Navigation</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">Editorial<br>Instrument Serif Italic</div>
+      <div style="font-family:'Instrument Serif',serif;font-size:28px;font-style:italic;color:var(--text-sec);">Considered craft. Enduring impact.</div>
+      <div class="type-usage">Pullquotes<br>Hero sub</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">Body<br>DM Mono 300</div>
+      <div style="font-size:14px;line-height:1.8;color:var(--text-sec);max-width:500px;">BRANSOL operates at the intersection of strategic clarity and visual precision — a studio built for organisations whose ambitions demand more than execution.</div>
+      <div class="type-usage">Body copy<br>Descriptions</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">Label<br>DM Mono 400</div>
+      <div style="font-size:10px;letter-spacing:0.35em;text-transform:uppercase;color:var(--text-ter);">Strategic Partner · Premium Studio · Est. 2019</div>
+      <div class="type-usage">Labels<br>Eyebrows</div>
+    </div>
+  </div>
+</section>
+
+<!-- GLASS COMPONENTS -->
+<section class="section" id="components">
+  <div class="section-meta">03 · Glassmorphism Components</div>
+  <h2 class="section-title">UI Components</h2>
+
+  <div class="components-grid">
+    <!-- Card 1: glass default -->
+    <div class="demo-card glass">
+      <div>
+        <div class="card-tag">Selected Work</div>
+        <div class="card-title">National Brand Identity</div>
+      </div>
+      <div class="card-body">A complete visual overhaul for a government communications agency — from strategy through to implementation.</div>
+    </div>
+
+    <!-- Card 2: glass elevated with chrome border -->
+    <div class="demo-card glass-chrome" style="border-radius:16px;">
+      <div>
+        <div class="card-tag">Featured Engagement</div>
+        <div class="card-title"><span class="chrome-text">2024 Commission</span></div>
+      </div>
+      <div class="card-body">Flagship design system for a listed financial services group — 240 components, 6 platforms.</div>
+    </div>
+
+    <!-- Card 3: dark lift -->
+    <div class="demo-card" style="background:var(--lift);border:1px solid var(--border);">
+      <div>
+        <div class="card-tag">Studio Platform</div>
+        <div class="card-title">Client Workspace</div>
+      </div>
+      <div class="card-body">Every client receives a dedicated environment — briefs, assets, milestones, and approvals in one place.</div>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div style="margin-bottom:12px;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--text-ter);">Buttons</div>
+  <div class="btn-group">
+    <button class="btn btn-primary">Begin Enquiry</button>
+    <button class="btn btn-glass">View Our Work</button>
+    <button class="btn btn-ghost">Download Credentials</button>
+  </div>
+
+  <!-- Input -->
+  <div style="margin-bottom:12px;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--text-ter);">Form Fields</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:640px;">
+    <input class="input-demo" placeholder="Organisation name" type="text">
+    <input class="input-demo" placeholder="Project scope" type="text">
+  </div>
+
+  <!-- Stat bar -->
+  <div style="margin-top:32px;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);">
+    <div class="glass" style="padding:28px 24px;">
+      <div style="font-family:'Syne',sans-serif;font-size:38px;font-weight:800;letter-spacing:-0.03em;" class="chrome-text">94%</div>
+      <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-ter);margin-top:6px;">Client Retention</div>
+    </div>
+    <div class="glass" style="padding:28px 24px;">
+      <div style="font-family:'Syne',sans-serif;font-size:38px;font-weight:800;letter-spacing:-0.03em;" class="chrome-text">6+</div>
+      <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-ter);margin-top:6px;">Years Operating</div>
+    </div>
+    <div class="glass" style="padding:28px 24px;">
+      <div style="font-family:'Syne',sans-serif;font-size:38px;font-weight:800;letter-spacing:-0.03em;" class="chrome-text">1:3</div>
+      <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-ter);margin-top:6px;">Win Rate</div>
+    </div>
+    <div class="glass" style="padding:28px 24px;">
+      <div style="font-family:'Syne',sans-serif;font-size:38px;font-weight:800;letter-spacing:-0.03em;" class="chrome-text">∞</div>
+      <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-ter);margin-top:6px;">Revisions Included</div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO EXPLORATIONS -->
+<section class="section" id="logo">
+  <div class="section-meta">04 · Logo Explorations</div>
+  <h2 class="section-title">BRANSOL Wordmark Directions</h2>
+
+  <div class="logo-grid">
+    <!-- 1: Full chrome, dark -->
+    <div class="logo-cell logo-cell-dark">
+      <div class="logo-mark-1 chrome-text">BRANSOL</div>
+      <span class="logo-variant-label">A · Full Chrome</span>
+    </div>
+    <!-- 2: Split chrome / white -->
+    <div class="logo-cell logo-cell-dark">
+      <div class="logo-mark-1">
+        <span class="chrome-text">BRAN</span><span style="color:var(--text-pri);">SOL</span>
+      </div>
+      <span class="logo-variant-label">B · Split Identity</span>
+    </div>
+    <!-- 3: Spaced caps -->
+    <div class="logo-cell logo-cell-dark">
+      <div class="logo-mark-2" style="color:var(--text-pri);">BRANSOL</div>
+      <span class="logo-variant-label">C · Spaced Caps</span>
+    </div>
+    <!-- 4: Italic serif -->
+    <div class="logo-cell logo-cell-dark">
+      <div class="logo-mark-3 chrome-shimmer">Bransol</div>
+      <span class="logo-variant-label">D · Editorial Italic</span>
+    </div>
+    <!-- 5: Icon + wordmark -->
+    <div class="logo-cell logo-cell-dark">
+      <div class="logo-mark-5">
+        <div class="logo-symbol"></div>
+        <span style="color:var(--text-pri);font-family:'Syne',sans-serif;font-size:32px;font-weight:800;letter-spacing:-0.02em;">BRANSOL</span>
+      </div>
+      <span class="logo-variant-label">E · Symbol + Mark</span>
+    </div>
+    <!-- 6: On light -->
+    <div class="logo-cell logo-cell-mid">
+      <div class="logo-mark-4" style="color:#060608;">BRANSOL</div>
+      <span class="logo-variant-label" style="color:#999;">F · Reversed (Light BG)</span>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:var(--border);">
+    <div style="background:var(--surface);padding:24px 28px;">
+      <div style="font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--text-ter);margin-bottom:12px;">Recommended Direction</div>
+      <p style="font-size:13px;line-height:1.75;color:var(--text-sec);">Direction B (Split Identity) — chrome for BRAN, white for SOL — creates a dual tension: the iridescent creative side balanced by the grounded, structural side. Most distinctive at scale.</p>
+    </div>
+    <div style="background:var(--surface);padding:24px 28px;">
+      <div style="font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--text-ter);margin-bottom:12px;">Minimum Size</div>
+      <p style="font-size:13px;line-height:1.75;color:var(--text-sec);">Never render the wordmark below 120px wide in digital or 30mm in print. Chrome gradient loses fidelity below this threshold.</p>
+    </div>
+    <div style="background:var(--surface);padding:24px 28px;">
+      <div style="font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--text-ter);margin-bottom:12px;">Clear Space</div>
+      <p style="font-size:13px;line-height:1.75;color:var(--text-sec);">Maintain clear space equal to the cap-height of the wordmark on all four sides. No competing visual elements within this zone.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TONE OF VOICE -->
+<section class="section" id="voice">
+  <div class="section-meta">05 · Tone of Voice</div>
+  <h2 class="section-title">How BRANSOL Speaks</h2>
+
+  <div class="tone-grid">
+    <div class="tone-card">
+      <h3><span class="chrome-text">Sharp</span></h3>
+      <div class="tone-attr">
+        <span class="tone-pill">Precise</span>
+        <span class="tone-pill">Direct</span>
+        <span class="tone-pill">No filler</span>
+      </div>
+      <div class="tone-example">"We work with organisations whose ambitions require more than execution."</div>
+      <div class="tone-bad">"We're a passionate team of creatives who love bringing your vision to life!"</div>
+    </div>
+    <div class="tone-card">
+      <h3><span class="chrome-text">Measured</span></h3>
+      <div class="tone-attr">
+        <span class="tone-pill">Unhurried</span>
+        <span class="tone-pill">Authoritative</span>
+        <span class="tone-pill">Deliberate</span>
+      </div>
+      <div class="tone-example">"Every engagement begins with the right questions — not the right answers."</div>
+      <div class="tone-bad">"We move fast and deliver quick turnarounds on all your design needs!"</div>
+    </div>
+    <div class="tone-card">
+      <h3><span class="chrome-text">Commanding</span></h3>
+      <div class="tone-attr">
+        <span class="tone-pill">Owns the room</span>
+        <span class="tone-pill">No hedging</span>
+        <span class="tone-pill">Confident</span>
+      </div>
+      <div class="tone-example">"BRANSOL doesn't compete on price. We compete on consequence."</div>
+      <div class="tone-bad">"We try our best to offer competitive rates for high quality design services."</div>
+    </div>
+    <div class="tone-card">
+      <h3><span class="chrome-text">Selective</span></h3>
+      <div class="tone-attr">
+        <span class="tone-pill">Curated</span>
+        <span class="tone-pill">Discerning</span>
+        <span class="tone-pill">Invites, not sells</span>
+      </div>
+      <div class="tone-example">"We take on a limited number of commissions each year. Begin a conversation."</div>
+      <div class="tone-bad">"Sign up today! We'd love to work with you — get started for free!"</div>
+    </div>
+  </div>
+</section>
+
+<!-- DO / DON'T -->
+<section class="section" id="rules">
+  <div class="section-meta">06 · Brand Rules</div>
+  <h2 class="section-title">What BRANSOL Does &amp; Doesn't Do</h2>
+
+  <div class="dodo-grid">
+    <div class="do-col">
+      <h3>DO</h3>
+      <div class="do-item">Use the rainbowchrome gradient only on primary actions, the wordmark, and key accent moments. Restraint is what makes it powerful.</div>
+      <div class="do-item">Lead with dark backgrounds. The chrome reads at its most powerful against deep void tones — #060608 or #0D0D12.</div>
+      <div class="do-item">Use glassmorphism for cards, overlays, and panels. Blur values between 20–32px. Always with a chrome or white border at low opacity.</div>
+      <div class="do-item">Write in short, declarative sentences. No sentence needs to be longer than it earns the right to be.</div>
+      <div class="do-item">Let negative space breathe. Premium brands are not afraid of emptiness — it signals confidence.</div>
+      <div class="do-item">Use Syne for all display and heading weights. Use Instrument Serif italic for editorial moments. DM Mono for everything functional.</div>
+    </div>
+    <div class="dont-col">
+      <h3>DON'T</h3>
+      <div class="dont-item">Apply the chrome gradient to body text, backgrounds, or decorative fills. It loses all authority when used everywhere.</div>
+      <div class="dont-item">Use light backgrounds as a primary environment. BRANSOL lives in dark. Light is reserved for reversed lockups only.</div>
+      <div class="dont-item">Stack glass effects on glass effects. One layer of glassmorphism per visual plane. More than one creates visual mud.</div>
+      <div class="dont-item">Use exclamation marks, question hooks, or engagement-bait language. BRANSOL states — it doesn't ask for permission.</div>
+      <div class="dont-item">Use purple gradients on white, Inter/Roboto/Arial, or any pattern that reads as generic SaaS or generic "AI aesthetic."</div>
+      <div class="dont-item">Show pricing, tiers, or subscription language anywhere in the brand. Investment is a private conversation.</div>
+    </div>
+  </div>
+
+  <!-- Motion principles -->
+  <div style="margin-bottom:16px;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--text-ter);">Motion Principles</div>
+  <div class="motion-demo">
+    <div class="motion-cell">
+      <div class="motion-box"></div>
+      <div class="motion-label">Entrance</div>
+      <div class="motion-spec">Fade + translate Y<br>400ms ease-out<br>Stagger: 80ms</div>
+    </div>
+    <div class="motion-cell">
+      <div class="motion-box"></div>
+      <div class="motion-label">Chrome Cycle</div>
+      <div class="motion-spec">Background-position<br>4s ease infinite<br>Always on chrome</div>
+    </div>
+    <div class="motion-cell">
+      <div class="motion-box"></div>
+      <div class="motion-label">Pulse</div>
+      <div class="motion-spec">Opacity 0.4→0.9<br>6s ease-in-out<br>Ambient orbs only</div>
+    </div>
+    <div class="motion-cell">
+      <div class="motion-box"></div>
+      <div class="motion-label">Hover Scale</div>
+      <div class="motion-spec">translateY(-4px)<br>250ms ease<br>Cards + swatches</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo"><span class="chrome-text">BRANSOL</span></div>
+  <p>Brand Identity System · v1.0 · Confidential</p>
+  <p>© 2026 BRANSOL</p>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top  = my + 'px';
+  });
+
+  // Ring follows with lag
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  // Cursor expand on hover
+  document.querySelectorAll('button, a, .swatch, .spec-swatch, .demo-card, .logo-cell').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
+      ring.style.transform   = 'translate(-50%,-50%) scale(1.5)';
+      ring.style.borderColor = 'rgba(255,255,255,0.4)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+      ring.style.transform   = 'translate(-50%,-50%) scale(1)';
+      ring.style.borderColor = 'rgba(255,255,255,0.2)';
+    });
+  });
+
+  // Entrance animations
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }, i * 60);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.swatch,.type-row,.demo-card,.tone-card,.logo-cell,.motion-cell').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    obs.observe(el);
+  });
+</script>
+</body>
+</html>

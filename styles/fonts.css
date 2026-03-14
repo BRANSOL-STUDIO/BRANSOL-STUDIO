@@ -1,0 +1,9 @@
+/* BRANSOL — Typography (Next.js: use CSS vars for font-family) */
+
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap");
+
+:root {
+  --font-syne: "Syne", sans-serif;
+  --font-dm-mono: "DM Mono", monospace;
+  --font-instrument: "Instrument Serif", serif;
+}

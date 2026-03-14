@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRANSOL — Social Content</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --void:#060608;--deep:#0d0d12;--surface:#111118;--lift:#18181f;--panel:#1e1e27;
+  --border:rgba(255,255,255,.07);--text:#f0eff5;--sub:rgba(240,239,245,.6);--ter:rgba(240,239,245,.28);
+  --iris:#7c83e5;--aqua:#06d6a0;--violet:#c77dff;--rose:#ff6b9d;
+  --gold:#ffd166;--sky:#45b7d1;--ember:#ff8c42;
+  --chrome:linear-gradient(135deg,#ff6b9d,#ff8c42,#ffd166,#06d6a0,#4ecdc4,#45b7d1,#7c83e5,#c77dff);
+}
+body{background:var(--void);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;padding:40px 24px 80px;}
+@keyframes cSpin{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+.chrome-text{background:var(--chrome);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:cSpin 5s ease infinite;}
+
+/* ── HEADER ── */
+header{max-width:960px;margin:0 auto 48px;}
+.logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:32px;display:inline-block;}
+h1{font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:12px;}
+.subtitle{font-size:14px;color:var(--sub);line-height:1.6;max-width:520px;}
+
+/* ── CONTROLS ── */
+.controls{max-width:960px;margin:0 auto 36px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.ctrl-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--ter);margin-right:4px;}
+.filter-btn{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;padding:8px 16px;border:1px solid var(--border);background:transparent;color:var(--ter);cursor:pointer;transition:all .18s;}
+.filter-btn:hover{border-color:rgba(255,255,255,.18);color:var(--sub);}
+.filter-btn.active{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.2);color:var(--text);}
+.filter-btn[data-p="linkedin"].active{border-color:var(--sky);color:var(--sky);}
+.filter-btn[data-p="instagram"].active{border-color:var(--rose);color:var(--rose);}
+.filter-btn[data-p="twitter"].active{border-color:var(--gold);color:var(--gold);}
+.filter-btn[data-t="sharp"].active{border-color:var(--iris);color:var(--iris);}
+.filter-btn[data-t="authority"].active{border-color:var(--aqua);color:var(--aqua);}
+.filter-btn[data-t="bts"].active{border-color:var(--violet);color:var(--violet);}
+.sep{width:1px;height:24px;background:var(--border);margin:0 4px;}
+
+/* ── GRID ── */
+.grid{max-width:960px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+
+/* ── CARD ── */
+.card{background:var(--surface);border:1px solid var(--border);display:flex;flex-direction:column;transition:border-color .2s,transform .2s;animation:fadeUp .4s ease both;}
+.card:hover{border-color:rgba(255,255,255,.14);transform:translateY(-2px);}
+.card.hidden{display:none;}
+
+.card-header{padding:16px 20px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
+.platform-badge{display:flex;align-items:center;gap:8px;}
+.platform-icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}
+.platform-icon.linkedin{background:rgba(69,183,209,.15);}
+.platform-icon.instagram{background:rgba(255,107,157,.15);}
+.platform-icon.twitter{background:rgba(255,209,102,.15);}
+.platform-name{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--ter);}
+.tone-pill{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;padding:3px 8px;border:1px solid;opacity:.7;}
+.tone-pill.sharp{border-color:var(--iris);color:var(--iris);}
+.tone-pill.authority{border-color:var(--aqua);color:var(--aqua);}
+.tone-pill.bts{border-color:var(--violet);color:var(--violet);}
+
+.card-body{padding:20px;flex:1;display:flex;flex-direction:column;gap:12px;}
+.post-text{font-size:13.5px;line-height:1.75;color:var(--sub);white-space:pre-line;flex:1;}
+.post-text .hook{color:var(--text);font-weight:500;}
+.post-text .hashtag{color:var(--iris);opacity:.7;font-size:12px;}
+
+.card-footer{padding:12px 20px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.post-meta{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--ter);}
+.copy-btn{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;padding:6px 14px;border:1px solid var(--border);background:transparent;color:var(--ter);cursor:pointer;transition:all .18s;}
+.copy-btn:hover{border-color:rgba(255,255,255,.18);color:var(--text);}
+.copy-btn.copied{border-color:var(--aqua);color:var(--aqua);}
+
+/* Visual mock for Instagram */
+.card[data-platform="instagram"] .card-body{padding:0;}
+.insta-visual{width:100%;aspect-ratio:1;background:var(--lift);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;flex-shrink:0;}
+.insta-visual svg{width:100%;height:100%;}
+.insta-caption{padding:16px 20px;flex:1;display:flex;flex-direction:column;gap:10px;}
+
+/* count */
+.count{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--ter);max-width:960px;margin:0 auto 20px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span class="chrome-text">BRAN</span><span>SOL</span></div>
+  <h1>Social Content<br><span class="chrome-text">12 Posts</span></h1>
+  <p class="subtitle">LinkedIn · Instagram · X — rotating across Sharp, Authoritative, and Behind-the-scenes tones. Click any card to copy.</p>
+</header>
+
+<div class="controls">
+  <span class="ctrl-label">Platform</span>
+  <button class="filter-btn active" data-p="all">All</button>
+  <button class="filter-btn" data-p="linkedin">LinkedIn</button>
+  <button class="filter-btn" data-p="instagram">Instagram</button>
+  <button class="filter-btn" data-p="twitter">X / Twitter</button>
+  <div class="sep"></div>
+  <span class="ctrl-label">Tone</span>
+  <button class="filter-btn active" data-t="all">All</button>
+  <button class="filter-btn" data-t="sharp">Sharp</button>
+  <button class="filter-btn" data-t="authority">Authority</button>
+  <button class="filter-btn" data-t="bts">Behind-the-scenes</button>
+</div>
+
+<div class="count" id="count">Showing 12 posts</div>
+<div class="grid" id="grid"></div>
+
+<script>
+const LI = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#45B7D1" opacity=".25"/><path d="M6.5 10h-2v7h2v-7zm-1-3.3a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4zM18 13.2c0-2-.9-3.2-2.7-3.2-1 0-1.8.5-2.3 1.2V10H11v7h2v-3.8c0-.9.6-1.7 1.5-1.7s1.5.7 1.5 1.7V17h2v-3.8z" fill="#45B7D1"/></svg>`;
+const IG = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#FF6B9D" opacity=".2"/><rect x="5" y="5" width="14" height="14" rx="4" stroke="#FF6B9D" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="3" stroke="#FF6B9D" stroke-width="1.5" fill="none"/><circle cx="16.5" cy="7.5" r=".75" fill="#FF6B9D"/></svg>`;
+const TW = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#FFD166" opacity=".15"/><path d="M17.5 6.5L13.2 11.4 18 17.5h-3.8l-2.9-3.8-3.3 3.8H6.5l4.6-5.3L6 6.5h3.9l2.6 3.4 3-3.4h2z" fill="#FFD166"/></svg>`;
+
+const posts = [
+  // ── LINKEDIN SHARP ──────────────────────────────────────────
+  {
+    platform:"linkedin", tone:"sharp", week:"Week 1",
+    text:`Most design briefs sent to agencies contain the answer to why the last agency failed.
+
+"We need something fresh."
+"The last one didn't understand our sector."
+"We want it to feel premium."
+
+None of these are briefs.
+They're symptoms.
+
+The organisations that get exceptional design work come in with a problem — not a preference.
+
+We commission a brief before we accept one.`,
+    tags:"#BrandStrategy #DesignLeadership #InstitutionalDesign"
+  },
+  {
+    platform:"linkedin", tone:"authority", week:"Week 2",
+    text:`Design systems are not a luxury for large organisations.
+
+They are the cheapest form of quality control that exists.
+
+Without one:
+— Every new document resets the brand
+— Every vendor interprets the identity differently
+— Every communication undoes the last one
+
+We've audited the communications of organisations managing billions in assets.
+The ones with no design system look like they don't know what they stand for.
+
+Because, visually, they don't.`,
+    tags:"#DesignSystems #BrandIdentity #CorporateDesign"
+  },
+  {
+    platform:"linkedin", tone:"bts", week:"Week 3",
+    text:`Something most clients don't see:
+
+Before we open a file, we read.
+
+The annual report. The strategic plan. The minister's speech. The analyst report. The last campaign.
+
+Design for institutions is not decoration.
+It's the translation of an organisation's intent into something a person can trust on sight.
+
+You can't do that without understanding what the organisation is trying to say — and what it's been saying wrong.
+
+The reading takes longer than the drawing.`,
+    tags:"#DesignProcess #BrandDesign #BRANSOL"
+  },
+  {
+    platform:"linkedin", tone:"sharp", week:"Week 5",
+    text:`The most expensive design decision most organisations make is choosing the cheapest option.
+
+Not because cheap work is badly executed.
+Because cheap work is designed for the wrong outcome.
+
+A R15,000 brand identity is built to be delivered.
+A R150,000 brand identity is built to perform.
+
+The difference isn't craft.
+It's what the designer is optimising for.
+
+We optimise for the room it enters — the boardroom, the prospectus, the tender, the public.
+
+That room has standards.`,
+    tags:"#DesignValue #BrandInvestment #StrategicDesign"
+  },
+
+  // ── INSTAGRAM ───────────────────────────────────────────────
+  {
+    platform:"instagram", tone:"authority", week:"Week 1",
+    visual:"grid",
+    caption:`The five things that separate an institutional brand from a corporate one.
+
+01 — Typography that holds across 200 pages
+02 — A colour system, not just a palette
+03 — Rules for every medium before it gets produced
+04 — A voice that survives committee review
+05 — A design system the client can actually use
+
+Credibility isn't felt. It's constructed.
+
+#BrandIdentity #DesignSystem #InstitutionalDesign #BRANSOL`,
+  },
+  {
+    platform:"instagram", tone:"sharp", week:"Week 2",
+    visual:"quote",
+    caption:`"A logo is not a brand. A brand is every decision that follows the logo."
+
+Most organisations spend 80% of the budget on the mark.
+And 0% on the system that makes it mean something.
+
+#BrandStrategy #DesignThinking #LogoDesign`,
+  },
+  {
+    platform:"instagram", tone:"bts", week:"Week 3",
+    visual:"studio",
+    caption:`The brief arrives. We don't open Figma.
+
+We open the annual report.
+We read the strategic plan.
+We call the comms director.
+
+Design that performs in a boardroom has to understand what happens in a boardroom.
+
+Studio · Ballito, KwaZulu-Natal
+
+#DesignStudio #BrandingProcess #BRANSOL #KZN`,
+  },
+  {
+    platform:"instagram", tone:"authority", week:"Week 4",
+    visual:"stat",
+    caption:`94% client retention.
+
+Not because we're easy to work with.
+Because we're precise about who we work with.
+
+We commission a brief before we accept one.
+We ask the questions the client hasn't thought to answer yet.
+
+That precision is what creates work that lasts.
+
+#BrandDesign #DesignAgency #ClientRetention #BRANSOL`,
+  },
+
+  // ── X / TWITTER ─────────────────────────────────────────────
+  {
+    platform:"twitter", tone:"sharp", week:"Week 1",
+    text:`The brief said: "make it look premium."
+
+That's not a brief.
+That's a symptom.
+
+Premium is earned by what you say, not how you style it.`,
+    tags:""
+  },
+  {
+    platform:"twitter", tone:"authority", week:"Week 2",
+    text:`Institutions that invest in design systems outperform those that don't — not in aesthetics, but in consistency.
+
+Every inconsistent touchpoint costs trust.
+Trust, once lost in a formal context, is expensive to recover.
+
+This is why design is a governance question, not a marketing one.`,
+    tags:""
+  },
+  {
+    platform:"twitter", tone:"sharp", week:"Week 3",
+    text:`Most design agencies are optimised for clients who don't know what they want.
+
+We're optimised for clients who do.
+
+The difference shows in the brief, the conversation, and the work.`,
+    tags:""
+  },
+  {
+    platform:"twitter", tone:"bts", week:"Week 4",
+    text:`A credentials deck is not a portfolio.
+
+A portfolio shows what you've made.
+A credentials deck argues why you should be trusted.
+
+Different documents. Different jobs. Most agencies send the same thing for both.`,
+    tags:""
+  },
+];
+
+// ─── INSTAGRAM VISUALS ───────────────────────────────────────
+function instaVisual(type) {
+  const vs = {
+    grid: `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="400" fill="#0D0D12"/>
+      <defs><linearGradient id="cg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#7c83e5"/><stop offset="50%" style="stop-color:#06d6a0"/>
+        <stop offset="100%" style="stop-color:#c77dff"/></linearGradient></defs>
+      <line x1="133" y1="20" x2="133" y2="380" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+      <line x1="267" y1="20" x2="267" y2="380" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+      <line x1="20" y1="133" x2="380" y2="133" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+      <line x1="20" y1="267" x2="380" y2="267" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+      <rect x="20" y="20" width="3" height="360" fill="url(#cg)" rx="2"/>
+      <text x="40" y="90" font-family="Arial" font-weight="800" font-size="52" fill="#F0EFF5">01–05</text>
+      <text x="40" y="140" font-family="Arial" font-size="14" fill="rgba(240,239,245,.5)" letter-spacing="3">WHAT SEPARATES</text>
+      <text x="40" y="165" font-family="Arial" font-size="14" fill="rgba(240,239,245,.5)" letter-spacing="3">INSTITUTIONAL</text>
+      <text x="40" y="190" font-family="Arial" font-size="14" fill="rgba(240,239,245,.5)" letter-spacing="3">BRAND WORK</text>
+      <text x="40" y="260" font-family="Arial" font-weight="700" font-size="16" fill="#F0EFF5">Typography</text>
+      <text x="40" y="285" font-family="Arial" font-weight="700" font-size="16" fill="#F0EFF5">Colour System</text>
+      <text x="40" y="310" font-family="Arial" font-weight="700" font-size="16" fill="#F0EFF5">Design Rules</text>
+      <text x="40" y="335" font-family="Arial" font-weight="700" font-size="16" fill="#F0EFF5">Voice</text>
+      <text x="40" y="360" font-family="Arial" font-weight="700" font-size="16" fill="#F0EFF5">System</text>
+      <text x="310" y="375" font-family="Arial" font-size="11" fill="rgba(240,239,245,.3)" letter-spacing="2">BRANSOL</text>
+    </svg>`,
+    quote: `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="400" fill="#060608"/>
+      <defs><linearGradient id="qg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#FF6B9D"/><stop offset="100%" style="stop-color:#7c83e5"/></linearGradient></defs>
+      <rect x="0" y="0" width="400" height="4" fill="url(#qg)"/>
+      <text x="36" y="80" font-family="Georgia,serif" font-size="110" fill="rgba(124,131,229,.15)">"</text>
+      <foreignObject x="36" y="80" width="328" height="220">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Arial;font-size:18px;font-weight:700;line-height:1.5;color:#F0EFF5;">A logo is not a brand.</div>
+      </foreignObject>
+      <text x="36" y="112" font-family="Arial" font-weight="800" font-size="18" fill="#F0EFF5">A logo is not a brand.</text>
+      <text x="36" y="148" font-family="Arial" font-weight="400" font-size="15" fill="rgba(240,239,245,.6)">A brand is every decision</text>
+      <text x="36" y="170" font-family="Arial" font-weight="400" font-size="15" fill="rgba(240,239,245,.6)">that follows the logo.</text>
+      <line x1="36" y1="215" x2="130" y2="215" stroke="url(#qg)" stroke-width="1.5"/>
+      <text x="36" y="240" font-family="Arial" font-size="11" fill="rgba(240,239,245,.38)" letter-spacing="3">BRANSOL</text>
+      <text x="36" y="360" font-family="Arial" font-size="11" fill="rgba(240,239,245,.2)" letter-spacing="2">BALLITO · KZN</text>
+    </svg>`,
+    studio: `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="400" fill="#0D0D12"/>
+      <rect x="0" y="0" width="3" height="400" fill="#7c83e5" opacity=".8"/>
+      <rect x="20" y="60" width="260" height="180" rx="2" fill="#18181f" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+      <rect x="30" y="72" width="180" height="8" rx="1" fill="rgba(255,255,255,.08)"/>
+      <rect x="30" y="90" width="140" height="6" rx="1" fill="rgba(255,255,255,.05)"/>
+      <rect x="30" y="106" width="160" height="6" rx="1" fill="rgba(255,255,255,.05)"/>
+      <rect x="30" y="130" width="240" height="90" rx="2" fill="#111118"/>
+      <rect x="36" y="136" width="228" height="3" fill="rgba(124,131,229,.4)" rx="1"/>
+      <rect x="36" y="147" width="180" height="2" rx="1" fill="rgba(255,255,255,.06)"/>
+      <rect x="36" y="156" width="200" height="2" rx="1" fill="rgba(255,255,255,.06)"/>
+      <rect x="36" y="165" width="160" height="2" rx="1" fill="rgba(255,255,255,.06)"/>
+      <rect x="36" y="194" width="60" height="18" rx="2" fill="rgba(124,131,229,.25)"/>
+      <text x="290" y="200" font-family="Arial" font-weight="800" font-size="48" fill="rgba(255,255,255,.04)" transform="rotate(-90,290,200)">PROCESS</text>
+      <text x="20" y="290" font-family="Arial" font-weight="800" font-size="24" fill="#F0EFF5">The brief</text>
+      <text x="20" y="316" font-family="Arial" font-weight="800" font-size="24" fill="#F0EFF5">arrives.</text>
+      <text x="20" y="345" font-family="Arial" font-size="13" fill="rgba(240,239,245,.4)" letter-spacing="1">We don't open Figma.</text>
+      <text x="310" y="390" font-family="Arial" font-size="10" fill="rgba(240,239,245,.2)" letter-spacing="2">BRANSOL</text>
+    </svg>`,
+    stat: `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="400" fill="#060608"/>
+      <defs>
+        <linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#ff6b9d"/><stop offset="50%" style="stop-color:#ffd166"/>
+          <stop offset="100%" style="stop-color:#06d6a0"/>
+        </linearGradient>
+        <linearGradient id="sg2" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" style="stop-color:rgba(124,131,229,0)"/><stop offset="100%" style="stop-color:rgba(124,131,229,.15)"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="400" height="4" fill="url(#sg)"/>
+      <circle cx="200" cy="175" r="110" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+      <circle cx="200" cy="175" r="80" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+      <path d="M200 65 A110 110 0 1 1 96 240" fill="none" stroke="url(#sg)" stroke-width="3" stroke-linecap="round"/>
+      <text x="200" y="162" font-family="Arial" font-weight="800" font-size="72" fill="#F0EFF5" text-anchor="middle">94%</text>
+      <text x="200" y="194" font-family="Arial" font-size="13" fill="rgba(240,239,245,.4)" text-anchor="middle" letter-spacing="3">CLIENT RETENTION</text>
+      <line x1="100" y1="320" x2="300" y2="320" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+      <text x="200" y="350" font-family="Arial" font-size="11" fill="rgba(240,239,245,.3)" text-anchor="middle" letter-spacing="2">BRANSOL · BALLITO</text>
+    </svg>`
+  };
+  return vs[type] || vs.grid;
+}
+
+// ─── RENDER ──────────────────────────────────────────────────
+function platformIcon(p){
+  return p==='linkedin'?LI:p==='instagram'?IG:TW;
+}
+function platformName(p){
+  return p==='linkedin'?'LinkedIn':p==='instagram'?'Instagram':'X / Twitter';
+}
+function toneLabel(t){
+  return t==='sharp'?'Sharp':t==='authority'?'Authority':'Behind-the-scenes';
+}
+function toneClass(t){return t;}
+
+function buildCards(){
+  const grid=document.getElementById('grid');
+  grid.innerHTML='';
+  posts.forEach((p,i)=>{
+    const card=document.createElement('div');
+    card.className=`card`;
+    card.dataset.platform=p.platform;
+    card.dataset.tone=p.tone;
+    card.style.animationDelay=(i*40)+'ms';
+
+    let bodyHTML='';
+    if(p.platform==='instagram'){
+      bodyHTML=`<div class="insta-visual">${instaVisual(p.visual)}</div>
+      <div class="insta-caption">
+        <div class="post-text">${p.caption.replace(/#(\w+)/g,'<span class="hashtag">#$1</span>').replace(/\n/g,'<br>')}</div>
+      </div>`;
+    } else {
+      const textFormatted=(p.text+(p.tags?'\n\n'+p.tags:'')).replace(/#(\w+)/g,'<span class="hashtag">#$1</span>').replace(/\n/g,'<br>');
+      bodyHTML=`<div class="post-text">${textFormatted}</div>`;
+    }
+
+    const copyText = p.platform==='instagram' ? p.caption : (p.text+(p.tags?'\n\n'+p.tags:''));
+
+    card.innerHTML=`
+      <div class="card-header">
+        <div class="platform-badge">
+          <div class="platform-icon ${p.platform}">${platformIcon(p.platform)}</div>
+          <span class="platform-name">${platformName(p.platform)}</span>
+        </div>
+        <span class="tone-pill ${toneClass(p.tone)}">${toneLabel(p.tone)}</span>
+      </div>
+      <div class="card-body">${bodyHTML}</div>
+      <div class="card-footer">
+        <span class="post-meta">${p.week}</span>
+        <button class="copy-btn" onclick="copyPost(this, ${JSON.stringify(copyText).replace(/</g,'\\u003c')})">Copy</button>
+      </div>`;
+    grid.appendChild(card);
+  });
+  updateCount();
+}
+
+function copyPost(btn, text){
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='Copied';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);
+  });
+}
+
+// ─── FILTERS ─────────────────────────────────────────────────
+let activePlatform='all', activeTone='all';
+
+document.querySelectorAll('.filter-btn[data-p]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn[data-p]').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    activePlatform=btn.dataset.p;
+    applyFilters();
+  });
+});
+document.querySelectorAll('.filter-btn[data-t]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn[data-t]').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    activeTone=btn.dataset.t;
+    applyFilters();
+  });
+});
+
+function applyFilters(){
+  const cards=document.querySelectorAll('.card');
+  let visible=0;
+  cards.forEach(c=>{
+    const pMatch=activePlatform==='all'||c.dataset.platform===activePlatform;
+    const tMatch=activeTone==='all'||c.dataset.tone===activeTone;
+    const show=pMatch&&tMatch;
+    c.classList.toggle('hidden',!show);
+    if(show)visible++;
+  });
+  document.getElementById('count').textContent=`Showing ${visible} post${visible!==1?'s':''}`;
+}
+
+function updateCount(){
+  const total=document.querySelectorAll('.card:not(.hidden)').length;
+  document.getElementById('count').textContent=`Showing ${total} posts`;
+}
+
+buildCards();
+</script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+/*
+ * ════════════════════════════════════════════════════════
+ *   BRANSOL — Typography System
+ *   All font faces used across the BRANSOL platform
+ * ════════════════════════════════════════════════════════
+ *
+ *   USAGE (online):
+ *   <link rel="stylesheet" href="bransol-fonts.css">
+ *
+ *   USAGE (offline / self-hosted):
+ *   1. Open bransol-font-downloader.html in your browser
+ *   2. It will save all .woff2 files into this folder
+ *   3. Uncomment the local src lines below and remove the Google src lines
+ *
+ * ════════════════════════════════════════════════════════
+ *   FONT FAMILIES
+ * ────────────────────────────────────────────────────────
+ *   Syne             — Display / Headings (wght 400–800)
+ *   DM Sans          — Body text (wght 300–500, italic 400)
+ *   DM Mono          — Labels / UI / Monospace (wght 300–400)
+ *   Cormorant Garamond — Brand identity / Editorial pages
+ *   Outfit           — Strategy / Planning pages
+ *   Instrument Serif — Accent / Holding page
+ * ════════════════════════════════════════════════════════
+ */
+
+/* ── ONLINE: load from Google Fonts CDN ── */
+
+/* Syne — Display */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
+
+/* DM Sans — Body */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap');
+
+/* DM Mono — UI / Labels */
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&display=swap');
+
+/* Cormorant Garamond — Editorial */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
+
+/* Outfit — Strategy pages */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500&display=swap');
+
+/* Instrument Serif — Holding page */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
+
+/* ════════════════════════════════════════════════════════
+ *   SELF-HOSTED (uncomment after downloading font files)
+ * ════════════════════════════════════════════════════════ */
+
+/*
+@font-face {
+  font-family: 'Syne';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url('syne/Syne-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Syne';
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url('syne/Syne-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Syne';
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url('syne/Syne-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Syne';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url('syne/Syne-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Syne';
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+  src: url('syne/Syne-800.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  src: url('dm-sans/DMSans-300.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url('dm-sans/DMSans-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url('dm-sans/DMSans-400-italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url('dm-sans/DMSans-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Mono';
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  src: url('dm-mono/DMMono-300.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'DM Mono';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url('dm-mono/DMMono-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  src: url('cormorant/CormorantGaramond-300.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+  src: url('cormorant/CormorantGaramond-300-italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url('cormorant/CormorantGaramond-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url('cormorant/CormorantGaramond-400-italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url('cormorant/CormorantGaramond-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Outfit';
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+  src: url('outfit/Outfit-200.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Outfit';
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  src: url('outfit/Outfit-300.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Outfit';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url('outfit/Outfit-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Outfit';
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url('outfit/Outfit-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Instrument Serif';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url('instrument-serif/InstrumentSerif-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url('instrument-serif/InstrumentSerif-Italic.woff2') format('woff2');
+}
+*/
+
+
+/* ════════════════════════════════════════════════════════
+ *   USAGE REFERENCE
+ * ════════════════════════════════════════════════════════
+ *
+ *   font-family: 'Syne', sans-serif;              — Headlines, logo, display
+ *   font-family: 'DM Sans', sans-serif;           — Body copy, UI text
+ *   font-family: 'DM Mono', monospace;            — Labels, tags, metadata, code
+ *   font-family: 'Cormorant Garamond', serif;     — Brand identity editorial
+ *   font-family: 'Outfit', sans-serif;            — Strategy/planning pages
+ *   font-family: 'Instrument Serif', serif;       — Holding page accent
+ *
+ *   WEIGHTS:
+ *   Syne             400 500 600 700 800
+ *   DM Sans          300 400 500 (+ italic 400)
+ *   DM Mono          300 400
+ *   Cormorant Garamond  300 400 600 (+ italic 300 400)
+ *   Outfit           200 300 400 500
+ *   Instrument Serif 400 (+ italic 400)
+ *
+ * ════════════════════════════════════════════════════════ */

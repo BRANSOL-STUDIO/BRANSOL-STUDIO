@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BRANSOL — Font Downloader</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #060608; color: #f0eff5;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 40px 20px;
+  }
+  .box {
+    width: 100%; max-width: 640px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.1);
+    padding: 40px;
+  }
+  .logo { font-size: 11px; letter-spacing: .38em; color: rgba(240,239,245,.4); margin-bottom: 28px; }
+  .logo span { color: #f0eff5; }
+  h1 { font-size: 22px; font-weight: 700; letter-spacing: -.03em; margin-bottom: 8px; }
+  p  { font-size: 13px; color: rgba(240,239,245,.6); line-height: 1.65; margin-bottom: 28px; }
+  .btn {
+    display: inline-block; padding: 13px 28px;
+    background: linear-gradient(135deg,#ff6b9d,#ff8c42,#ffd166,#06d6a0,#45b7d1,#7c83e5,#c77dff);
+    background-size: 300% 300%; animation: spin 4s ease infinite;
+    border: none; color: #060608; font-size: 11px; font-weight: 700;
+    letter-spacing: .28em; text-transform: uppercase; cursor: pointer;
+    width: 100%; margin-bottom: 24px;
+  }
+  .btn:disabled { opacity: .5; cursor: default; }
+  @keyframes spin { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+  .log {
+    background: rgba(0,0,0,.4); border: 1px solid rgba(255,255,255,.07);
+    padding: 16px; font-family: 'Courier New', monospace; font-size: 11px;
+    color: rgba(240,239,245,.5); line-height: 1.9; max-height: 320px; overflow-y: auto;
+    display: none;
+  }
+  .log.visible { display: block; }
+  .log .ok   { color: #06d6a0; }
+  .log .err  { color: #ff6b9d; }
+  .log .info { color: #7c83e5; }
+  .progress { height: 3px; background: rgba(255,255,255,.08); margin-bottom: 20px; display: none; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg,#7c83e5,#06d6a0,#c77dff); background-size:300%; animation:spin 2s linear infinite; transition: width .3s; width: 0%; }
+  .instructions {
+    font-size: 12px; color: rgba(240,239,245,.4); line-height: 1.8;
+    border-top: 1px solid rgba(255,255,255,.07); padding-top: 20px; margin-top: 20px;
+  }
+  .instructions strong { color: rgba(240,239,245,.7); }
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="logo"><span>BRAN</span>SOL</div>
+  <h1>Font Downloader</h1>
+  <p>Downloads all 21 font files used across the BRANSOL platform and saves them to your device. Once complete, place the folders next to <code>bransol-fonts.css</code> and uncomment the self-hosted section.</p>
+
+  <div class="progress" id="progress"><div class="progress-fill" id="progressFill"></div></div>
+  <button class="btn" id="dlBtn" onclick="startDownload()">Download All Fonts →</button>
+  <div class="log" id="log"></div>
+
+  <div class="instructions">
+    <strong>After downloading:</strong><br>
+    1. All .woff2 files will save to your Downloads folder<br>
+    2. Create subfolders: <code>syne/</code> <code>dm-sans/</code> <code>dm-mono/</code> <code>cormorant/</code> <code>outfit/</code> <code>instrument-serif/</code><br>
+    3. Move each file into the correct subfolder<br>
+    4. Open <code>bransol-fonts.css</code> and uncomment the self-hosted section<br>
+    5. Remove the <code>@import</code> lines at the top<br><br>
+    <strong>Folder structure:</strong><br>
+    <code>
+    BRANSOL-fonts/<br>
+    ├── bransol-fonts.css<br>
+    ├── syne/         Syne-400 500 600 700 800.woff2<br>
+    ├── dm-sans/      DMSans-300 400 400i 500.woff2<br>
+    ├── dm-mono/      DMMono-300 400.woff2<br>
+    ├── cormorant/    CormorantGaramond-300 300i 400 400i 600.woff2<br>
+    ├── outfit/       Outfit-200 300 400 500.woff2<br>
+    └── instrument-serif/  InstrumentSerif-Regular Italic.woff2
+    </code>
+  </div>
+</div>
+
+<script>
+const fonts = [
+  // [Google Fonts URL, filename]
+  // Syne
+  ['https://fonts.googleapis.com/css2?family=Syne:wght@400&display=swap', 'syne/Syne-400.woff2'],
+  ['https://fonts.googleapis.com/css2?family=Syne:wght@500&display=swap', 'syne/Syne-500.woff2'],
+  ['https://fonts.googleapis.com/css2?family=Syne:wght@600&display=swap', 'syne/Syne-600.woff2'],
+  ['https://fonts.googleapis.com/css2?family=Syne:wght@700&display=swap', 'syne/Syne-700.woff2'],
+  ['https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap', 'syne/Syne-800.woff2'],
+  // DM Sans
+  ['https://fonts.googleapis.com/css2?family=DM+Sans:wght@300&display=swap', 'dm-sans/DMSans-300.woff2'],
+  ['https://fonts.googleapis.com/css2?family=DM+Sans:wght@400&display=swap', 'dm-sans/DMSans-400.woff2'],
+  ['https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@1,400&display=swap', 'dm-sans/DMSans-400-italic.woff2'],
+  ['https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&display=swap', 'dm-sans/DMSans-500.woff2'],
+  // DM Mono
+  ['https://fonts.googleapis.com/css2?family=DM+Mono:wght@300&display=swap', 'dm-mono/DMMono-300.woff2'],
+  ['https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&display=swap', 'dm-mono/DMMono-400.woff2'],
+  // Cormorant Garamond
+  ['https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&display=swap', 'cormorant/CormorantGaramond-300.woff2'],
+  ['https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300&display=swap', 'cormorant/CormorantGaramond-300-italic.woff2'],
+  ['https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400&display=swap', 'cormorant/CormorantGaramond-400.woff2'],
+  ['https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400&display=swap', 'cormorant/CormorantGaramond-400-italic.woff2'],
+  ['https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&display=swap', 'cormorant/CormorantGaramond-600.woff2'],
+  // Outfit
+  ['https://fonts.googleapis.com/css2?family=Outfit:wght@200&display=swap', 'outfit/Outfit-200.woff2'],
+  ['https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap', 'outfit/Outfit-300.woff2'],
+  ['https://fonts.googleapis.com/css2?family=Outfit:wght@400&display=swap', 'outfit/Outfit-400.woff2'],
+  ['https://fonts.googleapis.com/css2?family=Outfit:wght@500&display=swap', 'outfit/Outfit-500.woff2'],
+  // Instrument Serif
+  ['https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0&display=swap', 'instrument-serif/InstrumentSerif-Regular.woff2'],
+  ['https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap', 'instrument-serif/InstrumentSerif-Italic.woff2'],
+];
+
+function log(msg, type='info') {
+  const el = document.getElementById('log');
+  el.classList.add('visible');
+  el.innerHTML += `<div class="${type}">${msg}</div>`;
+  el.scrollTop = el.scrollHeight;
+}
+
+function setProgress(n, total) {
+  const pct = Math.round((n / total) * 100);
+  document.getElementById('progress').style.display = 'block';
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+async function getWoff2Url(cssUrl) {
+  const res = await fetch(cssUrl, {
+    headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' }
+  });
+  const css = await res.text();
+  const match = css.match(/url\((https:\/\/fonts\.gstatic\.com[^)]+)\)/);
+  return match ? match[1] : null;
+}
+
+async function downloadFont(cssUrl, filename) {
+  const woffUrl = await getWoff2Url(cssUrl);
+  if (!woffUrl) throw new Error('Could not parse URL from CSS');
+  const res = await fetch(woffUrl);
+  const blob = await res.blob();
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename.split('/').pop();
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+  await new Promise(r => setTimeout(r, 400)); // small delay between downloads
+}
+
+async function startDownload() {
+  const btn = document.getElementById('dlBtn');
+  btn.disabled = true;
+  btn.textContent = 'Downloading…';
+  log('Starting download of ' + fonts.length + ' font files…', 'info');
+
+  let ok = 0, fail = 0;
+  for (let i = 0; i < fonts.length; i++) {
+    const [url, name] = fonts[i];
+    setProgress(i, fonts.length);
+    try {
+      await downloadFont(url, name);
+      log('✓ ' + name, 'ok');
+      ok++;
+    } catch(e) {
+      log('✗ ' + name + ' — ' + e.message, 'err');
+      fail++;
+    }
+  }
+
+  setProgress(fonts.length, fonts.length);
+  log('');
+  log('Complete — ' + ok + ' downloaded' + (fail > 0 ? ', ' + fail + ' failed' : ''), fail > 0 ? 'err' : 'ok');
+  btn.textContent = 'Done ✓';
+}
+</script>
+</body>
+</html>

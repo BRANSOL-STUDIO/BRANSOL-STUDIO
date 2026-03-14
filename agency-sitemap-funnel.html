@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategic Site Map & Client Funnel</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0d0b;
+    --parchment: #f5f0e8;
+    --gold: #b8963e;
+    --gold-light: #d4aa5a;
+    --warm-grey: #8a8278;
+    --pale: #faf7f2;
+    --border: rgba(184,150,62,0.25);
+    --deep: #1a1814;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--pale);
+    color: var(--ink);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ─────────────────────────────── */
+  header {
+    background: var(--deep);
+    color: var(--parchment);
+    padding: 64px 80px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,150,62,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 62px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--parchment);
+    max-width: 700px;
+  }
+  header h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  header p {
+    margin-top: 20px;
+    font-size: 15px;
+    color: rgba(245,240,232,0.6);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  /* ── LAYOUT ──────────────────────────────── */
+  main {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 80px 48px;
+  }
+
+  section {
+    margin-bottom: 100px;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 400;
+    color: var(--deep);
+    margin-bottom: 48px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── STRATEGIC POSITIONING ───────────────── */
+  .positioning-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 64px;
+  }
+  .pos-card {
+    background: var(--parchment);
+    padding: 36px 32px;
+    transition: background 0.3s;
+  }
+  .pos-card:hover { background: #fff; }
+  .pos-card-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--gold);
+    opacity: 0.4;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .pos-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--deep);
+  }
+  .pos-card p {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--warm-grey);
+  }
+
+  /* ── SITEMAP ─────────────────────────────── */
+  .sitemap-tree {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .site-page {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+    cursor: default;
+  }
+  .site-page:first-child { border-top: 1px solid var(--border); }
+  .site-page:hover { background: rgba(184,150,62,0.04); }
+
+  .page-label-col {
+    padding: 28px 32px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .page-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--deep);
+    margin-bottom: 4px;
+  }
+  .page-route {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+  }
+
+  .page-detail-col {
+    padding: 28px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .detail-block h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .detail-block p, .detail-block li {
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--warm-grey);
+    list-style: none;
+  }
+  .detail-block li::before {
+    content: '—  ';
+    color: var(--gold);
+    opacity: 0.5;
+  }
+
+  .funnel-badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+    margin-top: 8px;
+  }
+  .badge-aware  { background: rgba(184,150,62,0.12); color: #9a7a28; }
+  .badge-trust  { background: rgba(26,24,20,0.08);   color: var(--deep); }
+  .badge-convert{ background: var(--deep); color: var(--gold-light); }
+
+  /* ── FUNNEL DIAGRAM ──────────────────────── */
+  .funnel-wrap {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .funnel-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .funnel-stage {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 22px 28px;
+    border: 1px solid var(--border);
+    background: var(--parchment);
+    position: relative;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .funnel-stage:hover, .funnel-stage.active {
+    background: var(--deep);
+    border-color: var(--deep);
+  }
+  .funnel-stage:hover .fs-num,
+  .funnel-stage.active .fs-num { color: var(--gold); }
+  .funnel-stage:hover .fs-name,
+  .funnel-stage.active .fs-name { color: var(--parchment); }
+  .funnel-stage:hover .fs-sub,
+  .funnel-stage.active .fs-sub  { color: rgba(245,240,232,0.5); }
+
+  .fs-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--gold);
+    opacity: 0.5;
+    width: 36px;
+    flex-shrink: 0;
+    transition: color 0.25s;
+  }
+  .fs-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--deep);
+    transition: color 0.25s;
+  }
+  .fs-sub {
+    font-size: 11.5px;
+    color: var(--warm-grey);
+    margin-top: 2px;
+    transition: color 0.25s;
+  }
+
+  .funnel-details {
+    display: none;
+  }
+  .funnel-details.visible {
+    display: block;
+  }
+
+  .fd-stage-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--deep);
+    margin-bottom: 6px;
+  }
+  .fd-stage-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .fd-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .fd-block {
+    background: var(--parchment);
+    border: 1px solid var(--border);
+    padding: 24px;
+  }
+  .fd-block h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .fd-block ul {
+    list-style: none;
+  }
+  .fd-block ul li {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--warm-grey);
+    padding-left: 16px;
+    position: relative;
+  }
+  .fd-block ul li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+  .fd-metric {
+    background: var(--deep);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .fd-metric-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    color: var(--gold-light);
+    font-weight: 300;
+  }
+  .fd-metric-desc {
+    font-size: 12.5px;
+    color: rgba(245,240,232,0.65);
+    line-height: 1.6;
+  }
+
+  /* ── LANGUAGE GUIDE ──────────────────────── */
+  .language-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .lang-card {
+    background: var(--parchment);
+    padding: 32px;
+  }
+  .lang-card.avoid { background: #fdf7f5; }
+  .lang-card h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .lang-card.avoid h3 { color: #c0705a; }
+  .lang-card.use h3   { color: var(--gold); }
+  .lang-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 0;
+  }
+  .lang-item {
+    padding: 16px 20px;
+    border: 1px solid var(--border);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--warm-grey);
+  }
+  .lang-item.avoid-item { border-color: rgba(192,112,90,0.2); background: rgba(192,112,90,0.04); }
+  .lang-item.use-item   { border-color: rgba(184,150,62,0.2); background: rgba(184,150,62,0.04); }
+  .lang-item strong {
+    display: block;
+    font-size: 14.5px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .lang-item.avoid-item strong { color: #c0705a; }
+  .lang-item.use-item strong   { color: var(--deep); }
+
+  /* ── KPIs ─────────────────────────────────── */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .kpi {
+    background: var(--deep);
+    padding: 36px 28px;
+    color: var(--parchment);
+  }
+  .kpi-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--gold-light);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .kpi-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    margin-bottom: 8px;
+  }
+  .kpi p {
+    font-size: 12.5px;
+    color: rgba(245,240,232,0.6);
+    line-height: 1.6;
+  }
+
+  /* ── FOOTER ──────────────────────────────── */
+  footer {
+    background: var(--deep);
+    padding: 40px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(184,150,62,0.2);
+  }
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: rgba(245,240,232,0.3);
+  }
+  footer .gold-line {
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  @media (max-width: 900px) {
+    main { padding: 48px 24px; }
+    header { padding: 48px 24px 40px; }
+    .positioning-grid { grid-template-columns: 1fr; }
+    .site-page { grid-template-columns: 1fr; }
+    .page-detail-col { grid-template-columns: 1fr; gap: 16px; }
+    .funnel-wrap { grid-template-columns: 1fr; }
+    .kpi-row { grid-template-columns: 1fr 1fr; }
+    .language-grid { grid-template-columns: 1fr; }
+    .lang-pair { grid-template-columns: 1fr; }
+    .fd-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 20px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-label">Strategic Blueprint · Design Agency</div>
+  <h1>Site Map &amp; <em>Client Acquisition</em> Funnel</h1>
+  <p>A premium positioning strategy for entering the competitive tender landscape — without ever using the word "tender."</p>
+</header>
+
+<main>
+
+  <!-- SECTION 1: STRATEGIC POSITIONING -->
+  <section>
+    <div class="section-label">01 · Foundation</div>
+    <h2 class="section-title">Strategic Positioning Principles</h2>
+    <div class="positioning-grid">
+      <div class="pos-card">
+        <div class="pos-card-num">I</div>
+        <h3>Authority Over Availability</h3>
+        <p>Never position as "available for projects." Instead, signal that you selectively engage with clients whose ambitions match your standards. Scarcity and discernment build premium perception.</p>
+      </div>
+      <div class="pos-card">
+        <div class="pos-card-num">II</div>
+        <h3>Outcomes, Not Outputs</h3>
+        <p>Clients commissioning large-scale work buy results — revenue, reputation, market position. Every page, case study, and CTA should speak to transformation, not deliverables.</p>
+      </div>
+      <div class="pos-card">
+        <div class="pos-card-num">III</div>
+        <h3>Invisible Process, Visible Proof</h3>
+        <p>The mechanics of how you win work (competitive bids, submissions) stay behind the curtain. What's visible is your track record, methodology, and the calibre of organisations you've elevated.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: SITE MAP -->
+  <section>
+    <div class="section-label">02 · Architecture</div>
+    <h2 class="section-title">Site Map</h2>
+    <div class="sitemap-tree">
+
+      <div class="site-page">
+        <div class="page-label-col">
+          <div class="page-name">Home</div>
+          <div class="page-route">/</div>
+          <span class="funnel-badge badge-aware">Awareness</span>
+        </div>
+        <div class="page-detail-col">
+          <div class="detail-block">
+            <h4>Purpose</h4>
+            <p>Immediate authority signal. Communicate who you are for, not what you do. Filter out the wrong clients in the first 5 seconds.</p>
+          </div>
+          <div class="detail-block">
+            <h4>Key Sections</h4>
+            <ul>
+              <li>Hero: Bold positioning statement</li>
+              <li>Selected work (3 hero case studies)</li>
+              <li>Credibility strip (client logos/awards)</li>
+              <li>Manifesto teaser → About</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h4>Conversion Goal</h4>
+            <p>Drive to Work or About. Seed curiosity. No aggressive CTA — premium brands invite, not push.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="site-page">
+        <div class="page-label-col">
+          <div class="page-name">Work</div>
+          <div class="page-route">/work</div>
+          <span class="funnel-badge badge-trust">Trust</span>
+        </div>
+        <div class="page-detail-col">
+          <div class="detail-block">
+            <h4>Purpose</h4>
+            <p>The primary trust engine. Showcases the depth, scale, and impact of your engagements. This is where large organisations self-qualify.</p>
+          </div>
+          <div class="detail-block">
+            <h4>Key Sections</h4>
+            <ul>
+              <li>Filterable by sector / scale</li>
+              <li>Deep case studies with results</li>
+              <li>Before/after narrative structure</li>
+              <li>"Organisations like yours" framing</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h4>Conversion Goal</h4>
+            <p>Prospect reads one full case study and sees themselves in it. Natural next step: Enquire.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="site-page">
+        <div class="page-label-col">
+          <div class="page-name">Expertise</div>
+          <div class="page-route">/expertise</div>
+          <span class="funnel-badge badge-trust">Trust</span>
+        </div>
+        <div class="page-detail-col">
+          <div class="detail-block">
+            <h4>Purpose</h4>
+            <p>Replace a "Services" page with a demonstration of mastery. Positions you as a strategic partner, not a vendor. Critical for large-scale client confidence.</p>
+          </div>
+          <div class="detail-block">
+            <h4>Key Sections</h4>
+            <ul>
+              <li>Discipline areas (Brand, Digital, etc.)</li>
+              <li>Methodology / how you think</li>
+              <li>Strategic process overview</li>
+              <li>Sectors you work within</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h4>Conversion Goal</h4>
+            <p>Validate capability for prospect's brief. Removes procurement objections before the first conversation.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="site-page">
+        <div class="page-label-col">
+          <div class="page-name">Studio</div>
+          <div class="page-route">/studio</div>
+          <span class="funnel-badge badge-trust">Trust</span>
+        </div>
+        <div class="page-detail-col">
+          <div class="detail-block">
+            <h4>Purpose</h4>
+            <p>Humanise the agency. Large organisations and procurement teams need to trust the people, not just the portfolio. This page is about values, leadership, and longevity.</p>
+          </div>
+          <div class="detail-block">
+            <h4>Key Sections</h4>
+            <ul>
+              <li>Founding story / manifesto</li>
+              <li>Leadership team profiles</li>
+              <li>Studio values and approach</li>
+              <li>Accolades, press, recognition</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h4>Conversion Goal</h4>
+            <p>Build personal connection with decision-makers. Supports formal qualification processes.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="site-page">
+        <div class="page-label-col">
+          <div class="page-name">Perspectives</div>
+          <div class="page-route">/perspectives</div>
+          <span class="funnel-badge badge-aware">Awareness</span>
+        </div>
+        <div class="page-detail-col">
+          <div class="detail-block">
+            <h4>Purpose</h4>
+            <p>Thought leadership that attracts your ideal client via SEO and sharing. Demonstrates intellectual depth. Replaces a generic "Blog."</p>
+          </div>
+          <div class="detail-block">
+            <h4>Key Sections</h4>
+            <ul>
+              <li>Long-form essays on design &amp; business</li>
+              <li>Sector-specific insights</li>
+              <li>Project reflections / behind the brief</li>
+              <li>Annual trends or reports</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h4>Conversion Goal</h4>
+            <p>Drive return visits. Build email list. Establish authority in target sectors before a brief even exists.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="site-page">
+        <div class="page-label-col">
+          <div class="page-name">Begin</div>
+          <div class="page-route">/begin</div>
+          <span class="funnel-badge badge-convert">Convert</span>
+        </div>
+        <div class="page-detail-col">
+          <div class="detail-block">
+            <h4>Purpose</h4>
+            <p>The enquiry page — but framed as starting a relationship, not submitting a form. The language and design must feel as considered as the rest of the site.</p>
+          </div>
+          <div class="detail-block">
+            <h4>Key Sections</h4>
+            <ul>
+              <li>Short qualifying question set</li>
+              <li>Budget / scale indication</li>
+              <li>Timeline and sector fields</li>
+              <li>Reassurance copy about next steps</li>
+            </ul>
+          </div>
+          <div class="detail-block">
+            <h4>Conversion Goal</h4>
+            <p>Qualify inbound. Ensure only the right conversations are initiated. Response within 24h signals premium service.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 3: FUNNEL -->
+  <section>
+    <div class="section-label">03 · Strategy</div>
+    <h2 class="section-title">Client Acquisition Funnel</h2>
+    <div class="funnel-wrap">
+
+      <div class="funnel-visual">
+        <div class="funnel-stage active" onclick="showStage(0, this)">
+          <div class="fs-num">1</div>
+          <div>
+            <div class="fs-name">Discovery &amp; Attraction</div>
+            <div class="fs-sub">They find you — and are impressed</div>
+          </div>
+        </div>
+        <div class="funnel-stage" onclick="showStage(1, this)">
+          <div class="fs-num">2</div>
+          <div>
+            <div class="fs-name">Consideration &amp; Research</div>
+            <div class="fs-sub">They spend time evaluating your depth</div>
+          </div>
+        </div>
+        <div class="funnel-stage" onclick="showStage(2, this)">
+          <div class="fs-num">3</div>
+          <div>
+            <div class="fs-name">Validation &amp; Trust</div>
+            <div class="fs-sub">They decide you are the right fit</div>
+          </div>
+        </div>
+        <div class="funnel-stage" onclick="showStage(3, this)">
+          <div class="fs-num">4</div>
+          <div>
+            <div class="fs-name">Engagement &amp; Qualification</div>
+            <div class="fs-sub">They reach out and you respond</div>
+          </div>
+        </div>
+        <div class="funnel-stage" onclick="showStage(4, this)">
+          <div class="fs-num">5</div>
+          <div>
+            <div class="fs-name">Proposal &amp; Commission</div>
+            <div class="fs-sub">You present; they appoint</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detail panels -->
+      <div>
+        <div class="funnel-details visible" id="fd-0">
+          <div class="fd-stage-title">Discovery &amp; Attraction</div>
+          <div class="fd-stage-label">Stage 01 · Top of Funnel</div>
+          <div class="fd-grid">
+            <div class="fd-block">
+              <h4>Channels</h4>
+              <ul>
+                <li>Organic search (sector-specific keywords)</li>
+                <li>Design press &amp; award listings</li>
+                <li>LinkedIn thought leadership</li>
+                <li>Referrals from existing clients</li>
+                <li>Speaking engagements</li>
+              </ul>
+            </div>
+            <div class="fd-block">
+              <h4>Site Pages Activated</h4>
+              <ul>
+                <li>Home — immediate authority signal</li>
+                <li>Perspectives — SEO &amp; shareability</li>
+                <li>Award / press listings link back</li>
+              </ul>
+            </div>
+          </div>
+          <div class="fd-metric">
+            <div class="fd-metric-num">7s</div>
+            <div class="fd-metric-desc">Average time to form a first impression. Your home page must communicate premium positioning and relevance within one scroll.</div>
+          </div>
+        </div>
+
+        <div class="funnel-details" id="fd-1">
+          <div class="fd-stage-title">Consideration &amp; Research</div>
+          <div class="fd-stage-label">Stage 02 · Mid Funnel</div>
+          <div class="fd-grid">
+            <div class="fd-block">
+              <h4>Prospect Behaviour</h4>
+              <ul>
+                <li>Deep dive into case studies</li>
+                <li>Reading your Perspectives content</li>
+                <li>Looking up team on LinkedIn</li>
+                <li>Checking client roster credibility</li>
+                <li>Sharing your site internally</li>
+              </ul>
+            </div>
+            <div class="fd-block">
+              <h4>Site Pages Activated</h4>
+              <ul>
+                <li>Work — case study depth &amp; proof</li>
+                <li>Expertise — methodology confidence</li>
+                <li>Studio — team credibility</li>
+              </ul>
+            </div>
+          </div>
+          <div class="fd-metric">
+            <div class="fd-metric-num">3–5</div>
+            <div class="fd-metric-desc">Pages a serious prospect will visit before making contact. Every page must sustain and deepen trust without friction.</div>
+          </div>
+        </div>
+
+        <div class="funnel-details" id="fd-2">
+          <div class="fd-stage-title">Validation &amp; Trust</div>
+          <div class="fd-stage-label">Stage 03 · Intent Signal</div>
+          <div class="fd-grid">
+            <div class="fd-block">
+              <h4>What Validates You</h4>
+              <ul>
+                <li>Recognisable client names &amp; sectors</li>
+                <li>Quantified outcomes in case studies</li>
+                <li>Testimonials from senior stakeholders</li>
+                <li>Awards &amp; industry recognition</li>
+                <li>Years of operation &amp; team depth</li>
+              </ul>
+            </div>
+            <div class="fd-block">
+              <h4>Procurement-Specific Trust Signals</h4>
+              <ul>
+                <li>Company registration &amp; credentials</li>
+                <li>Insurance &amp; compliance indicators</li>
+                <li>Transparent team size &amp; capacity</li>
+                <li>Clear engagement process</li>
+              </ul>
+            </div>
+          </div>
+          <div class="fd-metric">
+            <div class="fd-metric-num">68%</div>
+            <div class="fd-metric-desc">Of B2B buyers complete the majority of their research before making first contact. Your site must close objections before the conversation begins.</div>
+          </div>
+        </div>
+
+        <div class="funnel-details" id="fd-3">
+          <div class="fd-stage-title">Engagement &amp; Qualification</div>
+          <div class="fd-stage-label">Stage 04 · Conversion</div>
+          <div class="fd-grid">
+            <div class="fd-block">
+              <h4>Enquiry Experience</h4>
+              <ul>
+                <li>Begin page: warm, considered copy</li>
+                <li>Brief qualifier questions (4–6 max)</li>
+                <li>Budget range selector (no awkwardness)</li>
+                <li>Immediate auto-reply with next steps</li>
+                <li>Personal response within 24 hours</li>
+              </ul>
+            </div>
+            <div class="fd-block">
+              <h4>Qualification Criteria</h4>
+              <ul>
+                <li>Project scale &amp; ambition fit</li>
+                <li>Timeline is realistic</li>
+                <li>Decision-maker is in contact</li>
+                <li>Budget signals genuine investment</li>
+              </ul>
+            </div>
+          </div>
+          <div class="fd-metric">
+            <div class="fd-metric-num">24h</div>
+            <div class="fd-metric-desc">Maximum response time to an enquiry. Premium agencies respond fast and personally — this itself communicates the quality of service to come.</div>
+          </div>
+        </div>
+
+        <div class="funnel-details" id="fd-4">
+          <div class="fd-stage-title">Proposal &amp; Commission</div>
+          <div class="fd-stage-label">Stage 05 · Close</div>
+          <div class="fd-grid">
+            <div class="fd-block">
+              <h4>The Credentials Meeting</h4>
+              <ul>
+                <li>Bespoke presentation — never generic</li>
+                <li>Deep knowledge of their sector</li>
+                <li>Reference relevant case studies only</li>
+                <li>Lead with questions, not features</li>
+                <li>Confirm you understand their ambition</li>
+              </ul>
+            </div>
+            <div class="fd-block">
+              <h4>Proposal Best Practice</h4>
+              <ul>
+                <li>Strategic thinking before creative</li>
+                <li>Outcome-focused scope language</li>
+                <li>Investment framing (not cost)</li>
+                <li>Clear phasing and milestones</li>
+                <li>Single point of contact named</li>
+              </ul>
+            </div>
+          </div>
+          <div class="fd-metric">
+            <div class="fd-metric-num">1:3</div>
+            <div class="fd-metric-desc">Target win ratio for competitive engagements when your positioning is tight. If you're losing more than this, the issue is usually misaligned qualification, not creative quality.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 4: LANGUAGE GUIDE -->
+  <section>
+    <div class="section-label">04 · Voice</div>
+    <h2 class="section-title">Brand Language Guide</h2>
+    <div class="language-grid">
+      <div class="lang-card avoid">
+        <h3>❌ Avoid — Commodity Language</h3>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:4px;">
+          <div class="lang-item avoid-item"><strong>Tendering / Bids</strong>We participate in competitive procurement processes.</div>
+          <div class="lang-item avoid-item"><strong>Affordable / Competitive rates</strong>Signals price competition, not premium value.</div>
+          <div class="lang-item avoid-item"><strong>Full service agency</strong>Vague, forgettable, undifferentiated.</div>
+          <div class="lang-item avoid-item"><strong>We'd love to work with you</strong>Desperate. Premium brands choose relationships.</div>
+        </div>
+      </div>
+      <div class="lang-card use">
+        <h3>✓ Use — Authority Language</h3>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:4px;">
+          <div class="lang-item use-item"><strong>Commissioned Work / Selected Engagements</strong>Positions each project as curated and intentional.</div>
+          <div class="lang-item use-item"><strong>Investment / Partnership</strong>Reframes cost as mutual commitment to outcomes.</div>
+          <div class="lang-item use-item"><strong>Strategic design studio</strong>Specific, elevated, memorable.</div>
+          <div class="lang-item use-item"><strong>We work with organisations who…</strong>Selective framing that attracts the right clients.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: KPIs -->
+  <section>
+    <div class="section-label">05 · Measurement</div>
+    <h2 class="section-title">Success Metrics to Track</h2>
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="kpi-num">4+</div>
+        <div class="kpi-label">Pages per session</div>
+        <p>Signals a serious prospect doing due diligence, not casual browsing.</p>
+      </div>
+      <div class="kpi">
+        <div class="kpi-num">3m+</div>
+        <div class="kpi-label">Avg. session duration</div>
+        <p>Deep engagement with case studies and Expertise pages indicates buyer intent.</p>
+      </div>
+      <div class="kpi">
+        <div class="kpi-num">60%</div>
+        <div class="kpi-label">Enquiry qualification rate</div>
+        <p>The Begin page qualifier should filter out misaligned briefs before your time is spent.</p>
+      </div>
+      <div class="kpi">
+        <div class="kpi-num">1:3</div>
+        <div class="kpi-label">Competitive win rate</div>
+        <p>Target ratio for formal competitive processes when brand authority is strong.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Strategic Blueprint · Confidential · Design Agency</p>
+  <div class="gold-line"></div>
+  <p>For internal strategic use only</p>
+</footer>
+
+<script>
+  function showStage(index, el) {
+    // Hide all details
+    document.querySelectorAll('.funnel-details').forEach(d => d.classList.remove('visible'));
+    // Deactivate all stages
+    document.querySelectorAll('.funnel-stage').forEach(s => s.classList.remove('active'));
+    // Show selected
+    document.getElementById('fd-' + index).classList.add('visible');
+    el.classList.add('active');
+  }
+
+  // Subtle entrance animation
+  const cards = document.querySelectorAll('.pos-card, .site-page, .kpi');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }, i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  cards.forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(16px)';
+    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(card);
+  });
+</script>
+</body>
+</html>

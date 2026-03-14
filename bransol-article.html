@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CHY7B35XNP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CHY7B35XNP');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perspectives — BRANSOL</title>
+<meta name="description" content="">
+<link rel="canonical" href="">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="BRANSOL">
+
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --void:   #060608;
+  --deep:   #0d0d12;
+  --surface:#111118;
+  --lift:   #18181f;
+  --panel:  #1e1e27;
+  --ghost:  #2a2a35;
+  --border: rgba(255,255,255,0.07);
+  --text:   #f0eff5;
+  --sub:    rgba(240,239,245,0.6);
+  --ter:    rgba(240,239,245,0.28);
+  --dim:    rgba(240,239,245,0.1);
+  --iris:  #7c83e5;
+  --aqua:  #06d6a0;
+  --violet:#c77dff;
+  --rose:  #ff6b9d;
+  --gold:  #ffd166;
+  --sky:   #45b7d1;
+  --teal:  #4ecdc4;
+  --ember: #ff8c42;
+  --chrome:linear-gradient(135deg,#ff6b9d,#ff8c42,#ffd166,#06d6a0,#4ecdc4,#45b7d1,#7c83e5,#c77dff);
+  --nav-h:68px;
+  --pad-x:72px;
+  --prose-w:720px;
+}
+
+/* ── LIGHT THEME ── */
+html[data-theme="light"]{
+  --void:#f5f4f0; --deep:#eeede8; --surface:#e8e7e1; --lift:#dddcd5;
+  --panel:#d4d3cb; --ghost:#c4c3ba; --border:rgba(0,0,0,0.09);
+  --text:#0e0e12; --sub:rgba(14,14,18,0.62); --ter:rgba(14,14,18,0.38); --dim:rgba(14,14,18,0.1);
+}
+html[data-theme="light"] body{background:var(--void);color:var(--text);}
+html[data-theme="light"] nav{background:rgba(245,244,240,.85);border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] nav.scrolled{background:rgba(245,244,240,.97);}
+html[data-theme="light"] .nav-links a{color:var(--sub);}
+html[data-theme="light"] .nav-links a:hover{color:var(--text);}
+html[data-theme="light"] .bg-grid{background-image:linear-gradient(rgba(0,0,0,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.04) 1px,transparent 1px);}
+html[data-theme="light"] .bg-orb-1{background:radial-gradient(circle,rgba(124,131,229,.1) 0%,transparent 70%);}
+html[data-theme="light"] .bg-orb-2{background:radial-gradient(circle,rgba(6,214,160,.08) 0%,transparent 70%);}
+html[data-theme="light"] .article-hero{border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] .article-hero-img{background:linear-gradient(135deg,#dde0f0,#d5d8ee,#d8ddf0)!important;}
+html[data-theme="light"] .prose-body{color:var(--text);}
+html[data-theme="light"] .prose-body p{color:rgba(14,14,18,.75);}
+html[data-theme="light"] .prose-pull{border-color:var(--iris);background:rgba(124,131,229,.06);}
+html[data-theme="light"] .prose-divider{background:rgba(0,0,0,.12);}
+html[data-theme="light"] .related-card{background:rgba(255,255,255,.65);border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] .related-card:hover{background:rgba(255,255,255,.9);border-color:rgba(0,0,0,.15);}
+html[data-theme="light"] .article-sidebar-sticky > *{background:rgba(255,255,255,.55);border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] .progress-bar-track{background:rgba(0,0,0,.08);}
+html[data-theme="light"] footer{background:var(--deep);border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] .tt-track{background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.12);}
+html[data-theme="light"] .theme-toggle:hover{border-color:rgba(0,0,0,.2);color:var(--text);}
+
+/* ── THEME TRANSITION — targeted only ── */
+body{transition:background-color .4s ease,color .35s ease;}
+nav{transition:background .4s ease,border-color .35s ease,height .3s ease!important;}
+.related-card,.sidebar-panel,.article-hero{transition:background-color .4s ease,border-color .35s ease;}
+.nav-links a{transition:color .2s;}
+.theme-toggle{transition:border-color .25s ease,color .25s ease;}
+.tt-track{transition:background .3s ease,border-color .3s ease;}
+.tt-thumb{transition:transform .3s cubic-bezier(.16,1,.3,1);}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .75s ease,transform .75s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+html{scroll-behavior:smooth;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;height:var(--nav-h);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 var(--pad-x) 0 calc(var(--pad-x) + 3px);border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(6,6,8,.65);backdrop-filter:blur(20px);}
+nav.scrolled{background:rgba(6,6,8,.92);backdrop-filter:blur(28px);border-color:var(--border);height:58px;}
+.nav-logo{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;letter-spacing:-.02em;line-height:1;text-decoration:none;cursor:none;justify-self:start;}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none;justify-self:center;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--ter);text-decoration:none;transition:color .2s;cursor:none;white-space:nowrap;}
+.nav-links a:hover,.nav-links a.active{color:var(--sub);}
+.nav-end{display:flex;align-items:center;gap:12px;justify-self:end;}
+.nav-cta{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:#060608!important;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;padding:10px 24px;text-decoration:none;cursor:none;transition:opacity .2s!important;white-space:nowrap;}
+.nav-cta:hover{opacity:.85;}
+.cur{position:fixed;width:7px;height:7px;border-radius:50%;background:var(--chrome);background-size:300% 300%;animation:cSpin 3s linear infinite;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .18s,height .18s;}
+.cur-ring{position:fixed;width:30px;height:30px;border-radius:50%;border:1px solid rgba(124,131,229,.32);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .15s,height .15s,border-color .2s;}
+
+/* ── KEYFRAMES ── */
+@keyframes cSpin{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes orbPulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes scanDown{0%{opacity:0;top:0}5%{opacity:1}95%{opacity:1}100%{opacity:0;top:100%}}
+@keyframes progressGrow{from{width:0}to{width:var(--progress)}}
+
+/* ── UTILITIES ── */
+.chrome-text{background:var(--chrome);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:cSpin 5s ease infinite;}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .75s ease,transform .75s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal-d1{transition-delay:.1s;}.reveal-d2{transition-delay:.2s;}.reveal-d3{transition-delay:.3s;}
+
+/* ── BG ── */
+.bg-fixed{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.013) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.013) 1px,transparent 1px);background-size:80px 80px;}
+.bg-orb{position:absolute;border-radius:50%;filter:blur(110px);animation:orbPulse 12s ease-in-out infinite;}
+.bg-orb-1{width:700px;height:700px;top:-200px;right:-100px;background:radial-gradient(circle,rgba(124,131,229,.12) 0%,transparent 70%);}
+.bg-orb-2{width:600px;height:600px;bottom:-150px;left:-100px;background:radial-gradient(circle,rgba(6,214,160,.09) 0%,transparent 70%);animation-delay:6s;}
+.bg-scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(124,131,229,.2),rgba(6,214,160,.2),transparent);animation:scanDown 16s ease-in-out 2s infinite;}
+.chrome-edge{position:fixed;left:0;top:0;bottom:0;width:3px;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;z-index:100;}
+
+/* ── READING PROGRESS BAR ── */
+.progress-bar-track{position:fixed;top:var(--nav-h);left:0;right:0;height:2px;background:rgba(255,255,255,.06);z-index:60;}
+.progress-bar-fill{height:100%;width:0%;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;transition:width .1s linear;}
+
+/* Theme toggle */
+.theme-toggle{display:flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid var(--border);background:transparent;cursor:none;color:var(--ter);font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.22em;text-transform:uppercase;transition:border-color .25s,color .25s;flex-shrink:0;}
+.theme-toggle:hover{border-color:rgba(255,255,255,.15);color:var(--sub);}
+.tt-track{width:28px;height:15px;border-radius:999px;border:1px solid var(--border);position:relative;transition:background .3s,border-color .3s;flex-shrink:0;}
+.tt-thumb{position:absolute;top:2px;left:2px;width:9px;height:9px;border-radius:50%;background:var(--chrome);background-size:300% 300%;animation:cSpin 3s linear infinite;transition:transform .3s cubic-bezier(.16,1,.3,1);}
+html[data-theme="light"] .tt-thumb{transform:translateX(13px);}
+
+/* ── BACK BREADCRUMB ── */
+.article-breadcrumb{
+  position:relative;z-index:1;
+  padding:calc(var(--nav-h) + 40px) var(--pad-x) 0 calc(var(--pad-x) + 3px);
+  animation:fadeIn .6s ease .2s both;
+}
+.breadcrumb-inner{display:flex;align-items:center;gap:12px;}
+.breadcrumb-back{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--ter);text-decoration:none;cursor:none;transition:color .2s;}
+.breadcrumb-back:hover{color:var(--sub);}
+.breadcrumb-back svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.5;transition:transform .2s;}
+.breadcrumb-back:hover svg{transform:translateX(-3px);}
+.breadcrumb-sep{color:var(--ter);font-family:'DM Mono',monospace;font-size:8px;}
+.breadcrumb-current{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--ter);}
+
+/* ── ARTICLE HERO ── */
+.article-hero{
+  position:relative;z-index:1;
+  padding:40px var(--pad-x) 0 calc(var(--pad-x) + 3px);
+  border-bottom:1px solid var(--border);
+  padding-bottom:0;
+}
+.article-hero-inner{max-width:1200px;}
+
+.article-category-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.28em;text-transform:uppercase;
+  margin-bottom:28px;animation:fadeIn .6s ease .3s both;
+}
+.article-category-tag::before{content:'';width:20px;height:1px;background:currentColor;}
+
+.article-hero-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(32px,4.5vw,64px);
+  font-weight:800;
+  letter-spacing:-.04em;
+  line-height:1.0;
+  max-width:900px;
+  animation:fadeUp .9s cubic-bezier(.16,1,.3,1) .35s both;
+}
+
+.article-hero-meta{
+  display:flex;align-items:center;gap:32px;
+  margin-top:32px;padding:24px 0;
+  border-top:1px solid var(--border);
+  animation:fadeIn .8s ease .55s both;
+  flex-wrap:wrap;
+}
+.article-meta-author{display:flex;flex-direction:column;gap:3px;}
+.article-meta-author-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--sub);}
+.article-meta-author-role{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--ter);}
+.article-meta-divider{width:1px;height:32px;background:var(--border);}
+.article-meta-stat{display:flex;flex-direction:column;gap:3px;}
+.article-meta-stat-val{font-family:'DM Mono',monospace;font-size:11px;color:var(--sub);}
+.article-meta-stat-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--ter);}
+.article-meta-share{margin-left:auto;display:flex;align-items:center;gap:8px;}
+.share-btn{display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--ter);background:transparent;border:1px solid var(--border);padding:8px 14px;cursor:none;transition:color .2s,border-color .2s;}
+.share-btn:hover{color:var(--sub);border-color:rgba(255,255,255,.14);}
+.share-btn svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:1.5;}
+
+/* ── HERO IMAGE BLOCK ── */
+.article-hero-img-wrap{
+  margin-top:48px;
+  position:relative;
+  height:420px;
+  overflow:hidden;
+  animation:fadeIn .8s ease .5s both;
+}
+.article-hero-img{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.article-hero-img::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;
+}
+
+/* Abstract SVG illustration per article */
+.hero-illustration{width:100%;height:100%;position:absolute;inset:0;}
+
+/* ── ARTICLE BODY LAYOUT ── */
+.article-layout{
+  display:grid;
+  grid-template-columns:1fr 280px;
+  gap:80px;
+  padding:80px var(--pad-x) 120px calc(var(--pad-x) + 3px);
+  position:relative;z-index:1;
+  align-items:start;
+  max-width:1400px;
+}
+
+/* ── PROSE ── */
+.prose-body{
+  max-width:var(--prose-w);
+  font-size:17px;
+  line-height:1.85;
+  color:var(--sub);
+}
+.prose-body p{margin-bottom:28px;color:rgba(240,239,245,.72);}
+html[data-theme="light"] .prose-body p{color:rgba(14,14,18,.68);}
+.prose-body h2{
+  font-family:'Syne',sans-serif;font-size:28px;font-weight:800;
+  letter-spacing:-.03em;line-height:1.1;
+  color:var(--text);margin:56px 0 20px;
+}
+.prose-body h3{
+  font-family:'Syne',sans-serif;font-size:20px;font-weight:700;
+  letter-spacing:-.02em;line-height:1.2;
+  color:var(--text);margin:40px 0 16px;
+}
+.prose-pull{
+  border-left:2px solid var(--iris);
+  padding:24px 32px;
+  margin:48px 0;
+  background:rgba(124,131,229,.04);
+  font-family:'Syne',sans-serif;font-size:22px;font-weight:700;
+  letter-spacing:-.025em;line-height:1.35;
+  color:var(--text);
+  position:relative;
+}
+.prose-pull::before{
+  content:'';position:absolute;top:0;left:0;bottom:0;width:2px;
+  background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;
+}
+.prose-divider{
+  width:60px;height:1px;background:var(--border);margin:48px 0;
+}
+.prose-tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:48px;padding-top:40px;border-top:1px solid var(--border);}
+.prose-tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;padding:6px 14px;border:1px solid var(--border);color:var(--ter);transition:border-color .2s,color .2s;}
+.prose-tag:hover{border-color:rgba(255,255,255,.14);color:var(--sub);}
+
+/* ── SIDEBAR ── */
+.article-sidebar-sticky{
+  position:sticky;top:calc(var(--nav-h) + 32px);
+  display:flex;flex-direction:column;gap:2px;
+}
+.sidebar-panel{
+  padding:28px 24px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.02);
+}
+.sidebar-panel-label{
+  font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--ter);margin-bottom:20px;display:block;
+}
+
+/* Reading progress indicator in sidebar */
+.sidebar-progress{margin-bottom:4px;}
+.sidebar-progress-bar{height:2px;background:var(--border);position:relative;overflow:hidden;}
+.sidebar-progress-fill{position:absolute;top:0;left:0;height:100%;width:0%;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;transition:width .15s linear;}
+.sidebar-progress-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--ter);margin-top:10px;display:block;}
+
+/* TOC */
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:1px;}
+.toc-item a{
+  display:block;
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.14em;
+  color:var(--ter);text-decoration:none;padding:8px 0;
+  border-bottom:1px solid transparent;
+  transition:color .2s,border-color .2s;cursor:none;
+  line-height:1.5;
+}
+.toc-item a:hover,.toc-item.active a{color:var(--sub);border-color:var(--border);}
+.toc-item.active a{color:var(--text);}
+
+/* Related articles in sidebar */
+.sidebar-related-item{
+  display:flex;flex-direction:column;gap:6px;
+  padding:16px 0;border-bottom:1px solid var(--border);
+  text-decoration:none;cursor:none;
+  transition:opacity .2s;
+}
+.sidebar-related-item:last-child{border-bottom:none;padding-bottom:0;}
+.sidebar-related-item:hover{opacity:.75;}
+.sidebar-related-cat{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.2em;text-transform:uppercase;color:var(--ter);}
+.sidebar-related-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--sub);line-height:1.3;}
+
+/* ── RELATED ARTICLES SECTION ── */
+.related-section{
+  position:relative;z-index:1;
+  padding:0 var(--pad-x) 120px calc(var(--pad-x) + 3px);
+  border-top:1px solid var(--border);
+  padding-top:80px;
+}
+.related-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:48px;}
+.related-title{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;letter-spacing:-.035em;}
+.related-all{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--ter);text-decoration:none;cursor:none;transition:color .2s;display:inline-flex;align-items:center;gap:8px;}
+.related-all:hover{color:var(--sub);}
+.related-all svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:1.5;}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.related-card{
+  display:flex;flex-direction:column;
+  background:var(--surface);border:1px solid var(--border);
+  text-decoration:none;cursor:none;
+  transition:border-color .3s,background .3s;
+  position:relative;overflow:hidden;
+}
+.related-card:hover{border-color:rgba(255,255,255,.14);background:var(--lift);}
+.related-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;opacity:0;transition:opacity .3s;}
+.related-card:hover::before{opacity:1;}
+.rc-img{height:160px;position:relative;overflow:hidden;}
+.rc-body{padding:28px 24px 24px;flex:1;display:flex;flex-direction:column;justify-content:space-between;}
+.rc-cat{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.24em;text-transform:uppercase;color:var(--ter);margin-bottom:10px;display:block;}
+.rc-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;letter-spacing:-.02em;line-height:1.25;color:var(--sub);margin-bottom:16px;transition:color .2s;}
+.related-card:hover .rc-title{color:var(--text);}
+.rc-footer{display:flex;align-items:center;justify-content:space-between;}
+.rc-date{font-family:'DM Mono',monospace;font-size:8px;color:var(--ter);}
+.rc-arrow{width:28px;height:28px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s;}
+.rc-arrow svg{width:10px;height:10px;stroke:var(--ter);fill:none;stroke-width:1.5;}
+.related-card:hover .rc-arrow{border-color:rgba(255,255,255,.14);background:var(--lift);}
+.related-card:hover .rc-arrow svg{stroke:var(--sub);}
+
+/* ── FOOTER ── */
+footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid var(--border);padding:72px var(--pad-x) 40px calc(var(--pad-x) + 3px);}
+.footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:60px;margin-bottom:60px;}
+.footer-logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;text-decoration:none;cursor:none;flex-shrink:0;}
+.footer-nav-wrap{display:flex;gap:60px;flex-wrap:wrap;}
+.footer-col{display:flex;flex-direction:column;gap:12px;}
+.footer-col-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.32em;text-transform:uppercase;color:var(--ter);margin-bottom:4px;}
+.footer-col a{font-size:14px;color:var(--ter);text-decoration:none;cursor:none;transition:color .2s;}
+.footer-col a:hover{color:var(--sub);}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:32px;border-top:1px solid var(--border);}
+.footer-copy{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--ter);}
+.footer-social{display:flex;gap:24px;}
+.footer-social a{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ter);text-decoration:none;cursor:none;transition:color .2s;}
+.footer-social a:hover{color:var(--sub);}
+
+/* ── 404 / LOADING ── */
+.not-found{
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:80vh;
+  text-align:center;
+  padding:var(--pad-x);
+}
+.not-found-code{font-family:'Syne',sans-serif;font-size:120px;font-weight:800;letter-spacing:-.06em;line-height:1;margin-bottom:16px;opacity:.08;}
+.not-found-title{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;letter-spacing:-.03em;margin-bottom:16px;}
+.not-found-sub{font-size:16px;color:var(--sub);margin-bottom:40px;}
+.not-found-link{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--ter);text-decoration:none;border:1px solid var(--border);padding:12px 24px;cursor:none;transition:color .2s,border-color .2s;}
+.not-found-link:hover{color:var(--sub);border-color:rgba(255,255,255,.14);}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<div class="bg-fixed">
+  <div class="bg-grid"></div>
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-scan"></div>
+</div>
+<div class="chrome-edge"></div>
+
+<!-- READING PROGRESS -->
+<div class="progress-bar-track">
+  <div class="progress-bar-fill" id="progressFill"></div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo"><span class="chrome-text">BRAN</span><span style="color:var(--text)">SOL</span></a>
+  <ul class="nav-links">
+    <li><a href="/work">Work</a></li>
+    <li><a href="/expertise">Expertise</a></li>
+    <li><a href="/platform">Platform</a></li>
+    <li><a href="/studio">Studio</a></li>
+    <li><a href="/perspectives" class="active">Perspectives</a></li>
+  </ul>
+  <div class="nav-end">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <div class="tt-track"><div class="tt-thumb"></div></div>
+      <span id="themeLabel">Light</span>
+    </button>
+    <a href="/begin" class="nav-cta">Begin</a>
+  </div>
+</nav>
+
+<!-- DYNAMIC CONTENT MOUNT -->
+<div id="articleMount"></div>
+
+<script>
+// ═══════════════════════════════════════════════
+//  ARTICLE DATA
+// ═══════════════════════════════════════════════
+const ARTICLES = [
+  {
+    slug: 'why-government-design-procurement-is-broken',
+    title: 'Why Government Design Procurement Is Still Broken — And What It Would Take to Fix It',
+    category: 'Procurement',
+    categoryColor: 'var(--aqua)',
+    date: '18 February 2026',
+    dateShort: '18 Feb 2026',
+    readTime: '8 min read',
+    author: 'BRANSOL Editorial',
+    authorRole: 'Studio',
+    excerpt: 'South Africa spends billions annually on government communications. A fraction of that produces work that is genuinely fit for purpose. The problem is not creative talent. It is the structure through which that talent is commissioned, evaluated, and paid.',
+    tags: ['Government','Procurement','Design Policy','Public Sector','South Africa'],
+    illustrationColor: ['#0a0a18','#0d0f2a','#06d6a0'],
+    toc: [
+      {id:'s1', label:'The structural problem'},
+      {id:'s2', label:'How evaluation criteria fail'},
+      {id:'s3', label:'The lowest-price fallacy'},
+      {id:'s4', label:'What good commissioning looks like'},
+      {id:'s5', label:'A path forward'},
+    ],
+    content: `
+      <p>South Africa's government communication apparatus is one of the largest single buyers of design services on the continent. National departments, provincial governments, SOEs, municipalities — collectively they commission billions of rands worth of design work each year. Branding, reports, campaigns, environmental signage, digital platforms, publications. The scale is significant. The quality, on average, is not.</p>
+      <p>This is not a talent problem. South Africa has world-class design talent. The problem is structural — baked into the way government procurement frameworks were designed, and perpetuated by a combination of institutional inertia, misaligned incentives, and a fundamental misunderstanding of what design actually is.</p>
+
+      <h2 id="s1">The structural problem</h2>
+      <p>Government procurement of design services in South Africa operates through frameworks designed primarily for the procurement of commodities and construction services. The PFMA, PPPFA, and SCM regulations were built to prevent corruption and ensure value for money in contexts where outputs are measurable and comparable. A bag of cement from supplier A is broadly equivalent to a bag of cement from supplier B. Design is not cement.</p>
+      <p>When you apply commodity procurement logic to creative services, you get commodity creative services. Agencies are selected primarily on price, with creative and strategic quality weighted so low in evaluation criteria that it is functionally irrelevant. A studio that bids at 40% below market rate will routinely outscore a studio with demonstrably superior work — because the evaluation matrix awards 90 points for price compliance and 10 points for everything else.</p>
+
+      <div class="prose-pull">
+        "The evaluation criteria for government design tenders rarely assess the thing being procured. They assess the ability to comply with a checklist."
+      </div>
+
+      <h2 id="s2">How evaluation criteria fail</h2>
+      <p>Walk through any government design tender brief and you will find a familiar set of requirements: BBBEE certificate, tax clearance, company registration, proof of insurance, a portfolio, and a price. The portfolio is rarely evaluated by anyone with design literacy. It exists to satisfy the requirement for a portfolio, not to genuinely inform selection.</p>
+      <p>When evaluation panels do assess creative quality, they tend to assess it against two criteria: does it look professional, and does it follow the brief. Neither of these distinguishes good design from mediocre design. A studio that produces technically compliant work that is strategically useless and aesthetically forgettable will score identically to one that produces work of genuine consequence.</p>
+      <p>The result is a market where the incentive structure actively selects against excellence. Studios that invest in senior talent, research-led strategy, and considered craft cannot compete on price with studios that treat design as a production output. And since price is the dominant evaluation criterion, they do not win.</p>
+
+      <div class="prose-divider"></div>
+
+      <h2 id="s3">The lowest-price fallacy</h2>
+      <p>There is a persistent belief in government procurement circles that selecting the lowest-price provider represents good stewardship of public funds. It does not. It represents a displacement of risk — the risk of poor quality is moved from the procurement decision to the implementation phase, where it manifests as rework, extensions, disputes, and ultimately, failed communications objectives.</p>
+      <p>We have reviewed the true cost of low-price government design commissions on multiple occasions. The pattern is consistent: the lowest bidder delivers work that requires revision cycles far exceeding the original scope, fails to achieve the communications objective it was designed to serve, and is either abandoned or replaced within 18 months. The accounting for these failures is rarely attributed back to the original procurement decision. It is absorbed into subsequent budgets as new commissions.</p>
+      <p>This is the lowest-price fallacy: the belief that the cheapest option is the most economical. In creative services, it is almost never true. The most economical outcome is work that achieves its purpose the first time, sustains its relevance over a reasonable lifespan, and does not require expensive remediation. That work costs more upfront. It costs considerably less over a cycle.</p>
+
+      <h2 id="s4">What good commissioning looks like</h2>
+      <p>The organisations that consistently commission excellent design — whether in government or the private sector — share a set of behaviours that distinguish them from the organisations that do not.</p>
+      <p>First, they ensure that someone with genuine design literacy is involved in the evaluation process. Not a designer necessarily, but a person who can assess creative and strategic quality with sophistication — who understands what a brand system is actually for, what constitutes a well-reasoned visual identity, what separates a communications strategy from a production schedule.</p>
+      <p>Second, they weight quality meaningfully. In the best procurement frameworks we have encountered, quality criteria carry equal or greater weight than price. Price is a filter — work below a certain quality threshold is excluded regardless of price — but above that threshold, quality determines selection.</p>
+      <p>Third, they brief well. The quality of commissioned design is directly related to the quality of the brief that initiates it. A vague brief produces vague design. A brief that articulates the strategic problem with precision, defines the audience with specificity, and establishes success criteria in terms of outcomes rather than outputs — that brief produces work worth commissioning.</p>
+
+      <div class="prose-pull">
+        "The quality of commissioned design is directly related to the quality of the brief that initiates it."
+      </div>
+
+      <h2 id="s5">A path forward</h2>
+      <p>Fixing government design procurement is not a simple undertaking. The frameworks are embedded in legislation. The institutional habits are deeply established. The people making procurement decisions are not, in most cases, specialists in creative services — and the system does not currently require them to be.</p>
+      <p>But progress is possible. The first step is recognition: acknowledging that design is not a commodity, that procurement frameworks designed for commodities produce consistently poor outcomes when applied to design, and that the cost of those poor outcomes is real and material.</p>
+      <p>From recognition, a number of practical reforms follow. Evaluation criteria can be reweighted. Quality assessors with relevant expertise can be included in panels. Briefing processes can be formalised and improved. Payment timelines can be reformed to stop the capital-starvation of smaller, high-quality studios that currently cannot afford to wait 90 to 180 days for payment on completed commissions.</p>
+      <p>None of this requires new legislation. It requires will, and a willingness to measure procurement outcomes rather than procurement compliance. Those are different things. South Africa's government communications deserve the distinction.</p>
+    `
+  },
+  {
+    slug: 'the-case-for-design-systems-in-enterprise',
+    title: 'The Case for Design Systems in Enterprise Organisations',
+    category: 'Strategy',
+    categoryColor: 'var(--iris)',
+    date: '30 January 2026',
+    dateShort: '30 Jan 2026',
+    readTime: '6 min read',
+    author: 'BRANSOL Studio',
+    authorRole: 'Studio',
+    excerpt: 'Enterprise organisations waste millions annually on inconsistent design outputs. A well-governed design system is not a design team luxury — it is a procurement efficiency tool.',
+    tags: ['Design Systems','Enterprise','Brand Governance','Efficiency','Strategy'],
+    illustrationColor: ['#0a0a18','#131340','#7c83e5'],
+    toc: [
+      {id:'s1', label:'The inconsistency cost'},
+      {id:'s2', label:'What a design system actually is'},
+      {id:'s3', label:'The governance argument'},
+      {id:'s4', label:'Implementation reality'},
+    ],
+    content: `
+      <p>Large organisations produce a staggering volume of designed material. Annual reports, investor presentations, campaign assets, environmental signage, digital interfaces, procurement documents, HR communications, event collateral. The list is long, and the organisations producing it rarely have a coherent system governing how any of it looks or behaves.</p>
+      <p>The result is inconsistency — not the harmless kind, but the kind that costs money. Duplicate production. Conflicting visual languages. Materials that undermine each other's credibility. Work that is produced, revised, approved, and then quietly abandoned because it does not look like it belongs to the same organisation as the work produced six months earlier.</p>
+
+      <h2 id="s1">The inconsistency cost</h2>
+      <p>Most enterprise organisations do not have a clear picture of what they spend on design annually. The spend is distributed across departments, absorbed into event budgets, communications budgets, HR budgets, and project budgets. When it is consolidated — as we have done on several occasions with clients prior to engagement — the numbers are consistently surprising.</p>
+      <p>One listed financial services group we worked with had produced 14 different versions of their core investor presentation in a single financial year, across three departments, with no shared template. Each was produced from scratch or from an outdated file. The aggregate cost, including internal time and external production, exceeded R2.8 million for a single document type.</p>
+
+      <div class="prose-pull">
+        "A design system is not an aesthetic exercise. It is an operational infrastructure investment with a measurable return."
+      </div>
+
+      <h2 id="s2">What a design system actually is</h2>
+      <p>The term "design system" is widely used and variably understood. In some contexts it refers to a UI component library for digital products. In others, it means a brand guidelines document. Neither of these is wrong, but neither captures what a fully realised design system is: a governed set of principles, components, and rules that enables an organisation to produce consistently excellent design output at scale, across teams, over time.</p>
+      <p>The critical word is governed. A set of brand guidelines with no governance mechanism is not a system. It is a PDF that will be ignored within 18 months. A design system is distinguished from brand guidelines by its operationalisation — by the fact that it is built into the tools people use, enforced through review processes, and maintained by designated owners with the authority to uphold it.</p>
+
+      <h2 id="s3">The governance argument</h2>
+      <p>Governance is where most enterprise design system initiatives fail. An organisation invests in building the system — often at significant cost — and then treats it as a completed project. The system is published. A PDF is circulated. A training session is scheduled and attended by some of the relevant people. And then the organisation continues producing design more or less as it did before, because the system has no teeth.</p>
+      <p>Effective design system governance requires three things: a designated owner with authority, a clear review process for new material, and consequences for non-compliance. These are not design requirements. They are organisational requirements. They require the same kind of institutional commitment as financial controls or IT governance frameworks — because they are, in effect, the same thing applied to a different domain.</p>
+
+      <h2 id="s4">Implementation reality</h2>
+      <p>The most successful design system implementations we have been involved in share a common characteristic: they start smaller than the organisation thinks they should, and they build from demonstrated value rather than comprehensive ambition. An organisation that tries to systemise everything simultaneously produces a system that covers everything superficially and governs nothing effectively.</p>
+      <p>A better approach: identify the three to five document types that are produced most frequently and consume the most design resource. Build a system for those first. Demonstrate the efficiency gain. Use that demonstrated value to secure the institutional commitment required to extend the system further. The organisations that have done this consistently find that the second phase is significantly easier than the first — because the proof of concept exists, and the sceptics have become advocates.</p>
+    `
+  },
+  {
+    slug: 'what-procurement-panels-actually-want',
+    title: 'What Procurement Panels Actually Want From a Design Agency',
+    category: 'Procurement',
+    categoryColor: 'var(--aqua)',
+    date: '14 January 2026',
+    dateShort: '14 Jan 2026',
+    readTime: '5 min read',
+    author: 'BRANSOL Studio',
+    authorRole: 'Studio',
+    excerpt: 'The evaluation criteria for formal design tenders rarely align with what good design actually requires. Here is what committees are really assessing — and how agencies consistently misread it.',
+    tags: ['Procurement','Tenders','Agency','Evaluation','Pitching'],
+    illustrationColor: ['#060814','#0a1020','#06d6a0'],
+    toc: [
+      {id:'s1', label:'What panels say they want'},
+      {id:'s2', label:'What panels actually assess'},
+      {id:'s3', label:'The credibility test'},
+      {id:'s4', label:'How agencies misread the room'},
+    ],
+    content: `
+      <p>Most design agencies approach formal tender processes as creative auditions. They put their best work forward, articulate their process with clarity, and present a team that is genuinely capable of delivering the brief. Then they lose to an agency that produced a cheaper price and a more compliant submission document.</p>
+      <p>The frustration is understandable. But it misses something important: procurement panels are not primarily assessing creative quality. They are assessing risk. Understanding this distinction is the difference between consistent tender success and consistent tender confusion.</p>
+
+      <h2 id="s1">What panels say they want</h2>
+      <p>Read any formal tender brief for design services and you will find a list of evaluation criteria. They typically include: relevant experience, team capability, methodology, transformation credentials, and price. Occasionally there will be a criterion labelled "quality of proposal" or "understanding of brief." These look like invitations to demonstrate creative thinking. They are not, primarily.</p>
+      <p>Each criterion, when examined carefully, is a proxy for risk assessment. Relevant experience: will this agency deliver without needing to learn on our time? Team capability: are there senior people on this account, or will it be handled by juniors? Methodology: does this agency have a structured process, or will delivery be chaotic? Transformation credentials: does this selection expose the organisation to reputational or regulatory risk?</p>
+
+      <div class="prose-pull">
+        "Procurement panels are not primarily assessing creative quality. They are assessing risk. Understanding this distinction changes everything about how you respond to a brief."
+      </div>
+
+      <h2 id="s2">What panels actually assess</h2>
+      <p>Beyond the formal criteria, experienced panel members are assessing three things that rarely appear explicitly in the evaluation matrix: credibility, reliability, and fit.</p>
+      <p>Credibility is assessed through the quality and specificity of your case studies. Not whether the work looks good — although that matters — but whether you can articulate what the client's problem was, what strategic decision you made to address it, and what the outcome was. Generic portfolio entries ("brand identity for a financial services company") score poorly. Specific, outcome-oriented case studies score well.</p>
+      <p>Reliability is assessed through your process documentation. A panel that has been burned by agencies who miss deadlines, produce work that requires extensive revision, or disappear after the fee is paid will scrutinise your process carefully. They want to see evidence that you have a repeatable, structured approach to delivery — not a vague reference to "our collaborative process."</p>
+
+      <h2 id="s3">The credibility test</h2>
+      <p>The credibility test happens in the first three pages of your submission. Panels read dozens of agency submissions. They develop heuristics quickly. An agency that opens with a capabilities overview and a list of services has already failed the credibility test — because every agency does this, and it signals that the submission is generic rather than considered.</p>
+      <p>The agencies that consistently perform well in formal evaluations open with a demonstration of strategic understanding. They show that they have thought carefully about the organisation's problem — not just the brief, but the underlying challenge the brief is trying to address. This requires research, and it signals the kind of agency behaviour that reduces risk for the client: an agency that thinks before it produces.</p>
+
+      <h2 id="s4">How agencies misread the room</h2>
+      <p>The most common error we observe in agency tender submissions is a mismatch between what the agency wants to demonstrate and what the panel wants to assess. Agencies want to demonstrate creative excellence. Panels want to assess organisational risk. These are not incompatible — but they require different emphasis.</p>
+      <p>A submission that leads with beautiful work and buries the process, team structure, and delivery methodology in the appendix is making a bet that the panel values aesthetics above reliability. In most formal tender processes, that bet loses. The work needs to be present and excellent — but it needs to be contextualised within a framework that addresses the panel's primary concern: can this agency be trusted to deliver what they are promising, on time, within scope, without creating problems for us?</p>
+    `
+  },
+  {
+    slug: 'brand-identity-is-not-a-logo',
+    title: 'A Brand Identity Is Not a Logo — It Is an Operating System',
+    category: 'Brand Identity',
+    categoryColor: 'var(--violet)',
+    date: '10 December 2025',
+    dateShort: '10 Dec 2025',
+    readTime: '7 min read',
+    author: 'BRANSOL Studio',
+    authorRole: 'Studio',
+    excerpt: 'Organisations that treat brand identity as a visual exercise routinely underinvest in it and overreact when it fails. The organisations that get lasting value from identity work understand what it actually is.',
+    tags: ['Brand Identity','Strategy','Visual Systems','Brand Management'],
+    illustrationColor: ['#0e0814','#1a0d2e','#c77dff'],
+    toc: [
+      {id:'s1', label:'The logo fallacy'},
+      {id:'s2', label:'What identity actually governs'},
+      {id:'s3', label:'The system mindset'},
+      {id:'s4', label:'Why identity work fails'},
+    ],
+    content: `
+      <p>When an organisation decides it needs a new brand identity, the conversation almost always begins with the logo. When will we see the logo options? How many logo concepts will you present? Can we see some logo ideas before we commit to the full process?</p>
+      <p>This is understandable. The logo is visible. It is the part of an identity that appears on business cards and building signage and social media profiles. It is the most tangible manifestation of brand identity work, and therefore the easiest to focus on. But it is the wrong focus — and organisations that understand brand identity as primarily a logo exercise consistently undervalue the work and are consistently disappointed by the outcomes.</p>
+
+      <h2 id="s1">The logo fallacy</h2>
+      <p>A logo is a mark. It is a symbol that, through consistent application over time, comes to stand for everything an organisation is and does. The mark itself carries no inherent meaning — it acquires meaning through the quality of the organisation's behaviour, communications, and outputs over time. A poorly run organisation with an excellent logo is still a poorly run organisation. An excellently run organisation with a mediocre logo is still excellent.</p>
+      <p>This does not mean logos are unimportant. A well-designed mark is more distinctive, more memorable, and more versatile than a poorly designed one. But the logo is one element of an identity system, and it is not the most important element. The most important element is the system — the set of principles, typographic choices, colour applications, compositional rules, and tonal guidelines that govern how the organisation presents itself across every point of contact.</p>
+
+      <div class="prose-pull">
+        "A logo is a mark. The identity is everything that gives that mark meaning — and building it requires considerably more than designing a symbol."
+      </div>
+
+      <h2 id="s2">What identity actually governs</h2>
+      <p>A fully realised brand identity governs a remarkably broad set of decisions. Typography: which typefaces are used, at what sizes, in which contexts, and with what spacing. Colour: the primary palette, the secondary palette, the rules governing when each is used, and the specific values for each environment (print, screen, environmental). Photography and illustration: the style, the tone, the subjects, the composition principles. Layout: the grid systems, the margins, the proportions. Voice: the tone of language, the grammatical preferences, the vocabulary that is used and avoided.</p>
+      <p>These decisions, taken together, create the experience of a brand. They determine whether a new communication feels like it belongs to the same organisation as the last one, or whether it appears to have been produced by a different team with a different set of preferences. Consistency in this experience builds trust. Inconsistency erodes it — slowly, then suddenly.</p>
+
+      <h2 id="s3">The system mindset</h2>
+      <p>The organisations that commission the best identity work and get the most lasting value from it approach the engagement with a system mindset. They understand that they are not buying a set of visual assets — they are investing in a governance infrastructure for how their organisation presents itself to the world. This changes how they brief, how they evaluate, and how they implement.</p>
+      <p>A system-minded client briefs identity work in terms of organisational objectives: what strategic goals does the organisation have over the next five to ten years, and what role does its public identity play in supporting those goals? A logo-focused client briefs in terms of aesthetic preferences: we want something that feels modern, not too corporate, maybe something with a geometric element.</p>
+      <p>The system-minded brief produces identity work that is designed to last and to scale. The aesthetic-preference brief produces identity work that reflects the current tastes of the people in the room and is refreshed every three years.</p>
+
+      <h2 id="s4">Why identity work fails</h2>
+      <p>Most identity projects that fail to deliver lasting value fail for one of three reasons. The first is insufficient strategic grounding: the identity is designed without a clear articulation of the organisation's positioning, its audiences, its competitive context, or its communications objectives. The visual work may be technically accomplished, but it is not anchored to anything that gives it longevity.</p>
+      <p>The second reason is poor implementation governance. The identity is designed with care and presented with conviction, and then immediately compromised by internal teams who apply it inconsistently, adapt it without authority, or simply ignore it in favour of their own preferences. An identity without governance is an identity in name only.</p>
+      <p>The third reason is organisational change that the identity was not designed to accommodate. Mergers, acquisitions, new business lines, new markets, new leadership with different aesthetic preferences — any of these can destabilise an identity that was designed as a fixed system rather than a scalable one. The organisations that build identity systems with longevity in mind design for the organisation they expect to become, not only for the organisation they currently are.</p>
+    `
+  },
+  {
+    slug: 'south-african-design-industry-2026',
+    title: 'The State of the South African Design Industry Heading Into 2026',
+    category: 'Industry',
+    categoryColor: 'var(--gold)',
+    date: '20 November 2025',
+    dateShort: '20 Nov 2025',
+    readTime: '9 min read',
+    author: 'BRANSOL Editorial',
+    authorRole: 'Studio',
+    excerpt: 'The industry is bifurcating. On one side, commoditised subscription services and AI-assisted production. On the other, a smaller number of studios doing the work that actually requires senior judgement. The middle is disappearing.',
+    tags: ['Industry','South Africa','Design Market','AI','Trends 2026'],
+    illustrationColor: ['#0e0a06','#1a1408','#ffd166'],
+    toc: [
+      {id:'s1', label:'The bifurcation'},
+      {id:'s2', label:'AI and the production layer'},
+      {id:'s3', label:'The strategic premium'},
+      {id:'s4', label:'What survives'},
+    ],
+    content: `
+      <p>The South African design industry enters 2026 in a state of structural tension. On one side, the economics of design production are being compressed by AI tooling, offshore competition, and a client market that has become more price-conscious following several years of economic pressure. On the other, a small number of studios are commanding higher fees for work at the strategic end of the discipline — work where judgement, context, and consequence matter more than execution speed.</p>
+      <p>The middle of the market — studios doing competent work at moderate prices — is under the most pressure. This cohort is being squeezed from below by lower-cost producers who can now match their output quality using AI-assisted tools, and from above by clients who are increasingly discerning about the difference between design that is executed and design that is considered.</p>
+
+      <h2 id="s1">The bifurcation</h2>
+      <p>Market bifurcation in creative industries is not a new phenomenon. It has been visible in the advertising industry for over a decade: a concentration of holding company scale at one end, and a proliferation of independent specialists at the other, with the mid-sized generalist agency in sustained decline. The same dynamic is now playing out in design, accelerated by technology shifts that are compressing the cost of design production faster than they are compressing the cost of design judgement.</p>
+      <p>The lower tier of the market is growing in volume terms. There are more design transactions happening than at any previous point — more logos commissioned, more websites built, more social content produced. The per-transaction value is declining. The aggregate value of the lower tier may be growing, but the individual economics for studios operating in it are deteriorating.</p>
+      <p>The upper tier — strategic design, identity systems, commissions with real organisational consequence — is a smaller volume market, but the economics are different. Clients in this segment understand that what they are buying is not production. They are buying strategic thinking, senior judgement, and the ability to translate an organisational challenge into a designed response that actually works. This work cannot be commoditised, and the clients who understand its value are willing to pay for it at rates that have not compressed.</p>
+
+      <div class="prose-pull">
+        "The middle of the market is disappearing. The studios that survive will be the ones that have decided clearly which end they are on — and built everything around that decision."
+      </div>
+
+      <h2 id="s2">AI and the production layer</h2>
+      <p>The honest assessment of AI's impact on the design industry is more nuanced than either the utopian or dystopian versions suggest. AI tooling has genuinely disrupted the production layer of design — the execution of competent visual work at speed. A skilled practitioner using current AI tools can produce in two hours what would have taken two days three years ago. This is not a trivial change. It has significant implications for how studios should be staffed, priced, and positioned.</p>
+      <p>What AI has not done, and shows no near-term signs of doing, is replace the strategic layer of design. The ability to understand an organisation's competitive context, identify the tension in a brief, make a judgement about what an identity needs to communicate in order to serve a strategic objective, assess whether a creative solution is genuinely solving the right problem — these capabilities remain distinctly human, and they remain the primary source of value in high-consequence design work.</p>
+      <p>The studios that are navigating the AI transition well are using it to increase the leverage of their senior people. Less time on production execution means more capacity for strategic thinking, more considered development, more time spent on the problems that actually differentiate excellent work from adequate work. The studios that are struggling are those whose value proposition was primarily execution speed and production volume — work that AI can now replicate at a fraction of the cost.</p>
+
+      <h2 id="s3">The strategic premium</h2>
+      <p>There is a meaningful and growing gap between what clients pay for production design and what they pay for strategic design. This gap is not primarily about aesthetics — a well-executed production design and a well-considered strategic design may look similar to an untrained eye. The gap is about consequences: the difference between design that is produced and design that performs.</p>
+      <p>Clients who have experienced the difference are consistent in their assessment. The design that was properly briefed, strategically grounded, and considered in its development produced better outcomes — better stakeholder reception, longer useful life, more effective communications. The economics of this experience are straightforward: if better-considered design produces better outcomes, the premium is justified on return grounds alone, quite apart from any aesthetic preference.</p>
+
+      <h2 id="s4">What survives</h2>
+      <p>The studios that will be in a materially better position in 2028 than they are today share a set of characteristics that are visible now. They are positioned at the strategic end of the market and are building their reputation around the quality of outcomes rather than the volume of output. They are using AI tooling to increase the leverage of their senior people rather than to reduce headcount. They are selective about the work they take on, because selectivity signals value and protects the quality of their output. And they are building direct relationships with the decision-makers in client organisations — the people who understand the difference between design that is produced and design that performs.</p>
+      <p>The South African market presents particular opportunities in this regard. Public sector organisations, listed companies, and major institutions are increasingly aware of the quality deficit in their communications — and increasingly willing to address it if a studio can articulate the value of doing so in business terms. The studios that can make this case, and then deliver on it, will find 2026 and beyond considerably more navigable than the aggregate market conditions might suggest.</p>
+    `
+  },
+  {
+    slug: 'why-your-digital-presence-is-your-credentials',
+    title: 'Your Digital Presence Is Your Credentials Document',
+    category: 'Digital',
+    categoryColor: 'var(--sky)',
+    date: '08 October 2025',
+    dateShort: '08 Oct 2025',
+    readTime: '5 min read',
+    author: 'BRANSOL Studio',
+    authorRole: 'Studio',
+    excerpt: 'Before any formal engagement, procurement panels, CEOs, and marketing directors will have already assessed your digital presence. Most organisations treat it as a brochure. It is closer to a first interview.',
+    tags: ['Digital','Brand','Credentials','First Impressions','Website Strategy'],
+    illustrationColor: ['#060a14','#0a1020','#45b7d1'],
+    toc: [
+      {id:'s1', label:'The pre-engagement assessment'},
+      {id:'s2', label:'What is actually being evaluated'},
+      {id:'s3', label:'The credibility gap'},
+      {id:'s4', label:'What good looks like'},
+    ],
+    content: `
+      <p>Every significant design engagement begins before the first conversation. By the time a procurement panel convenes to evaluate submissions, every member has already formed a view of each agency — based on what they found when they searched for the agency online. The website, the social presence, the visible portfolio, the quality of writing in published articles. This pre-engagement assessment is not formal. It is not documented. It carries no official weight in the evaluation matrix. And it shapes the outcome of the process more than most agencies realise.</p>
+      <p>The logic is straightforward: if you are commissioning an agency to manage how your organisation is perceived, and that agency's own digital presence is mediocre, what does that tell you about the quality of the work they will produce for you?</p>
+
+      <h2 id="s1">The pre-engagement assessment</h2>
+      <p>Decision-makers who commission design services are sophisticated enough to use their experience of an agency's communications as a data point about the agency's capabilities. They are not necessarily doing this consciously. It is the natural behaviour of anyone who has been on both sides of the design commissioning process: you assess the work in front of you as evidence of the thinking behind it.</p>
+      <p>A marketing director who visits an agency's website and finds a PDF portfolio uploaded in 2019, a blog last updated two years ago, and a homepage that reads like it was written to pass a checklist — that marketing director has already formed a view. The formal submission may revise it, but it is starting from a deficit.</p>
+
+      <div class="prose-pull">
+        "The question is not whether your digital presence will be assessed. It will be. The question is whether it is working for you or against you."
+      </div>
+
+      <h2 id="s2">What is actually being evaluated</h2>
+      <p>What decision-makers are assessing when they review a potential agency's digital presence is not primarily aesthetic. They are assessing evidence of thinking. Does this agency have a point of view? Do they publish ideas that demonstrate strategic intelligence? Does their own brand demonstrate the kind of considered craft they claim to apply to client work? Are they active, engaged, and current — or dormant?</p>
+      <p>These questions cannot be answered by a well-designed website alone. A beautiful website with no substance communicates something specific: that this is an agency that prioritises aesthetics over ideas. For some clients in some contexts, this is fine. For the clients commissioning work with real strategic consequence, it is not the signal they are looking for.</p>
+
+      <h2 id="s3">The credibility gap</h2>
+      <p>The credibility gap is the distance between what an agency claims to do and what its digital presence demonstrates it is capable of. Most agencies have a credibility gap. They describe themselves as strategic, innovative, and results-focused on their website, and then demonstrate none of these qualities in the writing, curation, or design of the website itself.</p>
+      <p>This gap is particularly damaging for agencies seeking to move into the upper tier of the market. A client considering a significant design commission is looking for evidence that the agency has the capability and the mindset to handle work of consequence. The website is the most accessible piece of evidence available. If it does not make the case compellingly, the agency is asking decision-makers to take the claim on faith — and sophisticated buyers do not take claims on faith.</p>
+
+      <h2 id="s4">What good looks like</h2>
+      <p>The digital presence of a high-calibre design agency is distinctive in a specific way: it demonstrates the thinking as much as the making. The work is present and well-presented, but it is contextualised. Each case study explains the strategic problem, the approach, the decisions made, and the outcome. The writing is clear, confident, and specific — not vague claims of excellence, but precise articulations of what the agency does and why it matters.</p>
+      <p>The best agency digital presences are themselves excellent design work — not in the sense of visual novelty, but in the sense of a considered translation of an organisational reality into a compelling communication. They communicate selectivity: the sense that this agency works with a particular kind of client on a particular kind of problem, and that not every commission is right for them. This selectivity is not arrogance. It is a signal of quality control, and decision-makers who are commissioning work of consequence find it reassuring.</p>
+    `
+  }
+];
+
+// ═══════════════════════════════════════════════
+//  ROUTING — read slug from URL path
+// ═══════════════════════════════════════════════
+function getSlug(){
+  const path = window.location.pathname;
+  const parts = path.split('/').filter(Boolean);
+  // Expects /perspectives/[slug] or just ?slug=... for demo
+  const fromQuery = new URLSearchParams(window.location.search).get('slug');
+  if(fromQuery) return fromQuery;
+  if(parts.length >= 2 && parts[0] === 'perspectives') return parts[1];
+  // Fallback: show first article for demo
+  return parts[parts.length - 1] || ARTICLES[0].slug;
+}
+
+function getArticle(slug){
+  return ARTICLES.find(a => a.slug === slug) || null;
+}
+
+function getRelated(article, count=3){
+  return ARTICLES.filter(a => a.slug !== article.slug).slice(0, count);
+}
+
+// ═══════════════════════════════════════════════
+//  ILLUSTRATION GENERATOR
+// ═══════════════════════════════════════════════
+function buildIllustration(colors, slug){
+  // Deterministic pseudo-random based on slug
+  let seed = slug.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
+  const rnd = (n) => { seed = (seed * 1664525 + 1013904223) & 0xffffffff; return Math.abs(seed % n); };
+  const [bg1, bg2, accent] = colors;
+
+  let shapes = '';
+  // Grid of rectangles
+  for(let i=0;i<18;i++){
+    const x = (rnd(90)+5); const y = (rnd(80)+5);
+    const w = rnd(140)+20; const h = rnd(60)+10;
+    const op = (rnd(30)+5)/100;
+    shapes += `<rect x="${x}%" y="${y}%" width="${w}" height="${h}" fill="${accent}" opacity="${op}" rx="${rnd(4)}"/>`;
+  }
+  // Lines
+  for(let i=0;i<6;i++){
+    const x1=rnd(100); const y1=rnd(100); const x2=rnd(100); const y2=rnd(100);
+    shapes += `<line x1="${x1}%" y1="${y1}%" x2="${x2}%" y2="${y2}%" stroke="${accent}" stroke-width="${(rnd(3)+1)*0.5}" opacity="0.15"/>`;
+  }
+  // Circles
+  for(let i=0;i<4;i++){
+    const cx=rnd(90)+5; const cy=rnd(80)+5; const r=rnd(80)+20;
+    shapes += `<circle cx="${cx}%" cy="${cy}%" r="${r}" fill="none" stroke="${accent}" stroke-width="1" opacity="0.08"/>`;
+  }
+
+  return `
+    <svg class="hero-illustration" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="hbg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="${bg1}"/>
+          <stop offset="100%" stop-color="${bg2}"/>
+        </linearGradient>
+        <filter id="hblur"><feGaussianBlur stdDeviation="2"/></filter>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#hbg)"/>
+      <g filter="url(#hblur)">${shapes}</g>
+      <!-- Grid overlay -->
+      <g opacity="0.04" stroke="${accent}" stroke-width="0.5">
+        ${Array.from({length:12},(_,i)=>`<line x1="${i*100}" y1="0" x2="${i*100}" y2="420"/>`).join('')}
+        ${Array.from({length:5},(_,i)=>`<line x1="0" y1="${i*84}" x2="1200" y2="${i*84}"/>`).join('')}
+      </g>
+    </svg>`;
+}
+
+// ═══════════════════════════════════════════════
+//  RENDER ARTICLE
+// ═══════════════════════════════════════════════
+function renderArticle(article){
+  const related = getRelated(article, 3);
+  const illustration = buildIllustration(article.illustrationColor, article.slug);
+
+  const tocHTML = article.toc.map(t =>
+    `<li class="toc-item" data-target="${t.id}"><a href="#${t.id}" onclick="return false">${t.label}</a></li>`
+  ).join('');
+
+  const relatedHTML = related.map(r => `
+    <a href="?slug=${r.slug}" class="related-card reveal" onclick="navigateTo('${r.slug}');return false;">
+      <div class="rc-img" style="background:linear-gradient(135deg,${r.illustrationColor[0]},${r.illustrationColor[1]});">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;opacity:.6;"></div>
+      </div>
+      <div class="rc-body">
+        <div>
+          <span class="rc-cat" style="color:${r.categoryColor}">${r.category}</span>
+          <div class="rc-title">${r.title}</div>
+        </div>
+        <div class="rc-footer">
+          <span class="rc-date">${r.dateShort} · ${r.readTime}</span>
+          <div class="rc-arrow"><svg viewBox="0 0 11 11"><path d="M1 5.5h9M6 1l4.5 4.5L6 10"/></svg></div>
+        </div>
+      </div>
+    </a>
+  `).join('');
+
+  const sidebarRelatedHTML = related.slice(0,2).map(r => `
+    <a href="?slug=${r.slug}" class="sidebar-related-item" onclick="navigateTo('${r.slug}');return false;">
+      <span class="sidebar-related-cat" style="color:${r.categoryColor}">${r.category}</span>
+      <span class="sidebar-related-title">${r.title}</span>
+    </a>
+  `).join('');
+
+  const tagsHTML = article.tags.map(t => `<span class="prose-tag">${t}</span>`).join('');
+
+  document.title = `${article.title} — BRANSOL Perspectives`;
+
+  return `
+    <!-- BREADCRUMB -->
+    <div class="article-breadcrumb">
+      <div class="breadcrumb-inner">
+        <a href="/perspectives" class="breadcrumb-back">
+          <svg viewBox="0 0 12 12"><path d="M10 6H2M5 2L1 6l4 4"/></svg>
+          Perspectives
+        </a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-current" style="color:${article.categoryColor}">${article.category}</span>
+      </div>
+    </div>
+
+    <!-- ARTICLE HERO -->
+    <div class="article-hero">
+      <div class="article-hero-inner">
+        <div class="article-category-tag" style="color:${article.categoryColor}">${article.category}</div>
+        <h1 class="article-hero-title">${article.title}</h1>
+        <div class="article-hero-meta">
+          <div class="article-meta-author">
+            <span class="article-meta-author-name">${article.author}</span>
+            <span class="article-meta-author-role">${article.authorRole}</span>
+          </div>
+          <div class="article-meta-divider"></div>
+          <div class="article-meta-stat">
+            <span class="article-meta-stat-val">${article.date}</span>
+            <span class="article-meta-stat-label">Published</span>
+          </div>
+          <div class="article-meta-divider"></div>
+          <div class="article-meta-stat">
+            <span class="article-meta-stat-val">${article.readTime}</span>
+            <span class="article-meta-stat-label">Reading time</span>
+          </div>
+          <div class="article-meta-share">
+            <button class="share-btn" onclick="copyLink()">
+              <svg viewBox="0 0 14 14"><circle cx="11" cy="3" r="1.5"/><circle cx="3" cy="7" r="1.5"/><circle cx="11" cy="11" r="1.5"/><path d="M4.5 6.5l5-3M4.5 7.5l5 3"/></svg>
+              Share
+            </button>
+          </div>
+        </div>
+        <div class="article-hero-img-wrap">
+          <div class="article-hero-img">${illustration}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARTICLE LAYOUT -->
+    <div class="article-layout" id="articleContent">
+      <article>
+        <div class="prose-body" id="proseBody">
+          ${article.content}
+        </div>
+        <div class="prose-tag-row">
+          ${tagsHTML}
+        </div>
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside>
+        <div class="article-sidebar-sticky">
+
+          <!-- Reading progress -->
+          <div class="sidebar-panel sidebar-progress">
+            <span class="sidebar-panel-label">Progress</span>
+            <div class="sidebar-progress-bar">
+              <div class="sidebar-progress-fill" id="sidebarProgress"></div>
+            </div>
+            <span class="sidebar-progress-label" id="progressLabel">0% read</span>
+          </div>
+
+          <!-- TOC -->
+          <div class="sidebar-panel">
+            <span class="sidebar-panel-label">In this article</span>
+            <ul class="toc-list" id="tocList">${tocHTML}</ul>
+          </div>
+
+          <!-- Related -->
+          <div class="sidebar-panel">
+            <span class="sidebar-panel-label">Read next</span>
+            ${sidebarRelatedHTML}
+          </div>
+
+        </div>
+      </aside>
+    </div>
+
+    <!-- RELATED ARTICLES -->
+    <div class="related-section">
+      <div class="related-header">
+        <h2 class="related-title">More perspectives</h2>
+        <a href="/perspectives" class="related-all">
+          All articles
+          <svg viewBox="0 0 11 11"><path d="M1 5.5h9M6 1l4.5 4.5L6 10"/></svg>
+        </a>
+      </div>
+      <div class="related-grid">${relatedHTML}</div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-top">
+        <a href="/" class="footer-logo"><span class="chrome-text">BRAN</span><span style="color:var(--text)">SOL</span></a>
+        <div class="footer-nav-wrap">
+          <div class="footer-col">
+            <span class="footer-col-label">Studio</span>
+            <a href="/work">Work</a><a href="/expertise">Expertise</a>
+            <a href="/platform">Platform</a><a href="/studio">About</a>
+            <a href="/perspectives">Perspectives</a>
+          </div>
+          <div class="footer-col">
+            <span class="footer-col-label">Sectors</span>
+            <a href="#">Government</a><a href="#">Financial Services</a>
+            <a href="#">Infrastructure</a><a href="#">Professional Services</a>
+          </div>
+          <div class="footer-col">
+            <span class="footer-col-label">Contact</span>
+            <a href="mailto:studio@bransol.com">studio@bransol.com</a>
+            <a href="/begin">Begin a commission</a>
+            <a href="/platform">Client platform</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 BRANSOL — Ballito, KwaZulu-Natal</span>
+        <div class="footer-social"><a href="#">LinkedIn</a><a href="#">Instagram</a></div>
+      </div>
+    </footer>
+  `;
+}
+
+// ═══════════════════════════════════════════════
+//  404
+// ═══════════════════════════════════════════════
+function render404(slug){
+  return `
+    <div class="not-found">
+      <div class="not-found-code">404</div>
+      <h1 class="not-found-title">Article not found</h1>
+      <p class="not-found-sub">We couldn't find an article at <em style="color:var(--ter)">${slug}</em>.</p>
+      <a href="/perspectives" class="not-found-link">Back to Perspectives</a>
+    </div>
+    <footer>
+      <div class="footer-bottom" style="padding-top:40px;">
+        <span class="footer-copy">© 2026 BRANSOL — Johannesburg, South Africa</span>
+      </div>
+    </footer>
+  `;
+}
+
+// ═══════════════════════════════════════════════
+//  MOUNT & INITIALISE
+// ═══════════════════════════════════════════════
+let currentArticle = null;
+
+function mount(slug){
+  const article = getArticle(slug);
+  const mount = document.getElementById('articleMount');
+  mount.style.opacity = '0';
+  mount.style.transition = 'opacity .35s ease';
+
+  setTimeout(() => {
+    if(article){
+      mount.innerHTML = renderArticle(article);
+      currentArticle = article;
+      initArticleFeatures();
+    } else {
+      mount.innerHTML = render404(slug);
+    }
+    mount.style.opacity = '1';
+    window.scrollTo({top:0,behavior:'smooth'});
+    initReveal();
+  }, 200);
+}
+
+function navigateTo(slug){
+  window.history.pushState({slug}, '', `?slug=${slug}`);
+  mount(slug);
+}
+
+function initReveal(){
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:0.05,rootMargin:'0px 0px -20px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+}
+
+function initArticleFeatures(){
+  // Add section IDs to headings in prose
+  const proseBody = document.getElementById('proseBody');
+  if(!proseBody) return;
+  let sIdx = 0;
+  proseBody.querySelectorAll('h2').forEach(h => {
+    if(!h.id && currentArticle.toc[sIdx]) h.id = currentArticle.toc[sIdx++].id;
+  });
+
+  // Reading progress
+  const progressFill = document.getElementById('progressFill');
+  const sidebarProgress = document.getElementById('sidebarProgress');
+  const progressLabel = document.getElementById('progressLabel');
+  const tocItems = document.querySelectorAll('.toc-item');
+
+  function updateProgress(){
+    const doc = document.documentElement;
+    const scrollTop = doc.scrollTop || document.body.scrollTop;
+    const scrollHeight = doc.scrollHeight - doc.clientHeight;
+    const pct = scrollHeight > 0 ? Math.round((scrollTop / scrollHeight) * 100) : 0;
+    if(progressFill) progressFill.style.width = pct + '%';
+    if(sidebarProgress) sidebarProgress.style.width = pct + '%';
+    if(progressLabel) progressLabel.textContent = pct + '% read';
+
+    // TOC active state
+    tocItems.forEach(item => {
+      const target = document.getElementById(item.dataset.target);
+      if(target){
+        const rect = target.getBoundingClientRect();
+        if(rect.top <= 120 && rect.top > -200){
+          tocItems.forEach(i=>i.classList.remove('active'));
+          item.classList.add('active');
+        }
+      }
+    });
+  }
+  window.addEventListener('scroll', updateProgress, {passive:true});
+
+  // TOC smooth scroll
+  document.querySelectorAll('.toc-item a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+}
+
+function copyLink(){
+  navigator.clipboard.writeText(window.location.href).catch(()=>{});
+  const btn = document.querySelector('.share-btn');
+  if(btn){ btn.textContent = 'Copied'; setTimeout(()=>{ btn.innerHTML = '<svg viewBox="0 0 14 14"><circle cx="11" cy="3" r="1.5"/><circle cx="3" cy="7" r="1.5"/><circle cx="11" cy="11" r="1.5"/><path d="M4.5 6.5l5-3M4.5 7.5l5 3"/></svg> Share'; },2000); }
+}
+
+// Handle browser back/forward
+window.addEventListener('popstate', e => {
+  const slug = (e.state && e.state.slug) || getSlug();
+  mount(slug);
+});
+
+// ═══════════════════════════════════════════════
+//  CURSOR
+// ═══════════════════════════════════════════════
+const cur = document.getElementById('cur'), ring = document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function tick(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick);})();
+document.addEventListener('mouseover',e=>{
+  if(e.target.closest('a,button')){cur.style.width=cur.style.height='14px';ring.style.width=ring.style.height='44px';ring.style.borderColor='rgba(124,131,229,.5)';}
+  else{cur.style.width=cur.style.height='7px';ring.style.width=ring.style.height='30px';ring.style.borderColor='rgba(124,131,229,.32)';}
+});
+
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});
+
+// Theme toggle
+(function(){
+  const btn = document.getElementById('themeToggle');
+  const label = document.getElementById('themeLabel');
+  const html = document.documentElement;
+  const saved = localStorage.getItem('bransol-theme');
+  if(saved === 'light'){ html.setAttribute('data-theme','light'); label.textContent='Dark'; }
+  btn.addEventListener('click', () => {
+    const isLight = html.getAttribute('data-theme') === 'light';
+    if(isLight){ html.removeAttribute('data-theme'); label.textContent='Light'; localStorage.setItem('bransol-theme','dark'); }
+    else { html.setAttribute('data-theme','light'); label.textContent='Dark'; localStorage.setItem('bransol-theme','light'); }
+  });
+})();
+
+// ── INIT ──
+mount(getSlug());
+</script>
+</body>
+</html>

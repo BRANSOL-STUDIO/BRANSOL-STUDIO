@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategic Blueprint v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0d0b;
+    --parchment: #f5f0e8;
+    --gold: #b8963e;
+    --gold-light: #d4aa5a;
+    --warm-grey: #7a7570;
+    --pale: #faf7f2;
+    --border: rgba(184,150,62,0.22);
+    --deep: #1a1814;
+    --red: #b84040;
+    --green: #3a7a5a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--pale); color: var(--ink); font-family: 'Outfit', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+  /* NAV TABS */
+  .tab-nav {
+    background: var(--deep);
+    display: flex;
+    gap: 0;
+    padding: 0 80px;
+    border-bottom: 1px solid rgba(184,150,62,0.2);
+    overflow-x: auto;
+  }
+  .tab-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    padding: 18px 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: rgba(245,240,232,0.7); }
+  .tab-btn.active { color: var(--gold-light); border-bottom-color: var(--gold); }
+
+  /* HEADER */
+  header {
+    background: var(--deep);
+    color: var(--parchment);
+    padding: 56px 80px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 420px; height: 420px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,150,62,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  header::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .header-label {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; margin-bottom: 16px;
+  }
+  header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4.5vw, 56px); font-weight: 300; line-height: 1.1; max-width: 680px;
+  }
+  header h1 em { font-style: italic; color: var(--gold-light); }
+  header p { margin-top: 16px; font-size: 14px; color: rgba(245,240,232,0.55); max-width: 500px; line-height: 1.75; }
+
+  /* SECTIONS */
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  main { max-width: 1280px; margin: 0 auto; padding: 72px 56px; }
+  .s-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; }
+  .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 3vw, 40px); font-weight: 400; color: var(--deep); margin-bottom: 40px; padding-bottom: 18px; border-bottom: 1px solid var(--border); }
+
+  /* COMPETITOR TABLE */
+  .comp-table { width: 100%; border-collapse: collapse; margin-bottom: 56px; }
+  .comp-table th {
+    font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.25em;
+    text-transform: uppercase; padding: 14px 20px; text-align: left;
+    border-bottom: 2px solid var(--border); color: var(--gold);
+    background: var(--parchment);
+  }
+  .comp-table td { padding: 20px; font-size: 13px; line-height: 1.7; color: var(--warm-grey); border-bottom: 1px solid var(--border); vertical-align: top; }
+  .comp-table tr:hover td { background: rgba(184,150,62,0.03); }
+  .comp-name { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--deep); display: block; margin-bottom: 3px; }
+  .comp-url { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--gold); }
+  .gap-pill {
+    display: inline-block; font-family: 'DM Mono', monospace; font-size: 9px;
+    letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px;
+    border-radius: 2px; margin: 3px 3px 3px 0;
+  }
+  .gap-weak  { background: rgba(184,62,62,0.1); color: var(--red); }
+  .gap-strong{ background: rgba(58,122,90,0.1); color: var(--green); }
+
+  /* DIFFERENTIATOR CARDS */
+  .diff-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: var(--border); border: 1px solid var(--border); margin-bottom: 56px; }
+  .diff-card { background: var(--parchment); padding: 36px 30px; transition: background 0.25s; }
+  .diff-card:hover { background: #fff; }
+  .diff-icon { font-size: 28px; margin-bottom: 16px; }
+  .diff-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--deep); margin-bottom: 10px; }
+  .diff-card p { font-size: 13px; line-height: 1.75; color: var(--warm-grey); }
+  .diff-card .vs { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--red); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+
+  /* SITEMAP */
+  .site-page { display: grid; grid-template-columns: 220px 1fr; border-bottom: 1px solid var(--border); transition: background 0.2s; }
+  .site-page:first-child { border-top: 1px solid var(--border); }
+  .site-page:hover { background: rgba(184,150,62,0.03); }
+  .page-label { padding: 26px 28px; border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
+  .page-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--deep); margin-bottom: 4px; }
+  .page-route { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--gold); margin-bottom: 8px; }
+  .f-badge { display: inline-block; font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 9px; border-radius: 2px; }
+  .b-aware   { background: rgba(184,150,62,0.12); color: #9a7a28; }
+  .b-trust   { background: rgba(26,24,20,0.08); color: var(--deep); }
+  .b-convert { background: var(--deep); color: var(--gold-light); }
+  .b-platform{ background: rgba(58,90,122,0.12); color: #3a5a7a; }
+  .page-cols { padding: 26px 36px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+  .pc h4 { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .pc p, .pc li { font-size: 12.5px; line-height: 1.75; color: var(--warm-grey); list-style: none; }
+  .pc li::before { content: '—  '; color: var(--gold); opacity: 0.5; }
+
+  /* FUNNEL */
+  .funnel-wrap { display: grid; grid-template-columns: 360px 1fr; gap: 56px; align-items: start; }
+  .funnel-stage { display: flex; align-items: center; gap: 18px; padding: 20px 24px; border: 1px solid var(--border); background: var(--parchment); margin-bottom: 3px; cursor: pointer; transition: all 0.22s; }
+  .funnel-stage:hover, .funnel-stage.active { background: var(--deep); border-color: var(--deep); }
+  .funnel-stage:hover .fsn, .funnel-stage.active .fsn { color: var(--gold); }
+  .funnel-stage:hover .fst, .funnel-stage.active .fst { color: var(--parchment); }
+  .funnel-stage:hover .fss, .funnel-stage.active .fss { color: rgba(245,240,232,0.45); }
+  .fsn { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 300; color: var(--gold); opacity: 0.45; width: 32px; flex-shrink: 0; transition: all 0.22s; }
+  .fst { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--deep); transition: color 0.22s; }
+  .fss { font-size: 11px; color: var(--warm-grey); margin-top: 1px; transition: color 0.22s; }
+  .fd { display: none; }
+  .fd.visible { display: block; }
+  .fd-title { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 400; color: var(--deep); margin-bottom: 4px; }
+  .fd-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; margin-bottom: 24px; }
+  .fd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+  .fd-block { background: var(--parchment); border: 1px solid var(--border); padding: 22px; }
+  .fd-block h4 { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .fd-block li { font-size: 12.5px; line-height: 1.8; color: var(--warm-grey); list-style: none; padding-left: 14px; position: relative; }
+  .fd-block li::before { content: '›'; position: absolute; left: 0; color: var(--gold); }
+  .fd-metric { background: var(--deep); padding: 18px 22px; display: flex; align-items: center; gap: 18px; }
+  .fd-metric-num { font-family: 'Cormorant Garamond', serif; font-size: 38px; color: var(--gold-light); font-weight: 300; }
+  .fd-metric-desc { font-size: 12px; color: rgba(245,240,232,0.6); line-height: 1.6; }
+
+  /* PLATFORM */
+  .platform-hero { background: var(--deep); padding: 48px; margin-bottom: 2px; position: relative; overflow: hidden; }
+  .platform-hero::before {
+    content: '';
+    position: absolute; right: -40px; top: -40px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,150,62,0.1) 0%, transparent 70%);
+  }
+  .platform-hero h2 { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: var(--parchment); margin-bottom: 10px; }
+  .platform-hero h2 em { font-style: italic; color: var(--gold-light); }
+  .platform-hero p { font-size: 14px; color: rgba(245,240,232,0.55); max-width: 520px; line-height: 1.75; }
+
+  .platform-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: var(--border); border: 1px solid var(--border); margin-bottom: 48px; }
+  .platform-card { background: var(--parchment); padding: 32px 28px; }
+  .platform-card:hover { background: #fff; }
+  .platform-card-icon { font-size: 24px; margin-bottom: 14px; }
+  .platform-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 600; color: var(--deep); margin-bottom: 8px; }
+  .platform-card p { font-size: 12.5px; line-height: 1.75; color: var(--warm-grey); }
+
+  /* OUTREACH */
+  .outreach-flow { display: flex; flex-direction: column; gap: 2px; margin-bottom: 48px; }
+  .outreach-step { display: grid; grid-template-columns: 80px 1fr; border: 1px solid var(--border); background: var(--parchment); transition: background 0.2s; }
+  .outreach-step:hover { background: #fff; }
+  .step-num-col { background: var(--deep); display: flex; align-items: center; justify-content: center; }
+  .step-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: var(--gold); opacity: 0.7; }
+  .step-body { padding: 24px 32px; }
+  .step-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--deep); margin-bottom: 6px; }
+  .step-body p { font-size: 13px; line-height: 1.75; color: var(--warm-grey); }
+  .step-body .step-tag { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+
+  /* EMAIL TEMPLATE */
+  .email-box { border: 1px solid var(--border); background: var(--parchment); }
+  .email-header { background: var(--deep); padding: 20px 28px; display: flex; justify-content: space-between; align-items: center; }
+  .email-header span { font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(245,240,232,0.5); letter-spacing: 0.15em; }
+  .email-subject { padding: 20px 28px 0; font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--deep); border-bottom: 1px solid var(--border); padding-bottom: 16px; }
+  .email-body { padding: 28px; font-size: 13.5px; line-height: 2; color: #4a4540; }
+  .email-body strong { color: var(--deep); font-weight: 500; }
+  .email-cta { margin: 20px 28px 28px; display: inline-block; background: var(--deep); color: var(--gold-light); font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; padding: 14px 28px; text-decoration: none; border: 1px solid rgba(184,150,62,0.3); }
+
+  /* LANGUAGE */
+  .lang-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border); border: 1px solid var(--border); }
+  .lang-side { background: var(--parchment); padding: 32px; }
+  .lang-side h3 { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 20px; }
+  .lang-side.avoid h3 { color: var(--red); }
+  .lang-side.use h3 { color: var(--green); }
+  .lang-row { padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .lang-row:last-child { border-bottom: none; }
+  .lang-bad { font-size: 14px; font-family: 'Cormorant Garamond', serif; font-weight: 600; color: var(--red); margin-bottom: 3px; }
+  .lang-good { font-size: 14px; font-family: 'Cormorant Garamond', serif; font-weight: 600; color: var(--green); margin-bottom: 3px; }
+  .lang-why { font-size: 12px; line-height: 1.65; color: var(--warm-grey); }
+
+  /* FOOTER */
+  footer { background: var(--deep); padding: 36px 80px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(184,150,62,0.15); }
+  footer p { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.15em; color: rgba(245,240,232,0.25); }
+
+  @media(max-width:900px){
+    .tab-nav { padding: 0 20px; }
+    header { padding: 40px 24px 36px; }
+    main { padding: 48px 20px; }
+    .diff-grid,.platform-grid { grid-template-columns:1fr; }
+    .site-page { grid-template-columns:1fr; }
+    .page-cols { grid-template-columns:1fr; }
+    .funnel-wrap { grid-template-columns:1fr; }
+    .fd-grid { grid-template-columns:1fr; }
+    .lang-grid { grid-template-columns:1fr; }
+    footer { flex-direction:column; gap:16px; }
+    .comp-table { display:block; overflow-x:auto; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-label">Strategic Blueprint v2 · Design Agency</div>
+  <h1>Competitive Positioning &amp; <em>Platform Strategy</em></h1>
+  <p>How to out-position Superside, DesignJoy, and Design Pickle — attract premium clients through your site, and convert them through your proprietary platform — without a pricing page in sight.</p>
+</header>
+
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('competitors',this)">01 · Competitors</button>
+  <button class="tab-btn" onclick="switchTab('sitemap',this)">02 · Site Map</button>
+  <button class="tab-btn" onclick="switchTab('funnel',this)">03 · Funnel</button>
+  <button class="tab-btn" onclick="switchTab('platform',this)">04 · Platform</button>
+  <button class="tab-btn" onclick="switchTab('outreach',this)">05 · Outreach</button>
+  <button class="tab-btn" onclick="switchTab('language',this)">06 · Language</button>
+</div>
+
+<!-- TAB 1: COMPETITORS -->
+<div class="tab-content active" id="tab-competitors">
+<main>
+  <div class="s-label">01 · Landscape</div>
+  <h2 class="s-title">Competitor Analysis &amp; Your White Space</h2>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Agency</th>
+        <th>Model</th>
+        <th>Target Client</th>
+        <th>Pricing Approach</th>
+        <th>Their Weaknesses (Your Opportunity)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <span class="comp-name">Superside</span>
+          <span class="comp-url">superside.com</span>
+        </td>
+        <td>Subscription + AI-powered production. Large distributed team. "Creative team's creative team" — designed to sit <em>under</em> in-house teams.</td>
+        <td>Enterprise marketing teams needing volume at speed. Fortune 500 in-house teams.</td>
+        <td>Publicly listed tiered subscriptions. Transactional, volume-based. "Affordable" is part of their pitch.</td>
+        <td>
+          <span class="gap-pill gap-weak">Commoditised</span>
+          <span class="gap-pill gap-weak">No human relationship</span>
+          <span class="gap-pill gap-weak">AI-heavy = generic</span>
+          <span class="gap-pill gap-weak">Too big to be personal</span>
+          <br><br>
+          They're a factory. You're a studio. They scale down quality to serve volume. You curate access to ensure quality. They have no bespoke tender capability.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="comp-name">DesignJoy</span>
+          <span class="comp-url">designjoy.co</span>
+        </td>
+        <td>Solo designer. Flat monthly subscription. One request at a time. Uses Trello to manage requests. Run entirely by one person (Brett).</td>
+        <td>Startups, SMEs, solo founders needing fast, affordable design at low commitment.</td>
+        <td>Fully public, flat-rate monthly pricing. No pricing conversations at all.</td>
+        <td>
+          <span class="gap-pill gap-weak">Single person = risk</span>
+          <span class="gap-pill gap-weak">No strategy — just execution</span>
+          <span class="gap-pill gap-weak">Not enterprise-ready</span>
+          <span class="gap-pill gap-weak">Trello board = low prestige</span>
+          <br><br>
+          DesignJoy is the anti-enterprise model. No account management, no strategic input, no formal proposal capability. Their client ceiling is low.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="comp-name">Design Pickle</span>
+          <span class="comp-url">designpickle.com</span>
+        </td>
+        <td>Subscription-based creative service. Clients buy reserved daily "creative hours" (2–12hrs/day) from a distributed team. Has its own platform with AI tools and asset management. Pivoted to an hours-based model in mid-2025, scrapping tiers.</td>
+        <td>Growth-stage businesses and marketing teams with steady, recurring design output needs — social, email, presentations, and basic motion. Not enterprise, not strategic.</td>
+        <td>Fully public pricing starting ~$1,918/month (platform fee + daily hours). Transparent, tiered by hours. No scoped projects — just time blocks. "Unlimited revisions" is a headline promise.</td>
+        <td>
+          <span class="gap-pill gap-weak">Time-block model = no strategy</span>
+          <span class="gap-pill gap-weak">Queue-based, not relationship-based</span>
+          <span class="gap-pill gap-weak">High churn, commodity perception</span>
+          <span class="gap-pill gap-weak">No formal tender capability</span>
+          <br><br>
+          Design Pickle occupies the "middle market" — more structured than DesignJoy, less capable than Superside. Their hours model means clients pay for time, not outcomes. You sell outcomes. They cannot credibly service a procurement brief, present credentials, or act as a strategic partner. Their platform is a workflow tool; yours is a relationship environment.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="comp-name">Your Agency</span>
+          <span class="comp-url">yoursite.com</span>
+        </td>
+        <td>High-end bespoke studio. Proprietary client platform. Selective engagement model. Strategic partner — not a vendor.</td>
+        <td>Ambitious organisations, large-scale commissions, formal procurement contexts.</td>
+        <td>No public pricing. Investment discussed in conversation, scoped to brief.</td>
+        <td>
+          <span class="gap-pill gap-strong">Premium positioning</span>
+          <span class="gap-pill gap-strong">Proprietary platform</span>
+          <span class="gap-pill gap-strong">Bespoke relationships</span>
+          <span class="gap-pill gap-strong">Formal commission capability</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- MARKET MAP VISUAL -->
+  <div class="s-label">Market Positioning Map</div>
+  <h2 class="s-title" style="margin-bottom:24px;">Where Every Player Sits — and Where You Win</h2>
+  <div style="background:var(--parchment);border:1px solid var(--border);padding:40px;margin-bottom:56px;position:relative;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;background:var(--border);min-height:320px;">
+      <!-- Top-left: High quality, low relationship -->
+      <div style="background:#faf7f2;padding:28px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--warm-grey);margin-bottom:12px;">High Output · Low Relationship</div>
+        <div>
+          <div style="display:inline-block;background:rgba(184,150,62,0.12);border:1px solid rgba(184,150,62,0.3);padding:8px 16px;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:#9a7a28;margin-bottom:6px;">Superside</div>
+          <div style="font-size:12px;color:var(--warm-grey);line-height:1.6;">Enterprise volume. AI-powered throughput. High spend, low personal touch. You're a line item, not a partner.</div>
+        </div>
+      </div>
+      <!-- Top-right: High quality, high relationship = YOU -->
+      <div style="background:var(--deep);padding:28px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:-30px;right:-30px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(184,150,62,0.15) 0%,transparent 70%);"></div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Bespoke Craft · Deep Relationship</div>
+        <div>
+          <div style="display:inline-block;background:var(--gold);padding:8px 16px;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:var(--deep);margin-bottom:6px;">Your Studio</div>
+          <div style="font-size:12px;color:rgba(245,240,232,0.65);line-height:1.6;">Strategic partner. Proprietary platform. Formal commission capability. Premium clients who want outcomes, not hours.</div>
+        </div>
+      </div>
+      <!-- Bottom-left: Low quality, low relationship -->
+      <div style="background:#faf7f2;padding:28px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--warm-grey);margin-bottom:12px;">Low Cost · Transactional</div>
+        <div>
+          <div style="display:inline-block;background:rgba(184,62,62,0.08);border:1px solid rgba(184,62,62,0.2);padding:8px 16px;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:var(--red);margin-bottom:4px;">DesignJoy</div>
+          <div style="font-size:12px;color:var(--warm-grey);line-height:1.6;margin-bottom:10px;">Solo operator. Flat subscription. Trello queue. No strategy, no scale, no formal capability.</div>
+        </div>
+      </div>
+      <!-- Bottom-right: Medium quality, medium relationship -->
+      <div style="background:#faf7f2;padding:28px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--warm-grey);margin-bottom:12px;">Steady Output · Time-Based</div>
+        <div>
+          <div style="display:inline-block;background:rgba(100,100,180,0.08);border:1px solid rgba(100,100,180,0.2);padding:8px 16px;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:#5a5a9a;margin-bottom:4px;">Design Pickle</div>
+          <div style="font-size:12px;color:var(--warm-grey);line-height:1.6;">Middle market. Sells hours, not outcomes. Has a platform but it's a workflow tool, not a relationship environment.</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:12px;padding:0 4px;">
+      <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;color:var(--warm-grey);text-transform:uppercase;">← Low Relationship</span>
+      <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;color:var(--warm-grey);text-transform:uppercase;">High Relationship →</span>
+    </div>
+  </div>
+
+  <div class="s-label">Your White Space</div>
+  <h2 class="s-title" style="margin-bottom:24px;">Three Differentiators None of Your Competitors Can Claim</h2>
+  <div class="diff-grid">
+    <div class="diff-card">
+      <div class="diff-icon">◈</div>
+      <h3>A Proprietary Client Platform</h3>
+      <p>DesignJoy uses Trello. Design Pickle has a workflow platform built for throughput. Superside has tech buried in their enterprise product. Yours is a bespoke relationship environment — built around the client, not the queue.</p>
+      <div class="vs">None of them built a platform as a client relationship tool. Yours is unique.</div>
+    </div>
+    <div class="diff-card">
+      <div class="diff-icon">◉</div>
+      <h3>Outcomes Over Hours</h3>
+      <p>Superside, DesignJoy, and Design Pickle all sell time in different packages. You sell results. Your clients aren't buying hours of creative labour — they're commissioning transformation. That framing puts you in a completely different market.</p>
+      <div class="vs">All three competitors are trapped in the time-for-money model. You aren't.</div>
+    </div>
+    <div class="diff-card">
+      <div class="diff-icon">◎</div>
+      <h3>Formal Commission Capability</h3>
+      <p>None of these three can credibly respond to a structured brief, present formal credentials, or operate within a procurement process. That entire market — organisations that require selection, vetting, and accountability — is yours alone to serve.</p>
+      <div class="vs">The formal commissioning market is structurally inaccessible to all three competitors.</div>
+    </div>
+  </div>
+</main>
+</div>
+
+<!-- TAB 2: SITEMAP -->
+<div class="tab-content" id="tab-sitemap">
+<main>
+  <div class="s-label">02 · Architecture</div>
+  <h2 class="s-title">Site Map — No Pricing Page Required</h2>
+
+  <div>
+    <div class="site-page">
+      <div class="page-label">
+        <div class="page-name">Home</div>
+        <div class="page-route">/</div>
+        <span class="f-badge b-aware">Awareness</span>
+      </div>
+      <div class="page-cols">
+        <div class="pc"><h4>Purpose</h4><p>Immediate authority signal. Communicate <em>who you are for</em>, not what you cost. Premium positioning in the hero — before they scroll once.</p></div>
+        <div class="pc"><h4>Key Sections</h4><ul><li>Positioning headline (not a tagline)</li><li>3 hero case studies, sector-diverse</li><li>Client logos / credibility strip</li><li>Platform teaser — "how we work"</li><li>Perspectives preview</li></ul></div>
+        <div class="pc"><h4>Conversion Goal</h4><p>Invite deeper exploration. No aggressive CTA. Prospects self-select by sector — Work, Expertise, or Platform.</p></div>
+      </div>
+    </div>
+    <div class="site-page">
+      <div class="page-label">
+        <div class="page-name">Work</div>
+        <div class="page-route">/work</div>
+        <span class="f-badge b-trust">Trust</span>
+      </div>
+      <div class="page-cols">
+        <div class="pc"><h4>Purpose</h4><p>Primary trust engine. Large-scale commissions, outcomes-led narratives. Where procurement teams self-qualify your capability.</p></div>
+        <div class="pc"><h4>Key Sections</h4><ul><li>Sector filters (not service filters)</li><li>Full case studies: brief → challenge → outcome</li><li>Quantified results where possible</li><li>Client testimonials from senior decision-makers</li></ul></div>
+        <div class="pc"><h4>Conversion Goal</h4><p>Prospect reads one deep case study and sees their own organisation in it. They move directly to Begin.</p></div>
+      </div>
+    </div>
+    <div class="site-page">
+      <div class="page-label">
+        <div class="page-name">Expertise</div>
+        <div class="page-route">/expertise</div>
+        <span class="f-badge b-trust">Trust</span>
+      </div>
+      <div class="page-cols">
+        <div class="pc"><h4>Purpose</h4><p>Replace a "Services" page with demonstrated mastery. Validates capability before a formal brief is submitted. Removes procurement objections.</p></div>
+        <div class="pc"><h4>Key Sections</h4><ul><li>Discipline areas (Brand, Digital, Print…)</li><li>Strategic methodology — how you think</li><li>Sectors served with depth markers</li><li>Process: from brief to completion</li></ul></div>
+        <div class="pc"><h4>Conversion Goal</h4><p>Build confidence that you can handle the scale and complexity of their requirements. Supports formal shortlisting.</p></div>
+      </div>
+    </div>
+    <div class="site-page">
+      <div class="page-label">
+        <div class="page-name">Platform</div>
+        <div class="page-route">/platform</div>
+        <span class="f-badge b-platform">Differentiator</span>
+      </div>
+      <div class="page-cols">
+        <div class="pc"><h4>Purpose</h4><p>Your most unique asset — shown as a proof of operational maturity. Not a tool demo, but a statement about how seriously you treat client relationships and accountability.</p></div>
+        <div class="pc"><h4>Key Sections</h4><ul><li>What the platform does (not how it works)</li><li>Client-facing benefits: visibility, control, clarity</li><li>Screenshots / interface preview</li><li>Security &amp; access credentials</li></ul></div>
+        <div class="pc"><h4>Conversion Goal</h4><p>Clients and procurement leads see infrastructure that rivals enterprise vendors. Differentiates you from all subscription competitors immediately.</p></div>
+      </div>
+    </div>
+    <div class="site-page">
+      <div class="page-label">
+        <div class="page-name">Studio</div>
+        <div class="page-route">/studio</div>
+        <span class="f-badge b-trust">Trust</span>
+      </div>
+      <div class="page-cols">
+        <div class="pc"><h4>Purpose</h4><p>Humanise the agency for formal procurement contexts. Decision-makers need to trust the people, not just the portfolio. Years of operation, values, leadership.</p></div>
+        <div class="pc"><h4>Key Sections</h4><ul><li>Founding story / agency manifesto</li><li>Leadership team with context</li><li>Studio values and working principles</li><li>Awards, press, recognition</li></ul></div>
+        <div class="pc"><h4>Conversion Goal</h4><p>Support credential submissions. Enable procurement teams to verify you as a serious, stable studio with staying power.</p></div>
+      </div>
+    </div>
+    <div class="site-page">
+      <div class="page-label">
+        <div class="page-name">Perspectives</div>
+        <div class="page-route">/perspectives</div>
+        <span class="f-badge b-aware">Awareness</span>
+      </div>
+      <div class="page-cols">
+        <div class="pc"><h4>Purpose</h4><p>Thought leadership that attracts your ideal client via search and sharing. Builds authority in target sectors before a brief even exists.</p></div>
+        <div class="pc"><h4>Key Sections</h4><ul><li>Long-form essays on design &amp; sector strategy</li><li>Project reflections</li><li>Annual design / sector reports</li><li>Email subscription prompt</li></ul></div>
+        <div class="pc"><h4>Conversion Goal</h4><p>Builds organic audience. Establishes intellectual credibility. Generates return visits from future clients not yet ready to brief.</p></div>
+      </div>
+    </div>
+    <div class="site-page">
+      <div class="page-label">
+        <div class="page-name">Begin</div>
+        <div class="page-route">/begin</div>
+        <span class="f-badge b-convert">Convert</span>
+      </div>
+      <div class="page-cols">
+        <div class="pc"><h4>Purpose</h4><p>The enquiry page — framed as beginning a conversation, not filling a form. The language here must match the calibre of the rest of the site.</p></div>
+        <div class="pc"><h4>Key Sections</h4><ul><li>4–6 qualifying questions max</li><li>Sector &amp; scale indicators</li><li>Timeline field</li><li>Warm reassurance copy on next steps</li></ul></div>
+        <div class="pc"><h4>Conversion Goal</h4><p>Quality over quantity. Pre-qualify the brief. Ensure only well-matched conversations are initiated. Respond personally within 24 hours.</p></div>
+      </div>
+    </div>
+  </div>
+</main>
+</div>
+
+<!-- TAB 3: FUNNEL -->
+<div class="tab-content" id="tab-funnel">
+<main>
+  <div class="s-label">03 · Strategy</div>
+  <h2 class="s-title">The Client Acquisition Funnel</h2>
+  <div class="funnel-wrap">
+    <div>
+      <div class="funnel-stage active" onclick="showFd(0,this)"><div class="fsn">1</div><div><div class="fst">Discovery</div><div class="fss">They find you and are impressed</div></div></div>
+      <div class="funnel-stage" onclick="showFd(1,this)"><div class="fsn">2</div><div><div class="fst">Research</div><div class="fss">They evaluate your depth and fit</div></div></div>
+      <div class="funnel-stage" onclick="showFd(2,this)"><div class="fsn">3</div><div><div class="fst">Validation</div><div class="fss">They confirm you are the right choice</div></div></div>
+      <div class="funnel-stage" onclick="showFd(3,this)"><div class="fsn">4</div><div><div class="fst">Engagement</div><div class="fss">They reach out via Begin</div></div></div>
+      <div class="funnel-stage" onclick="showFd(4,this)"><div class="fsn">5</div><div><div class="fst">Platform Onboarding</div><div class="fss">They join your client environment</div></div></div>
+      <div class="funnel-stage" onclick="showFd(5,this)"><div class="fsn">6</div><div><div class="fst">Commission</div><div class="fss">Work begins on shared platform</div></div></div>
+    </div>
+    <div>
+      <div class="fd visible" id="fd-0">
+        <div class="fd-title">Discovery &amp; Attraction</div>
+        <div class="fd-label">Stage 01 · Top of Funnel</div>
+        <div class="fd-grid">
+          <div class="fd-block"><h4>Inbound Channels</h4><ul><li>Organic search — sector keywords</li><li>Design awards &amp; industry press</li><li>LinkedIn long-form posts</li><li>Client referrals (highest quality)</li><li>Speaking at sector events</li></ul></div>
+          <div class="fd-block"><h4>Pages Activated</h4><ul><li>Home — first impression authority</li><li>Perspectives — search &amp; shares</li><li>Studio — if Googled directly</li></ul></div>
+        </div>
+        <div class="fd-metric"><div class="fd-metric-num">7s</div><div class="fd-metric-desc">Time to form a first impression. Your homepage must communicate premium, selective, and credible within one scroll — before they read a word.</div></div>
+      </div>
+      <div class="fd" id="fd-1">
+        <div class="fd-title">Research &amp; Evaluation</div>
+        <div class="fd-label">Stage 02 · Mid Funnel</div>
+        <div class="fd-grid">
+          <div class="fd-block"><h4>Prospect Behaviour</h4><ul><li>Deep reading of case studies</li><li>Checking your sector experience</li><li>Reading Studio / team pages</li><li>Forwarding your site internally</li><li>Comparing to other agencies</li></ul></div>
+          <div class="fd-block"><h4>Pages Activated</h4><ul><li>Work — case study depth</li><li>Expertise — methodology confidence</li><li>Platform — operational credibility</li><li>Studio — team &amp; longevity</li></ul></div>
+        </div>
+        <div class="fd-metric"><div class="fd-metric-num">3–5</div><div class="fd-metric-desc">Pages a serious prospect visits before making contact. Your Platform page now becomes a decisive differentiator at this stage — neither competitor has one.</div></div>
+      </div>
+      <div class="fd" id="fd-2">
+        <div class="fd-title">Validation &amp; Trust</div>
+        <div class="fd-label">Stage 03 · Intent Signal</div>
+        <div class="fd-grid">
+          <div class="fd-block"><h4>What Validates You</h4><ul><li>Recognisable clients in relevant sectors</li><li>Quantified outcomes, not just visuals</li><li>Senior stakeholder testimonials</li><li>Industry awards &amp; recognition</li><li>Years of operation &amp; team depth</li></ul></div>
+          <div class="fd-block"><h4>Formal Procurement Signals</h4><ul><li>Company registration visible</li><li>Insurance &amp; compliance indicators</li><li>Platform demonstrates process maturity</li><li>Named account contacts</li></ul></div>
+        </div>
+        <div class="fd-metric"><div class="fd-metric-num">68%</div><div class="fd-metric-desc">Of B2B buyers complete their research before first contact. Your site closes procurement objections before the conversation even begins.</div></div>
+      </div>
+      <div class="fd" id="fd-3">
+        <div class="fd-title">Engagement &amp; Qualification</div>
+        <div class="fd-label">Stage 04 · Conversion</div>
+        <div class="fd-grid">
+          <div class="fd-block"><h4>Begin Page Experience</h4><ul><li>Warm, considered copywriting</li><li>4–6 qualifying fields only</li><li>Scale &amp; sector context required</li><li>Immediate auto-confirmation sent</li><li>Personal response within 24 hours</li></ul></div>
+          <div class="fd-block"><h4>What You Qualify For</h4><ul><li>Ambition &amp; scale match</li><li>Decision-maker is in contact</li><li>Timeline is realistic</li><li>Budget signals genuine investment</li></ul></div>
+        </div>
+        <div class="fd-metric"><div class="fd-metric-num">24h</div><div class="fd-metric-desc">Maximum response time to an enquiry. A personal, considered reply within 24 hours is itself a demonstration of the quality of service to come.</div></div>
+      </div>
+      <div class="fd" id="fd-4">
+        <div class="fd-title">Platform Onboarding</div>
+        <div class="fd-label">Stage 05 · New to Your Funnel</div>
+        <div class="fd-grid">
+          <div class="fd-block"><h4>The Platform Welcome</h4><ul><li>Personal invitation sent to client</li><li>Bespoke workspace created for their project</li><li>Onboarding call scheduled</li><li>Brief documented in platform</li><li>Kick-off milestone set</li></ul></div>
+          <div class="fd-block"><h4>Why This Stage Matters</h4><ul><li>Replaces awkward email chains</li><li>Signals investment &amp; professionalism</li><li>Creates a record of every decision</li><li>Client feels held and organised</li><li>Becomes a retention tool for repeat work</li></ul></div>
+        </div>
+        <div class="fd-metric"><div class="fd-metric-num">↑</div><div class="fd-metric-desc">Platform onboarding is a moment Superside and DesignJoy cannot replicate. It's where your premium positioning becomes tangible, not just promised.</div></div>
+      </div>
+      <div class="fd" id="fd-5">
+        <div class="fd-title">Commission &amp; Delivery</div>
+        <div class="fd-label">Stage 06 · Active Engagement</div>
+        <div class="fd-grid">
+          <div class="fd-block"><h4>Inside the Platform</h4><ul><li>All briefs, revisions, approvals logged</li><li>Milestones and timelines visible</li><li>File delivery through platform</li><li>Feedback loops structured &amp; clear</li><li>No lost emails or version confusion</li></ul></div>
+          <div class="fd-block"><h4>Post-Project</h4><ul><li>Completion summary shared via platform</li><li>Case study permission request</li><li>Soft re-engagement at 60 days</li><li>Annual review invitation</li><li>Referral ask at peak satisfaction</li></ul></div>
+        </div>
+        <div class="fd-metric"><div class="fd-metric-num">60d</div><div class="fd-metric-desc">Re-engage past clients 60 days after project completion with a personalised platform message. The best new business is retained business.</div></div>
+      </div>
+    </div>
+  </div>
+</main>
+</div>
+
+<!-- TAB 4: PLATFORM -->
+<div class="tab-content" id="tab-platform">
+<main>
+  <div class="s-label">04 · Your Proprietary Advantage</div>
+  <h2 class="s-title">The Client Platform — How to Position &amp; Show It</h2>
+
+  <div class="platform-hero">
+    <h2>Not a tool. <em>An environment.</em></h2>
+    <p>Your platform is the most tangible proof of your premium positioning. It's not a feature — it's evidence that you've invested in your client relationships at an infrastructure level. Position it that way.</p>
+  </div>
+
+  <div style="height:2px;"></div>
+
+  <div class="platform-grid" style="margin-top:2px;">
+    <div class="platform-card">
+      <div class="platform-card-icon">📋</div>
+      <h3>Centralised Brief Management</h3>
+      <p>Every request, revision, and approval lives in one place. Clients always know where things stand. No chasing emails, no lost files, no version confusion. Structure signals professionalism from day one.</p>
+    </div>
+    <div class="platform-card">
+      <div class="platform-card-icon">🔍</div>
+      <h3>Real-Time Project Visibility</h3>
+      <p>Clients can see progress against milestones without asking. Status updates are automatic. This removes the most common anxiety in client-agency relationships: "where is my project?"</p>
+    </div>
+    <div class="platform-card">
+      <div class="platform-card-icon">💬</div>
+      <h3>Structured Feedback Loops</h3>
+      <p>Feedback is given in context, pinned to deliverables, and tracked to resolution. No interpretation gaps. Every revision is documented — protecting both client and studio.</p>
+    </div>
+    <div class="platform-card">
+      <div class="platform-card-icon">📁</div>
+      <h3>Secure Asset Delivery</h3>
+      <p>Files are delivered, versioned, and archived through the platform. Clients always have access to every asset, at any time, without needing to ask. Final asset packs are accessible permanently.</p>
+    </div>
+    <div class="platform-card">
+      <div class="platform-card-icon">📊</div>
+      <h3>Engagement History</h3>
+      <p>Every project, every brief, every conversation — stored. When a returning client starts a new project, the context is already there. This is relationship memory, systematised.</p>
+    </div>
+    <div class="platform-card">
+      <div class="platform-card-icon">🔒</div>
+      <h3>Access &amp; Compliance Ready</h3>
+      <p>Role-based access, audit trails, and documented approvals support formal procurement environments. Built for the kind of clients who require sign-off accountability and version control.</p>
+    </div>
+  </div>
+
+  <div class="s-label" style="margin-top:56px;">How to Show It on the Site</div>
+  <h2 class="s-title" style="margin-bottom:24px;">The /platform Page Strategy</h2>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);border:1px solid var(--border);">
+    <div style="background:var(--parchment);padding:32px;">
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--deep);margin-bottom:12px;">What to Show</h3>
+      <ul style="list-style:none;">
+        <li style="font-size:13px;line-height:1.9;color:var(--warm-grey);padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">›</span>A short video or animated walkthrough (no login required)</li>
+        <li style="font-size:13px;line-height:1.9;color:var(--warm-grey);padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">›</span>3–4 interface screenshots, lightly branded</li>
+        <li style="font-size:13px;line-height:1.9;color:var(--warm-grey);padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">›</span>Client quote specifically about the platform experience</li>
+        <li style="font-size:13px;line-height:1.9;color:var(--warm-grey);padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">›</span>The 6 benefit pillars (as named cards, not tech specs)</li>
+        <li style="font-size:13px;line-height:1.9;color:var(--warm-grey);padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--gold);">›</span>CTA: "Platform access is included with every engagement"</li>
+      </ul>
+    </div>
+    <div style="background:var(--parchment);padding:32px;">
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--deep);margin-bottom:12px;">What Not to Show</h3>
+      <ul style="list-style:none;">
+        <li style="font-size:13px;line-height:1.9;color:var(--warm-grey);padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--red);">✕</span>A login button on the main nav (keeps it exclusive)</li>
+        <li style="font-size:13px;line-height:1.9;color:var(--warm-grey);padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--red);">✕</span>Any pricing or plan tiers for platform access</li>
+        <li style="font-size:13px;line-height:1.9;color:var(--warm-grey);padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--red);">✕</span>Technical jargon or stack references</li>
+        <li style="font-size:13px;line-height:1.9;color:var(--warm-grey);padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--red);">✕</span>Comparison to Trello, Asana, or other tools</li>
+        <li style="font-size:13px;line-height:1.9;color:var(--warm-grey);padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--red);">✕</span>A "sign up free" flow — this is not self-serve</li>
+      </ul>
+    </div>
+  </div>
+</main>
+</div>
+
+<!-- TAB 5: OUTREACH -->
+<div class="tab-content" id="tab-outreach">
+<main>
+  <div class="s-label">05 · Client Outreach</div>
+  <h2 class="s-title">Reaching Existing Clients with Your Platform</h2>
+
+  <div class="outreach-flow">
+    <div class="outreach-step">
+      <div class="step-num-col"><div class="step-num">1</div></div>
+      <div class="step-body">
+        <div class="step-tag">Preparation</div>
+        <h3>Segment Your Existing Client List</h3>
+        <p>Divide into three groups before outreach: (A) Active clients mid-project, (B) Recently completed clients within 12 months, (C) Dormant clients not engaged in over a year. Each group receives a different message with a different tone and purpose.</p>
+      </div>
+    </div>
+    <div class="outreach-step">
+      <div class="step-num-col"><div class="step-num">2</div></div>
+      <div class="step-body">
+        <div class="step-tag">Messaging</div>
+        <h3>Frame It as an Upgrade, Not a Feature</h3>
+        <p>Do not send "we built a new tool." Send "we've invested in the way we work together." The platform is a benefit to them — more clarity, less friction, better outcomes. Every word should make them feel like they're gaining something, not being asked to do something new.</p>
+      </div>
+    </div>
+    <div class="outreach-step">
+      <div class="step-num-col"><div class="step-num">3</div></div>
+      <div class="step-body">
+        <div class="step-tag">Channel</div>
+        <h3>Personal Email First — Not a Newsletter</h3>
+        <p>Do not blast this via Mailchimp. For high-value clients, a personal email from a named senior contact carries ten times the weight. Reference their last project by name. Make it feel like a private introduction, not a broadcast. Reserve the newsletter format for a wider "studio news" send, months later.</p>
+      </div>
+    </div>
+    <div class="outreach-step">
+      <div class="step-num-col"><div class="step-num">4</div></div>
+      <div class="step-body">
+        <div class="step-tag">Invitation</div>
+        <h3>Invite to a Private Platform Walkthrough</h3>
+        <p>Offer a 20-minute screen share: "I'd love to show you what we've built." This is not a sales call — it's a demonstration of investment in your relationship. It also creates a natural opportunity to re-engage on future work without asking for business directly.</p>
+      </div>
+    </div>
+    <div class="outreach-step">
+      <div class="step-num-col"><div class="step-num">5</div></div>
+      <div class="step-body">
+        <div class="step-tag">Follow-Through</div>
+        <h3>Onboard Their Historical Projects Into the Platform</h3>
+        <p>Before the walkthrough call, pre-load their previous project assets and notes into their workspace. When they join the call and see their own work already organised there, the value is visceral. They didn't expect that. That's the moment the platform converts from a feature into a reason to stay.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-label">Outreach Email Template — Existing Client</div>
+  <h2 class="s-title" style="margin-bottom:24px;">Group B: Recently Completed Clients</h2>
+
+  <div class="email-box">
+    <div class="email-header">
+      <span>Personal Email · From Founder / Senior Account Lead</span>
+      <span>Group B Template</span>
+    </div>
+    <div class="email-subject">Something we built — and I wanted you to see it first</div>
+    <div class="email-body">
+      Hi <strong>[First Name]</strong>,<br><br>
+      I hope things are going well at <strong>[Organisation]</strong> — I still think about the <strong>[project name]</strong> work often, and from what I've heard it's been well received.<br><br>
+      I'm reaching out because we've spent the past months building something I think will genuinely change how we work together — a dedicated client platform that brings your projects, briefs, assets, and communication into one considered environment. No more email threads, no more wondering where things stand.<br><br>
+      I wanted to show it to you before anyone else, and I've already created a workspace with your previous work inside — so you can see exactly what it would look like for <strong>[Organisation]</strong>.<br><br>
+      Would you have 20 minutes in the next couple of weeks for a quick screen share? No agenda beyond showing you what we've built — and of course, if anything's coming up on your side, I'd love to hear about it.<br><br>
+      Warmly,<br>
+      <strong>[Your Name]</strong>
+    </div>
+    <a class="email-cta" href="#">Book 20-min Walkthrough →</a>
+  </div>
+</main>
+</div>
+
+<!-- TAB 6: LANGUAGE -->
+<div class="tab-content" id="tab-language">
+<main>
+  <div class="s-label">06 · Voice &amp; Positioning Language</div>
+  <h2 class="s-title">What You Say vs. What Your Competitors Say</h2>
+
+  <div class="lang-grid">
+    <div class="lang-side avoid">
+      <h3>❌ Language That Undermines Premium Positioning</h3>
+      <div class="lang-row">
+        <div class="lang-bad">Tendering / Bids / Proposals</div>
+        <div class="lang-why">Signals a commodity process. You're not competing on price — you're being selected on capability and trust.</div>
+      </div>
+      <div class="lang-row">
+        <div class="lang-bad">Unlimited revisions / Fast turnaround</div>
+        <div class="lang-why">DesignJoy's language. It signals volume and speed, not quality and craft. Premium clients aren't buying throughput.</div>
+      </div>
+      <div class="lang-row">
+        <div class="lang-bad">We'd love to work with you / We're available</div>
+        <div class="lang-why">Sounds desperate. Premium agencies are selectively engaged, not available.</div>
+      </div>
+      <div class="lang-row">
+        <div class="lang-bad">Affordable / Competitive pricing / Great value</div>
+        <div class="lang-why">Price-positioning language. Your clients aren't looking for affordable. They're looking for excellent.</div>
+      </div>
+      <div class="lang-row">
+        <div class="lang-bad">Full-service agency / One-stop-shop</div>
+        <div class="lang-why">Vague and forgettable. Says nothing about what makes you different or who you're for.</div>
+      </div>
+    </div>
+    <div class="lang-side use">
+      <h3>✓ Language That Builds Authority &amp; Attracts the Right Clients</h3>
+      <div class="lang-row">
+        <div class="lang-good">Selected engagements / Commissioned work</div>
+        <div class="lang-why">Positions each project as curated and intentional. You choose your clients as much as they choose you.</div>
+      </div>
+      <div class="lang-row">
+        <div class="lang-good">Considered craft / Sustained quality</div>
+        <div class="lang-why">Signals deliberate, careful work — the antithesis of subscription-model throughput.</div>
+      </div>
+      <div class="lang-row">
+        <div class="lang-good">We work with organisations who…</div>
+        <div class="lang-why">Selective framing. Attracts the right clients by describing them. Makes prospects want to qualify themselves in.</div>
+      </div>
+      <div class="lang-row">
+        <div class="lang-good">Investment / Partnership / Engagement</div>
+        <div class="lang-why">Reframes cost as mutual commitment to shared outcomes. No pricing page needed when this language is consistent.</div>
+      </div>
+      <div class="lang-row">
+        <div class="lang-good">Strategic design studio / Built for ambition</div>
+        <div class="lang-why">Specific, elevated, memorable. Suggests you're a thinking partner — not a pair of hands. This is what Superside and DesignJoy can never claim credibly.</div>
+      </div>
+    </div>
+  </div>
+</main>
+</div>
+
+<footer>
+  <p>Strategic Blueprint v2 · Confidential</p>
+  <p>Design Agency · For Internal Use</p>
+</footer>
+
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-'+id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  function showFd(i, el) {
+    document.querySelectorAll('.fd').forEach(d => d.classList.remove('visible'));
+    document.querySelectorAll('.funnel-stage').forEach(s => s.classList.remove('active'));
+    document.getElementById('fd-'+i).classList.add('visible');
+    el.classList.add('active');
+  }
+  // Entrance animations
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e,i) => {
+      if(e.isIntersecting){
+        setTimeout(()=>{ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }, i*50);
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.08});
+  document.querySelectorAll('.diff-card,.platform-card,.outreach-step,.site-page').forEach(el=>{
+    el.style.opacity='0'; el.style.transform='translateY(14px)';
+    el.style.transition='opacity 0.45s ease, transform 0.45s ease';
+    obs.observe(el);
+  });
+</script>
+</body>
+</html>
