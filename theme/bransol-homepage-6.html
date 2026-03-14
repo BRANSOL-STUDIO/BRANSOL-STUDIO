@@ -1,0 +1,2099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CHY7B35XNP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CHY7B35XNP');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BRANSOL — Strategic Design Studio. We work with organisations whose ambitions demand more than execution.">
+<title>BRANSOL — Strategic Design Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   RESET & TOKENS
+═══════════════════════════════════════════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --void:   #060608;
+  --deep:   #0d0d12;
+  --surface:#111118;
+  --lift:   #18181f;
+  --panel:  #1e1e27;
+  --ghost:  #2a2a35;
+  --border: rgba(255,255,255,0.07);
+  --text:   #f0eff5;
+  --sub:    rgba(240,239,245,0.6);
+  --ter:    rgba(240,239,245,0.28);
+  --dim:    rgba(240,239,245,0.1);
+
+  --iris:  #7c83e5;
+  --aqua:  #06d6a0;
+  --violet:#c77dff;
+  --rose:  #ff6b9d;
+  --gold:  #ffd166;
+  --sky:   #45b7d1;
+  --teal:  #4ecdc4;
+  --ember: #ff8c42;
+
+  --chrome:linear-gradient(135deg,#ff6b9d,#ff8c42,#ffd166,#06d6a0,#4ecdc4,#45b7d1,#7c83e5,#c77dff);
+  --chrome-h:linear-gradient(90deg,#7c83e5,#06d6a0,#c77dff);
+  --nav-h:68px;
+  --pad-x:72px;
+}
+
+/* ═══════════════════════════════════════════════
+   LIGHT THEME — token overrides
+═══════════════════════════════════════════════ */
+
+
+/* Bg orbs — invert to warm tones on light */
+
+/* Nav — light surface */
+
+/* Chrome edge — keep it, it pops on light */
+
+/* Work section left panel */
+
+/* Work cards — light bg tint */
+
+
+/* Glass cards — lighter glass on light bg */
+
+/* Manifesto, platform, diff, begin sections */
+
+/* Platform mock UI */
+
+/* Footer */
+
+/* ── NAV LOGIN LINK ── */
+.nav-login{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--ter);text-decoration:none;cursor:none;
+  padding:8px 16px;border:1px solid rgba(255,255,255,.1);
+  transition:color .2s,border-color .2s;position:relative;
+}
+.nav-login::after{
+  content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;
+  background:var(--chrome);background-size:300% 100%;animation:cSpin 4s linear infinite;
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform .32s cubic-bezier(.16,1,.3,1);
+}
+.nav-login:hover{color:var(--text);border-color:rgba(255,255,255,.2);}
+.nav-login:hover::after{transform:scaleX(1);}
+
+/* ── TRANSITIONS ── */
+body{transition:background-color .4s ease,color .35s ease;}
+nav{transition:background .4s ease,border-color .35s ease,height .3s ease!important;}
+section,footer,.wss-left,.platform-ui,.pf-card,.diff-card{transition:background-color .4s ease,border-color .35s ease;}
+.exp-glass-card{transition:background .5s ease,border-color .4s ease,transform .5s cubic-bezier(.16,1,.3,1),opacity .65s cubic-bezier(.16,1,.3,1);}
+.nav-links a{transition:color .2s;}
+.wss-item{transition:box-shadow .5s ease,filter .4s ease,opacity .4s ease;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+
+/* Apply theme instantly to html/root so CSS vars swap immediately */
+html{scroll-behavior:smooth;}
+
+body{
+  background:var(--void);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  font-weight:400;
+  font-size:16px;
+  line-height:1.65;
+  cursor:none;
+  overflow-x:hidden;
+}
+
+/* ── CURSOR ─────────────────────────────── */
+.cur{position:fixed;width:7px;height:7px;border-radius:50%;background:var(--chrome);background-size:300% 300%;animation:cSpin 3s linear infinite;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .18s,height .18s;}
+.cur-ring{position:fixed;width:30px;height:30px;border-radius:50%;border:1px solid rgba(124,131,229,.32);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .15s,height .15s,border-color .2s;}
+
+/* ── KEYFRAMES ──────────────────────────── */
+@keyframes cSpin{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes lineGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes scanDown{0%{opacity:0;top:0}5%{opacity:1}95%{opacity:1}100%{opacity:0;top:100%}}
+@keyframes orbPulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes dashPulse{0%,100%{opacity:.4}50%{opacity:1}}
+
+/* ── UTILITY ────────────────────────────── */
+.chrome-text{background:var(--chrome);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:cSpin 5s ease infinite;}
+.mono{font-family:'DM Mono',monospace;font-weight:300;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal-d1{transition-delay:.12s;}.reveal-d2{transition-delay:.22s;}.reveal-d3{transition-delay:.34s;}.reveal-d4{transition-delay:.46s;}.reveal-d5{transition-delay:.58s;}
+
+/* ── BG LAYER ───────────────────────────── */
+.bg-fixed{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:80px 80px;}
+
+/* Richer, more saturated orbs */
+.bg-orb{position:absolute;border-radius:50%;filter:blur(90px);animation:orbPulse 12s ease-in-out infinite;}
+.bg-orb-1{width:800px;height:800px;top:-280px;right:-180px;background:radial-gradient(circle,rgba(124,131,229,.22) 0%,rgba(199,125,255,.08) 40%,transparent 70%);}
+.bg-orb-2{width:700px;height:700px;bottom:-200px;left:-140px;background:radial-gradient(circle,rgba(6,214,160,.18) 0%,rgba(69,183,209,.06) 45%,transparent 70%);animation-delay:5s;}
+.bg-orb-3{width:500px;height:500px;top:35%;left:35%;background:radial-gradient(circle,rgba(199,125,255,.16) 0%,rgba(124,131,229,.04) 50%,transparent 70%);animation-delay:9s;}
+.bg-orb-4{width:420px;height:420px;top:60%;right:12%;background:radial-gradient(circle,rgba(255,107,157,.13) 0%,rgba(255,140,66,.04) 50%,transparent 70%);animation-delay:3s;}
+.bg-orb-5{width:380px;height:380px;top:18%;left:18%;background:radial-gradient(circle,rgba(255,209,102,.1) 0%,rgba(6,214,160,.03) 50%,transparent 70%);animation-delay:7s;}
+
+/* Sweeping chrome aurora band across the middle */
+.bg-aurora{
+  position:absolute;
+  top:30%;left:-20%;
+  width:140%;height:40%;
+  background:linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(124,131,229,.04) 20%,
+    rgba(6,214,160,.05) 40%,
+    rgba(199,125,255,.04) 60%,
+    rgba(255,107,157,.03) 80%,
+    transparent 100%
+  );
+  filter:blur(40px);
+  animation:auroraMove 20s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+@keyframes auroraMove{
+  0%  {transform:translateX(0) skewY(-2deg); opacity:.4;}
+  50% {transform:translateX(5%) skewY(1deg); opacity:.6;}
+  100%{transform:translateX(-3%) skewY(-1deg); opacity:.45;}
+}
+
+/* Radial depth vignette — darkens corners, lifts centre */
+.bg-vignette{position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 50% 40%,transparent 30%,rgba(6,6,8,.6) 100%);}
+
+/* Subtle grain texture via SVG filter */
+.bg-grain{position:absolute;inset:-50%;width:200%;height:200%;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");background-repeat:repeat;background-size:128px 128px;animation:grainShift 0.8s steps(1) infinite;}
+@keyframes grainShift{0%{transform:translate(0,0)}25%{transform:translate(-2%,-1%)}50%{transform:translate(1%,2%)}75%{transform:translate(-1%,1%)}100%{transform:translate(2%,-2%)}}
+
+.bg-scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(124,131,229,.35),rgba(6,214,160,.35),transparent);animation:scanDown 12s ease-in-out 2s infinite;}
+.chrome-edge{position:fixed;left:0;top:0;bottom:0;width:3px;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;z-index:100;box-shadow:0 0 24px rgba(124,131,229,.4),0 0 48px rgba(6,214,160,.2);}
+
+/* ── SHARED SECTION ─────────────────────── */
+section{position:relative;z-index:1;}
+.section-pad{padding:128px var(--pad-x) 128px calc(var(--pad-x) + 3px);}
+.eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.38em;text-transform:uppercase;color:rgba(240,239,245,0.5);display:block;margin-bottom:24px;}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(30px,3.6vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:20px;}
+
+/* ═══════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════ */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;height:var(--nav-h);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 var(--pad-x) 0 calc(var(--pad-x) + 3px);border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(6,6,8,.65);backdrop-filter:blur(20px);}
+nav.scrolled{background:rgba(6,6,8,.92);backdrop-filter:blur(28px);border-color:var(--border);height:58px;}
+.nav-logo{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;letter-spacing:-.02em;line-height:1;text-decoration:none;cursor:none;flex-shrink:0;justify-self:start;}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none;justify-self:center;}
+.nav-links a{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--ter);text-decoration:none;cursor:none;white-space:nowrap;
+  position:relative;padding-bottom:3px;
+  transition:color .25s;
+}
+/* Sliding underline — iris colour, grows from left on hover */
+.nav-links a::after{
+  content:'';
+  position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:var(--chrome);background-size:300% 100%;animation:cSpin 4s linear infinite;
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform .32s cubic-bezier(.16,1,.3,1);
+}
+.nav-links a:hover{color:var(--text);}
+.nav-links a:hover::after{transform:scaleX(1);}
+/* Active page indicator */
+.nav-links a.active{color:var(--sub);}
+.nav-links a.active::after{transform:scaleX(1);opacity:.5;}
+.nav-end{display:flex;align-items:center;gap:12px;justify-self:end;}
+.nav-cta{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:#060608!important;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;padding:10px 24px;text-decoration:none;cursor:none;transition:opacity .2s!important;white-space:nowrap;}
+.nav-cta:hover{opacity:.85;}
+
+/* ═══════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════ */
+.hero{
+  height:100vh;
+  display:grid;
+  grid-template-columns:1fr 520px;
+  padding-top:var(--nav-h);
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-content{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:60px var(--pad-x) 72px calc(var(--pad-x) + 3px);
+  overflow:hidden;
+}
+
+.hero-kicker{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.38em;text-transform:uppercase;color:rgba(240,239,245,0.45);margin-bottom:40px;animation:fadeIn 1s ease .3s both;}
+
+.hero-headline{font-family:'Syne',sans-serif;font-size:clamp(52px,7vw,110px);font-weight:800;letter-spacing:-.045em;line-height:.88;margin-bottom:0;}
+.hero-headline .line{display:block;overflow:hidden;}
+.hero-headline .line-inner{display:block;animation:fadeUp .9s cubic-bezier(.16,1,.3,1) both;}
+.hero-headline .line:nth-child(1) .line-inner{animation-delay:.4s;}
+.hero-headline .line:nth-child(2) .line-inner{animation-delay:.55s;}
+.hero-headline .line:nth-child(3) .line-inner{animation-delay:.7s;}
+
+.hero-rule{width:100%;height:1px;margin:44px 0 32px;background:linear-gradient(90deg,var(--iris),var(--aqua),transparent 60%);transform-origin:left;animation:lineGrow 1.2s ease 1s both;}
+
+.hero-bottom-row{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;}
+
+.hero-sub{font-size:16px;color:var(--sub);max-width:440px;line-height:1.8;font-weight:400;animation:fadeIn 1s ease 1.2s both;}
+
+.hero-platform-pill{display:inline-flex;align-items:center;gap:10px;margin-top:24px;padding:10px 16px;border:1px solid var(--border);background:rgba(124,131,229,.06);text-decoration:none;cursor:none;transition:border-color .2s,background .2s;}
+.hero-platform-pill:hover{border-color:rgba(124,131,229,.3);background:rgba(124,131,229,.1);}
+.hero-platform-pill span{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--sub);}
+.hero-platform-pill svg{stroke:var(--iris);flex-shrink:0;}
+.hero-pill-dot{width:6px;height:6px;border-radius:50%;background:var(--aqua);flex-shrink:0;animation:dashPulse 2s ease-in-out infinite;}
+
+.hero-right-meta{display:flex;flex-direction:column;align-items:flex-end;gap:10px;flex-shrink:0;animation:fadeIn 1s ease 1.4s both;}
+.hero-right-meta span{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--ter);}
+
+.hero-scroll{display:flex;align-items:center;gap:14px;}
+.hero-scroll span{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.35em;text-transform:uppercase;color:var(--ter);}
+.scroll-track{width:40px;height:1px;background:var(--ghost);position:relative;overflow:hidden;}
+.scroll-track::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,var(--iris));animation:scrollRight 2s ease-in-out 2s infinite;}
+@keyframes scrollRight{0%{left:-100%}100%{left:100%}}
+@keyframes tickerMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ═══════════════════════════════════════════════
+   WORK STRIP — 3 columns, Superside style
+═══════════════════════════════════════════════ */
+.work-strip{
+  border-left:1px solid var(--border);
+  overflow:hidden;
+  position:relative;
+  height:100%;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:0 8px;
+  padding:0 8px 0 10px;
+  animation:fadeIn 1s ease 1s both;
+}
+/* Fade masks — taller, softer */
+.work-strip::before{content:'';position:absolute;left:0;right:0;top:0;height:160px;background:linear-gradient(to bottom,var(--void) 30%,transparent);z-index:3;pointer-events:none;}
+.work-strip::after{content:'';position:absolute;left:0;right:0;bottom:0;height:160px;background:linear-gradient(to top,var(--void) 30%,transparent);z-index:3;pointer-events:none;}
+
+.ws-col{display:flex;flex-direction:column;gap:8px;overflow:hidden;position:relative;}
+
+/* Left col scrolls up, mid col scrolls down, right col scrolls up (offset) */
+.ws-track-up  {display:flex;flex-direction:column;gap:8px;animation:wsUp   26s linear infinite;}
+.ws-track-down{display:flex;flex-direction:column;gap:8px;animation:wsDown 30s linear infinite;}
+.ws-track-up:hover,.ws-track-down:hover{animation-play-state:paused;}
+@keyframes wsUp  {from{transform:translateY(0)}   to{transform:translateY(-50%)}}
+@keyframes wsDown{from{transform:translateY(-50%)} to{transform:translateY(0)}}
+
+/* Individual card */
+.ws-card{
+  display:block;
+  width:100%;
+  flex-shrink:0;
+  position:relative;
+  overflow:hidden;
+  text-decoration:none;
+  border-radius:12px;
+  cursor:pointer;
+  transition:transform .45s cubic-bezier(.16,1,.3,1), box-shadow .4s ease;
+  will-change:transform;
+}
+/* Varied heights — tall, regular, short */
+.ws-card          {height:190px;}
+.ws-card.ws-tall  {height:260px;}
+.ws-card.ws-short {height:140px;}
+
+/* Hover — lifts, shadow blooms */
+.ws-card:hover{
+  transform:translateY(-4px) scale(1.01);
+  box-shadow:0 20px 48px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.1);
+}
+
+/* Art layer — fills the card fully, scales on hover */
+.ws-art{
+  position:absolute;inset:0;
+  border-radius:12px;
+  display:flex;flex-direction:column;justify-content:center;align-items:stretch;
+  padding:24px;
+  opacity:.35;
+  transition:transform .6s cubic-bezier(.16,1,.3,1), filter .4s ease, opacity .4s ease;
+  transform:scale(1.0);
+  overflow:hidden;
+}
+.ws-card:hover .ws-art{transform:scale(1.07);filter:brightness(1.15) saturate(1.3);opacity:.55;}
+
+/* Scrim — lighter at idle, nearly gone on hover */
+.ws-scrim{
+  position:absolute;inset:0;border-radius:12px;
+  background:rgba(6,6,8,.55);
+  transition:opacity .4s ease;z-index:1;
+}
+.ws-card:hover .ws-scrim{opacity:0.15;}
+
+/* Bottom text gradient */
+.ws-overlay{
+  position:absolute;bottom:0;left:0;right:0;height:70%;
+  border-radius:0 0 12px 12px;
+  z-index:2;
+  transition:opacity .35s;
+}
+.ws-c1 .ws-overlay{background:linear-gradient(to top,rgba(10,10,30,.96) 0%,rgba(10,10,30,.5) 50%,transparent);}
+.ws-c2 .ws-overlay{background:linear-gradient(to top,rgba(4,20,16,.96) 0%,rgba(4,20,16,.5) 50%,transparent);}
+.ws-c3 .ws-overlay{background:linear-gradient(to top,rgba(26,18,0,.96) 0%,rgba(26,18,0,.5) 50%,transparent);}
+.ws-c4 .ws-overlay{background:linear-gradient(to top,rgba(22,6,30,.96) 0%,rgba(22,6,30,.5) 50%,transparent);}
+.ws-c5 .ws-overlay{background:linear-gradient(to top,rgba(4,12,28,.96) 0%,rgba(4,12,28,.5) 50%,transparent);}
+.ws-c6 .ws-overlay{background:linear-gradient(to top,rgba(24,8,0,.96) 0%,rgba(24,8,0,.5) 50%,transparent);}
+
+/* Card colour fills */
+.ws-c1{background:linear-gradient(145deg,#0d0d22,#141432);}
+.ws-c2{background:linear-gradient(145deg,#041810,#07221a);}
+.ws-c3{background:linear-gradient(145deg,#1e1400,#261a00);}
+.ws-c4{background:linear-gradient(145deg,#190728,#220a34);}
+.ws-c5{background:linear-gradient(145deg,#040e20,#061228);}
+.ws-c6{background:linear-gradient(145deg,#1c0a00,#240e00);}
+
+/* Art elements */
+.ws-vrow{display:flex;gap:6px;margin-bottom:6px;align-items:flex-end;}
+.ws-vblock{flex:1;border:1px solid currentColor;border-radius:2px;}
+.ws-vblock-tall{height:56px;}
+.ws-vblock:not(.ws-vblock-tall){height:28px;}
+.ws-vline{height:1px;background:currentColor;margin-bottom:6px;opacity:.6;}
+
+/* Content overlay — sits above gradient */
+.ws-inner{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  padding:14px 16px 16px;
+  z-index:3;
+}
+
+/* No accent bar — removed */
+.ws-accent-bar{display:none;}
+
+.ws-top{display:none;}
+.ws-sector{
+  font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.18em;text-transform:uppercase;
+  padding:3px 7px;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);
+  border-radius:3px;background:rgba(255,255,255,.06);backdrop-filter:blur(4px);
+}
+.ws-num{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.3);}
+
+.ws-bottom{position:relative;}
+.ws-name{
+  font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:-.01em;
+  line-height:1.25;color:rgba(255,255,255,.92);margin-bottom:3px;
+  transition:color .25s;
+}
+.ws-card:hover .ws-name{color:#fff;}
+.ws-discipline{
+  font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(255,255,255,.4);transition:color .25s;
+}
+.ws-card:hover .ws-discipline{color:rgba(255,255,255,.6);}
+
+/* Arrow — bottom right, slides in */
+.ws-arrow{
+  position:absolute;top:12px;right:12px;
+  width:28px;height:28px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:scale(.8) translateY(-4px);
+  transition:opacity .3s,transform .3s cubic-bezier(.16,1,.3,1);
+  z-index:4;background:rgba(255,255,255,.08);backdrop-filter:blur(8px);
+}
+.ws-card:hover .ws-arrow{opacity:1;transform:scale(1) translateY(0);}
+.ws-arrow svg{width:10px;height:10px;stroke:#fff;fill:none;stroke-width:1.8;}
+
+/* Individual card — Superside style */
+.ws-card{
+  display:block;
+  width:100%;
+  height:200px;
+  flex-shrink:0;
+  position:relative;
+  overflow:hidden;
+  text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  cursor:pointer;
+  transition:border-color .3s;
+}
+
+/* ═══════════════════════════════════════════════
+   MANIFESTO
+═══════════════════════════════════════════════ */
+.manifesto{
+  position:relative;overflow:hidden;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.manifesto::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 55% 80% at 15% 50%,rgba(124,131,229,.18) 0%,transparent 65%),
+    radial-gradient(ellipse 45% 60% at 85% 30%,rgba(6,214,160,.13) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 50% at 60% 90%,rgba(199,125,255,.10) 0%,transparent 55%);
+  pointer-events:none;
+}
+.manifesto-inner{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;
+}
+.manifesto-statement{font-family:'Syne',sans-serif;font-size:clamp(26px,3.2vw,44px);font-weight:700;letter-spacing:-.025em;line-height:1.12;margin-bottom:40px;}
+.stat-row{display:flex;gap:0;padding-top:40px;border-top:1px solid rgba(255,255,255,.07);}
+.stat{
+  display:flex;flex-direction:column;gap:6px;
+  flex:1;padding:28px 32px;
+  position:relative;
+  background:rgba(255,255,255,.03);
+  backdrop-filter:blur(20px) saturate(160%);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  border:1px solid rgba(255,255,255,.07);
+  transition:background .3s,border-color .3s;
+}
+.stat:not(:last-child){border-right:none;}
+.stat::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+}
+.stat:hover{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.12);}
+.stat-num{font-family:'Syne',sans-serif;font-size:38px;font-weight:800;letter-spacing:-.03em;line-height:1;}
+.stat-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--ter);}
+.manifesto-body{display:flex;flex-direction:column;gap:20px;padding-top:8px;}
+.manifesto-body p{font-size:16px;color:var(--sub);line-height:1.8;}
+.manifesto-body p strong{color:var(--text);font-weight:500;}
+
+/* ═══════════════════════════════════════════════
+   WORK — SCROLL PARALLAX GRID
+═══════════════════════════════════════════════ */
+.work-scroll-section{
+  display:grid;
+  grid-template-columns:300px 1fr;
+  border-top:1px solid var(--border);
+  position:relative;
+  z-index:1;
+}
+.wss-left{
+  position:sticky;top:0;height:100vh;
+  display:flex;align-items:center;
+  border-right:1px solid var(--border);
+  background:var(--void);
+  z-index:10; /* sits above all card layers */
+  /* subtle right-edge glow bleeds onto the card grid */
+  box-shadow:4px 0 32px rgba(6,6,8,.7);
+}
+.wss-left-inner{
+  padding:0 40px 0 calc(var(--pad-x) + 3px);
+  display:flex;flex-direction:column;
+}
+.wss-left-inner .eyebrow{margin-bottom:14px;}
+.wss-left-inner .section-title{margin-bottom:20px;}
+.wss-desc{font-size:13px;color:var(--ter);line-height:1.8;margin-bottom:28px;}
+.wss-cta{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--sub);text-decoration:none;
+  padding:11px 18px;border:1px solid var(--border);
+  transition:border-color .2s,color .2s;width:fit-content;margin-bottom:36px;cursor:none;
+}
+.wss-cta:hover{border-color:rgba(255,255,255,.15);color:var(--text);}
+.wss-cta svg{stroke:currentColor;flex-shrink:0;}
+.wss-counter{display:flex;align-items:baseline;gap:6px;border-top:1px solid var(--border);padding-top:24px;}
+.wss-counter-num{font-family:'Syne',sans-serif;font-size:40px;font-weight:800;letter-spacing:-.04em;line-height:1;}
+.wss-counter-sep,.wss-counter-total{font-family:'DM Mono',monospace;font-size:12px;color:var(--ter);}
+
+.wss-right{
+  overflow:hidden;
+  height:100vh;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 14%,black 86%,transparent 100%);
+  mask-image:linear-gradient(to bottom,transparent 0%,black 14%,black 86%,transparent 100%);
+  /* perspective so scale changes read as depth */
+  perspective:1200px;
+}
+.wss-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:16px;padding:0 16px;
+  height:200%;
+}
+.wss-col{display:flex;flex-direction:column;gap:16px;will-change:transform;height:100%;}
+
+/* ── DEPTH LAYERS ─────────────────────────────────────
+   Col A: mid-ground — default
+   Col B: background — smaller, dimmer, slower
+   Col C: foreground — slightly larger, brighter, fastest
+──────────────────────────────────────────────────────── */
+
+/* Col A — mid, no extra treatment */
+#wssColA{
+  animation:colScrollUp 24s linear infinite;
+  animation-delay:-8s; /* stagger: starts 8s in */
+  z-index:2;
+}
+
+/* Col B — pushed back: scale down, dim, blur slightly */
+#wssColB{
+  animation:colScrollDown 32s linear infinite;
+  animation-delay:-19s; /* stagger: starts 19s in */
+  z-index:1;
+  transform-origin:center top;
+  filter:brightness(.65) blur(.4px);
+  opacity:.8;
+}
+/* wrap colB scale in keyframe override */
+@keyframes colScrollDownBack{
+  0%  {transform:translateY(-50%) scale(.88);}
+  100%{transform:translateY(0)    scale(.88);}
+}
+#wssColB{animation-name:colScrollDownBack;}
+
+/* Col C — brought forward: slightly larger, full brightness */
+#wssColC{
+  animation:colScrollUpFront 19s linear infinite;
+  animation-delay:-3s; /* stagger: starts 3s in */
+  z-index:3;
+  filter:brightness(1.08);
+}
+@keyframes colScrollUpFront{
+  0%  {transform:translateY(0)    scale(1.04);}
+  100%{transform:translateY(-50%) scale(1.04);}
+}
+
+@keyframes colScrollUp  {0%{transform:translateY(0)} 100%{transform:translateY(-50%)}}
+@keyframes colScrollDown{0%{transform:translateY(-50%)} 100%{transform:translateY(0)}}
+
+/* ── HOVER INTERACTION ────────────────────────────────
+   Individual card lifts toward viewer on hover.
+   Does NOT pause the column animation.
+──────────────────────────────────────────────────────── */
+
+.wss-item{
+  display:block;position:relative;overflow:hidden;
+  aspect-ratio:3/4;text-decoration:none;cursor:none;flex-shrink:0;
+  box-shadow:
+    0 4px 16px rgba(0,0,0,.45),
+    0 12px 40px rgba(0,0,0,.3),
+    0 1px 0 rgba(255,255,255,.04) inset;
+  /* transition only non-transform properties so it doesn't fight the column animation */
+  transition:box-shadow .5s ease, filter .4s ease, opacity .4s ease;
+}
+
+/* Hover: brighten + deepen shadow — no transform (column handles movement) */
+.wss-item:hover{
+  box-shadow:
+    0 6px 20px rgba(0,0,0,.55),
+    0 16px 48px rgba(0,0,0,.35),
+    0 24px 80px rgba(124,131,229,.1),
+    0 32px 100px rgba(6,214,160,.07),
+    0 0 0 1px rgba(255,255,255,.03) inset;
+  filter:brightness(1.15) saturate(1.2);
+}
+
+/* Col B cards: when hovered, break out of the back-plane dimness */
+#wssColB .wss-item:hover{
+  filter:brightness(1.1) saturate(1.15) blur(0px);
+  box-shadow:
+    0 8px 28px rgba(0,0,0,.6),
+    0 20px 60px rgba(199,125,255,.12),
+    0 0 0 1px rgba(255,255,255,.04) inset;
+}
+/* ── RAINBOW CHROME KEYFRAMES ── */
+@keyframes chromeShift{
+  0%  {background-position:0% 50%}
+  50% {background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes chromeBorderPulse{
+  0%  {opacity:.3}
+  50% {opacity:.55}
+  100%{opacity:.3}
+}
+
+/* Every card: same rich dark base */
+.wss-iris .wss-img-bg,
+.wss-aqua .wss-img-bg,
+.wss-gold .wss-img-bg,
+.wss-violet .wss-img-bg,
+.wss-sky .wss-img-bg,
+.wss-ember .wss-img-bg{
+  background:#0a0a12;
+}
+.wss-img-bg{position:absolute;inset:0;}
+
+/* Chrome shimmer layer — sits on top of bg, shifts on hover */
+.wss-img-bg::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(
+    135deg,
+    rgba(255,107,157,.08),
+    rgba(255,140,66,.05),
+    rgba(255,209,102,.07),
+    rgba(6,214,160,.06),
+    rgba(78,205,196,.07),
+    rgba(69,183,209,.05),
+    rgba(124,131,229,.08),
+    rgba(199,125,255,.07),
+    rgba(255,107,157,.06)
+  );
+  background-size:400% 400%;
+  animation:chromeShift 8s ease infinite;
+  opacity:.6;
+  transition:opacity .5s;
+}
+.wss-item:hover .wss-img-bg::after{opacity:1;}
+
+/* Chrome border — animated rainbow on all sides */
+.wss-item::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(
+    135deg,
+    #ff6b9d,#ff8c42,#ffd166,#06d6a0,#4ecdc4,#45b7d1,#7c83e5,#c77dff,#ff6b9d
+  );
+  background-size:400% 400%;
+  animation:chromeShift 6s ease infinite, chromeBorderPulse 4s ease infinite;
+  z-index:3;
+  padding:1px;
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  opacity:.25;
+  transition:opacity .4s;
+}
+.wss-item:hover::before{opacity:.55;}
+
+/* Top specular — subtle chrome sweep */
+.wss-item::after{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,107,157,.4) 15%,
+    rgba(255,209,102,.5) 30%,
+    rgba(6,214,160,.5) 50%,
+    rgba(124,131,229,.5) 70%,
+    rgba(199,125,255,.4) 85%,
+    transparent 100%
+  );
+  background-size:400% 100%;
+  animation:chromeShift 5s ease infinite;
+  z-index:5;pointer-events:none;
+  opacity:.4;
+  transition:opacity .4s;
+}
+.wss-item:hover::after{opacity:.8;}
+
+/* Hover shadow — soft prismatic glow, not harsh */
+.wss-iris:hover,
+.wss-aqua:hover,
+.wss-gold:hover,
+.wss-violet:hover,
+.wss-sky:hover,
+.wss-ember:hover{
+  box-shadow:
+    0 6px 20px rgba(0,0,0,.55),
+    0 16px 48px rgba(0,0,0,.35),
+    0 24px 80px rgba(124,131,229,.1),
+    0 32px 100px rgba(6,214,160,.07),
+    0 0 0 1px rgba(255,255,255,.03) inset;
+}
+
+.wss-img-art{
+  position:absolute;inset:0;padding:20px;
+  opacity:.18;transition:opacity .35s;
+  display:flex;flex-direction:column;gap:5px;
+}
+/* Art colour — now uses the chrome gradient */
+.wss-iris .wss-img-art,
+.wss-aqua .wss-img-art,
+.wss-gold .wss-img-art,
+.wss-violet .wss-img-art,
+.wss-sky .wss-img-art,
+.wss-ember .wss-img-art{
+  color:rgba(255,255,255,.6);
+}
+.wia-row{display:flex;gap:5px;}
+.wia-b{flex:1;border:1px solid currentColor;opacity:.4;}
+.wia-b.tall{height:56px;}
+.wia-line{height:1px;background:currentColor;opacity:.3;margin:3px 0;}
+
+/* Overlay — chrome iridescent wash */
+.wss-item-overlay{position:absolute;inset:0;opacity:0;transition:opacity .35s;z-index:1;}
+.wss-iris .wss-item-overlay,
+.wss-aqua .wss-item-overlay,
+.wss-gold .wss-item-overlay,
+.wss-violet .wss-item-overlay,
+.wss-sky .wss-item-overlay,
+.wss-ember .wss-item-overlay{
+  background:linear-gradient(
+    160deg,
+    rgba(255,107,157,.06),
+    rgba(124,131,229,.08),
+    rgba(6,214,160,.06)
+  );
+  background-size:300% 300%;
+  animation:chromeShift 5s ease infinite;
+}
+
+.wss-item-info{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:48px 18px 18px;
+  background:linear-gradient(to top,rgba(6,6,8,.97) 55%,transparent);
+  z-index:2;display:flex;flex-direction:column;gap:4px;
+  transform:translateY(10px);opacity:0;
+  transition:transform .3s cubic-bezier(.16,1,.3,1),opacity .28s ease;
+}
+.wss-item-sector{
+  font-family:'DM Mono',monospace;font-size:6px;letter-spacing:.25em;text-transform:uppercase;
+  /* Chrome text for sector label */
+  background:linear-gradient(90deg,#ff6b9d,#ffd166,#06d6a0,#7c83e5,#c77dff);
+  background-size:300% 100%;
+  animation:chromeShift 4s ease infinite;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+/* Override colour-specific sector rules — all unified now */
+.wss-iris .wss-item-sector,
+.wss-aqua .wss-item-sector,
+.wss-gold .wss-item-sector,
+.wss-violet .wss-item-sector,
+.wss-sky .wss-item-sector,
+.wss-ember .wss-item-sector{color:unset;}
+
+.wss-item-title{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:-.01em;line-height:1.3;color:var(--text);}
+.wss-item-scope{font-family:'DM Mono',monospace;font-size:6px;letter-spacing:.14em;text-transform:uppercase;color:var(--ter);}
+
+/* ═══════════════════════════════════════════════
+   EXPERTISE — ULTRA GLASSMORPHISM
+═══════════════════════════════════════════════ */
+.expertise{
+  position:relative;
+  border-top:1px solid var(--border);
+  overflow:hidden;
+  padding:140px var(--pad-x) 140px calc(var(--pad-x) + 3px);
+}
+.expertise::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 55% 50% at 15% 55%, rgba(124,131,229,.12) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 55% at 85% 30%, rgba(6,214,160,.09) 0%, transparent 60%),
+    radial-gradient(ellipse 35% 35% at 55% 85%, rgba(199,125,255,.08) 0%, transparent 55%);
+  pointer-events:none;z-index:0;
+}
+.expertise-inner{
+  position:relative;z-index:1;
+  display:grid;
+  grid-template-columns:300px 1fr;
+  gap:80px;align-items:start;
+}
+.expertise-left{position:sticky;top:calc(var(--nav-h) + 48px);}
+.expertise-desc{font-size:14px;color:var(--sub);line-height:1.85;margin-top:16px;max-width:260px;}
+.expertise-left-glass{
+  margin-top:40px;padding:28px;
+  background:rgba(255,255,255,.028);border:1px solid rgba(255,255,255,.07);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  position:relative;overflow:hidden;
+}
+.expertise-left-glass::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);}
+.elg-label{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.3em;text-transform:uppercase;color:var(--ter);margin-bottom:12px;display:block;}
+.elg-stat{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;letter-spacing:-.04em;line-height:1;}
+.elg-stat-sub{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.18em;color:var(--ter);margin-top:4px;}
+
+/* ── NEW EXPERTISE GRID ── */
+.expertise-glass-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.exp-glass-card{
+  position:relative;
+  padding:36px 32px 32px;
+  overflow:hidden;
+  cursor:none;
+  background:rgba(255,255,255,.03);
+  backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);
+  border:1px solid rgba(255,255,255,.07);
+  transition:background .4s ease, border-color .35s ease, transform .45s cubic-bezier(.16,1,.3,1);
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+.exp-glass-card.in:hover{
+  background:rgba(255,255,255,.055);
+  border-color:rgba(255,255,255,.13);
+  transform:translateY(-3px);
+}
+
+/* Top specular edge */
+.exp-glass-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.4) 40%,rgba(255,255,255,.55) 60%,transparent);
+  z-index:2;
+}
+
+/* Colour accent — bottom bar, grows on hover */
+.exp-glass-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--card-accent,var(--iris));
+  opacity:.5;transition:opacity .35s, height .35s;z-index:2;
+}
+.exp-glass-card.in:hover::after{opacity:1;height:2px;}
+
+/* Per-card accent colours */
+.exp-glass-card:nth-child(1){--card-accent:var(--iris);}
+.exp-glass-card:nth-child(2){--card-accent:var(--aqua);}
+.exp-glass-card:nth-child(3){--card-accent:var(--gold);}
+.exp-glass-card:nth-child(4){--card-accent:var(--violet);}
+.exp-glass-card:nth-child(5){--card-accent:var(--sky); grid-column:1 / -1;}
+
+/* Hover glow */
+.exp-glass-card .egc-glow{position:absolute;inset:0;opacity:0;transition:opacity .5s;pointer-events:none;z-index:0;}
+.exp-glass-card.in:hover .egc-glow{opacity:1;}
+.exp-glass-card:nth-child(1) .egc-glow{background:radial-gradient(ellipse 70% 60% at 0% 0%,rgba(124,131,229,.1),transparent 65%);}
+.exp-glass-card:nth-child(2) .egc-glow{background:radial-gradient(ellipse 70% 60% at 100% 0%,rgba(6,214,160,.09),transparent 65%);}
+.exp-glass-card:nth-child(3) .egc-glow{background:radial-gradient(ellipse 70% 60% at 0% 100%,rgba(255,209,102,.08),transparent 65%);}
+.exp-glass-card:nth-child(4) .egc-glow{background:radial-gradient(ellipse 70% 60% at 100% 100%,rgba(199,125,255,.1),transparent 65%);}
+.exp-glass-card:nth-child(5) .egc-glow{background:radial-gradient(ellipse 40% 80% at 10% 50%,rgba(69,183,209,.08),transparent 60%);}
+
+/* Noise texture */
+.exp-glass-card .egc-refract{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");background-size:180px 180px;opacity:.018;pointer-events:none;z-index:1;}
+
+/* Large number — top right watermark */
+.egc-num{
+  position:absolute;right:24px;top:20px;
+  font-family:'Syne',sans-serif;font-size:80px;font-weight:800;
+  letter-spacing:-.05em;line-height:1;
+  color:rgba(255,255,255,.03);
+  transition:color .4s;z-index:1;pointer-events:none;user-select:none;
+}
+.exp-glass-card.in:hover .egc-num{color:rgba(255,255,255,.06);}
+
+/* Icon */
+.egc-icon-wrap{
+  width:40px;height:40px;flex-shrink:0;margin-bottom:20px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  position:relative;z-index:3;
+}
+.egc-icon-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);}
+.egc-icon-wrap svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.4;}
+.exp-glass-card:nth-child(1) .egc-icon-wrap{color:var(--iris);}
+.exp-glass-card:nth-child(2) .egc-icon-wrap{color:var(--aqua);}
+.exp-glass-card:nth-child(3) .egc-icon-wrap{color:var(--gold);}
+.exp-glass-card:nth-child(4) .egc-icon-wrap{color:var(--violet);}
+.exp-glass-card:nth-child(5) .egc-icon-wrap{color:var(--sky);}
+
+/* Text */
+.egc-content{position:relative;z-index:3;display:flex;flex-direction:column;flex:1;}
+.egc-text-block{flex:1;}
+.egc-label{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:8px;display:block;opacity:.4;}
+.egc-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.03em;line-height:1.1;color:var(--text);margin-bottom:10px;}
+.egc-body{font-size:13px;color:var(--sub);line-height:1.75;}
+
+/* Tags — appear below body */
+.egc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:20px;}
+.egc-tag{
+  font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.16em;text-transform:uppercase;
+  padding:4px 10px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  color:var(--ter);backdrop-filter:blur(4px);white-space:nowrap;
+  transition:background .25s,border-color .25s,color .25s;
+}
+.exp-glass-card.in:hover .egc-tag{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.12);color:var(--sub);}
+
+/* Entrance animation */
+.expertise-glass-grid .exp-glass-card{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s cubic-bezier(.16,1,.3,1),background .4s ease,border-color .35s ease;}
+.expertise-glass-grid .exp-glass-card.in{opacity:1;transform:translateY(0);}
+.expertise-glass-grid .exp-glass-card:nth-child(1){transition-delay:.05s;}
+.expertise-glass-grid .exp-glass-card:nth-child(2){transition-delay:.12s;}
+.expertise-glass-grid .exp-glass-card:nth-child(3){transition-delay:.19s;}
+.expertise-glass-grid .exp-glass-card:nth-child(4){transition-delay:.26s;}
+.expertise-glass-grid .exp-glass-card:nth-child(5){transition-delay:.33s;}
+
+/* ═══════════════════════════════════════════════
+   PLATFORM  (expanded, with mock UI)
+═══════════════════════════════════════════════ */
+.platform{
+  position:relative;overflow:hidden;
+  border-top:1px solid rgba(255,255,255,.07);
+}
+.platform::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 70% at 90% 20%,rgba(124,131,229,.20) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 60% at 5%  80%,rgba(6,214,160,.15) 0%,transparent 58%),
+    radial-gradient(ellipse 40% 40% at 50% 60%,rgba(199,125,255,.10) 0%,transparent 55%);
+  pointer-events:none;z-index:0;
+}
+.platform-intro{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:80px;}
+.platform-title{font-family:'Syne',sans-serif;font-size:clamp(28px,3.4vw,46px);font-weight:800;letter-spacing:-.035em;line-height:1.04;margin-bottom:20px;}
+.platform-desc{font-size:16px;color:var(--sub);line-height:1.8;margin-bottom:32px;}
+.platform-pill{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid rgba(6,214,160,.25);
+  background:rgba(6,214,160,.06);
+  backdrop-filter:blur(12px);
+  padding:10px 18px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--aqua);
+}
+.platform-pill-dot{width:6px;height:6px;border-radius:50%;background:var(--aqua);animation:dashPulse 2s ease-in-out infinite;}
+
+.platform-right-intro{display:flex;flex-direction:column;gap:20px;position:relative;z-index:1;}
+.platform-right-intro p{font-size:15px;color:var(--sub);line-height:1.8;}
+
+/* Feature grid — glass cards */
+.platform-features{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:80px;}
+.pf-card{
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);
+  border:1px solid rgba(255,255,255,.09);
+  padding:32px 28px;display:flex;flex-direction:column;gap:16px;
+  position:relative;overflow:hidden;
+  transition:background .3s,border-color .3s,transform .3s;
+}
+.pf-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);
+}
+.pf-card:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14);transform:translateY(-3px);}
+.pf-icon{
+  width:42px;height:42px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.pf-icon svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;}
+.pf-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;letter-spacing:-.01em;}
+.pf-desc{font-size:13px;color:var(--sub);line-height:1.7;}
+
+/* Mock platform UI */
+.platform-ui{
+  position:relative;z-index:1;
+  background:rgba(255,255,255,.03);
+  backdrop-filter:blur(32px) saturate(180%);
+  -webkit-backdrop-filter:blur(32px) saturate(180%);
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 24px 60px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.1);
+  overflow:hidden;
+}
+.platform-ui::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;}
+.platform-ui-bar{background:var(--lift);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+.pui-logo{font-family:'Syne',sans-serif;font-size:12px;font-weight:800;letter-spacing:-.01em;}
+.pui-dots{display:flex;gap:6px;}
+.pui-dot{width:8px;height:8px;border-radius:50%;border:1px solid var(--border);}
+.platform-ui-body{display:grid;grid-template-columns:200px 1fr;min-height:380px;}
+.pui-sidebar{background:var(--panel);border-right:1px solid var(--border);padding:20px 16px;display:flex;flex-direction:column;gap:4px;}
+.pui-nav-item{padding:8px 12px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;color:var(--ter);display:flex;align-items:center;gap:10px;transition:background .2s,color .2s;}
+.pui-nav-item.active{background:var(--lift);color:var(--text);}
+.pui-nav-item svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.5;flex-shrink:0;}
+.pui-main{padding:28px;}
+.pui-section-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.32em;text-transform:uppercase;color:var(--ter);margin-bottom:16px;}
+.pui-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:24px;}
+.pui-card{background:var(--panel);border:1px solid var(--border);padding:14px 16px;}
+.pui-card-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.2em;color:var(--ter);margin-bottom:8px;}
+.pui-card-val{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;}
+.pui-table-head{display:grid;grid-template-columns:2fr 1fr 1fr 80px;padding:8px 12px;background:var(--panel);border:1px solid var(--border);font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--ter);gap:12px;}
+.pui-table-row{display:grid;grid-template-columns:2fr 1fr 1fr 80px;padding:10px 12px;border:1px solid var(--border);border-top:none;font-size:12px;color:var(--sub);gap:12px;align-items:center;}
+.pui-badge{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.15em;text-transform:uppercase;padding:3px 8px;border:1px solid;}
+.badge-active{color:var(--aqua);border-color:rgba(6,214,160,.3);}
+.badge-review{color:var(--gold);border-color:rgba(255,209,102,.3);}
+.badge-done{color:var(--ter);border-color:var(--ghost);}
+.pui-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--ter);}
+.platform-ui-footer{padding:14px 24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.pui-note{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--ter);}
+.pui-status{display:flex;align-items:center;gap:8px;}
+
+/* ═══════════════════════════════════════════════
+   DIFFERENTIATORS
+═══════════════════════════════════════════════ */
+.diff{
+  position:relative;overflow:hidden;
+  border-top:1px solid rgba(255,255,255,.07);
+}
+.diff::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 50% 60% at 10% 40%,rgba(124,131,229,.16) 0%,transparent 60%),
+    radial-gradient(ellipse 45% 55% at 90% 70%,rgba(255,107,157,.12) 0%,transparent 55%),
+    radial-gradient(ellipse 40% 50% at 50% 20%,rgba(199,125,255,.09) 0%,transparent 55%);
+  pointer-events:none;z-index:0;
+}
+.diff-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:56px;}
+.diff-card{
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);
+  border:1px solid rgba(255,255,255,.09);
+  padding:36px 28px;display:flex;flex-direction:column;gap:16px;
+  position:relative;overflow:hidden;
+  transition:background .3s,border-color .3s,transform .4s cubic-bezier(.16,1,.3,1);
+}
+.diff-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+}
+/* Coloured bottom bar — always visible, dim — brightens on hover */
+.diff-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  opacity:.35;transition:opacity .3s;
+}
+.diff-card:hover::after{opacity:1;}
+.diff-card:nth-child(1)::after{background:var(--iris);}
+.diff-card:nth-child(2)::after{background:var(--aqua);}
+.diff-card:nth-child(3)::after{background:var(--violet);}
+.diff-card:nth-child(4)::after{background:var(--rose);}
+.diff-card:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14);transform:translateY(-4px);}
+.diff-icon{
+  width:44px;height:44px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+}
+.diff-icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;}
+.diff-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;letter-spacing:-.01em;}
+.diff-body{font-size:14px;color:var(--sub);line-height:1.7;}
+
+/* ═══════════════════════════════════════════════
+   BEGIN
+═══════════════════════════════════════════════ */
+.begin{
+  position:relative;overflow:hidden;
+  border-top:1px solid rgba(255,255,255,.07);
+}
+.begin::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 55% 70% at 80% 50%,rgba(124,131,229,.22) 0%,transparent 60%),
+    radial-gradient(ellipse 45% 55% at 10% 30%,rgba(6,214,160,.14) 0%,transparent 58%),
+    radial-gradient(ellipse 35% 45% at 50% 90%,rgba(199,125,255,.10) 0%,transparent 55%);
+  pointer-events:none;z-index:0;
+}
+.begin-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 440px;gap:100px;align-items:center;}
+.begin-headline{font-family:'Syne',sans-serif;font-size:clamp(40px,5.5vw,80px);font-weight:800;letter-spacing:-.04em;line-height:.92;margin-bottom:32px;}
+.begin-text{font-size:16px;color:var(--sub);line-height:1.8;margin-bottom:0;}
+.begin-right{
+  display:flex;flex-direction:column;gap:20px;
+  padding:40px;
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(28px) saturate(170%);
+  -webkit-backdrop-filter:blur(28px) saturate(170%);
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 20px 60px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.1);
+  position:relative;
+}
+.begin-right::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);
+}
+.btn-primary{display:inline-flex;align-items:center;gap:14px;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;color:#05050a;font-family:'DM Mono',monospace;font-size:10px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;padding:17px 32px;text-decoration:none;transition:opacity .2s;cursor:none;}
+.btn-primary:hover{opacity:.88;}
+.btn-primary svg{width:13px;height:13px;stroke:#05050a;fill:none;stroke-width:2;flex-shrink:0;}
+.btn-ghost{display:inline-flex;align-items:center;gap:12px;color:var(--ter);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;text-transform:uppercase;text-decoration:none;transition:color .2s;cursor:none;}
+.btn-ghost:hover{color:var(--sub);}
+.btn-ghost-line{display:inline-block;width:20px;height:1px;background:var(--ghost);transition:width .22s,background .22s;}
+.btn-ghost:hover .btn-ghost-line{width:32px;background:var(--iris);}
+.begin-note{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;color:var(--ter);}
+.begin-email{font-family:'DM Mono',monospace;font-size:13px;color:var(--sub);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s;cursor:none;}
+.begin-email:hover{color:var(--text);}
+.begin-email svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.5;}
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer{
+  position:relative;overflow:hidden;
+  border-top:1px solid rgba(255,255,255,.07);
+  padding:64px var(--pad-x) 52px calc(var(--pad-x) + 3px);
+}
+footer::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 50% 80% at 20% 50%,rgba(124,131,229,.08) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 60% at 80% 50%,rgba(6,214,160,.06) 0%,transparent 55%);
+  pointer-events:none;
+}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:64px;}
+.footer-logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.02em;text-decoration:none;cursor:none;}
+.footer-nav{display:flex;gap:80px;}
+.footer-col{display:flex;flex-direction:column;}
+.footer-col-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.35em;text-transform:uppercase;color:var(--ter);margin-bottom:20px;}
+.footer-col a{font-size:14px;color:var(--sub);text-decoration:none;transition:color .2s;cursor:none;line-height:2.2;}
+.footer-col a:hover{color:var(--text);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;border-top:1px solid var(--border);}
+.footer-copy{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ter);}
+.footer-social{display:flex;gap:28px;}
+.footer-social a{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--ter);text-decoration:none;transition:color .2s;cursor:none;}
+.footer-social a:hover{color:var(--sub);}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media(max-width:1100px){
+  :root{--pad-x:40px;}
+  .hero{grid-template-columns:1fr 300px;}
+  .work-strip{grid-template-columns:1fr 1fr;}
+  .work-scroll-section{grid-template-columns:240px 1fr;}
+  .manifesto-inner,.platform-intro,.begin-inner{grid-template-columns:1fr;gap:52px;}
+  .expertise-inner{grid-template-columns:1fr;gap:48px;}.expertise-left{position:static;}
+  .expertise-glass-grid{grid-template-columns:1fr;}
+  .exp-glass-card:nth-child(5){grid-column:auto;}
+  .diff-grid{grid-template-columns:1fr 1fr;}
+  .platform-features{grid-template-columns:1fr 1fr;}
+  .platform-ui-body{grid-template-columns:160px 1fr;}
+  .pui-cards{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  :root{--pad-x:24px;--nav-h:58px;}
+  .hero{grid-template-columns:1fr;height:auto;min-height:100vh;}
+  .work-strip{display:none;}
+  .work-scroll-section{grid-template-columns:1fr;}
+  .wss-left{position:relative;height:auto;padding:60px 0 40px;}
+  .wss-col{will-change:auto;}
+  .wss-grid{grid-template-columns:1fr 1fr;}
+  #wssColC{display:none;}
+  #wssColB{margin-top:60px;}
+  .expertise-glass-grid{grid-template-columns:1fr;}
+  .exp-glass-card:nth-child(5){grid-column:auto;}
+  .diff-grid{grid-template-columns:1fr;}
+  .platform-features{grid-template-columns:1fr;}
+  .footer-nav{flex-direction:column;gap:40px;}.footer-top{flex-direction:column;gap:48px;}
+  .nav-links{display:none;}
+  .nav-login{display:none;}
+  .pui-cards{grid-template-columns:1fr;}
+  .pui-table-head,.pui-table-row{grid-template-columns:2fr 1fr;}.pui-table-head>*:nth-child(n+3),.pui-table-row>*:nth-child(n+3){display:none;}
+  .platform-ui-body{grid-template-columns:1fr;}.pui-sidebar{display:none;}
+  .hero-sub{font-size:15px;}
+  .hero-bottom-row{flex-direction:column;align-items:flex-start;gap:24px;}
+  .hero-right-meta{align-items:flex-start;}
+  .begin-right,.manifesto-inner .stat-row{flex-wrap:wrap;}
+}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<div class="bg-fixed">
+  <div class="bg-grid"></div>
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb bg-orb-3"></div>
+  <div class="bg-orb bg-orb-4"></div>
+  <div class="bg-orb bg-orb-5"></div>
+  <div class="bg-aurora"></div>
+  <div class="bg-vignette"></div>
+  <div class="bg-grain"></div>
+  <div class="bg-scan"></div>
+</div>
+<div class="chrome-edge"></div>
+
+<!-- ════ NAV ════ -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <span class="chrome-text">BRAN</span><span style="color:var(--text)">SOL</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/work">Work</a></li>
+    <li><a href="/expertise">Expertise</a></li>
+    <li><a href="/platform">Platform</a></li>
+    <li><a href="/studio">Studio</a></li>
+    <li><a href="/perspectives">Perspectives</a></li>
+  </ul>
+  <div class="nav-end">
+    <a href="/bransol-login.html" class="nav-login">Login</a>
+    <a href="/begin" class="nav-cta">Begin</a>
+  </div>
+</nav>
+
+<!-- ════ HERO ════ -->
+<section class="hero" id="home">
+
+  <!-- Left: headline + copy -->
+  <div class="hero-content">
+    <div class="hero-kicker">Strategic Design Studio — Johannesburg</div>
+    <h1 class="hero-headline">
+      <span class="line"><span class="line-inner">We don't</span></span>
+      <span class="line"><span class="line-inner"><span class="chrome-text">compete</span></span></span>
+      <span class="line"><span class="line-inner">on price.</span></span>
+    </h1>
+    <div class="hero-rule"></div>
+    <div class="hero-bottom-row">
+      <div>
+        <p class="hero-sub">BRANSOL is a strategic design studio working with organisations whose ambitions demand more than execution. We work selectively — a limited number of commissions each year, each one fully considered.</p>
+        <a href="/platform" class="hero-platform-pill">
+          <div class="hero-pill-dot"></div>
+          <span>Proprietary client platform — included with every engagement</span>
+          <svg viewBox="0 0 12 12" fill="none" width="12" height="12"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+      </div>
+      <div class="hero-right-meta">
+        <span>Est. 2018</span>
+        <span>Johannesburg · ZA</span>
+        <div class="hero-scroll">
+          <div class="scroll-track"></div>
+          <span>Scroll</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: 2-column work strip, left scrolls up, right scrolls down -->
+  <div class="work-strip">
+
+    <!-- Column A — scrolls UP, 28s -->
+    <div class="ws-col">
+      <div class="ws-track-up" style="animation-duration:28s;">
+        <a href="/work/national-communications-agency" class="ws-card ws-c1 ws-tall">
+          <div class="ws-art" style="color:var(--iris)"><div class="ws-vrow" style="align-items:flex-end;height:80px;gap:5px;"><div class="ws-vblock" style="height:38%;flex:1;"></div><div class="ws-vblock" style="height:70%;flex:2;"></div><div class="ws-vblock" style="height:52%;flex:1;"></div><div class="ws-vblock" style="height:88%;flex:1.5;"></div><div class="ws-vblock" style="height:44%;flex:1;"></div></div><div class="ws-vline" style="width:58%;margin-top:10px;"></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">National Communications Agency</div><div class="ws-discipline">Brand Identity · Design System</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+        <a href="/work/pan-african-law-practice" class="ws-card ws-c5 ws-short">
+          <div class="ws-art" style="color:var(--sky)"><div class="ws-vrow" style="align-items:flex-end;height:68px;gap:5px;"><div class="ws-vblock" style="height:55%;flex:1.5;"></div><div class="ws-vblock" style="height:85%;flex:1;"></div><div class="ws-vblock" style="height:38%;flex:1;"></div></div><div class="ws-vline" style="width:68%;margin-top:9px;"></div><div class="ws-vrow" style="gap:5px;margin-top:7px;"><div class="ws-vblock" style="height:9px;flex:2;"></div><div class="ws-vblock" style="height:9px;flex:1;"></div></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">Pan-African Law Practice</div><div class="ws-discipline">Brand Identity · Credentials</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+        <a href="/work/renewable-energy-ipp" class="ws-card ws-c6">
+          <div class="ws-art" style="color:var(--ember)"><div class="ws-vrow" style="align-items:flex-end;height:72px;gap:4px;"><div class="ws-vblock" style="height:30%;flex:1;"></div><div class="ws-vblock" style="height:62%;flex:1;"></div><div class="ws-vblock" style="height:90%;flex:1;"></div><div class="ws-vblock" style="height:50%;flex:1;"></div><div class="ws-vblock" style="height:72%;flex:1;"></div></div><div class="ws-vline" style="width:62%;margin-top:9px;"></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">Renewable Energy IPP</div><div class="ws-discipline">Digital Design · Pitch Deck</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+        <a href="/work/property-development-consortium" class="ws-card ws-c3 ws-tall">
+          <div class="ws-art" style="color:var(--gold)"><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;"><div class="ws-vblock ws-vblock-tall"></div><div class="ws-vblock ws-vblock-tall"></div><div class="ws-vblock ws-vblock-tall"></div></div><div class="ws-vline" style="width:82%;margin-top:9px;"></div><div class="ws-vrow" style="gap:5px;margin-top:7px;"><div class="ws-vblock" style="height:12px;flex:1;"></div><div class="ws-vblock" style="height:12px;flex:2;"></div></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">Property Development Consortium</div><div class="ws-discipline">Spatial Identity · Wayfinding</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+        <!-- ↓ duplicate set for seamless loop -->
+        <a href="/work/national-communications-agency" class="ws-card ws-c1 ws-tall">
+          <div class="ws-art" style="color:var(--iris)"><div class="ws-vrow" style="align-items:flex-end;height:80px;gap:5px;"><div class="ws-vblock" style="height:38%;flex:1;"></div><div class="ws-vblock" style="height:70%;flex:2;"></div><div class="ws-vblock" style="height:52%;flex:1;"></div><div class="ws-vblock" style="height:88%;flex:1.5;"></div><div class="ws-vblock" style="height:44%;flex:1;"></div></div><div class="ws-vline" style="width:58%;margin-top:10px;"></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">National Communications Agency</div><div class="ws-discipline">Brand Identity · Design System</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+        <a href="/work/pan-african-law-practice" class="ws-card ws-c5 ws-short">
+          <div class="ws-art" style="color:var(--sky)"><div class="ws-vrow" style="align-items:flex-end;height:68px;gap:5px;"><div class="ws-vblock" style="height:55%;flex:1.5;"></div><div class="ws-vblock" style="height:85%;flex:1;"></div><div class="ws-vblock" style="height:38%;flex:1;"></div></div><div class="ws-vline" style="width:68%;margin-top:9px;"></div><div class="ws-vrow" style="gap:5px;margin-top:7px;"><div class="ws-vblock" style="height:9px;flex:2;"></div><div class="ws-vblock" style="height:9px;flex:1;"></div></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">Pan-African Law Practice</div><div class="ws-discipline">Brand Identity · Credentials</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+        <a href="/work/renewable-energy-ipp" class="ws-card ws-c6">
+          <div class="ws-art" style="color:var(--ember)"><div class="ws-vrow" style="align-items:flex-end;height:72px;gap:4px;"><div class="ws-vblock" style="height:30%;flex:1;"></div><div class="ws-vblock" style="height:62%;flex:1;"></div><div class="ws-vblock" style="height:90%;flex:1;"></div><div class="ws-vblock" style="height:50%;flex:1;"></div><div class="ws-vblock" style="height:72%;flex:1;"></div></div><div class="ws-vline" style="width:62%;margin-top:9px;"></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">Renewable Energy IPP</div><div class="ws-discipline">Digital Design · Pitch Deck</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+        <a href="/work/property-development-consortium" class="ws-card ws-c3 ws-tall">
+          <div class="ws-art" style="color:var(--gold)"><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;"><div class="ws-vblock ws-vblock-tall"></div><div class="ws-vblock ws-vblock-tall"></div><div class="ws-vblock ws-vblock-tall"></div></div><div class="ws-vline" style="width:82%;margin-top:9px;"></div><div class="ws-vrow" style="gap:5px;margin-top:7px;"><div class="ws-vblock" style="height:12px;flex:1;"></div><div class="ws-vblock" style="height:12px;flex:2;"></div></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">Property Development Consortium</div><div class="ws-discipline">Spatial Identity · Wayfinding</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Column B — scrolls DOWN, 34s, starts 120px lower -->
+    <div class="ws-col" style="margin-top:120px;">
+      <div class="ws-track-down" style="animation-duration:34s;">
+        <a href="/work/listed-asset-management-group" class="ws-card ws-c2">
+          <div class="ws-art" style="color:var(--aqua)"><div class="ws-vrow" style="gap:5px;margin-bottom:8px;"><div class="ws-vblock" style="height:24px;flex:1;"></div><div class="ws-vblock" style="height:44px;flex:2;"></div><div class="ws-vblock" style="height:18px;flex:1;"></div></div><div class="ws-vline" style="width:72%;"></div><div class="ws-vrow" style="gap:5px;margin-top:8px;"><div class="ws-vblock" style="height:10px;flex:1;"></div><div class="ws-vblock" style="height:10px;flex:1;"></div><div class="ws-vblock" style="height:10px;flex:1;"></div></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">Listed Asset Management Group</div><div class="ws-discipline">Design System · Investor Decks</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+        <a href="/work/regional-medical-foundation" class="ws-card ws-c4 ws-tall">
+          <div class="ws-art" style="color:var(--violet)"><div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;height:72px;align-items:stretch;"><div class="ws-vblock" style="height:100%;"></div><div style="display:flex;flex-direction:column;gap:5px;"><div class="ws-vblock" style="flex:1;"></div><div class="ws-vblock" style="flex:1;"></div></div></div><div class="ws-vline" style="width:60%;margin-top:9px;"></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">Regional Medical Foundation</div><div class="ws-discipline">Campaign Creative · Print</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+        <a href="/work/pan-african-law-practice" class="ws-card ws-c5 ws-short">
+          <div class="ws-art" style="color:var(--sky)"><div class="ws-vrow" style="align-items:flex-end;height:68px;gap:5px;"><div class="ws-vblock" style="height:55%;flex:1.5;"></div><div class="ws-vblock" style="height:85%;flex:1;"></div><div class="ws-vblock" style="height:38%;flex:1;"></div></div><div class="ws-vline" style="width:68%;margin-top:9px;"></div><div class="ws-vrow" style="gap:5px;margin-top:7px;"><div class="ws-vblock" style="height:9px;flex:2;"></div><div class="ws-vblock" style="height:9px;flex:1;"></div></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">Pan-African Law Practice</div><div class="ws-discipline">Credentials Design</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+        <a href="/work/national-communications-agency" class="ws-card ws-c1">
+          <div class="ws-art" style="color:var(--iris)"><div class="ws-vrow" style="align-items:flex-end;height:80px;gap:5px;"><div class="ws-vblock" style="height:38%;flex:1;"></div><div class="ws-vblock" style="height:70%;flex:2;"></div><div class="ws-vblock" style="height:52%;flex:1;"></div><div class="ws-vblock" style="height:88%;flex:1.5;"></div><div class="ws-vblock" style="height:44%;flex:1;"></div></div><div class="ws-vline" style="width:58%;margin-top:10px;"></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">NCA Annual Report 2025</div><div class="ws-discipline">Editorial Design · Print</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+        <!-- ↓ duplicate set for seamless loop -->
+        <a href="/work/listed-asset-management-group" class="ws-card ws-c2">
+          <div class="ws-art" style="color:var(--aqua)"><div class="ws-vrow" style="gap:5px;margin-bottom:8px;"><div class="ws-vblock" style="height:24px;flex:1;"></div><div class="ws-vblock" style="height:44px;flex:2;"></div><div class="ws-vblock" style="height:18px;flex:1;"></div></div><div class="ws-vline" style="width:72%;"></div><div class="ws-vrow" style="gap:5px;margin-top:8px;"><div class="ws-vblock" style="height:10px;flex:1;"></div><div class="ws-vblock" style="height:10px;flex:1;"></div><div class="ws-vblock" style="height:10px;flex:1;"></div></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">Listed Asset Management Group</div><div class="ws-discipline">Design System · Investor Decks</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+        <a href="/work/regional-medical-foundation" class="ws-card ws-c4 ws-tall">
+          <div class="ws-art" style="color:var(--violet)"><div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;height:72px;align-items:stretch;"><div class="ws-vblock" style="height:100%;"></div><div style="display:flex;flex-direction:column;gap:5px;"><div class="ws-vblock" style="flex:1;"></div><div class="ws-vblock" style="flex:1;"></div></div></div><div class="ws-vline" style="width:60%;margin-top:9px;"></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">Regional Medical Foundation</div><div class="ws-discipline">Campaign Creative · Print</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+        <a href="/work/pan-african-law-practice" class="ws-card ws-c5 ws-short">
+          <div class="ws-art" style="color:var(--sky)"><div class="ws-vrow" style="align-items:flex-end;height:68px;gap:5px;"><div class="ws-vblock" style="height:55%;flex:1.5;"></div><div class="ws-vblock" style="height:85%;flex:1;"></div><div class="ws-vblock" style="height:38%;flex:1;"></div></div><div class="ws-vline" style="width:68%;margin-top:9px;"></div><div class="ws-vrow" style="gap:5px;margin-top:7px;"><div class="ws-vblock" style="height:9px;flex:2;"></div><div class="ws-vblock" style="height:9px;flex:1;"></div></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">Pan-African Law Practice</div><div class="ws-discipline">Credentials Design</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+        <a href="/work/national-communications-agency" class="ws-card ws-c1">
+          <div class="ws-art" style="color:var(--iris)"><div class="ws-vrow" style="align-items:flex-end;height:80px;gap:5px;"><div class="ws-vblock" style="height:38%;flex:1;"></div><div class="ws-vblock" style="height:70%;flex:2;"></div><div class="ws-vblock" style="height:52%;flex:1;"></div><div class="ws-vblock" style="height:88%;flex:1.5;"></div><div class="ws-vblock" style="height:44%;flex:1;"></div></div><div class="ws-vline" style="width:58%;margin-top:10px;"></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">NCA Annual Report 2025</div><div class="ws-discipline">Editorial Design · Print</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Column C — scrolls UP, 22s, starts 60px lower -->
+    <div class="ws-col" style="margin-top:60px;">
+      <div class="ws-track-up" style="animation-duration:22s;">
+        <a href="/work/regional-medical-foundation" class="ws-card ws-c4 ws-short">
+          <div class="ws-art" style="color:var(--violet)"><div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;height:72px;align-items:stretch;"><div class="ws-vblock" style="height:100%;"></div><div style="display:flex;flex-direction:column;gap:5px;"><div class="ws-vblock" style="flex:1;"></div><div class="ws-vblock" style="flex:1;"></div></div></div><div class="ws-vline" style="width:60%;margin-top:9px;"></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">Regional Medical Foundation</div><div class="ws-discipline">Campaign Creative · Print</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+        <a href="/work/national-communications-agency" class="ws-card ws-c1 ws-tall">
+          <div class="ws-art" style="color:var(--iris)"><div class="ws-vrow" style="align-items:flex-end;height:80px;gap:5px;"><div class="ws-vblock" style="height:38%;flex:1;"></div><div class="ws-vblock" style="height:70%;flex:2;"></div><div class="ws-vblock" style="height:52%;flex:1;"></div><div class="ws-vblock" style="height:88%;flex:1.5;"></div><div class="ws-vblock" style="height:44%;flex:1;"></div></div><div class="ws-vline" style="width:58%;margin-top:10px;"></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">Annual Report Commission</div><div class="ws-discipline">Editorial Design · Print</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+        <a href="/work/listed-asset-management-group" class="ws-card ws-c2">
+          <div class="ws-art" style="color:var(--aqua)"><div class="ws-vrow" style="gap:5px;margin-bottom:8px;"><div class="ws-vblock" style="height:24px;flex:1;"></div><div class="ws-vblock" style="height:44px;flex:2;"></div><div class="ws-vblock" style="height:18px;flex:1;"></div></div><div class="ws-vline" style="width:72%;"></div><div class="ws-vrow" style="gap:5px;margin-top:8px;"><div class="ws-vblock" style="height:10px;flex:1;"></div><div class="ws-vblock" style="height:10px;flex:1;"></div><div class="ws-vblock" style="height:10px;flex:1;"></div></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">Investor Deck Series</div><div class="ws-discipline">Presentation Design</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+        <a href="/work/property-development-consortium" class="ws-card ws-c3 ws-short">
+          <div class="ws-art" style="color:var(--gold)"><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;"><div class="ws-vblock ws-vblock-tall"></div><div class="ws-vblock ws-vblock-tall"></div><div class="ws-vblock ws-vblock-tall"></div></div><div class="ws-vline" style="width:82%;margin-top:9px;"></div><div class="ws-vrow" style="gap:5px;margin-top:7px;"><div class="ws-vblock" style="height:12px;flex:1;"></div><div class="ws-vblock" style="height:12px;flex:2;"></div></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">Property Development Consortium</div><div class="ws-discipline">Wayfinding System</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+        <!-- ↓ duplicate set for seamless loop -->
+        <a href="/work/regional-medical-foundation" class="ws-card ws-c4 ws-short">
+          <div class="ws-art" style="color:var(--violet)"><div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;height:72px;align-items:stretch;"><div class="ws-vblock" style="height:100%;"></div><div style="display:flex;flex-direction:column;gap:5px;"><div class="ws-vblock" style="flex:1;"></div><div class="ws-vblock" style="flex:1;"></div></div></div><div class="ws-vline" style="width:60%;margin-top:9px;"></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">Regional Medical Foundation</div><div class="ws-discipline">Campaign Creative · Print</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+        <a href="/work/national-communications-agency" class="ws-card ws-c1 ws-tall">
+          <div class="ws-art" style="color:var(--iris)"><div class="ws-vrow" style="align-items:flex-end;height:80px;gap:5px;"><div class="ws-vblock" style="height:38%;flex:1;"></div><div class="ws-vblock" style="height:70%;flex:2;"></div><div class="ws-vblock" style="height:52%;flex:1;"></div><div class="ws-vblock" style="height:88%;flex:1.5;"></div><div class="ws-vblock" style="height:44%;flex:1;"></div></div><div class="ws-vline" style="width:58%;margin-top:10px;"></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">Annual Report Commission</div><div class="ws-discipline">Editorial Design · Print</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+        <a href="/work/listed-asset-management-group" class="ws-card ws-c2">
+          <div class="ws-art" style="color:var(--aqua)"><div class="ws-vrow" style="gap:5px;margin-bottom:8px;"><div class="ws-vblock" style="height:24px;flex:1;"></div><div class="ws-vblock" style="height:44px;flex:2;"></div><div class="ws-vblock" style="height:18px;flex:1;"></div></div><div class="ws-vline" style="width:72%;"></div><div class="ws-vrow" style="gap:5px;margin-top:8px;"><div class="ws-vblock" style="height:10px;flex:1;"></div><div class="ws-vblock" style="height:10px;flex:1;"></div><div class="ws-vblock" style="height:10px;flex:1;"></div></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">Investor Deck Series</div><div class="ws-discipline">Presentation Design</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+        <a href="/work/property-development-consortium" class="ws-card ws-c3 ws-short">
+          <div class="ws-art" style="color:var(--gold)"><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;"><div class="ws-vblock ws-vblock-tall"></div><div class="ws-vblock ws-vblock-tall"></div><div class="ws-vblock ws-vblock-tall"></div></div><div class="ws-vline" style="width:82%;margin-top:9px;"></div><div class="ws-vrow" style="gap:5px;margin-top:7px;"><div class="ws-vblock" style="height:12px;flex:1;"></div><div class="ws-vblock" style="height:12px;flex:2;"></div></div></div>
+          <div class="ws-scrim"></div><div class="ws-overlay"></div>
+          <div class="ws-inner">
+            <div class="ws-bottom"><div class="ws-name">Property Development Consortium</div><div class="ws-discipline">Wayfinding System</div></div>
+          </div>
+          <div class="ws-arrow"><svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2.5 9.5l7-7M9.5 9.5V2.5H2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ════ DISCIPLINE TICKER ════ -->
+<div style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--deep);padding:13px 0;overflow:hidden;position:relative;z-index:1;">
+  <div style="display:flex;gap:0;white-space:nowrap;animation:tickerMove 32s linear infinite;">
+    <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--ter);padding:0 36px;display:inline-flex;align-items:center;gap:36px;">Brand Identity <span style="width:3px;height:3px;border-radius:50%;background:var(--iris);display:inline-block;flex-shrink:0"></span></span>
+    <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--ter);padding:0 36px;display:inline-flex;align-items:center;gap:36px;">Digital Design <span style="width:3px;height:3px;border-radius:50%;background:var(--aqua);display:inline-block;flex-shrink:0"></span></span>
+    <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--ter);padding:0 36px;display:inline-flex;align-items:center;gap:36px;">Campaign Creative <span style="width:3px;height:3px;border-radius:50%;background:var(--gold);display:inline-block;flex-shrink:0"></span></span>
+    <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--ter);padding:0 36px;display:inline-flex;align-items:center;gap:36px;">Design Systems <span style="width:3px;height:3px;border-radius:50%;background:var(--violet);display:inline-block;flex-shrink:0"></span></span>
+    <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--ter);padding:0 36px;display:inline-flex;align-items:center;gap:36px;">Environmental & Spatial <span style="width:3px;height:3px;border-radius:50%;background:var(--sky);display:inline-block;flex-shrink:0"></span></span>
+    <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--ter);padding:0 36px;display:inline-flex;align-items:center;gap:36px;">Credentials & Presentations <span style="width:3px;height:3px;border-radius:50%;background:var(--ember);display:inline-block;flex-shrink:0"></span></span>
+    <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--ter);padding:0 36px;display:inline-flex;align-items:center;gap:36px;">Brand Identity <span style="width:3px;height:3px;border-radius:50%;background:var(--iris);display:inline-block;flex-shrink:0"></span></span>
+    <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--ter);padding:0 36px;display:inline-flex;align-items:center;gap:36px;">Digital Design <span style="width:3px;height:3px;border-radius:50%;background:var(--aqua);display:inline-block;flex-shrink:0"></span></span>
+    <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--ter);padding:0 36px;display:inline-flex;align-items:center;gap:36px;">Campaign Creative <span style="width:3px;height:3px;border-radius:50%;background:var(--gold);display:inline-block;flex-shrink:0"></span></span>
+    <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--ter);padding:0 36px;display:inline-flex;align-items:center;gap:36px;">Design Systems <span style="width:3px;height:3px;border-radius:50%;background:var(--violet);display:inline-block;flex-shrink:0"></span></span>
+    <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--ter);padding:0 36px;display:inline-flex;align-items:center;gap:36px;">Environmental & Spatial <span style="width:3px;height:3px;border-radius:50%;background:var(--sky);display:inline-block;flex-shrink:0"></span></span>
+    <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--ter);padding:0 36px;display:inline-flex;align-items:center;gap:36px;">Credentials & Presentations <span style="width:3px;height:3px;border-radius:50%;background:var(--ember);display:inline-block;flex-shrink:0"></span></span>
+  </div>
+</div>
+
+<!-- ════ MANIFESTO ════ -->
+<section class="manifesto section-pad" id="about">
+  <div class="manifesto-inner">
+    <div>
+      <span class="eyebrow reveal">01 · Who We Are</span>
+      <h2 class="manifesto-statement reveal reveal-d1">
+        We compete on <span class="chrome-text">consequence.</span>
+      </h2>
+      <div class="stat-row reveal reveal-d2">
+        <div class="stat">
+          <span class="stat-num chrome-text">94%</span>
+          <span class="stat-lbl">Client Retention</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num chrome-text">6+</span>
+          <span class="stat-lbl">Years Operating</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num chrome-text">1:3</span>
+          <span class="stat-lbl">Win Rate</span>
+        </div>
+      </div>
+    </div>
+    <div class="manifesto-body">
+      <p class="reveal reveal-d1">BRANSOL brings <strong>clarity to complex briefs</strong>, craft to every deliverable, and strategic accountability to every engagement. We are not a production house. We are a considered partner.</p>
+      <p class="reveal reveal-d2">Every commission begins with a conversation. Every deliverable is tracked in our <strong>proprietary client platform</strong> — a dedicated workspace designed around your work, not our workflow.</p>
+      <p class="reveal reveal-d3">We don't publish rates. We don't take on every brief. We do take <strong>full responsibility for outcomes.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ WORK ════ -->
+<section id="work" class="work-scroll-section">
+
+  <!-- Sticky left panel: title + CTA -->
+  <div class="wss-left">
+    <div class="wss-left-inner">
+      <span class="eyebrow reveal">02 · Selected Work</span>
+      <h2 class="section-title reveal reveal-d1">Commissions</h2>
+      <p class="wss-desc reveal reveal-d2">A selection of engagements across government, financial services, infrastructure, and professional sectors. Each one fully considered.</p>
+      <a href="/work" class="wss-cta reveal reveal-d3">
+        <span>View all work</span>
+        <svg viewBox="0 0 12 12" fill="none" width="12" height="12"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+      </a>
+      <div class="wss-counter reveal reveal-d4">
+        <span class="wss-counter-num chrome-text" id="wssActive">01</span>
+        <span class="wss-counter-sep">/</span>
+        <span class="wss-counter-total">09</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Infinite looping 3-column grid -->
+  <div class="wss-right">
+    <div class="wss-grid" id="wssGrid">
+
+      <!-- Column A: scrolls UP, slow (22s) -->
+      <div class="wss-col" id="wssColA">
+        <!-- set 1 -->
+        <a href="/work/national-communications-agency" class="wss-item wss-iris">
+          <div class="wss-img-bg"></div><div class="wss-img-art"><div class="wia-row"><div class="wia-b tall"></div><div class="wia-b tall" style="flex:2"></div></div><div class="wia-line" style="width:65%"></div><div class="wia-row"><div class="wia-b" style="flex:3"></div><div class="wia-b"></div></div></div>
+          <div class="wss-item-overlay"></div><div class="wss-item-info"><span class="wss-item-sector">Government</span><span class="wss-item-title">National Communications Agency</span><span class="wss-item-scope">Brand Identity · Design System</span></div>
+        </a>
+        <a href="/work/regional-medical-foundation" class="wss-item wss-violet">
+          <div class="wss-img-bg"></div><div class="wss-img-art"><div class="wia-row"><div class="wia-b" style="flex:2"></div><div class="wia-b"></div></div><div class="wia-line" style="width:50%"></div><div class="wia-row"><div class="wia-b tall"></div><div class="wia-b tall" style="flex:3"></div></div></div>
+          <div class="wss-item-overlay"></div><div class="wss-item-info"><span class="wss-item-sector">Healthcare</span><span class="wss-item-title">Regional Medical Foundation</span><span class="wss-item-scope">Campaign Creative · Print</span></div>
+        </a>
+        <a href="/work/pan-african-law-practice" class="wss-item wss-sky">
+          <div class="wss-img-bg"></div><div class="wss-img-art"><div class="wia-row"><div class="wia-b tall" style="flex:3"></div><div class="wia-b tall"></div></div><div class="wia-line" style="width:40%"></div><div class="wia-row"><div class="wia-b"></div><div class="wia-b"></div></div></div>
+          <div class="wss-item-overlay"></div><div class="wss-item-info"><span class="wss-item-sector">Professional Services</span><span class="wss-item-title">Pan-African Law Practice</span><span class="wss-item-scope">Brand Identity · Credentials</span></div>
+        </a>
+        <!-- set 2 — duplicate -->
+        <a href="/work/national-communications-agency" class="wss-item wss-iris" aria-hidden="true">
+          <div class="wss-img-bg"></div><div class="wss-img-art"><div class="wia-row"><div class="wia-b tall"></div><div class="wia-b tall" style="flex:2"></div></div><div class="wia-line" style="width:65%"></div><div class="wia-row"><div class="wia-b" style="flex:3"></div><div class="wia-b"></div></div></div>
+          <div class="wss-item-overlay"></div><div class="wss-item-info"><span class="wss-item-sector">Government</span><span class="wss-item-title">National Communications Agency</span><span class="wss-item-scope">Brand Identity · Design System</span></div>
+        </a>
+        <a href="/work/regional-medical-foundation" class="wss-item wss-violet" aria-hidden="true">
+          <div class="wss-img-bg"></div><div class="wss-img-art"><div class="wia-row"><div class="wia-b" style="flex:2"></div><div class="wia-b"></div></div><div class="wia-line" style="width:50%"></div><div class="wia-row"><div class="wia-b tall"></div><div class="wia-b tall" style="flex:3"></div></div></div>
+          <div class="wss-item-overlay"></div><div class="wss-item-info"><span class="wss-item-sector">Healthcare</span><span class="wss-item-title">Regional Medical Foundation</span><span class="wss-item-scope">Campaign Creative · Print</span></div>
+        </a>
+        <a href="/work/pan-african-law-practice" class="wss-item wss-sky" aria-hidden="true">
+          <div class="wss-img-bg"></div><div class="wss-img-art"><div class="wia-row"><div class="wia-b tall" style="flex:3"></div><div class="wia-b tall"></div></div><div class="wia-line" style="width:40%"></div><div class="wia-row"><div class="wia-b"></div><div class="wia-b"></div></div></div>
+          <div class="wss-item-overlay"></div><div class="wss-item-info"><span class="wss-item-sector">Professional Services</span><span class="wss-item-title">Pan-African Law Practice</span><span class="wss-item-scope">Brand Identity · Credentials</span></div>
+        </a>
+      </div>
+
+      <!-- Column B: scrolls DOWN, medium (28s) -->
+      <div class="wss-col" id="wssColB">
+        <!-- set 1 -->
+        <a href="/work/listed-asset-management-group" class="wss-item wss-aqua">
+          <div class="wss-img-bg"></div><div class="wss-img-art"><div class="wia-row"><div class="wia-b"></div><div class="wia-b"></div><div class="wia-b"></div></div><div class="wia-line" style="width:70%"></div><div class="wia-row"><div class="wia-b tall" style="flex:2"></div><div class="wia-b tall"></div></div></div>
+          <div class="wss-item-overlay"></div><div class="wss-item-info"><span class="wss-item-sector">Financial Services</span><span class="wss-item-title">Listed Asset Management Group</span><span class="wss-item-scope">Design System · Investor Decks</span></div>
+        </a>
+        <a href="/work/property-development-consortium" class="wss-item wss-gold">
+          <div class="wss-img-bg"></div><div class="wss-img-art"><div class="wia-row"><div class="wia-b tall"></div><div class="wia-b tall"></div><div class="wia-b tall"></div></div><div class="wia-line" style="width:80%"></div><div class="wia-row"><div class="wia-b"></div><div class="wia-b" style="flex:2"></div></div></div>
+          <div class="wss-item-overlay"></div><div class="wss-item-info"><span class="wss-item-sector">Infrastructure</span><span class="wss-item-title">Property Development Consortium</span><span class="wss-item-scope">Spatial Identity · Wayfinding</span></div>
+        </a>
+        <a href="/work/renewable-energy-ipp" class="wss-item wss-ember">
+          <div class="wss-img-bg"></div><div class="wss-img-art"><div class="wia-row"><div class="wia-b"></div><div class="wia-b" style="flex:2"></div><div class="wia-b"></div></div><div class="wia-line" style="width:55%"></div><div class="wia-row"><div class="wia-b tall" style="flex:2"></div><div class="wia-b tall"></div></div></div>
+          <div class="wss-item-overlay"></div><div class="wss-item-info"><span class="wss-item-sector">Energy</span><span class="wss-item-title">Renewable Energy IPP</span><span class="wss-item-scope">Digital Design · Pitch Deck</span></div>
+        </a>
+        <!-- set 2 — duplicate -->
+        <a href="/work/listed-asset-management-group" class="wss-item wss-aqua" aria-hidden="true">
+          <div class="wss-img-bg"></div><div class="wss-img-art"><div class="wia-row"><div class="wia-b"></div><div class="wia-b"></div><div class="wia-b"></div></div><div class="wia-line" style="width:70%"></div><div class="wia-row"><div class="wia-b tall" style="flex:2"></div><div class="wia-b tall"></div></div></div>
+          <div class="wss-item-overlay"></div><div class="wss-item-info"><span class="wss-item-sector">Financial Services</span><span class="wss-item-title">Listed Asset Management Group</span><span class="wss-item-scope">Design System · Investor Decks</span></div>
+        </a>
+        <a href="/work/property-development-consortium" class="wss-item wss-gold" aria-hidden="true">
+          <div class="wss-img-bg"></div><div class="wss-img-art"><div class="wia-row"><div class="wia-b tall"></div><div class="wia-b tall"></div><div class="wia-b tall"></div></div><div class="wia-line" style="width:80%"></div><div class="wia-row"><div class="wia-b"></div><div class="wia-b" style="flex:2"></div></div></div>
+          <div class="wss-item-overlay"></div><div class="wss-item-info"><span class="wss-item-sector">Infrastructure</span><span class="wss-item-title">Property Development Consortium</span><span class="wss-item-scope">Spatial Identity · Wayfinding</span></div>
+        </a>
+        <a href="/work/renewable-energy-ipp" class="wss-item wss-ember" aria-hidden="true">
+          <div class="wss-img-bg"></div><div class="wss-img-art"><div class="wia-row"><div class="wia-b"></div><div class="wia-b" style="flex:2"></div><div class="wia-b"></div></div><div class="wia-line" style="width:55%"></div><div class="wia-row"><div class="wia-b tall" style="flex:2"></div><div class="wia-b tall"></div></div></div>
+          <div class="wss-item-overlay"></div><div class="wss-item-info"><span class="wss-item-sector">Energy</span><span class="wss-item-title">Renewable Energy IPP</span><span class="wss-item-scope">Digital Design · Pitch Deck</span></div>
+        </a>
+      </div>
+
+      <!-- Column C: scrolls UP, fast (18s) -->
+      <div class="wss-col" id="wssColC">
+        <!-- set 1 -->
+        <a href="/work/ministry-of-trade" class="wss-item wss-iris">
+          <div class="wss-img-bg"></div><div class="wss-img-art"><div class="wia-row"><div class="wia-b tall" style="flex:1.5"></div><div class="wia-b tall"></div></div><div class="wia-line" style="width:60%"></div><div class="wia-row"><div class="wia-b"></div><div class="wia-b"></div><div class="wia-b"></div></div></div>
+          <div class="wss-item-overlay"></div><div class="wss-item-info"><span class="wss-item-sector">Government</span><span class="wss-item-title">Ministry of Trade & Industry</span><span class="wss-item-scope">Report Design · Campaign</span></div>
+        </a>
+        <a href="/work/listed-insurer" class="wss-item wss-aqua">
+          <div class="wss-img-bg"></div><div class="wss-img-art"><div class="wia-row"><div class="wia-b tall"></div><div class="wia-b tall" style="flex:2"></div></div><div class="wia-line" style="width:45%"></div><div class="wia-row"><div class="wia-b" style="flex:2"></div><div class="wia-b"></div></div></div>
+          <div class="wss-item-overlay"></div><div class="wss-item-info"><span class="wss-item-sector">Financial Services</span><span class="wss-item-title">Listed Short-Term Insurer</span><span class="wss-item-scope">Brand Refresh · Digital</span></div>
+        </a>
+        <a href="/work/development-finance" class="wss-item wss-gold">
+          <div class="wss-img-bg"></div><div class="wss-img-art"><div class="wia-row"><div class="wia-b"></div><div class="wia-b"></div></div><div class="wia-line" style="width:75%"></div><div class="wia-row"><div class="wia-b tall" style="flex:3"></div><div class="wia-b tall"></div></div></div>
+          <div class="wss-item-overlay"></div><div class="wss-item-info"><span class="wss-item-sector">Development Finance</span><span class="wss-item-title">Continental DFI</span><span class="wss-item-scope">Identity · Annual Report</span></div>
+        </a>
+        <!-- set 2 — duplicate -->
+        <a href="/work/ministry-of-trade" class="wss-item wss-iris" aria-hidden="true">
+          <div class="wss-img-bg"></div><div class="wss-img-art"><div class="wia-row"><div class="wia-b tall" style="flex:1.5"></div><div class="wia-b tall"></div></div><div class="wia-line" style="width:60%"></div><div class="wia-row"><div class="wia-b"></div><div class="wia-b"></div><div class="wia-b"></div></div></div>
+          <div class="wss-item-overlay"></div><div class="wss-item-info"><span class="wss-item-sector">Government</span><span class="wss-item-title">Ministry of Trade & Industry</span><span class="wss-item-scope">Report Design · Campaign</span></div>
+        </a>
+        <a href="/work/listed-insurer" class="wss-item wss-aqua" aria-hidden="true">
+          <div class="wss-img-bg"></div><div class="wss-img-art"><div class="wia-row"><div class="wia-b tall"></div><div class="wia-b tall" style="flex:2"></div></div><div class="wia-line" style="width:45%"></div><div class="wia-row"><div class="wia-b" style="flex:2"></div><div class="wia-b"></div></div></div>
+          <div class="wss-item-overlay"></div><div class="wss-item-info"><span class="wss-item-sector">Financial Services</span><span class="wss-item-title">Listed Short-Term Insurer</span><span class="wss-item-scope">Brand Refresh · Digital</span></div>
+        </a>
+        <a href="/work/development-finance" class="wss-item wss-gold" aria-hidden="true">
+          <div class="wss-img-bg"></div><div class="wss-img-art"><div class="wia-row"><div class="wia-b"></div><div class="wia-b"></div></div><div class="wia-line" style="width:75%"></div><div class="wia-row"><div class="wia-b tall" style="flex:3"></div><div class="wia-b tall"></div></div></div>
+          <div class="wss-item-overlay"></div><div class="wss-item-info"><span class="wss-item-sector">Development Finance</span><span class="wss-item-title">Continental DFI</span><span class="wss-item-scope">Identity · Annual Report</span></div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ════ EXPERTISE ════ -->
+<section class="expertise section-pad" id="expertise">
+  <div class="expertise-inner">
+
+    <!-- Left sticky panel -->
+    <div class="expertise-left">
+      <span class="eyebrow reveal">03 · Expertise</span>
+      <h2 class="section-title reveal reveal-d1">What We Do</h2>
+      <p class="expertise-desc reveal reveal-d2">We work across disciplines — always with strategy as the foundation and craft as the standard. No outsourcing. No queues. Your work receives the studio's full attention.</p>
+      <div class="expertise-left-glass reveal reveal-d2">
+        <span class="elg-label">Studio focus</span>
+        <div class="elg-stat chrome-text">5</div>
+        <div class="elg-stat-sub">Core disciplines</div>
+      </div>
+    </div>
+
+    <!-- Glass card grid -->
+    <div class="expertise-glass-grid">
+
+      <!-- 01 Brand Identity -->
+      <div class="exp-glass-card">
+        <div class="egc-glow"></div><div class="egc-refract"></div>
+        <span class="egc-num">01</span>
+        <div class="egc-content">
+          <div class="egc-icon-wrap">
+            <svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="6"/><path d="M10 4v12M4 10h12"/></svg>
+          </div>
+          <div class="egc-text-block">
+            <span class="egc-label">01 · Discipline</span>
+            <div class="egc-title">Brand Identity</div>
+            <p class="egc-body">Strategy, naming, visual identity systems, and brand guidelines built for longevity — not trends. Systems that scale and govern with precision.</p>
+          </div>
+          <div class="egc-tags">
+            <span class="egc-tag">Naming</span>
+            <span class="egc-tag">Identity Systems</span>
+            <span class="egc-tag">Brand Guidelines</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 Digital Design -->
+      <div class="exp-glass-card">
+        <div class="egc-glow"></div><div class="egc-refract"></div>
+        <span class="egc-num">02</span>
+        <div class="egc-content">
+          <div class="egc-icon-wrap">
+            <svg viewBox="0 0 20 20"><rect x="2" y="3" width="16" height="11" rx="1"/><path d="M7 17h6M10 14v3"/></svg>
+          </div>
+          <div class="egc-text-block">
+            <span class="egc-label">02 · Discipline</span>
+            <div class="egc-title">Digital Design</div>
+            <p class="egc-body">Web, platform, and product design that converts and endures. We design digital experiences with the same rigour we apply to physical ones.</p>
+          </div>
+          <div class="egc-tags">
+            <span class="egc-tag">Web Design</span>
+            <span class="egc-tag">Product UI</span>
+            <span class="egc-tag">Design Systems</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 Campaign Creative -->
+      <div class="exp-glass-card">
+        <div class="egc-glow"></div><div class="egc-refract"></div>
+        <span class="egc-num">03</span>
+        <div class="egc-content">
+          <div class="egc-icon-wrap">
+            <svg viewBox="0 0 20 20"><path d="M3 4h14M3 8h10M3 12h12M3 16h7"/></svg>
+          </div>
+          <div class="egc-text-block">
+            <span class="egc-label">03 · Discipline</span>
+            <div class="egc-title">Campaign Creative</div>
+            <p class="egc-body">Integrated campaigns across print, digital, and environmental media. Built around a single strategic idea, executed across every channel.</p>
+          </div>
+          <div class="egc-tags">
+            <span class="egc-tag">Print</span>
+            <span class="egc-tag">Digital</span>
+            <span class="egc-tag">Environmental</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 Credentials -->
+      <div class="exp-glass-card">
+        <div class="egc-glow"></div><div class="egc-refract"></div>
+        <span class="egc-num">04</span>
+        <div class="egc-content">
+          <div class="egc-icon-wrap">
+            <svg viewBox="0 0 20 20"><rect x="3" y="3" width="14" height="14" rx="1"/><path d="M7 8h6M7 12h4"/></svg>
+          </div>
+          <div class="egc-text-block">
+            <span class="egc-label">04 · Discipline</span>
+            <div class="egc-title">Credentials &amp; Presentations</div>
+            <p class="egc-body">Pitch-ready presentations, investor decks, and formal credentials for boards, procurement panels, and C-suite audiences.</p>
+          </div>
+          <div class="egc-tags">
+            <span class="egc-tag">Pitch Decks</span>
+            <span class="egc-tag">Investor Materials</span>
+            <span class="egc-tag">Credentials</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 05 Environmental — spans full width -->
+      <div class="exp-glass-card">
+        <div class="egc-glow"></div><div class="egc-refract"></div>
+        <span class="egc-num">05</span>
+        <div class="egc-content">
+          <div class="egc-icon-wrap">
+            <svg viewBox="0 0 20 20"><path d="M10 2L2 7v11h16V7L10 2z"/><path d="M7 18v-5h6v5"/></svg>
+          </div>
+          <div class="egc-text-block">
+            <span class="egc-label">05 · Discipline</span>
+            <div class="egc-title">Environmental &amp; Spatial</div>
+            <p class="egc-body">Wayfinding, signage, and spatial identity for organisations commissioning at scale — from single sites to national rollouts.</p>
+          </div>
+          <div class="egc-tags">
+            <span class="egc-tag">Wayfinding</span>
+            <span class="egc-tag">Signage Systems</span>
+            <span class="egc-tag">Spatial Identity</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ PLATFORM ════ -->
+<section class="platform section-pad" id="platform">
+  <span class="eyebrow reveal">04 · Client Platform</span>
+  <div class="platform-intro">
+    <div>
+      <h2 class="platform-title reveal reveal-d1">Your work.<br>One environment.</h2>
+      <p class="platform-desc reveal reveal-d2">Every BRANSOL engagement includes access to a dedicated client workspace. Not a shared folder. Not a ticketing system. A considered environment designed around the way serious work gets done.</p>
+      <div class="platform-pill reveal reveal-d3">
+        <div class="platform-pill-dot"></div>
+        Invitation-only · Included with every engagement
+      </div>
+    </div>
+    <div class="platform-right-intro">
+      <p class="reveal reveal-d2">When you commission BRANSOL, you receive your own named workspace — pre-loaded with your brief, your team's access levels, and a structured project environment before the first call.</p>
+      <p class="reveal reveal-d3">No onboarding. No configuration. Your environment is ready when you are.</p>
+    </div>
+  </div>
+
+  <!-- Feature grid -->
+  <div class="platform-features reveal">
+    <div class="pf-card">
+      <div class="pf-icon" style="color:var(--iris)">
+        <svg viewBox="0 0 18 18"><rect x="2" y="2" width="14" height="14" rx="1"/><path d="M5 7h8M5 11h5"/></svg>
+      </div>
+      <div class="pf-name">Brief Management</div>
+      <p class="pf-desc">All requests documented, structured, and version-controlled from day one. No lost emails, no ambiguous briefs.</p>
+    </div>
+    <div class="pf-card">
+      <div class="pf-icon" style="color:var(--aqua)">
+        <svg viewBox="0 0 18 18"><circle cx="9" cy="9" r="7"/><path d="M9 5v4l3 2"/></svg>
+      </div>
+      <div class="pf-name">Live Milestones</div>
+      <p class="pf-desc">Track project progress in real time. No chasing, no status emails. Every milestone visible at a glance.</p>
+    </div>
+    <div class="pf-card">
+      <div class="pf-icon" style="color:var(--violet)">
+        <svg viewBox="0 0 18 18"><path d="M3 13V5a1 1 0 011-1h10a1 1 0 011 1v6a1 1 0 01-1 1H6l-3 2z"/></svg>
+      </div>
+      <div class="pf-name">Feedback Loops</div>
+      <p class="pf-desc">Contextual comments pinned to deliverables. Every revision tracked, every decision documented.</p>
+    </div>
+    <div class="pf-card">
+      <div class="pf-icon" style="color:var(--rose)">
+        <svg viewBox="0 0 18 18"><path d="M9 2v10M5 8l4 4 4-4"/><path d="M2 14h14v2H2z"/></svg>
+      </div>
+      <div class="pf-name">Secure Asset Delivery</div>
+      <p class="pf-desc">Files delivered, versioned, and permanently archived. Your assets are always accessible, always safe.</p>
+    </div>
+    <div class="pf-card">
+      <div class="pf-icon" style="color:var(--gold)">
+        <svg viewBox="0 0 18 18"><path d="M2 5h14v10H2z"/><path d="M5 5V3h8v2"/><path d="M5 9h8M5 12h5"/></svg>
+      </div>
+      <div class="pf-name">Engagement History</div>
+      <p class="pf-desc">Every project, brief, and conversation stored. Returning clients benefit from full continuity without repetition.</p>
+    </div>
+    <div class="pf-card">
+      <div class="pf-icon" style="color:var(--sky)">
+        <svg viewBox="0 0 18 18"><path d="M9 2l2 4h4l-3 3 1 4-4-2-4 2 1-4L3 6h4z"/></svg>
+      </div>
+      <div class="pf-name">Compliance Ready</div>
+      <p class="pf-desc">Role-based access, audit trails, and documented approvals for formal procurement environments.</p>
+    </div>
+  </div>
+
+  <!-- Mock UI -->
+  <div class="platform-ui reveal reveal-d2">
+    <div class="platform-ui-bar">
+      <div class="pui-logo"><span class="chrome-text">BRAN</span><span style="color:var(--text)">SOL</span> <span style="color:var(--ter);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;margin-left:12px;">Client Platform</span></div>
+      <div class="pui-dots">
+        <div class="pui-dot" style="background:var(--iris);border:none;opacity:.6"></div>
+        <div class="pui-dot" style="background:var(--aqua);border:none;opacity:.4"></div>
+        <div class="pui-dot" style="background:var(--ghost);border:none"></div>
+      </div>
+    </div>
+    <div class="platform-ui-body">
+      <div class="pui-sidebar">
+        <div class="pui-nav-item active">
+          <svg viewBox="0 0 13 13"><rect x="1" y="1" width="5" height="5"/><rect x="7" y="1" width="5" height="5"/><rect x="1" y="7" width="5" height="5"/><rect x="7" y="7" width="5" height="5"/></svg>
+          Overview
+        </div>
+        <div class="pui-nav-item">
+          <svg viewBox="0 0 13 13"><rect x="1" y="2" width="11" height="9" rx="1"/><path d="M4 5h5M4 8h3"/></svg>
+          Briefs
+        </div>
+        <div class="pui-nav-item">
+          <svg viewBox="0 0 13 13"><circle cx="6.5" cy="6.5" r="5"/><path d="M6.5 3.5v3l2 1.5"/></svg>
+          Milestones
+        </div>
+        <div class="pui-nav-item">
+          <svg viewBox="0 0 13 13"><path d="M2 9V3a1 1 0 011-1h7a1 1 0 011 1v5a1 1 0 01-1 1H4L2 11V9z"/></svg>
+          Feedback
+        </div>
+        <div class="pui-nav-item">
+          <svg viewBox="0 0 13 13"><path d="M6.5 1.5v7M3.5 5.5l3 3 3-3"/><path d="M1.5 10.5h11"/></svg>
+          Assets
+        </div>
+      </div>
+      <div class="pui-main">
+        <div class="pui-section-label">Active Engagements</div>
+        <div class="pui-cards">
+          <div class="pui-card">
+            <div class="pui-card-label">Active Briefs</div>
+            <div class="pui-card-val chrome-text">3</div>
+          </div>
+          <div class="pui-card">
+            <div class="pui-card-label">Pending Review</div>
+            <div class="pui-card-val" style="color:var(--gold)">2</div>
+          </div>
+          <div class="pui-card">
+            <div class="pui-card-label">Assets Delivered</div>
+            <div class="pui-card-val" style="color:var(--aqua)">18</div>
+          </div>
+        </div>
+        <div class="pui-section-label">Current Projects</div>
+        <div class="pui-table-head">
+          <span>Project</span>
+          <span>Milestone</span>
+          <span>Due</span>
+          <span>Status</span>
+        </div>
+        <div class="pui-table-row">
+          <span>Brand Identity System</span>
+          <span class="pui-label">Phase 2</span>
+          <span class="pui-label">14 Mar</span>
+          <span><span class="pui-badge badge-active">Active</span></span>
+        </div>
+        <div class="pui-table-row">
+          <span>Digital Style Guide</span>
+          <span class="pui-label">Review</span>
+          <span class="pui-label">18 Mar</span>
+          <span><span class="pui-badge badge-review">Review</span></span>
+        </div>
+        <div class="pui-table-row">
+          <span>Credentials Deck</span>
+          <span class="pui-label">Complete</span>
+          <span class="pui-label">03 Mar</span>
+          <span><span class="pui-badge badge-done">Done</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="platform-ui-footer">
+      <span class="pui-note">National Communications Agency · Private Workspace</span>
+      <div class="pui-status">
+        <div style="width:5px;height:5px;border-radius:50%;background:var(--aqua);animation:dashPulse 2s ease-in-out infinite"></div>
+        <span class="pui-note">Platform live</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ════ DIFFERENTIATORS ════ -->
+<section class="diff section-pad" id="studio">
+  <span class="eyebrow reveal">05 · Why BRANSOL</span>
+  <h2 class="section-title reveal reveal-d1">What sets us apart</h2>
+  <div class="diff-grid">
+
+    <div class="diff-card reveal reveal-d1">
+      <div class="diff-icon" style="color:var(--iris)">
+        <svg viewBox="0 0 20 20"><rect x="2" y="2" width="16" height="16" rx="1"/><path d="M6 7h8M6 11h5M6 15h3"/></svg>
+      </div>
+      <div class="diff-title">Proprietary Client Platform</div>
+      <p class="diff-body">Every client receives a dedicated workspace. Briefs, assets, milestones, and approvals — in one considered environment. Not a Trello board. Not a shared folder.</p>
+    </div>
+
+    <div class="diff-card reveal reveal-d2">
+      <div class="diff-icon" style="color:var(--aqua)">
+        <svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 3"/></svg>
+      </div>
+      <div class="diff-title">Outcomes, Not Hours</div>
+      <p class="diff-body">We don't sell time blocks or subscriptions. We scope engagements to outcomes — what will be different when this work is complete, and how we will both know.</p>
+    </div>
+
+    <div class="diff-card reveal reveal-d3">
+      <div class="diff-icon" style="color:var(--violet)">
+        <svg viewBox="0 0 20 20"><path d="M10 2l2.4 7.4H20l-6.2 4.5 2.4 7.4L10 17l-6.2 4.3 2.4-7.4L0 9.4h7.6z"/></svg>
+      </div>
+      <div class="diff-title">Formal Commission Capability</div>
+      <p class="diff-body">BRANSOL operates professionally within structured procurement processes — credentials, proposals, scoped briefs, and senior accountability at every stage.</p>
+    </div>
+
+    <div class="diff-card reveal reveal-d4">
+      <div class="diff-icon" style="color:var(--rose)">
+        <svg viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2z"/><path d="M10 6v4"/><circle cx="10" cy="13" r="1" fill="currentColor" stroke="none"/></svg>
+      </div>
+      <div class="diff-title">No Public Pricing</div>
+      <p class="diff-body">Investment is scoped to the brief. Discussed directly — privately, precisely, and without awkwardness. We don't publish rates. Every engagement is individual.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════ BEGIN ════ -->
+<section class="begin section-pad" id="begin">
+  <div class="begin-inner">
+    <div>
+      <span class="eyebrow reveal">06 · Begin</span>
+      <h2 class="begin-headline reveal reveal-d1">Ready to<br><span class="chrome-text">begin?</span></h2>
+      <p class="begin-text reveal reveal-d2">We take on a limited number of commissions each year. Every engagement begins with a conversation — not a brief form, not a quote request. Tell us about your organisation and what you are trying to achieve.</p>
+    </div>
+    <div class="begin-right reveal reveal-d2">
+      <a href="/cdn-cgi/l/email-protection#ea828f868685aa88988b84998586c4898587" class="btn-primary">
+        Start a conversation
+        <svg viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+      </a>
+      <a href="/cdn-cgi/l/email-protection#92faf7fefefdd2f0e0f3fce1fdfebcf1fdff" class="begin-email">
+        <svg viewBox="0 0 14 14"><rect x="1" y="3" width="12" height="9" rx="1"/><path d="M1 4l6 5 6-5"/></svg>
+        <span class="__cf_email__" data-cfemail="c4aca1a8a8ab84a6b6a5aab7aba8eaa7aba9">[email&#160;protected]</span>
+      </a>
+      <a href="/work" class="btn-ghost">
+        <span class="btn-ghost-line"></span>View our work first
+      </a>
+      <div class="begin-note">Johannesburg, South Africa · bransol.com/begin</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div class="footer-top">
+    <a href="/" class="footer-logo">
+      <span class="chrome-text">BRAN</span><span style="color:var(--text)">SOL</span>
+    </a>
+    <div class="footer-nav">
+      <div class="footer-col">
+        <span class="footer-col-label">Studio</span>
+        <a href="#work">Work</a>
+        <a href="/expertise">Expertise</a>
+        <a href="#platform">Platform</a>
+        <a href="/studio">About</a>
+        <a href="/perspectives">Perspectives</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-label">Sectors</span>
+        <a href="#">Government</a>
+        <a href="#">Financial Services</a>
+        <a href="#">Infrastructure</a>
+        <a href="#">Professional Services</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-label">Contact</span>
+        <a href="/cdn-cgi/l/email-protection#e8808d848487a88a9a89869b8784c68b8785"><span class="__cf_email__" data-cfemail="93fbf6fffffcd3f1e1f2fde0fcffbdf0fcfe">[email&#160;protected]</span></a>
+        <a href="#begin">Begin a commission</a>
+        <a href="#platform">Client platform</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 BRANSOL — Ballito, KwaZulu-Natal</span>
+    <div class="footer-social">
+      <a href="#">LinkedIn</a>
+      <a href="#">Instagram</a>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── Cursor ──────────────────────────────────────────────
+const cur=document.getElementById('cur'),ring=document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function tick(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick);})();
+document.querySelectorAll('a,button,.work-card,.expertise-item,.pf-card,.diff-card,.ws-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width=cur.style.height='14px';ring.style.width=ring.style.height='44px';ring.style.borderColor='rgba(124,131,229,.5)';});
+  el.addEventListener('mouseleave',()=>{cur.style.width=cur.style.height='7px';ring.style.width=ring.style.height='30px';ring.style.borderColor='rgba(124,131,229,.32)';});
+});
+
+// ── Nav scroll state ─────────────────────────────────────
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});
+
+// ── Reveal on scroll ─────────────────────────────────────
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:0.05,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+
+// ── Glass card entrance observer ─────────────────────────
+(function(){
+  const cards = document.querySelectorAll('.expertise-glass-grid .exp-glass-card');
+  if(!cards.length) return;
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.05, rootMargin:'0px 0px -20px 0px'});
+  cards.forEach(c=>obs.observe(c));
+})();
+
+(function(){
+  const counter = document.getElementById('wssActive');
+  const items = document.querySelectorAll('.wss-item');
+  if(!counter || !items.length) return;
+  let ticking = false;
+  function updateCounter(){
+    const mid = window.innerHeight / 2;
+    let closest = 0, closestDist = Infinity;
+    items.forEach((item, i) => {
+      const rect = item.getBoundingClientRect();
+      const dist = Math.abs((rect.top + rect.height / 2) - mid);
+      if(dist < closestDist){ closestDist = dist; closest = i; }
+    });
+    counter.textContent = String(closest + 1).padStart(2,'0');
+    ticking = false;
+  }
+  window.addEventListener('scroll',()=>{
+    if(!ticking){ requestAnimationFrame(updateCounter); ticking=true; }
+  },{passive:true});
+})();
+// ── Orb parallax ────────────────────────────────────────
+(function(){
+  const orb1=document.querySelector('.bg-orb-1');
+  const orb2=document.querySelector('.bg-orb-2');
+  const orb3=document.querySelector('.bg-orb-3');
+  if(!orb1||!orb2||!orb3) return;
+  const cx=window.innerWidth/2, cy=window.innerHeight/2;
+  orb1.style.transition='transform 2s ease-out';
+  orb2.style.transition='transform 2.5s ease-out';
+  orb3.style.transition='transform 3s ease-out';
+  document.addEventListener('mousemove',ev=>{
+    const dx=(ev.clientX-cx)/cx, dy=(ev.clientY-cy)/cy;
+    orb1.style.transform=`translate(${dx*18}px,${dy*12}px)`;
+    orb2.style.transform=`translate(${-dx*14}px,${-dy*10}px)`;
+    orb3.style.transform=`translate(${dx*10}px,${dy*16}px)`;
+  });
+})();
+</script>
+</body>
+</html>
