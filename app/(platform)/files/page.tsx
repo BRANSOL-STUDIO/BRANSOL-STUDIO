@@ -17,12 +17,12 @@ export default async function FilesPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <div className="space-y-6">
+    <>
       <header className="dashboard-page-header">
         <h2>Files</h2>
         <p>Upload briefs, references, and supporting materials</p>
       </header>
-      <div className="dashboard-upload-zone" role="button" tabIndex={0} onClick={() => {}} onKeyDown={() => {}}>
+      <div id="upload" className="dashboard-upload-zone" role="button" tabIndex={0}>
         <div className="dashboard-upload-icon">⊞</div>
         <div style={{ fontFamily: "var(--font-dm-mono), monospace", fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: "var(--text-ter)" }}>Click to Upload</div>
         <p>PDF, ZIP, DOCX, JPG — up to 100MB per file</p>
@@ -36,7 +36,7 @@ export default async function FilesPage() {
             <div className="dashboard-file-icon">
               {(f.file_type || "").toUpperCase().includes("PDF") ? "📄" : "📦"}
             </div>
-            <div style={{ flex: 1 }}>
+            <div style={{ flex: 1, minWidth: 0 }}>
               <div className="dashboard-file-name">{f.name}</div>
               <div className="dashboard-file-meta">{f.file_type ?? "—"} · {formatSize(f.file_size)}</div>
             </div>
@@ -47,6 +47,6 @@ export default async function FilesPage() {
           <p className="py-4 text-sm" style={{ color: "var(--text-ter)" }}>No files yet</p>
         )}
       </div>
-    </div>
+    </>
   );
 }

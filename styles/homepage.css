@@ -1,19 +1,4 @@
-/* ── Homepage (from bransol-homepage.html) ── */
-:root {
-  --pad-x: 72px;
-  --nav-h: 68px;
-  --text: var(--text-pri);
-  --sub: rgba(240, 239, 245, 0.6);
-  --ter: var(--text-ter);
-  --ghost: #2a2a35;
-  --aqua: var(--r4);
-  --violet: var(--r8);
-  --rose: var(--r1);
-  --gold: var(--r3);
-  --sky: var(--r6);
-  --ember: var(--r2);
-  --teal: var(--r5);
-}
+/* ── Homepage (from bransol-homepage-6.html) — tokens in globals.css ── */
 
 @keyframes cSpin {
   0% { background-position: 0% 50%; }

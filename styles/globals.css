@@ -1,21 +1,42 @@
 @import "./fonts.css";
 
-/* ── BRANSOL Brand tokens (do not use Tailwind colour classes) ── */
+/* ═══════════════════════════════════════════════
+   RESET & TOKENS — match theme/bransol-homepage-6.html
+═══════════════════════════════════════════════ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 :root {
   --void: #060608;
   --deep: #0d0d12;
   --surface: #111118;
   --lift: #18181f;
   --panel: #1e1e27;
+  --ghost: #2a2a35;
   --border: rgba(255, 255, 255, 0.07);
   --border-hi: rgba(255, 255, 255, 0.14);
-  --text-pri: #f0eff5;
-  --text-sec: rgba(240, 239, 245, 0.55);
-  --text-ter: rgba(240, 239, 245, 0.28);
+  --text: #f0eff5;
+  --sub: rgba(240, 239, 245, 0.6);
+  --ter: rgba(240, 239, 245, 0.28);
+  --dim: rgba(240, 239, 245, 0.1);
+  /* Aliases for dashboard/app */
+  --text-pri: var(--text);
+  --text-sec: var(--sub);
+  --text-ter: var(--ter);
   --nav-h: 68px;
   --pad-x: 72px;
 
-  /* Rainbowchrome spectrum */
+  --iris: #7c83e5;
+  --aqua: #06d6a0;
+  --violet: #c77dff;
+  --rose: #ff6b9d;
+  --gold: #ffd166;
+  --sky: #45b7d1;
+  --teal: #4ecdc4;
+  --ember: #ff8c42;
   --r1: #ff6b9d;
   --r2: #ff8c42;
   --r3: #ffd166;
@@ -24,30 +45,10 @@
   --r6: #45b7d1;
   --r7: #7c83e5;
   --r8: #c77dff;
-  --iris: var(--r7);
 
-  --chrome: linear-gradient(
-    135deg,
-    var(--r1),
-    var(--r2),
-    var(--r3),
-    var(--r4),
-    var(--r5),
-    var(--r6),
-    var(--r7),
-    var(--r8)
-  );
-  --chrome-subtle: linear-gradient(
-    135deg,
-    rgba(255, 107, 157, 0.6),
-    rgba(255, 140, 66, 0.6),
-    rgba(255, 209, 102, 0.6),
-    rgba(6, 214, 160, 0.6),
-    rgba(78, 205, 196, 0.6),
-    rgba(69, 183, 209, 0.6),
-    rgba(124, 131, 229, 0.6),
-    rgba(199, 125, 255, 0.6)
-  );
+  --chrome: linear-gradient(135deg, #ff6b9d, #ff8c42, #ffd166, #06d6a0, #4ecdc4, #45b7d1, #7c83e5, #c77dff);
+  --chrome-h: linear-gradient(90deg, #7c83e5, #06d6a0, #c77dff);
+  --chrome-subtle: linear-gradient(135deg, rgba(255,107,157,0.6), rgba(255,140,66,0.6), rgba(255,209,102,0.6), rgba(6,214,160,0.6), rgba(78,205,196,0.6), rgba(69,183,209,0.6), rgba(124,131,229,0.6), rgba(199,125,255,0.6));
 
   --glass-bg: rgba(255, 255, 255, 0.04);
   --glass-border: rgba(255, 255, 255, 0.09);
@@ -58,31 +59,40 @@
 @tailwind components;
 @tailwind utilities;
 
-/* BRANSOL base theme — must override any reset; applied after Tailwind layers */
-html.bransol,
+/* ═══════════════════════════════════════════════
+   BASE THEME — match bransol-homepage-6.html (override Tailwind)
+═══════════════════════════════════════════════ */
 html {
   scroll-behavior: smooth;
-  background: #060608;
-  background: var(--void);
+  background: var(--void) !important;
 }
 
-body.bransol,
 body {
-  margin: 0;
+  margin: 0 !important;
   min-height: 100vh;
-  background: #060608 !important;
-  background-color: var(--void) !important;
-  color: #f0eff5 !important;
-  color: var(--text-pri) !important;
-  font-family: var(--font-dm-mono), monospace;
-  font-weight: 300;
+  background: var(--void) !important;
+  color: var(--text) !important;
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  line-height: 1.65 !important;
   overflow-x: hidden;
 }
 
-body.bransol main,
 body main {
   background: transparent !important;
-  color: inherit;
+  color: inherit !important;
+}
+
+/* Dashboard shell — platform app */
+.dashboard-shell {
+  background: transparent;
+  color: var(--text);
+  font-family: inherit;
+}
+.dashboard-content {
+  background: transparent !important;
+  color: inherit !important;
 }
 
 /* ── Keyframes ── */

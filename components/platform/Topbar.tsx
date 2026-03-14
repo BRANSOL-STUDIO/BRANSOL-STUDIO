@@ -8,7 +8,7 @@ const titles: Record<string, string> = {
   "/projects": "Projects",
   "/deliverables": "Deliverables",
   "/files": "Files",
-  "/invoices": "Invoices",
+  "/invoices": "Invoices & Billing",
   "/subscription": "Subscription",
 };
 
@@ -22,10 +22,17 @@ function getTitle(pathname: string): string {
 export function Topbar() {
   const pathname = usePathname();
   const title = getTitle(pathname ?? "/dashboard");
+  const isFiles = pathname === "/files";
+
   return (
     <header className="dashboard-topbar">
       <div className="dashboard-topbar-title">{title}</div>
       <div className="dashboard-topbar-actions">
+        {isFiles && (
+          <a href="#upload" className="dashboard-tb-btn primary">
+            + Upload File
+          </a>
+        )}
         <Link
           href="/"
           className="text-[10px] tracking-[0.2em] uppercase"

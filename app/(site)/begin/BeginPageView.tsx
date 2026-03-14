@@ -606,8 +606,7 @@ export function BeginPageView() {
           )}
         </div>
 
-        {!submitted && (
-          <aside className="page-aside">
+        <aside className="page-aside" aria-hidden={submitted}>
             <div className="aside-panel">
               <span className="aside-label">Your progress</span>
               <div className="aside-steps">
@@ -668,8 +667,7 @@ export function BeginPageView() {
                 </p>
               </div>
             </div>
-          </aside>
-        )}
+        </aside>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { fmtDate } from "@/lib/utils";
 
-function taskStatusClass(status: string | null): string {
+function projCardStatusClass(status: string | null): string {
   const s = (status || "").toLowerCase();
   if (s === "active" || s === "in progress") return "s-active";
   if (s === "pending") return "s-pending";
@@ -12,12 +12,26 @@ function taskStatusClass(status: string | null): string {
   return "s-pending";
 }
 
+type Phase = { id: string; label: string; done: boolean; active: boolean };
+type Project = {
+  id: string;
+  title: string;
+  scope: string | null;
+  status: string | null;
+  progress: number;
+  milestone: string | null;
+  due_date: string | null;
+  project_phases?: Phase[];
+};
+
 export default async function ProjectsPage() {
   const supabase = await createClient();
   const { data: projects } = await supabase
     .from("projects")
-    .select("id, title, scope, status, progress, milestone, due_date")
+    .select("id, title, scope, status, progress, milestone, due_date, project_phases(id, label, done, active)")
     .order("created_at", { ascending: false });
+
+  const list = (projects ?? []) as Project[];
 
   return (
     <div className="space-y-6">
@@ -25,42 +39,64 @@ export default async function ProjectsPage() {
         <h2>Projects</h2>
         <p>Your active and upcoming commissions</p>
       </header>
-      {(projects ?? []).map((p) => (
-        <Link
-          key={p.id}
-          href={`/projects/${p.id}`}
-          className={`dashboard-task-row ${taskStatusClass(p.status)}`}
-          style={{ marginBottom: 10, alignItems: "stretch", textDecoration: "none", color: "inherit" }}
-        >
-          <div className="dashboard-task-bar" style={{ minHeight: "auto" }} />
-          <div className="dashboard-task-body" style={{ flexDirection: "column", alignItems: "stretch", gap: 12 }}>
-            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
-              <div>
-                <div className="dashboard-task-title" style={{ fontSize: 15, marginBottom: 4 }}>{p.title}</div>
-                <div className="dashboard-task-status-label">{p.status ? p.status.charAt(0).toUpperCase() + p.status.slice(1) : "Pending"}</div>
+      <div className="proj-filter-bar">
+        <button type="button" className="proj-filter-btn active">All</button>
+        <button type="button" className="proj-filter-btn">Active</button>
+        <button type="button" className="proj-filter-btn">Pending</button>
+        <button type="button" className="proj-filter-btn">Complete</button>
+        <span className="proj-filter-sep" />
+        <span className="proj-sort">Sort: Newest</span>
+      </div>
+      {list.map((p) => {
+        const statusClass = projCardStatusClass(p.status);
+        const phases = (p.project_phases ?? []).sort((a, b) => (a.label || "").localeCompare(b.label || ""));
+        return (
+          <Link key={p.id} href={`/projects/${p.id}`} className={`proj-card ${statusClass}`}>
+            <div className="proj-accent" />
+            <div className="proj-header">
+              <div className="proj-title-block">
+                <div className="proj-title">{p.title}</div>
+                <div className="proj-client-tag">Project</div>
               </div>
-              <div style={{ textAlign: "right", flexShrink: 0 }}>
-                <div className="dashboard-file-meta">Due {p.due_date ? fmtDate(p.due_date) : "—"}</div>
+              <div className="proj-meta-right">
+                <span className="proj-status-badge">{p.status ? p.status.charAt(0).toUpperCase() + p.status.slice(1) : "Pending"}</span>
+                <span className="proj-due">Due {p.due_date ? fmtDate(p.due_date) : "—"}</span>
               </div>
             </div>
-            {p.milestone && (
-              <div>
-                <div style={{ fontFamily: "var(--font-dm-mono), monospace", fontSize: 8, letterSpacing: "0.16em", color: "var(--text-ter)", marginBottom: 5 }}>CURRENT MILESTONE</div>
-                <div style={{ fontSize: 13, color: "var(--text-sec)" }}>{p.milestone}</div>
+            {p.scope && <div className="proj-scope">{p.scope.slice(0, 120)}{p.scope.length > 120 ? "…" : ""}</div>}
+            <div className="proj-progress-wrap">
+              <div className="proj-progress-label">
+                <span className="proj-phase-name">{p.milestone || "Progress"}</span>
+                <span className="proj-pct">{p.progress}%</span>
+              </div>
+              <div className="proj-track">
+                <div className="proj-fill" style={{ width: `${p.progress}%` }} />
+              </div>
+            </div>
+            {phases.length > 0 && (
+              <div className="proj-phases">
+                {phases.map((ph, i) => (
+                  <div key={ph.id} className={`proj-phase-step ${ph.done ? "done" : ph.active ? "active" : "upcoming"}`}>
+                    <div className="proj-phase-dot" />
+                    <div className="proj-phase-label">{ph.label}</div>
+                  </div>
+                ))}
               </div>
             )}
-            {p.progress > 0 && (
-              <div>
-                <div style={{ fontFamily: "var(--font-dm-mono), monospace", fontSize: 8, letterSpacing: "0.12em", color: "var(--text-ter)", marginBottom: 4 }}>PROGRESS · {p.progress}%</div>
-                <div className="dashboard-progress-track">
-                  <div className="dashboard-progress-fill" style={{ width: `${p.progress}%` }} />
-                </div>
+            <div className="proj-footer">
+              <div className="proj-foot-stat">
+                <span className="proj-foot-label">Progress</span>
+                <span className="proj-foot-val">{p.progress}%</span>
               </div>
-            )}
-          </div>
-        </Link>
-      ))}
-      {(!projects || projects.length === 0) && (
+              <div className="proj-foot-stat">
+                <span className="proj-foot-label">Due</span>
+                <span className="proj-foot-val">{p.due_date ? fmtDate(p.due_date) : "—"}</span>
+              </div>
+            </div>
+          </Link>
+        );
+      })}
+      {list.length === 0 && (
         <p className="py-8 text-sm" style={{ color: "var(--text-ter)" }}>No projects yet</p>
       )}
     </div>

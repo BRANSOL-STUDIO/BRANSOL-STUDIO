@@ -57,8 +57,9 @@ function LoginFormInner() {
       return;
     }
     setSuccess(true);
+    const destination = tab === "studio" ? "/admin/overview" : redirectTo;
     setTimeout(() => {
-      router.push(redirectTo);
+      router.push(destination);
       router.refresh();
     }, 1400);
   }
