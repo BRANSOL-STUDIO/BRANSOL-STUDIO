@@ -12,6 +12,8 @@
   --text-pri: #f0eff5;
   --text-sec: rgba(240, 239, 245, 0.55);
   --text-ter: rgba(240, 239, 245, 0.28);
+  --nav-h: 68px;
+  --pad-x: 72px;
 
   /* Rainbowchrome spectrum */
   --r1: #ff6b9d;
@@ -56,16 +58,29 @@
 @tailwind components;
 @tailwind utilities;
 
+/* BRANSOL base theme — must override any reset; applied after Tailwind layers */
 html {
   scroll-behavior: smooth;
+  background: #060608;
+  background: var(--void);
 }
 
 body {
-  background: var(--void);
-  color: var(--text-pri);
+  margin: 0;
+  min-height: 100vh;
+  background: #060608 !important;
+  background-color: var(--void) !important;
+  color: #f0eff5 !important;
+  color: var(--text-pri) !important;
   font-family: var(--font-dm-mono), monospace;
   font-weight: 300;
   overflow-x: hidden;
+}
+
+/* Ensure main content area inherits dark theme */
+body main {
+  background: transparent;
+  color: inherit;
 }
 
 /* ── Keyframes ── */

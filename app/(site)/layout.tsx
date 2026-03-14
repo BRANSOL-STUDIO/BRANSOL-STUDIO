@@ -5,6 +5,7 @@ import "@/styles/article.css";
 import "@/styles/expertise.css";
 import "@/styles/begin.css";
 import "@/styles/studio.css";
+import "@/styles/platform.css";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { SiteCursor } from "@/components/site/SiteCursor";
