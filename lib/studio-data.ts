@@ -63,7 +63,7 @@ export const TEAM: TeamMember[] = [
   {
     initials: "AB",
     name: "Ashleigh Beaumont",
-    role: "Head of Operations",
+    role: "COO",
     bio: "Manages client relationships, the BRANSOL platform, and the operational infrastructure that lets the creative team work without administrative friction. The person who makes sure everything lands on time.",
     tags: ["Operations", "Client Relations", "Platform"],
     quote: '"Operations is the invisible design work. Nobody sees it when it works. Everybody feels it when it doesn\'t."',
