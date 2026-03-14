@@ -148,6 +148,114 @@
   pointer-events: none;
 }
 
+/* ── NAV LINK HOVER (theme v6: sliding underline) ── */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+  justify-self: center;
+}
+.nav-links a,
+.nav-link {
+  position: relative;
+  padding-bottom: 3px;
+  color: var(--ter);
+  transition: color 0.25s;
+}
+.nav-links a::after,
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--chrome);
+  background-size: 300% 100%;
+  animation: cSpin 4s linear infinite;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-links a:hover,
+.nav-link:hover {
+  color: var(--text-pri);
+}
+.nav-links a:hover::after,
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Nav Login — sliding underline + border (theme v6) */
+.nav-login {
+  font-family: var(--font-dm-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ter);
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: color 0.2s, border-color 0.2s;
+  position: relative;
+}
+.nav-login::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--chrome);
+  background-size: 300% 100%;
+  animation: cSpin 4s linear infinite;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-login:hover {
+  color: var(--text-pri);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.nav-login:hover::after {
+  transform: scaleX(1);
+}
+
+/* ── CUSTOM CURSOR (theme v6) ── */
+body.site-cursor-active {
+  cursor: none;
+}
+body.site-cursor-active * {
+  cursor: none;
+}
+.site-cursor-dot,
+.site-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+.site-cursor-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--chrome);
+  background-size: 300% 300%;
+  animation: cSpin 3s linear infinite;
+  transition: width 0.18s, height 0.18s;
+}
+.site-cursor-ring {
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(124, 131, 229, 0.32);
+  z-index: 9998;
+  transition: width 0.15s, height 0.15s, border-color 0.2s;
+}
+
 /* Section shared */
 .section-pad {
   padding: 128px var(--pad-x) 128px calc(var(--pad-x) + 3px);

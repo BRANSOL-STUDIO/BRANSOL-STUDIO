@@ -105,8 +105,8 @@ export function HomeHero() {
             </Link>
           </div>
           <div className="hero-right-meta">
-            <span>Est. 2018</span>
-            <span>Johannesburg · ZA</span>
+            <span>EST. 2018</span>
+            <span>Durban, KZN</span>
             <div className="hero-scroll">
               <div className="scroll-track" />
               <span>Scroll</span>

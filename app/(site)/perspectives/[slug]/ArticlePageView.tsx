@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
+import { ArticlePageBg } from "@/components/site/ArticlePageBg";
 import type { ArticleContent } from "@/lib/article-content";
 
 interface ArticlePageViewProps {
@@ -87,6 +88,7 @@ export function ArticlePageView({ article, related }: ArticlePageViewProps) {
 
   return (
     <div className="article-page">
+      <ArticlePageBg />
       <div className="article-progress-track">
         <div className="article-progress-fill" style={{ width: `${progress}%` }} />
       </div>
@@ -163,8 +165,8 @@ export function ArticlePageView({ article, related }: ArticlePageViewProps) {
           </div>
         </article>
 
-        <aside>
-          <div className="article-sidebar-sticky">
+        <aside className="article-sidebar-wrap">
+          <div className="article-sidebar">
             <div className="article-sidebar-panel article-sidebar-progress">
               <span className="article-sidebar-label">Progress</span>
               <div className="article-sidebar-progress-bar">

@@ -41,12 +41,12 @@ export function Nav() {
         <span className="chrome-text">BRAN</span>
         <span style={{ color: "var(--text-pri)" }}>SOL</span>
       </Link>
-      <ul className="hidden md:flex items-center gap-8 list-none justify-self-center">
+      <ul className="nav-links hidden md:flex items-center gap-8 list-none justify-self-center">
         {links.map(({ href, label }) => (
           <li key={href}>
             <Link
               href={href}
-              className="text-[9px] tracking-[0.28em] uppercase no-underline transition-colors"
+              className="nav-link text-[9px] tracking-[0.28em] uppercase no-underline"
               style={{ color: "var(--ter)" }}
             >
               {label}
@@ -57,8 +57,8 @@ export function Nav() {
       <div className="flex items-center gap-6 justify-self-end">
         <Link
           href="/auth/login"
-          className="text-[9px] tracking-[0.28em] uppercase no-underline transition-colors hover:opacity-90"
-          style={{ color: "var(--sub)" }}
+          className="nav-login text-[9px] tracking-[0.28em] uppercase no-underline"
+          style={{ color: "var(--ter)" }}
         >
           Login
         </Link>
