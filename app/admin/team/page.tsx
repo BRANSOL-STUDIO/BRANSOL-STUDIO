@@ -32,7 +32,7 @@ export default async function AdminTeamPage() {
     .select("id, name, email, role, organisation_id")
     .order("role", { ascending: false });
 
-  const orgIds = [...new Set((profiles ?? []).map((p) => p.organisation_id).filter(Boolean))] as string[];
+  const orgIds = Array.from(new Set((profiles ?? []).map((p) => p.organisation_id).filter(Boolean))) as string[];
   const { data: orgs } = orgIds.length
     ? await supabase.from("organisations").select("id, name").in("id", orgIds)
     : { data: [] };
