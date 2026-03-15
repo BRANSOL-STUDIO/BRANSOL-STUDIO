@@ -1,8 +1,8 @@
 "use client";
 
-import "@/styles/login.css";
-import { useState, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+/* login.css loaded from root layout for correct cascade order */
+import { useState, Suspense, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 const SECTORS = [
@@ -15,10 +15,17 @@ const SECTORS = [
 ];
 
 function LoginFormInner() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirect") ?? "/dashboard";
-  const [tab, setTab] = useState<"client" | "studio">("client");
+  const [tab, setTab] = useState<"client" | "studio">(
+    searchParams.get("tab") === "studio" ? "studio" : "client"
+  );
+  useEffect(() => {
+    const err = searchParams.get("error");
+    if (err) setPasswordError(decodeURIComponent(err));
+    const t = searchParams.get("tab");
+    if (t === "studio" || t === "client") setTab(t);
+  }, [searchParams]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -36,32 +43,21 @@ function LoginFormInner() {
     setPasswordError("");
   }
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     clearErrors();
     const trimmedEmail = email.trim();
     if (!trimmedEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+      e.preventDefault();
       setEmailError("Please enter a valid email address.");
       return;
     }
     if (!password || password.length < 6) {
+      e.preventDefault();
       setPasswordError("Password must be at least 6 characters.");
       return;
     }
     setLoading(true);
-    const supabase = createClient();
-    const { error } = await supabase.auth.signInWithPassword({ email: trimmedEmail, password });
-    setLoading(false);
-    if (error) {
-      setPasswordError("Incorrect email or password.");
-      return;
-    }
-    setSuccess(true);
-    const destination = tab === "studio" ? "/admin/overview" : redirectTo;
-    setTimeout(() => {
-      router.push(destination);
-      router.refresh();
-    }, 1400);
+    // Let the form do a native POST to /api/auth/sign-in so the browser gets Set-Cookie and follows the redirect
   }
 
   async function handleForgot(e: React.FormEvent) {
@@ -148,22 +144,33 @@ function LoginFormInner() {
                     : "Studio and admin access only."}
                 </p>
                 <div className="login-tab-row">
-                  <button
-                    type="button"
-                    className={`login-tab-btn ${tab === "client" ? "active" : ""}`}
-                    onClick={() => { setTab("client"); clearErrors(); setEmail(""); setPassword(""); }}
+                  <label className="login-field-label" htmlFor="login-tab-select" style={{ marginBottom: 8 }}>
+                    Sign in as
+                  </label>
+                  <select
+                    id="login-tab-select"
+                    value={tab}
+                    onChange={(e) => {
+                      const value = e.target.value as "client" | "studio";
+                      setTab(value);
+                      clearErrors();
+                      setEmail("");
+                      setPassword("");
+                    }}
+                    className="login-tab-select"
+                    aria-label="Client or Studio"
                   >
-                    Client
-                  </button>
-                  <button
-                    type="button"
-                    className={`login-tab-btn ${tab === "studio" ? "active" : ""}`}
-                    onClick={() => { setTab("studio"); clearErrors(); setEmail(""); setPassword(""); }}
-                  >
-                    Studio
-                  </button>
+                    <option value="client">Client</option>
+                    <option value="studio">Studio</option>
+                  </select>
                 </div>
-                <form onSubmit={handleSubmit}>
+                <form
+                  action="/api/auth/sign-in"
+                  method="POST"
+                  onSubmit={handleSubmit}
+                >
+                  <input type="hidden" name="redirect" value={redirectTo} />
+                  <input type="hidden" name="tab" value={tab} />
                   <div className="login-field">
                     <label className="login-field-label" htmlFor="login-email">
                       Email Address
@@ -171,6 +178,7 @@ function LoginFormInner() {
                     <div className="login-field-wrap">
                       <input
                         id="login-email"
+                        name="email"
                         className={`login-field-input ${emailError ? "error" : ""}`}
                         type="email"
                         placeholder={tab === "client" ? "your@organisation.com" : "name@bransol.co.za"}
@@ -188,6 +196,7 @@ function LoginFormInner() {
                     <div className="login-field-wrap">
                       <input
                         id="login-pw"
+                        name="password"
                         className={`login-field-input ${passwordError ? "error" : ""}`}
                         type={showPassword ? "text" : "password"}
                         placeholder="••••••••••••"

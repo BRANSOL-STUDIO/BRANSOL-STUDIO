@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import type { UserRole } from "@/lib/types";
 
@@ -11,6 +12,7 @@ export type MemberForList = {
   type: "studio" | "client";
   orgName: string | null;
   avatar: string;
+  avatarUrl?: string | null;
   color: string;
   projectCount?: number;
 };
@@ -20,30 +22,6 @@ const ACCESS_LABELS: Record<UserRole, string> = {
   admin: "Admin",
   client: "Client",
 };
-
-const COLORS = [
-  "var(--iris)",
-  "var(--aqua)",
-  "var(--violet)",
-  "var(--gold)",
-  "var(--sky)",
-  "var(--ember)",
-  "var(--rose)",
-];
-
-function getColor(index: number) {
-  return COLORS[index % COLORS.length];
-}
-
-function getInitials(name: string | null, email: string | null): string {
-  if (name?.trim()) {
-    const parts = name.trim().split(/\s+/);
-    if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
-    return parts[0].slice(0, 2).toUpperCase();
-  }
-  if (email) return email.slice(0, 2).toUpperCase();
-  return "??";
-}
 
 export function MembersView({
   members,
@@ -129,14 +107,27 @@ export function MembersView({
 
       <div className="dashboard-card" style={{ padding: 0, overflow: "hidden" }}>
         {shown.map((m) => (
-          <div key={m.id} className="dashboard-member-row">
+          <Link
+            key={m.id}
+            href={`/admin/team/${m.id}`}
+            className="dashboard-member-row-link"
+          >
             <div style={{ position: "relative", flexShrink: 0 }}>
-              <div
-                className="dashboard-member-avatar"
-                style={{ background: m.color, opacity: 0.9 }}
-              >
-                {m.avatar}
-              </div>
+              {m.avatarUrl ? (
+                <img
+                  src={m.avatarUrl}
+                  alt=""
+                  className="dashboard-member-avatar"
+                  style={{ objectFit: "cover" }}
+                />
+              ) : (
+                <div
+                  className="dashboard-member-avatar"
+                  style={{ background: m.color, opacity: 0.9 }}
+                >
+                  {m.avatar}
+                </div>
+              )}
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div className="dashboard-member-name">{m.name || m.email || m.id}</div>
@@ -162,33 +153,8 @@ export function MembersView({
                 {ACCESS_LABELS[m.role]}
               </span>
             </div>
-            <div style={{ flexShrink: 0, marginLeft: 8 }}>
-              {m.type === "studio" && m.role !== "super_admin" ? (
-                <select
-                  className="dashboard-members-access-select"
-                  defaultValue={m.role}
-                  onChange={() => {}}
-                  style={{
-                    background: "rgba(255,255,255,.04)",
-                    border: "1px solid var(--glass-border)",
-                    color: "var(--text-ter)",
-                    fontFamily: "var(--font-dm-mono), monospace",
-                    fontSize: 8,
-                    letterSpacing: "0.1em",
-                    padding: "5px 8px",
-                    cursor: "pointer",
-                  }}
-                >
-                  <option value="admin">admin</option>
-                  <option value="super_admin">super_admin</option>
-                </select>
-              ) : (
-                <span style={{ fontFamily: "var(--font-dm-mono), monospace", fontSize: 8, color: "var(--text-ter)" }}>
-                  {m.type === "studio" ? "Owner" : "Client"}
-                </span>
-              )}
-            </div>
-          </div>
+            <span className="member-profile-row-arrow">›</span>
+          </Link>
         ))}
       </div>
     </>

@@ -1,7 +1,36 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { createClient } from "@/lib/supabase/server";
 import { createServiceClient } from "@/lib/supabase/server";
+
+/**
+ * Sign in with email/password. Runs on the server so session cookies are set on the response
+ * and the next request (e.g. to /dashboard) includes them.
+ */
+export async function signIn(formData: FormData) {
+  const email = (formData.get("email") as string)?.trim();
+  const password = formData.get("password") as string;
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return { error: "Please enter a valid email address." };
+  }
+  if (!password || password.length < 6) {
+    return { error: "Password must be at least 6 characters." };
+  }
+  const supabase = await createClient();
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  if (error) {
+    const msg = error.message?.toLowerCase() ?? "";
+    if (msg.includes("invalid login credentials") || msg.includes("invalid_credentials")) {
+      return { error: "Incorrect email or password." };
+    }
+    if (msg.includes("fetch") || msg.includes("network") || msg.includes("failed to fetch")) {
+      return { error: "Cannot reach Supabase. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to .env.local and restart." };
+    }
+    return { error: error.message };
+  }
+  return { success: true };
+}
 
 /**
  * Commission intake form submission.

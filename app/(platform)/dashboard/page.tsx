@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { fmtDate } from "@/lib/utils";
+import { getInitials, getAvatarColor } from "@/lib/utils";
 
 function taskStatusClass(status: string): string {
   const s = (status || "").toLowerCase();
@@ -25,15 +26,28 @@ export default async function DashboardPage() {
   let filesCount = 0;
   let invoiceSummary: { totalPaid: number; pending: number; nextDue: string | null } = { totalPaid: 0, pending: 0, nextDue: null };
   let userName: string | null = null;
+  let assignedTeam: { id: string; name: string | null; email: string | null; avatar: string | null; initials: string; color: string }[] = [];
 
   try {
     const supabase = await createClient();
-    const [projRes, delivRes, filesRes, invRes, authRes] = await Promise.all([
-      supabase
-        .from("projects")
-        .select("id, title, status, progress, due_date, milestone")
-        .order("created_at", { ascending: false })
-        .limit(10),
+    const authRes = await supabase.auth.getUser();
+    const userId = authRes.data?.user?.id;
+    userName = authRes.data?.user?.user_metadata?.full_name ?? authRes.data?.user?.email?.split("@")[0] ?? null;
+
+    const { data: profile } = userId
+      ? await supabase.from("profiles").select("organisation_id").eq("id", userId).maybeSingle()
+      : { data: null };
+    const orgId = profile?.organisation_id ?? null;
+
+    const [projRes, delivRes, filesRes, invRes] = await Promise.all([
+      orgId
+        ? supabase
+            .from("projects")
+            .select("id, title, status, progress, due_date, milestone")
+            .eq("organisation_id", orgId)
+            .order("created_at", { ascending: false })
+            .limit(10)
+        : { data: [] },
       supabase
         .from("deliverables")
         .select("id, name, status, created_at, file_type")
@@ -45,7 +59,6 @@ export default async function DashboardPage() {
         .select("id, status, due_date")
         .order("date", { ascending: false })
         .limit(20),
-      supabase.auth.getUser(),
     ]);
     projects = (projRes.data ?? []) as typeof projects;
     deliverables = (delivRes.data ?? []) as typeof deliverables;
@@ -58,7 +71,29 @@ export default async function DashboardPage() {
       pending: pendingInv ? 1 : 0,
       nextDue: pendingInv?.due_date ?? null,
     };
-    userName = authRes.data?.user?.user_metadata?.full_name ?? authRes.data?.user?.email?.split("@")[0] ?? null;
+
+    if (orgId && projects.length > 0) {
+      const projectIds = projects.map((p) => p.id);
+      const { data: teamRows } = await supabase
+        .from("project_team")
+        .select("profile_id")
+        .in("project_id", projectIds);
+      const profileIds = Array.from(new Set((teamRows ?? []).map((r) => r.profile_id).filter(Boolean)));
+      if (profileIds.length > 0) {
+        const { data: teamProfiles } = await supabase
+          .from("profiles")
+          .select("id, name, email, avatar")
+          .in("id", profileIds);
+        assignedTeam = (teamProfiles ?? []).map((p, i) => ({
+          id: p.id,
+          name: p.name ?? null,
+          email: p.email ?? null,
+          avatar: p.avatar ?? null,
+          initials: getInitials(p.name, p.email),
+          color: getAvatarColor(i),
+        }));
+      }
+    }
   } catch {
     // show empty state
   }
@@ -134,6 +169,33 @@ export default async function DashboardPage() {
             <p className="py-4 text-sm" style={{ color: "var(--text-ter)" }}>No projects yet</p>
           )}
         </div>
+        {assignedTeam.length > 0 && (
+          <div className="dashboard-card">
+            <div className="dashboard-card-header">
+              <span className="dashboard-card-title">Your Studio Team</span>
+              <Link href="/team" className="dashboard-card-action">View all →</Link>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              {assignedTeam.slice(0, 5).map((m) => (
+                <div key={m.id} style={{ display: "flex", alignItems: "center", gap: 12, padding: "8px 0", borderBottom: "1px solid var(--glass-border)" }}>
+                  <div style={{ position: "relative", flexShrink: 0 }}>
+                    {m.avatar ? (
+                      <img src={m.avatar} alt="" style={{ width: 28, height: 28, borderRadius: "50%", objectFit: "cover" }} />
+                    ) : (
+                      <div style={{ width: 28, height: 28, borderRadius: "50%", background: m.color, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-dm-mono), monospace", fontSize: 8, fontWeight: 700, color: "#060608" }}>
+                        {m.initials}
+                      </div>
+                    )}
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontFamily: "var(--font-syne), sans-serif", fontSize: 12, fontWeight: 700, color: "var(--text-pri)" }}>{m.name || m.email || "—"}</div>
+                    <div style={{ fontSize: 11, color: "var(--text-ter)" }}>Studio</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         <div className="dashboard-card">
           <div className="dashboard-card-header">
             <span className="dashboard-card-title">Recent Activity</span>

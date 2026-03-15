@@ -6,7 +6,15 @@ export async function createClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://placeholder.supabase.co";
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "placeholder-anon-key";
 
-  const cookieStore = await cookies();
+  let cookieStore: Awaited<ReturnType<typeof cookies>>;
+  try {
+    cookieStore = await cookies();
+  } catch {
+    // cookies() can throw outside request context; use no-op store so callers don't crash
+    return createServerClient(url, key, {
+      cookies: { getAll: () => [], setAll: () => {} },
+    });
+  }
 
   return createServerClient(
     url,

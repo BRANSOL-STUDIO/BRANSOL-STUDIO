@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { fmtDate } from "@/lib/utils";
+import { fmtDate, getInitials, getAvatarColor } from "@/lib/utils";
 
 function projCardStatusClass(status: string | null): string {
   const s = (status || "").toLowerCase();
@@ -26,12 +26,44 @@ type Project = {
 
 export default async function ProjectsPage() {
   const supabase = await createClient();
-  const { data: projects } = await supabase
-    .from("projects")
-    .select("id, title, scope, status, progress, milestone, due_date, project_phases(id, label, done, active)")
-    .order("created_at", { ascending: false });
+  const { data: { user } } = await supabase.auth.getUser();
+  const { data: profile } = user
+    ? await supabase.from("profiles").select("organisation_id").eq("id", user.id).maybeSingle()
+    : { data: null };
+  const orgId = profile?.organisation_id ?? null;
+
+  const { data: projects } = orgId
+    ? await supabase
+        .from("projects")
+        .select("id, title, scope, status, progress, milestone, due_date, project_phases(id, label, done, active)")
+        .eq("organisation_id", orgId)
+        .order("created_at", { ascending: false })
+    : { data: [] };
 
   const list = (projects ?? []) as Project[];
+  const projectIds = list.map((p) => p.id);
+  const { data: teamRows } = projectIds.length > 0
+    ? await supabase.from("project_team").select("project_id, profile_id").in("project_id", projectIds)
+    : { data: [] };
+  const profileIds = Array.from(new Set((teamRows ?? []).map((r) => r.profile_id).filter(Boolean)));
+  const { data: teamProfiles } = profileIds.length > 0
+    ? await supabase.from("profiles").select("id, name, email, avatar").in("id", profileIds)
+    : { data: [] };
+  const teamByProject: Record<string, { name: string; initials: string; color: string }[]> = {};
+  (teamRows ?? []).forEach((r) => {
+    const pid = r.project_id;
+    const uid = r.profile_id;
+    if (!pid || !uid) return;
+    const p = (teamProfiles ?? []).find((x) => x.id === uid);
+    if (!p) return;
+    if (!teamByProject[pid]) teamByProject[pid] = [];
+    if (teamByProject[pid].some((t) => t.name === (p.name || p.email))) return;
+    teamByProject[pid].push({
+      name: p.name || p.email || "—",
+      initials: getInitials(p.name, p.email),
+      color: getAvatarColor(profileIds.indexOf(uid)),
+    });
+  });
 
   return (
     <div className="space-y-6">
@@ -88,10 +120,32 @@ export default async function ProjectsPage() {
                 <span className="proj-foot-label">Progress</span>
                 <span className="proj-foot-val">{p.progress}%</span>
               </div>
+              <div className="proj-foot-sep" />
               <div className="proj-foot-stat">
                 <span className="proj-foot-label">Due</span>
                 <span className="proj-foot-val">{p.due_date ? fmtDate(p.due_date) : "—"}</span>
               </div>
+              {(teamByProject[p.id] ?? []).length > 0 && (
+                <>
+                  <div className="proj-foot-sep" />
+                  <div className="proj-foot-stat proj-foot-team">
+                    <span className="proj-foot-label">Team</span>
+                    <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 2 }}>
+                      {(teamByProject[p.id] ?? []).map((t, i) => (
+                        <div
+                          key={i}
+                          className="proj-avatar"
+                          title={t.name}
+                          style={{ background: t.color, color: "#060608" }}
+                        >
+                          {t.initials}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
+              <div style={{ marginLeft: 4, fontFamily: "var(--font-dm-mono), monospace", fontSize: 9, color: "var(--text-ter)", letterSpacing: "0.1em" }}>View →</div>
             </div>
           </Link>
         );

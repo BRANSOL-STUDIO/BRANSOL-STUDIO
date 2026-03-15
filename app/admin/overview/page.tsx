@@ -2,37 +2,48 @@ import { createClient } from "@/lib/supabase/server";
 
 export default async function AdminOverviewPage() {
   const supabase = await createClient();
-  const { count: orgCount } = await supabase.from("organisations").select("id", { count: "exact", head: true });
-  const { count: projectCount } = await supabase.from("projects").select("id", { count: "exact", head: true });
+  const [
+    { count: orgCount },
+    { count: projectCount },
+    { count: clientCount },
+    { count: teamCount },
+  ] = await Promise.all([
+    supabase.from("organisations").select("id", { count: "exact", head: true }),
+    supabase.from("projects").select("id", { count: "exact", head: true }),
+    supabase.from("profiles").select("id", { count: "exact", head: true }).eq("role", "client"),
+    supabase.from("profiles").select("id", { count: "exact", head: true }).in("role", ["admin", "super_admin"]),
+  ]);
+
+  const dateLabel = new Date().toLocaleDateString("en-ZA", { month: "long", year: "numeric" });
 
   return (
-    <div className="space-y-8">
-      <h1
-        className="text-2xl font-bold tracking-tight"
-        style={{ fontFamily: "var(--font-syne)", color: "var(--text-pri)" }}
-      >
-        Overview
-      </h1>
-      <div className="grid gap-4 md:grid-cols-3">
-        <div
-          className="p-6 rounded-xl border"
-          style={{ background: "var(--glass-bg)", borderColor: "var(--glass-border)" }}
-        >
-          <p className="text-[10px] tracking-wider uppercase mb-2" style={{ color: "var(--text-ter)" }}>
-            Organisations
-          </p>
-          <p className="text-3xl font-bold chrome-text">{orgCount ?? 0}</p>
+    <>
+      <header className="dashboard-page-header">
+        <h2>Studio Overview</h2>
+        <p>BRANSOL · {dateLabel}</p>
+      </header>
+      <div className="dashboard-grid-4" style={{ marginBottom: 32 }}>
+        <div className="dashboard-stat-card c-iris">
+          <span className="dashboard-card-title" style={{ marginBottom: 10, display: "block" }}>Organisations</span>
+          <div className="dashboard-stat-val chrome-text">{orgCount ?? 0}</div>
+          <div className="dashboard-stat-delta">Clients</div>
         </div>
-        <div
-          className="p-6 rounded-xl border"
-          style={{ background: "var(--glass-bg)", borderColor: "var(--glass-border)" }}
-        >
-          <p className="text-[10px] tracking-wider uppercase mb-2" style={{ color: "var(--text-ter)" }}>
-            Projects
-          </p>
-          <p className="text-3xl font-bold chrome-text">{projectCount ?? 0}</p>
+        <div className="dashboard-stat-card c-aqua">
+          <span className="dashboard-card-title" style={{ marginBottom: 10, display: "block" }}>Active Projects</span>
+          <div className="dashboard-stat-val">{projectCount ?? 0}</div>
+          <div className="dashboard-stat-delta">Total</div>
+        </div>
+        <div className="dashboard-stat-card c-rose">
+          <span className="dashboard-card-title" style={{ marginBottom: 10, display: "block" }}>Client Users</span>
+          <div className="dashboard-stat-val">{clientCount ?? 0}</div>
+          <div className="dashboard-stat-delta">Profiles</div>
+        </div>
+        <div className="dashboard-stat-card c-gold">
+          <span className="dashboard-card-title" style={{ marginBottom: 10, display: "block" }}>Studio Team</span>
+          <div className="dashboard-stat-val">{teamCount ?? 0}</div>
+          <div className="dashboard-stat-delta">Admins & super admins</div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

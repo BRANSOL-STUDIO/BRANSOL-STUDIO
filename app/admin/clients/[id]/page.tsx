@@ -47,7 +47,7 @@ export default async function AdminClientDetailPage({
           {(projects ?? []).map((p) => (
             <li key={p.id}>
               <Link
-                href={`/admin/projects?org=${org.id}`}
+                href={`/admin/projects/${p.id}`}
                 className="block p-3 rounded-lg border"
                 style={{ background: "var(--lift)", borderColor: "var(--border)" }}
               >

@@ -43,3 +43,53 @@ export function fmtRelative(date: string): string {
   if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
   return fmtDate(date);
 }
+
+/**
+ * Format date as "Mon YYYY" (month short + year)
+ */
+export function fmtDateShort(date: string | null | undefined): string {
+  if (!date) return "—";
+  return new Date(date).toLocaleDateString("en-ZA", { month: "short", year: "numeric" });
+}
+
+/**
+ * Format due date: "Overdue" if past, otherwise full date
+ */
+export function fmtDueDate(date: string | null | undefined): string {
+  if (!date) return "—";
+  const d = new Date(date);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  d.setHours(0, 0, 0, 0);
+  return d < today ? "Overdue" : fmtDate(date);
+}
+
+/**
+ * Get initials from name (or email fallback), max 2 chars
+ */
+export function getInitials(name: string | null | undefined, email?: string | null): string {
+  if (name?.trim()) {
+    const parts = name.trim().split(/\s+/);
+    if (parts.length >= 2) return (parts[0][0]! + parts[1][0]!).toUpperCase();
+    return parts[0]!.slice(0, 2).toUpperCase();
+  }
+  if (email) return email.slice(0, 2).toUpperCase();
+  return "?";
+}
+
+const AVATAR_COLORS = [
+  "var(--iris)",
+  "var(--aqua)",
+  "var(--violet)",
+  "var(--gold)",
+  "var(--sky)",
+  "var(--ember)",
+  "var(--rose)",
+];
+
+/**
+ * Cycle through avatar colors by index (for lists)
+ */
+export function getAvatarColor(index: number): string {
+  return AVATAR_COLORS[index % AVATAR_COLORS.length];
+}

@@ -53,63 +53,13 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
-  let user = null;
+  // Only refresh session in middleware; do not redirect here.
+  // Auth redirects are done in (platform)/layout and admin/layout so the request
+  // that has the auth cookies is the one that runs the check (avoids redirect loop).
   try {
-    const { data } = await supabase.auth.getUser();
-    user = data?.user ?? null;
+    await supabase.auth.getUser();
   } catch {
-    return response;
-  }
-
-  // Protected client platform: /dashboard, /projects, /deliverables, /files, /invoices, /subscription
-  const isPlatform =
-    pathname.startsWith("/dashboard") ||
-    pathname.startsWith("/projects") ||
-    pathname.startsWith("/deliverables") ||
-    pathname.startsWith("/files") ||
-    pathname.startsWith("/invoices") ||
-    pathname.startsWith("/subscription");
-
-  // Protected admin
-  const isAdmin = pathname.startsWith("/admin");
-
-  if (isPlatform || isAdmin) {
-    if (!user) {
-      const url = request.nextUrl.clone();
-      url.pathname = "/auth/login";
-      url.searchParams.set("redirect", pathname);
-      return NextResponse.redirect(url);
-    }
-
-    // Role comes from JWT custom claim (set by Edge Function on signup) or from profiles table
-    const role = (user as { role?: string }).role ?? "client";
-
-    if (isAdmin) {
-      const isSuperOnly =
-        pathname.startsWith("/admin/billing") ||
-        pathname.startsWith("/admin/team");
-      if (isSuperOnly && role !== "super_admin") {
-        const url = request.nextUrl.clone();
-        url.pathname = "/admin/overview";
-        return NextResponse.redirect(url);
-      }
-      if (role !== "admin" && role !== "super_admin") {
-        const url = request.nextUrl.clone();
-        url.pathname = "/dashboard";
-        return NextResponse.redirect(url);
-      }
-    }
-
-    if (isPlatform && role !== "client" && role !== "admin" && role !== "super_admin") {
-      // e.g. admin visiting /dashboard — allow; or redirect to admin
-      if (role === "admin" || role === "super_admin") {
-        // Admins can access platform too (e.g. preview)
-      } else {
-        const url = request.nextUrl.clone();
-        url.pathname = "/admin/overview";
-        return NextResponse.redirect(url);
-      }
-    }
+    // ignore
   }
 
   return response;

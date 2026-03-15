@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import { fmtCurrency } from "@/lib/utils";
+import { fmtCurrency, fmtDate } from "@/lib/utils";
 
 const DEFAULT_FEATURES = [
   "Unlimited active projects",
@@ -20,7 +20,7 @@ export default async function SubscriptionPage() {
 
   const tier = org?.tier ?? "—";
   const mrr = org?.mrr ?? 0;
-  const renewal = org?.renewal_date ? new Date(org.renewal_date).toLocaleDateString("en-ZA", { day: "numeric", month: "short", year: "numeric" }) : "—";
+  const renewal = fmtDate(org?.renewal_date);
 
   return (
     <div className="space-y-6">

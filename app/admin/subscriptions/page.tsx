@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import { fmtCurrency } from "@/lib/utils";
+import { fmtCurrency, fmtDate } from "@/lib/utils";
 
 export default async function AdminSubscriptionsPage() {
   const supabase = await createClient();
@@ -28,7 +28,7 @@ export default async function AdminSubscriptionsPage() {
             <div className="flex items-center gap-4 text-sm" style={{ color: "var(--text-sec)" }}>
               <span>{o.tier}</span>
               <span>{o.mrr != null ? fmtCurrency(Number(o.mrr)) : "—"}</span>
-              <span>{o.renewal_date ? new Date(o.renewal_date).toLocaleDateString("en-ZA") : "—"}</span>
+              <span>{fmtDate(o.renewal_date)}</span>
             </div>
           </li>
         ))}

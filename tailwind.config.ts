@@ -5,6 +5,9 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  corePlugins: {
+    preflight: false, // Use globals.css reset & theme; avoid Tailwind reset overriding BRANSOL styles
+  },
   theme: {
     extend: {},
   },

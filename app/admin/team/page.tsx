@@ -1,35 +1,12 @@
 import { createClient } from "@/lib/supabase/server";
 import { MembersView, type MemberForList } from "@/components/admin/MembersView";
-
-const COLORS = [
-  "var(--iris)",
-  "var(--aqua)",
-  "var(--violet)",
-  "var(--gold)",
-  "var(--sky)",
-  "var(--ember)",
-  "var(--rose)",
-];
-
-function getColor(index: number) {
-  return COLORS[index % COLORS.length];
-}
-
-function getInitials(name: string | null, email: string | null): string {
-  if (name?.trim()) {
-    const parts = name.trim().split(/\s+/);
-    if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
-    return parts[0].slice(0, 2).toUpperCase();
-  }
-  if (email) return email.slice(0, 2).toUpperCase();
-  return "??";
-}
+import { getInitials, getAvatarColor } from "@/lib/utils";
 
 export default async function AdminTeamPage() {
   const supabase = await createClient();
   const { data: profiles } = await supabase
     .from("profiles")
-    .select("id, name, email, role, organisation_id")
+    .select("id, name, email, role, organisation_id, avatar")
     .order("role", { ascending: false });
 
   const orgIds = Array.from(new Set((profiles ?? []).map((p) => p.organisation_id).filter(Boolean))) as string[];
@@ -37,6 +14,12 @@ export default async function AdminTeamPage() {
     ? await supabase.from("organisations").select("id, name").in("id", orgIds)
     : { data: [] };
   const orgMap = new Map((orgs ?? []).map((o) => [o.id, o.name]));
+
+  const { data: teamRows } = await supabase.from("project_team").select("profile_id");
+  const projectCountByProfile: Record<string, number> = {};
+  (teamRows ?? []).forEach((r) => {
+    if (r.profile_id) projectCountByProfile[r.profile_id] = (projectCountByProfile[r.profile_id] ?? 0) + 1;
+  });
 
   const studioRoles = ["admin", "super_admin"];
   const members: MemberForList[] = (profiles ?? []).map((p, i) => ({
@@ -47,7 +30,9 @@ export default async function AdminTeamPage() {
     type: studioRoles.includes(p.role) ? "studio" : "client",
     orgName: p.organisation_id ? orgMap.get(p.organisation_id) ?? null : null,
     avatar: getInitials(p.name, p.email),
-    color: getColor(i),
+    avatarUrl: p.avatar ?? null,
+    color: getAvatarColor(i),
+    projectCount: projectCountByProfile[p.id] ?? 0,
   }));
 
   const studioCount = members.filter((m) => m.type === "studio").length;

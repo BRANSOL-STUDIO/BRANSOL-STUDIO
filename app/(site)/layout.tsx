@@ -1,11 +1,4 @@
-import "@/styles/homepage.css";
-import "@/styles/work.css";
-import "@/styles/blog.css";
-import "@/styles/article.css";
-import "@/styles/expertise.css";
-import "@/styles/begin.css";
-import "@/styles/studio.css";
-import "@/styles/platform.css";
+/* Site CSS loaded from root layout so order is correct vs theme-override */
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { SiteCursor } from "@/components/site/SiteCursor";
