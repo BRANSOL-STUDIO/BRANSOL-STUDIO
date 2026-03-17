@@ -40,9 +40,20 @@ function TeamCard({ member }: { member: TeamMember }) {
     <div className="team-card">
       <div className="tc-avatar">
         <div className="tc-avatar-bg">
-          <TeamAvatarGeo id={`studio-geo-${member.initials}`} accent={member.accent} />
+          {member.avatarUrl ? (
+            <img
+              src={member.avatarUrl}
+              alt=""
+              className="tc-avatar-img"
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          ) : (
+            <>
+              <TeamAvatarGeo id={`studio-geo-${member.initials}`} accent={member.accent} />
+              <div className="tc-initials">{member.initials}</div>
+            </>
+          )}
         </div>
-        <div className="tc-initials">{member.initials}</div>
         <div className="tc-overlay">
           <div className="tc-overlay-quote">{member.quote}</div>
         </div>
@@ -63,7 +74,10 @@ function TeamCard({ member }: { member: TeamMember }) {
   );
 }
 
-export function StudioPageView() {
+type StudioPageViewProps = { team?: TeamMember[] };
+
+export function StudioPageView({ team = TEAM }: StudioPageViewProps) {
+  const displayTeam = team ?? TEAM;
   return (
     <div className="studio-page">
       <section className="hero">
@@ -177,7 +191,7 @@ export function StudioPageView() {
           </div>
         </div>
         <div className="team-grid">
-          {TEAM.map((member) => (
+          {displayTeam.map((member) => (
             <TeamCard key={member.initials} member={member} />
           ))}
           <div className="team-card join-card">

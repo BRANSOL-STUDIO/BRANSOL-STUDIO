@@ -276,39 +276,65 @@
   border: 1px solid var(--border);
   overflow: hidden;
   position: relative;
-  transition: background 0.3s ease, border-color 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 36px 28px 32px;
+  text-align: center;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .studio-page .team-card:hover {
   background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-3px);
 }
 .studio-page .team-card:hover .tc-overlay {
   opacity: 1;
 }
 .studio-page .team-card:hover .tc-avatar {
-  filter: brightness(0.7);
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.18),
+    0 12px 40px rgba(0, 0, 0, 0.5);
 }
 .studio-page .tc-avatar {
-  width: 100%;
-  aspect-ratio: 1;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
   position: relative;
   overflow: hidden;
-  transition: filter 0.4s ease;
+  flex-shrink: 0;
+  margin-bottom: 24px;
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.08),
+    0 8px 32px rgba(0, 0, 0, 0.4);
+  transition: box-shadow 0.35s ease;
 }
 .studio-page .tc-avatar-bg {
   position: absolute;
   inset: 0;
+  border-radius: 50%;
+}
+.studio-page .tc-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 .studio-page .tc-initials {
   position: absolute;
   inset: 0;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-syne), sans-serif;
-  font-size: 48px;
+  font-size: 28px;
   font-weight: 800;
   letter-spacing: -0.04em;
-  color: rgba(240, 239, 245, 0.06);
+  color: rgba(240, 239, 245, 0.18);
   z-index: 1;
 }
 .studio-page .tc-geo {
@@ -319,61 +345,67 @@
 .studio-page .tc-overlay {
   position: absolute;
   inset: 0;
+  border-radius: 50%;
   z-index: 2;
-  background: rgba(6, 6, 8, 0.6);
-  backdrop-filter: blur(4px);
+  background: rgba(6, 6, 8, 0.75);
+  backdrop-filter: blur(6px);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 12px;
-  padding: 24px;
+  justify-content: center;
+  padding: 12px;
   opacity: 0;
   transition: opacity 0.35s ease;
 }
 .studio-page .tc-overlay-quote {
   font-family: var(--font-dm-sans), "DM Sans", sans-serif;
-  font-size: 13px;
+  font-size: 10px;
   font-style: italic;
   color: var(--text-sec);
   text-align: center;
-  line-height: 1.65;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .studio-page .tc-info {
-  padding: 24px 24px 28px;
+  width: 100%;
+  padding: 0;
 }
 .studio-page .tc-name {
   font-family: var(--font-syne), sans-serif;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 800;
   letter-spacing: -0.03em;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 .studio-page .tc-role {
   font-family: var(--font-dm-mono), monospace;
   font-size: 8px;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--text-ter);
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 .studio-page .tc-bio {
   font-size: 13px;
   color: var(--text-sec);
-  line-height: 1.6;
+  line-height: 1.65;
   margin-bottom: 16px;
+  text-align: left;
 }
 .studio-page .tc-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  justify-content: center;
 }
 .studio-page .tc-tag {
   font-family: var(--font-dm-mono), monospace;
   font-size: 7px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  padding: 4px 8px;
+  padding: 4px 10px;
   border: 1px solid var(--border);
   color: var(--text-ter);
 }

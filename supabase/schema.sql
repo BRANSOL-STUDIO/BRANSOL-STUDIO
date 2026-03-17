@@ -208,6 +208,8 @@ create table if not exists notes (
 alter table profiles enable row level security;
 create policy "Users can read own profile" on profiles for select using (auth.uid() = id);
 create policy "Users can update own profile" on profiles for update using (auth.uid() = id);
+-- Public studio page: anyone can read name/avatar of studio members (admin/super_admin) for /studio
+create policy "Public read studio team" on profiles for select using (lower(trim(role)) in ('admin', 'super_admin'));
 
 -- After running this, give a user admin access in Table Editor → profiles → set role to 'admin' or 'super_admin'
 -- Or run: update profiles set role = 'admin' where email = 'your@email.com';

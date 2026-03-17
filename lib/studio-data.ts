@@ -48,6 +48,8 @@ export type TeamMember = {
   quote: string;
   /** CSS color for geo SVG (e.g. var(--iris)) */
   accent: string;
+  /** Optional profile image URL from Supabase; when set, shown on studio page */
+  avatarUrl?: string | null;
 };
 
 export const TEAM: TeamMember[] = [

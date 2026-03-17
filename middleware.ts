@@ -14,11 +14,12 @@ export const config = {
   matcher: [
     /*
      * Match all request paths except:
+     * - api (route handlers; avoid Edge/cookie issues on sign-in)
      * - _next/static (static files)
      * - _next/image (image optimization)
      * - favicon.ico (favicon)
      * - public folder
      */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!api/|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };

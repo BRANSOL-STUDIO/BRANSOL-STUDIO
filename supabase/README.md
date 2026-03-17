@@ -25,3 +25,11 @@ update profiles set role = 'admin' where email = 'your@email.com';
 ```
 
 New signups get a profile row automatically (trigger) with `role = 'client'`; change it to `admin` in Table Editor or with the SQL above.
+
+## Studio page team photos
+
+The public **/studio** page shows profile photos for studio members (admin/super_admin) from `profiles.avatar`. If you ran an older schema, add this policy so unauthenticated visitors can read studio team names/avatars:
+
+```sql
+create policy "Public read studio team" on profiles for select using (lower(trim(role)) in ('admin', 'super_admin'));
+```
