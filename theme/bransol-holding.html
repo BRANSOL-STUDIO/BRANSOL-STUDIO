@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CHY7B35XNP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CHY7B35XNP');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BRANSOL — Strategic Design Studio.">
+<title>BRANSOL — Strategic Design Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --void:   #060608;
+  --ghost:  #2a2a35;
+  --text:   #f0eff5;
+  --sub:    rgba(240,239,245,0.4);
+  --ter:    rgba(240,239,245,0.18);
+  --iris:   #7c83e5;
+  --aqua:   #06d6a0;
+  --chrome: linear-gradient(135deg,#ff6b9d,#ff8c42,#ffd166,#06d6a0,#4ecdc4,#45b7d1,#7c83e5,#c77dff);
+}
+
+html, body {
+  width:100%; height:100%;
+  background:var(--void);
+  color:var(--text);
+  font-family:'DM Mono',monospace;
+  font-weight:300;
+  overflow:hidden;
+  cursor:none;
+}
+
+/* ── CURSOR ─────────────────────────────────────── */
+.cur {
+  position:fixed; width:7px; height:7px; border-radius:50%;
+  background:var(--chrome); background-size:300% 300%;
+  animation:cSpin 3s linear infinite;
+  pointer-events:none; z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:width .18s,height .18s;
+}
+.cur-ring {
+  position:fixed; width:30px; height:30px; border-radius:50%;
+  border:1px solid rgba(124,131,229,.3);
+  pointer-events:none; z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:width .15s,height .15s,border-color .15s;
+}
+
+/* ── KEYFRAMES ──────────────────────────────────── */
+@keyframes cSpin {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes fadeUp {
+  from{opacity:0;transform:translateY(16px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeIn {
+  from{opacity:0} to{opacity:1}
+}
+@keyframes lineGrow {
+  from{transform:scaleX(0)} to{transform:scaleX(1)}
+}
+@keyframes orbPulse {
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.6;transform:scale(1.06)}
+}
+@keyframes scanDown {
+  0%{opacity:0;top:-2px}
+  5%{opacity:1}
+  95%{opacity:1}
+  100%{opacity:0;top:100%}
+}
+
+/* ── BACKGROUND ─────────────────────────────────── */
+.bg { position:fixed; inset:0; z-index:0; overflow:hidden; }
+
+.bg-grid {
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.016) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.016) 1px,transparent 1px);
+  background-size:72px 72px;
+}
+
+.orb {
+  position:absolute; border-radius:50%;
+  filter:blur(100px); pointer-events:none;
+  animation:orbPulse 10s ease-in-out infinite;
+}
+.orb-1 {
+  width:550px; height:550px; top:-160px; right:-100px;
+  background:radial-gradient(circle,rgba(124,131,229,.11) 0%,transparent 70%);
+}
+.orb-2 {
+  width:420px; height:420px; bottom:-120px; left:-80px;
+  background:radial-gradient(circle,rgba(6,214,160,.08) 0%,transparent 70%);
+  animation-delay:4s;
+}
+.orb-3 {
+  width:280px; height:280px; top:45%; left:42%;
+  background:radial-gradient(circle,rgba(199,125,255,.06) 0%,transparent 70%);
+  animation-delay:7s;
+}
+
+.scan {
+  position:absolute; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,transparent 0%,rgba(124,131,229,.35) 40%,rgba(6,214,160,.35) 60%,transparent 100%);
+  animation:scanDown 10s ease-in-out 1.5s infinite;
+  pointer-events:none;
+}
+
+/* ── CHROME EDGE ─────────────────────────────────── */
+.edge {
+  position:fixed; left:0; top:0; bottom:0; width:3px;
+  background:var(--chrome); background-size:300% 300%;
+  animation:cSpin 4s ease infinite; z-index:10;
+}
+
+/* ── LAYOUT ─────────────────────────────────────── */
+.stage {
+  position:relative; z-index:1;
+  width:100%; height:100vh;
+  display:flex; flex-direction:column;
+  justify-content:space-between;
+  padding:48px 72px 48px 80px;
+}
+
+/* ── TOP ─────────────────────────────────────────── */
+.top {
+  display:flex; justify-content:space-between; align-items:flex-start;
+  animation:fadeIn .8s ease .1s both;
+}
+.wordmark {
+  font-family:'Syne',sans-serif; font-size:21px; font-weight:800;
+  letter-spacing:-.02em; line-height:1;
+}
+.wm-chrome {
+  background:var(--chrome); background-size:300% 300%;
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text; animation:cSpin 4s ease infinite;
+}
+.top-meta { text-align:right; }
+.top-meta p {
+  font-size:9px; letter-spacing:.35em; text-transform:uppercase;
+  color:var(--ter); line-height:2;
+}
+
+/* ── CENTRE ──────────────────────────────────────── */
+.centre { display:flex; flex-direction:column; max-width:860px; }
+
+.eyebrow {
+  font-size:9px; letter-spacing:.42em; text-transform:uppercase;
+  color:var(--ter); margin-bottom:26px;
+  animation:fadeUp .7s ease .35s both;
+}
+
+.headline {
+  font-family:'Syne',sans-serif;
+  font-size:clamp(50px,7.5vw,102px);
+  font-weight:800; letter-spacing:-.04em; line-height:.92;
+  margin-bottom:34px;
+  animation:fadeUp .7s ease .5s both;
+}
+
+.rule {
+  width:100%; max-width:520px; height:1px;
+  background:linear-gradient(90deg,var(--iris),var(--aqua),transparent);
+  transform-origin:left; animation:lineGrow 1s ease .85s both;
+  margin-bottom:28px;
+}
+
+.subline {
+  font-size:clamp(13px,1.4vw,16px); color:var(--sub);
+  max-width:460px; line-height:1.75; letter-spacing:.01em;
+  animation:fadeUp .7s ease .95s both;
+}
+
+/* ── FORM ────────────────────────────────────────── */
+.form-wrap { margin-top:44px; animation:fadeUp .7s ease 1.1s both; }
+
+.form-label {
+  font-size:9px; letter-spacing:.32em; text-transform:uppercase;
+  color:var(--ter); margin-bottom:12px;
+}
+
+.form-row { display:flex; max-width:460px; position:relative; }
+.form-row::before {
+  content:''; position:absolute; inset:-1px;
+  background:var(--chrome); background-size:300% 300%;
+  animation:cSpin 4s ease infinite; z-index:0; opacity:.55;
+}
+
+.form-input {
+  position:relative; z-index:1; flex:1;
+  background:rgba(6,6,8,.9); border:none; outline:none;
+  color:var(--text); font-family:'DM Mono',monospace;
+  font-size:12px; font-weight:300; padding:13px 18px;
+  cursor:none; min-width:0;
+}
+.form-input::placeholder { color:var(--ter); }
+
+.form-btn {
+  position:relative; z-index:1;
+  background:var(--chrome); background-size:300% 300%;
+  animation:cSpin 4s ease infinite;
+  border:none; color:#05050a;
+  font-family:'DM Mono',monospace; font-size:9px; font-weight:400;
+  letter-spacing:.22em; text-transform:uppercase;
+  padding:13px 22px; cursor:none; white-space:nowrap;
+  transition:opacity .2s;
+}
+.form-btn:hover { opacity:.82; }
+
+.form-note {
+  font-size:9px; color:var(--ter);
+  letter-spacing:.06em; margin-top:11px;
+}
+
+.form-success {
+  display:none; font-size:13px; color:var(--sub);
+  padding:13px 0; letter-spacing:.03em;
+}
+.form-success em { font-style:italic; }
+.form-success.show { display:block; }
+.form-row.hide, .form-note.hide { display:none; }
+
+/* ── BOTTOM ──────────────────────────────────────── */
+.bottom {
+  display:flex; justify-content:space-between; align-items:flex-end;
+  animation:fadeIn .8s ease 1.4s both;
+}
+
+.contact-link {
+  font-size:12px; color:var(--sub); text-decoration:none;
+  letter-spacing:.03em; display:inline-flex; align-items:center; gap:12px;
+  transition:color .2s; cursor:none;
+}
+.contact-link:hover { color:var(--text); }
+.dash {
+  display:inline-block; width:14px; height:1px;
+  background:var(--ghost); flex-shrink:0;
+  transition:width .22s,background .22s;
+}
+.contact-link:hover .dash { width:24px; background:var(--iris); }
+
+.bottom-right {
+  display:flex; flex-direction:column;
+  align-items:flex-end; gap:16px;
+}
+
+.social-row { display:flex; gap:28px; }
+
+.social-link {
+  font-size:9px; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--ter); text-decoration:none;
+  transition:color .2s; cursor:none;
+  line-height:1;
+}
+.social-link:hover { color:var(--sub); }
+
+.copy {
+  font-size:9px; letter-spacing:.14em; color:var(--ter); line-height:1;
+}
+
+/* ── PROGRESS ────────────────────────────────────── */
+.progress-wrap {
+  position:fixed; bottom:48px; right:72px;
+  display:flex; flex-direction:column; align-items:flex-end; gap:8px;
+  z-index:10; animation:fadeIn .8s ease 1.8s both;
+}
+.progress-label {
+  font-size:8px; letter-spacing:.3em;
+  text-transform:uppercase; color:var(--ter);
+}
+.progress-bar { width:96px; height:1px; background:var(--ghost); position:relative; }
+.progress-fill {
+  position:absolute; left:0; top:0; bottom:0; width:72%;
+  background:var(--chrome); background-size:300% 300%;
+  animation:cSpin 3s ease infinite;
+}
+.progress-pct {
+  font-family:'Syne',sans-serif; font-size:10px;
+  font-weight:700; color:var(--ter);
+}
+
+/* ── RESPONSIVE ─────────────────────────────────── */
+@media (max-width:768px) {
+  .stage { padding:30px 24px 36px 34px; }
+  .progress-wrap { right:24px; bottom:36px; }
+  .form-row { flex-direction:column; max-width:100%; }
+  .form-btn { text-align:center; padding:13px; }
+  .headline { letter-spacing:-.03em; }
+}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<div class="bg">
+  <div class="bg-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="scan"></div>
+</div>
+
+<div class="edge"></div>
+
+<div class="stage">
+
+  <div class="top">
+    <div class="wordmark">
+      <span class="wm-chrome">BRAN</span><span style="color:var(--text)">SOL</span>
+    </div>
+    <div class="top-meta">
+      <p>Strategic Design Studio</p>
+      <p>Johannesburg · South Africa</p>
+    </div>
+  </div>
+
+  <div class="centre">
+    <div class="eyebrow">Something considered is being built</div>
+    <h1 class="headline">
+      <span style="display:block">A new studio.</span>
+      <span class="wm-chrome" style="display:block">A new standard.</span>
+    </h1>
+    <div class="rule"></div>
+    <p class="subline">
+      We work with organisations whose ambitions demand more than execution.
+      BRANSOL opens its doors shortly.
+    </p>
+    <div class="form-wrap">
+      <div class="form-label">Be the first to know when we open</div>
+      <div class="form-row" id="formRow">
+        <input class="form-input" type="email" id="emailInput"
+          placeholder="your@organisation.com" autocomplete="off"/>
+        <button class="form-btn" onclick="handleSubmit()">Notify Me</button>
+      </div>
+      <div class="form-success" id="formSuccess">
+        Noted. We will be in touch — <em>personally.</em>
+      </div>
+      <div class="form-note" id="formNote">
+        No newsletters. No noise. One message, when we are ready.
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div>
+      <a href="/cdn-cgi/l/email-protection#056d6069696a456777646b766a692b666a68" class="contact-link">
+        <span class="dash"></span><span class="__cf_email__" data-cfemail="6109040d0d0e210313000f120e0d4f020e0c">[email&#160;protected]</span>
+      </a>
+    </div>
+    <div class="bottom-right">
+      <div class="social-row">
+        <a href="#" class="social-link">LinkedIn</a>
+        <a href="#" class="social-link">Instagram</a>
+      </div>
+      <div class="copy">© 2026 BRANSOL</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-label">Studio build</div>
+  <div class="progress-bar"><div class="progress-fill"></div></div>
+  <div class="progress-pct">72%</div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const cur = document.getElementById('cur');
+  const ring = document.getElementById('curRing');
+  let mx=0, my=0, rx=0, ry=0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cur.style.left = mx + 'px';
+    cur.style.top  = my + 'px';
+  });
+
+  (function tick() {
+    rx += (mx - rx) * .1;
+    ry += (my - ry) * .1;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(tick);
+  })();
+
+  document.querySelectorAll('a, button, .form-input').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cur.style.width = cur.style.height = '14px';
+      ring.style.width = ring.style.height = '44px';
+      ring.style.borderColor = 'rgba(124,131,229,.5)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cur.style.width = cur.style.height = '7px';
+      ring.style.width = ring.style.height = '30px';
+      ring.style.borderColor = 'rgba(124,131,229,.3)';
+    });
+  });
+
+  function handleSubmit() {
+    const val = document.getElementById('emailInput').value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+      const inp = document.getElementById('emailInput');
+      inp.style.outline = '1px solid rgba(255,107,157,.55)';
+      setTimeout(() => inp.style.outline = 'none', 1600);
+      return;
+    }
+    document.getElementById('formRow').classList.add('hide');
+    document.getElementById('formNote').classList.add('hide');
+    document.getElementById('formSuccess').classList.add('show');
+  }
+
+  document.getElementById('emailInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') handleSubmit();
+  });
+
+  document.addEventListener('mousemove', e => {
+    const cx = e.clientX / window.innerWidth  - .5;
+ 

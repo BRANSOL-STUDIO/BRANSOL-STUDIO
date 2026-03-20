@@ -1,9 +1,11 @@
 import type { StaticImageData } from "next/image";
 
 import globtekHero from "@/images/archive/GLOBTEK/Globtek_Homepage.png";
+import globtekHeroPreview from "@/images/archive/GLOBTEK/Globtek_Hero_Preview.png";
 import globtekMegaMenu from "@/images/archive/GLOBTEK/Globtek_Homepage_Mega-Menu.png";
 import globtekPanelRail from "@/images/archive/GLOBTEK/Globtek_Rail-Infrastructure.png";
 import globtekPanelRoads from "@/images/archive/GLOBTEK/Globtek_Roads & Transport.png";
+import globtekHeroBanner from "@/images/archive/GLOBTEK/Globtek_Hero_Banner.png";
 
 import globtekBrandProfiles from "@/images/archive/GLOBTEK/BRANDING/Globtek_Profiles_Mockup.png";
 import globtekRailProfile from "@/images/archive/GLOBTEK/BRANDING/Globtek_Rail-Profile_Mockup.png";
@@ -33,6 +35,7 @@ export interface WorkCaseStudyStats {
 
 export interface WorkCaseStudyImages {
   hero: StaticImageData;
+  cardHero?: StaticImageData;
   panels?: StaticImageData[];
   vehicle?: {
     left: StaticImageData;
@@ -140,7 +143,8 @@ export const WORK_CASE_STUDIES: Record<string, WorkCaseStudy> = {
     ],
     bigStat: { val: "2026", label: "Rollout evolution" },
     images: {
-      hero: globtekVehicleBakkie,
+      hero: globtekHeroBanner,
+      cardHero: globtekHeroPreview,
       vehicle: {
         left: globtekVehicleBakkie,
         right: globtekVehicleBakkieRight,

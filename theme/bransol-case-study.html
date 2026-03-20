@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CHY7B35XNP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CHY7B35XNP');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work — BRANSOL</title>
+<meta name="description" content="Case study — BRANSOL">
+<link rel="canonical" href="https://bransol.com/work">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --void:#060608;--deep:#0d0d12;--surface:#111118;--lift:#18181f;
+  --panel:#1e1e27;--ghost:#2a2a35;--border:rgba(255,255,255,.07);
+  --text:#f0eff5;--sub:rgba(240,239,245,.6);--ter:rgba(240,239,245,.28);--dim:rgba(240,239,245,.1);
+  --iris:#7c83e5;--aqua:#06d6a0;--violet:#c77dff;--rose:#ff6b9d;
+  --gold:#ffd166;--sky:#45b7d1;--teal:#4ecdc4;--ember:#ff8c42;
+  --accent:var(--iris);--accent-hex:#7c83e5;
+  --chrome:linear-gradient(135deg,#ff6b9d,#ff8c42,#ffd166,#06d6a0,#4ecdc4,#45b7d1,#7c83e5,#c77dff);
+  --nav-h:68px;--pad-x:72px;
+}
+html[data-theme="light"]{
+  --void:#f5f4f0;--deep:#eeede8;--surface:#e8e7e1;--lift:#dddcd5;
+  --panel:#d4d3cb;--ghost:#c4c3ba;--border:rgba(0,0,0,.09);
+  --text:#0e0e12;--sub:rgba(14,14,18,.62);--ter:rgba(14,14,18,.38);--dim:rgba(14,14,18,.1);
+}
+html[data-theme="light"] body{background:var(--void);color:var(--text);}
+html[data-theme="light"] nav{background:rgba(245,244,240,.85);border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] nav.scrolled{background:rgba(245,244,240,.97);}
+html[data-theme="light"] .nav-links a{color:var(--sub);}
+html[data-theme="light"] .bg-grid{background-image:linear-gradient(rgba(0,0,0,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.03) 1px,transparent 1px);}
+html[data-theme="light"] .meta-block{background:rgba(255,255,255,.6);border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] .deliverable-item{background:rgba(255,255,255,.6);border-color:rgba(0,0,0,.07);}
+html[data-theme="light"] .process-step{border-color:rgba(0,0,0,.07);}
+html[data-theme="light"] .related-card{background:rgba(255,255,255,.6);border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] .related-card:hover{background:rgba(255,255,255,.9);}
+html[data-theme="light"] .stat-pill{border-color:rgba(0,0,0,.09);}
+html[data-theme="light"] .tt-track{background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.12);}
+html[data-theme="light"] footer{background:var(--deep);}
+html[data-theme="light"] .not-found{background:var(--surface);}
+
+body{transition:background-color .4s ease,color .35s ease;}
+nav{transition:background .4s ease,border-color .35s ease,height .3s ease!important;}
+.nav-links a,.theme-toggle{transition:color .2s,border-color .2s;}
+.tt-track{transition:background .3s,border-color .3s;}
+.tt-thumb{transition:transform .3s cubic-bezier(.16,1,.3,1);}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .75s ease,transform .75s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-22px);transition:opacity .75s ease,transform .75s ease;}
+.reveal-left.in{opacity:1;transform:translateX(0);}
+
+body{background:var(--void);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.65;cursor:none;overflow-x:hidden;}
+html{scroll-behavior:smooth;}
+
+.cur{position:fixed;width:7px;height:7px;border-radius:50%;background:var(--chrome);background-size:300% 300%;animation:cSpin 3s linear infinite;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .18s,height .18s;}
+.cur-ring{position:fixed;width:30px;height:30px;border-radius:50%;border:1px solid rgba(124,131,229,.32);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .15s,height .15s,border-color .2s;}
+
+@keyframes cSpin{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes orbPulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes scanDown{0%{opacity:0;top:0}5%{opacity:1}95%{opacity:1}100%{opacity:0;top:100%}}
+@keyframes progressIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes countUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.chrome-text{background:var(--chrome);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:cSpin 5s ease infinite;}
+
+.bg-fixed{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.013) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.013) 1px,transparent 1px);background-size:80px 80px;}
+.bg-orb{position:absolute;border-radius:50%;filter:blur(100px);animation:orbPulse 12s ease-in-out infinite;}
+.bg-orb-1{width:800px;height:800px;top:-200px;right:-200px;}
+.bg-orb-2{width:600px;height:600px;bottom:100px;left:-100px;background:radial-gradient(circle,rgba(6,214,160,.07) 0%,transparent 70%);animation-delay:6s;}
+.bg-scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(124,131,229,.15),rgba(6,214,160,.12),transparent);animation:scanDown 20s ease-in-out 2s infinite;}
+.chrome-edge{position:fixed;left:0;top:0;bottom:0;width:3px;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;z-index:100;}
+
+/* Reading progress bar */
+.progress-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:200;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;transform-origin:left;transform:scaleX(0);transition:transform .1s linear;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:50;height:var(--nav-h);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 var(--pad-x) 0 calc(var(--pad-x) + 3px);border-bottom:1px solid rgba(255,255,255,.05);background:rgba(6,6,8,.65);backdrop-filter:blur(20px);}
+nav.scrolled{background:rgba(6,6,8,.92);border-color:var(--border);height:58px;}
+.nav-logo{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;letter-spacing:-.02em;text-decoration:none;cursor:none;justify-self:start;}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none;justify-self:center;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--ter);text-decoration:none;cursor:none;}
+.nav-links a:hover,.nav-links a.active{color:var(--sub);}
+.nav-end{display:flex;align-items:center;gap:12px;justify-self:end;}
+.nav-cta{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:#060608!important;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;padding:10px 24px;text-decoration:none;cursor:none;white-space:nowrap;}
+.theme-toggle{display:flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid var(--border);background:transparent;cursor:none;color:var(--ter);font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.22em;text-transform:uppercase;}
+.theme-toggle:hover{border-color:rgba(255,255,255,.15);color:var(--sub);}
+.tt-track{width:28px;height:15px;border-radius:999px;border:1px solid var(--border);position:relative;flex-shrink:0;}
+.tt-thumb{position:absolute;top:2px;left:2px;width:9px;height:9px;border-radius:50%;background:var(--chrome);background-size:300% 300%;animation:cSpin 3s linear infinite;}
+html[data-theme="light"] .tt-thumb{transform:translateX(13px);}
+
+/* ═══════════ HERO ═══════════ */
+.cs-hero{
+  position:relative;z-index:1;
+  padding:calc(var(--nav-h) + 64px) var(--pad-x) 0 calc(var(--pad-x) + 3px);
+}
+
+/* Breadcrumb */
+.breadcrumb{
+  display:flex;align-items:center;gap:10px;
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ter);margin-bottom:40px;
+  animation:fadeIn .6s ease .1s both;
+}
+.breadcrumb a{color:var(--ter);text-decoration:none;cursor:none;transition:color .2s;}
+.breadcrumb a:hover{color:var(--sub);}
+.bc-sep{opacity:.4;}
+
+/* Hero two-col */
+.hero-split{
+  display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:flex-end;
+  padding-bottom:64px;border-bottom:1px solid var(--border);
+}
+.hero-left{}
+.hero-sector{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;
+  padding:5px 12px;border:1px solid;margin-bottom:24px;
+  animation:fadeIn .7s ease .2s both;
+}
+.hero-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(40px,5.5vw,80px);
+  font-weight:800;letter-spacing:-.05em;line-height:.88;
+  margin-bottom:24px;
+  animation:fadeUp .9s cubic-bezier(.16,1,.3,1) .25s both;
+}
+.hero-discipline{
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--ter);display:block;margin-bottom:20px;
+  animation:fadeIn .8s ease .4s both;
+}
+.hero-excerpt{
+  font-size:17px;color:var(--sub);line-height:1.75;
+  animation:fadeIn .8s ease .5s both;
+}
+
+/* Stats pills */
+.hero-right{animation:fadeIn .8s ease .4s both;}
+.stat-pills{display:flex;flex-direction:column;gap:2px;margin-bottom:28px;}
+.stat-pill{
+  display:grid;grid-template-columns:120px 1fr;
+  padding:14px 18px;border:1px solid var(--border);
+  background:rgba(255,255,255,.02);align-items:center;
+}
+.sp-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--ter);}
+.sp-val{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;letter-spacing:-.02em;}
+.hero-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.hero-tag{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.18em;text-transform:uppercase;padding:4px 8px;border:1px solid var(--border);color:var(--ter);}
+
+/* ═══════════ FULL VISUAL ═══════════ */
+.cs-visual{
+  position:relative;z-index:1;
+  padding:0 var(--pad-x) 0 calc(var(--pad-x) + 3px);
+  margin-top:64px;
+}
+.visual-wrap{
+  width:100%;overflow:hidden;border:1px solid var(--border);
+  position:relative;
+}
+.visual-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;z-index:2;}
+.visual-inner{width:100%;display:block;}
+.visual-caption{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 0;border-bottom:1px solid var(--border);
+  font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--ter);
+}
+
+/* ═══════════ BODY CONTENT ═══════════ */
+.cs-body{
+  position:relative;z-index:1;
+  padding:100px var(--pad-x) 0 calc(var(--pad-x) + 3px);
+  display:grid;grid-template-columns:1fr 340px;gap:100px;align-items:flex-start;
+}
+
+/* Main editorial column */
+.cs-main{}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--ter);display:block;margin-bottom:16px;}
+.cs-section{margin-bottom:64px;}
+.cs-section-title{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;letter-spacing:-.035em;line-height:1.05;margin-bottom:20px;}
+.cs-text{font-size:15px;color:var(--sub);line-height:1.85;}
+.cs-text p{margin-bottom:16px;}
+.cs-text p:last-child{margin-bottom:0;}
+
+/* Challenge callout */
+.challenge-block{
+  padding:28px 32px;
+  border-left:2px solid var(--accent);
+  background:rgba(124,131,229,.04);
+  margin:32px 0;
+}
+.cb-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:10px;}
+.cb-text{font-size:15px;color:var(--sub);line-height:1.75;font-style:italic;}
+
+/* Process steps */
+.process-steps{display:flex;flex-direction:column;gap:0;}
+.process-step{
+  display:grid;grid-template-columns:60px 1fr;gap:24px;
+  padding:28px 0;border-bottom:1px solid var(--border);
+  align-items:flex-start;
+}
+.process-step:first-child{border-top:1px solid var(--border);}
+.ps-num{
+  font-family:'Syne',sans-serif;font-size:32px;font-weight:800;
+  letter-spacing:-.05em;line-height:1;
+  opacity:.18;transition:opacity .3s;
+}
+.process-step:hover .ps-num{opacity:.6;}
+.ps-body{}
+.ps-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;letter-spacing:-.025em;margin-bottom:6px;}
+.ps-text{font-size:14px;color:var(--ter);line-height:1.7;transition:color .3s;}
+.process-step:hover .ps-text{color:var(--sub);}
+
+/* Deliverables */
+.deliverable-grid{display:flex;flex-direction:column;gap:2px;}
+.deliverable-item{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:14px 18px;
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--border);
+  font-size:13px;color:var(--sub);line-height:1.5;
+}
+.di-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+
+/* Sidebar */
+.cs-sidebar{
+  position:sticky;top:calc(var(--nav-h) + 32px);
+  display:flex;flex-direction:column;gap:24px;
+}
+.meta-block{
+  padding:24px;
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--border);
+  display:flex;flex-direction:column;gap:0;
+}
+.mb-title{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--ter);display:block;margin-bottom:16px;}
+.meta-row{display:flex;flex-direction:column;gap:2px;padding:12px 0;border-bottom:1px solid var(--border);}
+.meta-row:last-child{border-bottom:none;padding-bottom:0;}
+.mr-label{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--ter);}
+.mr-val{font-size:13px;color:var(--sub);margin-top:3px;}
+
+/* Big number stat */
+.big-stat{
+  padding:24px;
+  border:1px solid var(--border);
+  text-align:center;
+}
+.bs-val{font-family:'Syne',sans-serif;font-size:52px;font-weight:800;letter-spacing:-.06em;line-height:1;}
+.bs-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--ter);display:block;margin-top:6px;}
+
+/* CTA sidebar */
+.sidebar-cta{
+  padding:24px;
+  background:rgba(255,255,255,.02);
+  border:1px solid var(--border);
+}
+.sc-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--ter);display:block;margin-bottom:12px;}
+.sc-text{font-size:13px;color:var(--ter);line-height:1.65;margin-bottom:16px;}
+.sc-btn{
+  display:block;text-align:center;
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.24em;text-transform:uppercase;
+  color:#060608;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;
+  padding:12px;text-decoration:none;cursor:none;
+}
+
+/* ═══════════ SECONDARY VISUAL STRIP ═══════════ */
+.visual-strip{
+  position:relative;z-index:1;
+  padding:80px var(--pad-x) 0 calc(var(--pad-x) + 3px);
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;
+}
+.vs-panel{
+  border:1px solid var(--border);overflow:hidden;
+}
+.vs-panel svg{width:100%;display:block;}
+
+/* ═══════════ RELATED PROJECTS ═══════════ */
+.related{
+  position:relative;z-index:1;
+  padding:100px var(--pad-x) 120px calc(var(--pad-x) + 3px);
+  border-top:1px solid var(--border);
+  margin-top:100px;
+}
+.related-header{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:48px;
+}
+.related-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--ter);display:block;margin-bottom:12px;}
+.related-title{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,40px);font-weight:800;letter-spacing:-.04em;line-height:.95;}
+.related-back{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--ter);border:1px solid var(--border);padding:10px 18px;
+  text-decoration:none;cursor:none;transition:color .2s,border-color .2s;white-space:nowrap;
+}
+.related-back:hover{color:var(--sub);border-color:rgba(255,255,255,.14);}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.related-card{
+  background:rgba(255,255,255,.02);border:1px solid var(--border);
+  cursor:none;overflow:hidden;text-decoration:none;color:inherit;display:block;
+  transition:background .25s,border-color .25s;
+}
+.related-card:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);}
+.related-card:hover .rc-visual{transform:scale(1.04);}
+.rc-visual-wrap{overflow:hidden;}
+.rc-visual{display:block;width:100%;aspect-ratio:3/2;transition:transform .5s cubic-bezier(.16,1,.3,1);}
+.rc-info{padding:18px 20px 22px;}
+.rc-sector{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.22em;text-transform:uppercase;padding:3px 7px;border:1px solid;display:inline-block;margin-bottom:8px;}
+.rc-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;letter-spacing:-.025em;margin-bottom:4px;}
+.rc-discipline{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--ter);}
+
+/* Not found */
+.not-found{
+  position:relative;z-index:1;
+  min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:var(--pad-x);
+  background:var(--surface);margin:calc(var(--nav-h) + 40px) var(--pad-x) 40px;border:1px solid var(--border);
+}
+.nf-code{font-family:'Syne',sans-serif;font-size:96px;font-weight:800;letter-spacing:-.06em;line-height:1;margin-bottom:16px;opacity:.1;}
+.nf-title{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;letter-spacing:-.035em;margin-bottom:12px;}
+.nf-text{font-size:14px;color:var(--ter);max-width:400px;line-height:1.7;margin-bottom:28px;}
+.nf-btn{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:#060608;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;padding:12px 28px;text-decoration:none;cursor:none;}
+
+footer{position:relative;z-index:1;background:var(--deep);border-top:1px solid var(--border);padding:48px var(--pad-x) 32px calc(var(--pad-x) + 3px);}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;}
+.footer-copy{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--ter);}
+.footer-links{display:flex;gap:24px;}
+.footer-links a{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ter);text-decoration:none;cursor:none;transition:color .2s;}
+.footer-links a:hover{color:var(--sub);}
+
+@media(max-width:1100px){
+  :root{--pad-x:40px;}
+  .hero-split,.cs-body{grid-template-columns:1fr;gap:48px;}
+  .hero-right{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;}
+  .cs-sidebar{position:relative;top:0;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .visual-strip{grid-template-columns:1fr 1fr;}
+  .related-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  :root{--pad-x:24px;}
+  .nav-links{display:none;}
+  .hero-right{grid-template-columns:1fr;}
+  .cs-sidebar{grid-template-columns:1fr;}
+  .visual-strip{grid-template-columns:1fr;}
+  .related-grid{grid-template-columns:1fr;}
+  .related-header{flex-direction:column;align-items:flex-start;gap:16px;}
+  .process-step{grid-template-columns:40px 1fr;gap:16px;}
+}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+<div class="progress-bar" id="progressBar"></div>
+<div class="bg-fixed">
+  <div class="bg-grid"></div>
+  <div class="bg-orb bg-orb-1" id="bgOrb1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-scan"></div>
+</div>
+<div class="chrome-edge"></div>
+
+<nav id="nav">
+  <a href="/" class="nav-logo"><span class="chrome-text">BRAN</span><span style="color:var(--text)">SOL</span></a>
+  <ul class="nav-links">
+    <li><a href="/work" class="active">Work</a></li>
+    <li><a href="/expertise">Expertise</a></li>
+    <li><a href="/platform">Platform</a></li>
+    <li><a href="/studio">Studio</a></li>
+    <li><a href="/perspectives">Perspectives</a></li>
+  </ul>
+  <div class="nav-end">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <div class="tt-track"><div class="tt-thumb"></div></div>
+      <span id="themeLabel">Light</span>
+    </button>
+    <a href="/begin" class="nav-cta">Begin</a>
+  </div>
+</nav>
+
+<div id="pageContent"></div>
+
+<footer>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 BRANSOL — Ballito, KwaZulu-Natal</span>
+    <div class="footer-links">
+      <a href="/work">Work</a>
+      <a href="/expertise">Expertise</a>
+      <a href="/begin">Begin</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════
+// PROJECT DATA — single source of truth
+// ═══════════════════════════════════════════════
+const PROJECTS = [
+  {id:'national-communications-agency',num:'01',name:'National Communications Agency',sector:'Government',disciplines:['Brand Identity','Digital Design'],disciplineLabel:'Brand Identity · Design System',year:'2025',size:'large',accentColor:'var(--iris)',accentHex:'#7c83e5',bgStop1:'rgba(124,131,229,.18)',bgStop2:'rgba(199,125,255,.06)',excerpt:'Complete brand overhaul for a national government communications body — from identity foundations to a 200-page design system deployed across 14 provincial offices.',overview:'The National Communications Agency required a brand system capable of operating across print, digital, outdoor, and broadcast environments simultaneously — and surviving the political transitions that come with government work. We rebuilt from first principles: a mark that carries authority without looking departmental, a typographic system that reads at highway billboard scale and business card scale equally, and a colour palette that translates cleanly to low-resolution printing environments common in government procurement.',challenge:'Government brands must serve multiple audiences: public trust, ministerial oversight, and operational staff. Most agencies design for one. We designed for all three simultaneously.',deliverables:['Primary identity system — wordmark, icon, clear space rules','Extended colour system with CMYK and Pantone specifications','200-page design system — templates for all 14 provincial offices','Digital asset library — web, social, presentation formats','Brand governance guidelines for in-house teams','Stationery suite — 24 document types'],stats:{duration:'6 months',scope:'Full identity',team:'4 designers'},tags:['Government','Brand Identity','Design System','Print','Digital'],process:[{title:'Discovery & Audit',text:'Comprehensive audit of existing brand touchpoints across all 14 provincial offices. Stakeholder interviews at ministerial, operational, and public-facing levels.'},{title:'Strategy & Architecture',text:'Brand positioning strategy, naming system, and hierarchy framework. Approval at Director-General level before any design work commenced.'},{title:'Identity Design',text:'Three identity directions developed, each stress-tested against real-world applications. One direction taken forward through multiple refinement rounds.'},{title:'System Build',text:'Full design system built in InDesign and Figma. 200-page guidelines document, all templates, all asset libraries.'},{title:'Governance Handover',text:'Two-day handover workshop with in-house team. Ongoing support contract for the first six months post-launch.'}],bigStat:{val:'200',label:'Page design system'}},
+  {id:'listed-asset-management-group',num:'02',name:'Listed Asset Management Group',sector:'Financial Services',disciplines:['Credentials','Digital Design'],disciplineLabel:'Design System · Investor Decks',year:'2024',size:'medium',accentColor:'var(--aqua)',accentHex:'#06d6a0',bgStop1:'rgba(6,214,160,.15)',bgStop2:'rgba(69,183,209,.05)',excerpt:'Investor-grade presentation system and quarterly reporting suite for a JSE-listed asset manager with R42bn AUM. Designed to survive the CFO, the board, and the institutional investor in the same room.',overview:'Asset managers live and die by the quality of their investor materials. Weak credentials cost mandates. This group had strong performance numbers buried in mediocre documents — a problem we fixed by building a presentation system that leads with data clarity and institutional credibility. Every template was designed to work with the firm\'s existing PowerPoint workflow, requiring no specialist software for in-house updates.',challenge:'Financial materials must be precise, not decorative. Every design decision had to serve legibility and trust — never aesthetics at the expense of either.',deliverables:['Master investor presentation — 48 slides, 6 chapter templates','Quarterly reporting suite — print and digital versions','Annual report layout system','Board pack template library','Fund factsheet system — 12 fund types','Email signature and digital communication standards'],stats:{duration:'4 months',scope:'Credentials + reporting',team:'3 designers'},tags:['Financial Services','Credentials','Investor Decks','Annual Reports','JSE'],process:[{title:'Materials Audit',text:'Full audit of existing investor materials. Benchmarked against peer asset managers in South Africa and comparable international firms.'},{title:'Data Hierarchy',text:'Information architecture for all document types. Establishing what matters most to each audience — trustees, advisors, retail investors.'},{title:'Design System',text:'Typography, colour, grid, and chart style defined. Applied consistently across all 6 document types.'},{title:'Template Production',text:'All 48 master slides built. All 12 factsheet templates. Quarterly and annual report masters. Full PowerPoint and InDesign versions.'},{title:'Training',text:'Half-day session with the client\'s investment team. Ongoing template support.'}],bigStat:{val:'R42bn',label:'AUM — client asset base'}},
+  {id:'property-development-consortium',num:'03',name:'Property Development Consortium',sector:'Infrastructure',disciplines:['Spatial','Brand Identity'],disciplineLabel:'Spatial Identity · Wayfinding',year:'2024',size:'large',accentColor:'var(--gold)',accentHex:'#ffd166',bgStop1:'rgba(255,209,102,.14)',bgStop2:'rgba(255,140,66,.06)',excerpt:'Wayfinding and environmental identity for a 340-hectare mixed-use development on the KZN North Coast — from site entrance to individual building identification.',overview:'Large-scale property developments require wayfinding systems that work before the buildings are complete and after they have been repainted three times. We designed a spatial identity system built on durable principles: geometric forms that fabricate cleanly in metal, concrete, and vinyl; a naming hierarchy that scales from precinct to parking bay; and a system flexible enough to accommodate Phase 2 and Phase 3 without a rebrand.',challenge:'The client had four different contractors involved in fabrication across the site. The system had to be simple enough for any of them to implement correctly without a designer on site.',deliverables:['Precinct naming and identity system','Primary entrance monuments — 3 variants','Vehicular directional signage suite — 28 sign types','Pedestrian wayfinding system','Building identification standards','Contractor implementation guide — 140 pages'],stats:{duration:'8 months',scope:'Full spatial rollout',team:'3 designers + fabrication oversight'},tags:['Infrastructure','Spatial','Wayfinding','KZN','Property'],process:[{title:'Site Analysis',text:'Full site walk with the development team. Mapping pedestrian flows, vehicle entry points, and key decision nodes across the 340 hectares.'},{title:'Naming System',text:'Hierarchical naming system for precincts, streets, buildings, and amenities. Tested for linguistic clarity in English, Zulu, and Afrikaans.'},{title:'Design Development',text:'Sign family design across all 28 types. Material and fabrication specifications for each.'},{title:'Contractor Coordination',text:'Briefing sessions with all four fabrication contractors. 140-page implementation guide produced.'},{title:'Site Inspection',text:'Three site inspections during rollout. Snagging list and remedial guidance issued.'}],bigStat:{val:'340ha',label:'Development site area'}},
+  {id:'regional-medical-foundation',num:'04',name:'Regional Medical Foundation',sector:'Healthcare',disciplines:['Campaign','Brand Identity'],disciplineLabel:'Campaign Creative · Print',year:'2023',size:'small',accentColor:'var(--violet)',accentHex:'#c77dff',bgStop1:'rgba(199,125,255,.14)',bgStop2:'rgba(124,131,229,.05)',excerpt:'Public health awareness campaign targeting rural KZN communities — designed to function across print, radio, and community health worker kits with no electricity required.',overview:'Designing for under-resourced environments requires a fundamentally different approach to campaign thinking. Beautiful work that requires a smartphone is useless in a community health worker\'s bag. We stripped the campaign to its essentials: high-contrast, high-legibility print materials; a visual system that works in black and white on cheap paper; and messaging developed in partnership with Zulu-speaking health workers rather than over their heads.',challenge:'The campaign had to work in three languages simultaneously (English, Zulu, Xhosa) without separate print runs for each. We designed a modular typographic system that accommodated all three in the same space.',deliverables:['Campaign identity and visual language','A3 poster series — 8 subjects, 3 languages','Community health worker information kits','Clinic waiting room display system','Branded educational flip charts','Radio script visual reference guides'],stats:{duration:'3 months',scope:'Campaign design',team:'2 designers'},tags:['Healthcare','Campaign','Print','Public Sector','Multilingual'],process:[{title:'Community Research',text:'Two weeks in the field with community health workers across three districts. Understanding how they actually communicate with patients.'},{title:'Language Strategy',text:'Working with Zulu and Xhosa translators embedded in the studio. Every piece co-authored, not just translated.'},{title:'Low-Resource Design',text:'All materials designed to work in black and white on 80gsm paper. No gradients, no photography that requires colour.'},{title:'Production',text:'Printed in three languages simultaneously using a modular grid. Single print run, all three versions.'},{title:'Distribution Training',text:'Health worker briefing on material usage. Distribution to 120 clinic points.'}],bigStat:{val:'120',label:'Clinic distribution points'}},
+  {id:'pan-african-law-practice',num:'05',name:'Pan-African Law Practice',sector:'Professional Services',disciplines:['Brand Identity','Credentials'],disciplineLabel:'Brand Identity · Credentials',year:'2025',size:'medium',accentColor:'var(--sky)',accentHex:'#45b7d1',bgStop1:'rgba(69,183,209,.14)',bgStop2:'rgba(78,205,196,.05)',excerpt:'Brand identity and business development materials for a 12-office pan-African law firm expanding into East African markets — built to carry authority across 6 jurisdictions.',overview:'Law firms are among the most conservative brand clients — and among the ones with the most to gain from doing it well. This practice had strong regional presence and a credibility gap in new markets. We built a brand that reads as established without looking dated: a mark with institutional weight, a document system that signals seniority in every client touchpoint, and a credentials deck designed to close mandates in Lagos, Nairobi, and Accra simultaneously.',challenge:'The identity had to feel South African in origin but pan-African in application — without defaulting to generic "African" visual tropes that the firm\'s partners rightly rejected.',deliverables:['Primary identity — wordmark, symbol, colour system','Jurisdiction sub-branding system — 6 offices','Capability credentials deck — 60 slides','Practice area one-pagers — 8 disciplines','Proposal template system','Office environmental standards'],stats:{duration:'5 months',scope:'Identity + credentials',team:'3 designers'},tags:['Professional Services','Legal','Brand Identity','Pan-African','Credentials'],process:[{title:'Partner Alignment',text:'Structured interviews with 6 office managing partners across the network. Establishing the single idea that unites the firm.'},{title:'Market Research',text:'Visual audit of competitor law firms across 6 jurisdictions. Identifying the white space.'},{title:'Identity Design',text:'Two identity directions developed. One emphasising scale and authority, one on expertise and counsel. Partners chose a synthesis.'},{title:'Credentials Build',text:'60-slide credentials deck built as a modular system. Partners can assemble practice-specific versions.'},{title:'Office Rollout',text:'Environmental standards applied across 3 offices in Year 1. Remaining 3 offices on schedule for Year 2.'}],bigStat:{val:'12',label:'Office network'}},
+  {id:'renewable-energy-ipp',num:'06',name:'Renewable Energy IPP',sector:'Energy',disciplines:['Digital Design','Credentials'],disciplineLabel:'Digital Design · Pitch Deck',year:'2023',size:'small',accentColor:'var(--aqua)',accentHex:'#06d6a0',bgStop1:'rgba(6,214,160,.12)',bgStop2:'rgba(78,205,196,.04)',excerpt:'REIPPPP bid documentation and investor pitch deck for a 140MW solar development — designed to meet Department of Energy submission standards while outperforming on visual quality.',overview:'REIPPPP bids are evaluated on technical and financial merit — but presentation quality signals operational competence. A well-designed bid document tells evaluators that the organisation behind it is serious, organised, and capable of delivery. We designed a submission package that met every Department of Energy format requirement while demonstrating a level of document quality that set the bid apart from its competitors.',challenge:'Government tender documents have rigid format requirements. Designing within those constraints while still producing something that looks considered rather than template-generated requires precision.',deliverables:['REIPPPP bid document — 340 pages, DOE format compliant','Investor pitch deck — 36 slides','Executive summary — standalone format','Technical appendix layout system','Financial model presentation format','Due diligence data room structure'],stats:{duration:'6 weeks',scope:'Bid documentation',team:'2 designers'},tags:['Energy','REIPPPP','Government','Credentials','Pitch Deck'],process:[{title:'DOE Requirements Audit',text:'Full review of REIPPPP submission requirements. Mapping format constraints before any design decisions.'},{title:'Document Architecture',text:'340-page document structure and navigation system. Chapter hierarchy, cross-referencing system, index.'},{title:'Design Within Constraints',text:'Typography and layout designed to comply with every DOE requirement while maximising visual quality.'},{title:'Parallel Production',text:'Bid document and pitch deck produced simultaneously. Consistent visual language, different formats.'},{title:'Submission Support',text:'Final quality check and submission formatting. On-site support during the submission window.'}],bigStat:{val:'140MW',label:'Solar capacity — project scale'}},
+  {id:'university-advancement-office',num:'07',name:'University Advancement Office',sector:'Education',disciplines:['Brand Identity','Campaign'],disciplineLabel:'Donor Campaign · Fundraising Materials',year:'2024',size:'medium',accentColor:'var(--violet)',accentHex:'#c77dff',bgStop1:'rgba(199,125,255,.14)',bgStop2:'rgba(124,131,229,.06)',excerpt:'Donor recognition system and capital campaign identity for a university\'s R800m fundraising drive — from naming rights frameworks to individual donor wall design.',overview:'University fundraising occupies a unique design space: the materials must appeal to ultra-high-net-worth individuals while remaining appropriate for institutional academic governance. We designed a campaign identity that carried the weight of the institution\'s history while speaking the visual language of private philanthropy — not a government grant application.',challenge:'Donor recognition requires a tiering system that feels meaningful at every level — a R1m donor and a R50m donor must both feel appropriately honoured without the R1m donor feeling diminished.',deliverables:['Capital campaign identity — "Building Forward"','Donor recognition tier system — 6 levels','Naming rights framework and guidelines','Donor wall design — entrance atrium and faculty buildings','Campaign credentials for major gift officers','Stewardship report template'],stats:{duration:'5 months',scope:'Campaign + donor system',team:'3 designers'},tags:['Education','Fundraising','Donor Recognition','Campaign','Spatial'],process:[{title:'Advancement Strategy Review',text:'Working sessions with the Advancement Office and Vice-Chancellor. Understanding the campaign narrative and donor psychology.'},{title:'Tier Architecture',text:'Six-level recognition system. Naming, benefits, and visual treatment for each tier.'},{title:'Campaign Identity',text:'"Building Forward" — identity, colour, typography. Applied across all campaign materials.'},{title:'Donor Wall Design',text:'Entrance atrium wall: 3.6m × 8m. Three faculty buildings. All designed for phased installation over 5 years.'},{title:'Major Gift Materials',text:'Printed credentials and digital presentations for the gift officers managing the top 40 relationships.'}],bigStat:{val:'R800m',label:'Campaign fundraising target'}},
+  {id:'development-finance-institution',num:'08',name:'Development Finance Institution',sector:'Financial Services',disciplines:['Brand Identity','Digital Design'],disciplineLabel:'Brand Identity · Digital Presence',year:'2022',size:'large',accentColor:'var(--iris)',accentHex:'#7c83e5',bgStop1:'rgba(124,131,229,.16)',bgStop2:'rgba(69,183,209,.06)',excerpt:'Full rebrand of a state-supported DFI — repositioning from a perceived grant-giving body to a commercially credible development finance partner for private sector investment.',overview:'Development finance institutions carry a perception problem: they are often seen as government appendages rather than commercially sophisticated partners. This DFI needed a brand that could sit credibly next to private equity firms and commercial banks in a room of institutional investors — while still honouring its development mandate. We rebuilt the identity from scratch, carrying across only the institution\'s name and its core mandate.',challenge:'The rebrand had political dimensions — any significant change to a state entity\'s visual identity requires stakeholder management at ministerial level. Every design decision needed a clear rationale we could defend in writing.',deliverables:['Full identity rebrand — mark, typography, colour, voice','Digital presence — website design and content architecture','Annual report system — print and interactive PDF','Investment prospectus templates','Board and executive presentation system','Staff communication standards'],stats:{duration:'9 months',scope:'Full rebrand',team:'4 designers'},tags:['Financial Services','DFI','Government','Brand Identity','Digital'],process:[{title:'Political Stakeholder Mapping',text:'Mapping all approval stakeholders before design commenced. Understanding which decisions required ministerial sign-off.'},{title:'Positioning Strategy',text:'Repositioning document — written by BRANSOL, approved at board level. The strategic rationale for every identity decision.'},{title:'Identity Design',text:'Four directions developed. Each presented with a written rationale. Two rounds of ministerial-level review.'},{title:'Digital Architecture',text:'Website information architecture and content strategy. Built for institutional investors, not general public.'},{title:'System Rollout',text:'Phased rollout across 18 months. Staff communication and change management materials included.'}],bigStat:{val:'18mo',label:'Phased rollout period'}},
+  {id:'mining-services-group',num:'09',name:'Mining Services Group',sector:'Infrastructure',disciplines:['Brand Identity','Credentials'],disciplineLabel:'Brand Architecture · Subsidiary System',year:'2023',size:'small',accentColor:'var(--gold)',accentHex:'#ffd166',bgStop1:'rgba(255,209,102,.13)',bgStop2:'rgba(255,140,66,.05)',excerpt:'Brand architecture rationalisation for a mining services group with 9 subsidiary entities — from 9 unrelated identities to a coherent endorsed brand structure.',overview:'After three acquisitions in four years, this mining services group had nine entities operating under nine unrelated identities — some inherited, some self-designed, none cohesive. We audited the portfolio, established a brand architecture strategy, and designed an endorsed brand system that allowed each entity to retain operational identity while clearly signalling group membership to procurement teams.',challenge:'Subsidiaries often have strong internal loyalty to their existing identities. The brand architecture had to make the business case for change compelling enough to overcome that resistance.',deliverables:['Brand architecture strategy document','Group master identity','Endorsed sub-brand system — 9 entities','Transition rollout plan — 18 months','Procurement-facing group credentials','Tender cover sheet system'],stats:{duration:'4 months',scope:'Brand architecture',team:'2 designers'},tags:['Infrastructure','Mining','Brand Architecture','Credentials','B2B'],process:[{title:'Portfolio Audit',text:'Full audit of all 9 entity identities. Usage patterns, stakeholder perceptions, and procurement implications documented.'},{title:'Architecture Strategy',text:'Three architecture models evaluated: monolithic, endorsed, freestanding. Endorsed model selected and rationale documented.'},{title:'Master Identity',text:'Group master brand designed. Endorsed relationship mark system developed for all 9 entities.'},{title:'Change Management',text:'Subsidiary briefing sessions. Internal comms supporting the transition. 18-month phased rollout plan.'},{title:'Credentials Build',text:'Group credentials deck for procurement use. Showing entity capabilities under unified group narrative.'}],bigStat:{val:'9',label:'Entities unified'}},
+  {id:'public-health-department',num:'10',name:'Provincial Health Department',sector:'Government',disciplines:['Campaign','Spatial'],disciplineLabel:'Public Health Campaign · Clinic Rollout',year:'2022',size:'medium',accentColor:'var(--aqua)',accentHex:'#06d6a0',bgStop1:'rgba(6,214,160,.13)',bgStop2:'rgba(78,205,196,.05)',excerpt:'Patient experience campaign rolled out across 240 public health clinics — environmental graphics, patient communication materials, and staff identity systems.',overview:'Public health environments are among the most challenging design contexts: high foot traffic, multiple languages, varied literacy levels, and the constant pressure of institutional budget constraints. We designed a patient experience system that made every touchpoint clearer, warmer, and more navigable — without requiring specialist installation at any of the 240 sites.',challenge:'The system had to be implementable by clinic staff with no design training, using materials available from standard office supply stores. This constraint became the design brief.',deliverables:['Patient communication system — 36 document types','Clinic environmental graphics — self-adhesive installation','Staff identification and role clarity system','Waiting area information hierarchy','Multilingual signage — 4 languages','Implementation guide for clinic managers'],stats:{duration:'7 months',scope:'Clinic rollout system',team:'3 designers'},tags:['Government','Healthcare','Spatial','Campaign','Public Sector'],process:[{title:'Clinic Ethnography',text:'Two weeks embedded in three pilot clinics. Observing patient journeys and communication pain points.'},{title:'Staff Co-Design',text:'Design workshops with clinic managers and frontline staff. Identifying what information patients most need.'},{title:'System Design',text:'36 document types, environmental graphics, staff ID. All designed for self-adhesive installation.'},{title:'Pilot Rollout',text:'Pilot in 12 clinics. Staff feedback sessions. 14 design revisions based on real-world learning.'},{title:'Full Rollout',text:'Rollout to all 240 clinics. Implementation guide and video training produced.'}],bigStat:{val:'240',label:'Clinic rollout sites'}},
+  {id:'infrastructure-fund-manager',num:'11',name:'Infrastructure Fund Manager',sector:'Financial Services',disciplines:['Credentials','Digital Design'],disciplineLabel:'Fund Credentials · Investor Relations',year:'2025',size:'small',accentColor:'var(--sky)',accentHex:'#45b7d1',bgStop1:'rgba(69,183,209,.13)',bgStop2:'rgba(78,205,196,.05)',excerpt:'Investor relations design system for a specialist infrastructure fund manager — built to communicate complex project pipelines to pension fund trustees and institutional allocators.',overview:'Infrastructure fund credentials are notoriously difficult to design: the underlying projects are physical and tangible, but the investment product is abstract and complex. We designed a system that bridges that gap — using project imagery and outcome data to make the investment thesis legible to trustees who are experts in governance rather than infrastructure finance.',challenge:'The fund had not yet deployed capital at the time of the credentials build. We had to communicate future conviction, not past performance.',deliverables:['Fund credentials deck — 44 slides','LP update template — quarterly','Investment committee presentation system','Project case study format','Website design — investment-grade digital presence','Data room index design'],stats:{duration:'3 months',scope:'Investor relations',team:'2 designers'},tags:['Financial Services','Infrastructure','Credentials','Investor Relations','Fund'],process:[{title:'Investor Audience Analysis',text:'Understanding pension fund trustee decision-making. What they need to see, what reassures them, what raises flags.'},{title:'Fund Narrative',text:'Investment thesis articulation. Pipeline visualisation strategy. How to show conviction without performance data.'},{title:'Credentials Design',text:'44-slide deck. Modular sections for different LP audiences.'},{title:'Digital Presence',text:'Website architecture and design. Built for institutional investors: no retail noise.'},{title:'LP Communications System',text:'Quarterly update template. Consistent format across all investor touchpoints.'}],bigStat:{val:'44',label:'Slide master system'}},
+  {id:'national-ports-authority',num:'12',name:'National Ports Authority',sector:'Government',disciplines:['Spatial','Brand Identity'],disciplineLabel:'Environmental Identity · Port Signage',year:'2021',size:'large',accentColor:'var(--ember)',accentHex:'#ff8c42',bgStop1:'rgba(255,140,66,.14)',bgStop2:'rgba(255,107,157,.05)',excerpt:'Wayfinding and environmental identity system for three major South African port facilities — designed to meet international maritime signage standards while expressing national identity.',overview:'Port signage operates in an environment that most design studios never encounter: heavy industry, extreme weather, multilingual workforces, and international maritime safety standards that are non-negotiable. We designed a system that met every IMO signage requirement while creating a visual environment that reflected the port authority\'s ambition to be recognised as a world-class port operator.',challenge:'Maritime safety standards are written by engineers, not designers. The design constraints were extensive — and working within them while producing something that felt considered rather than compliance-driven was the central challenge.',deliverables:['Port wayfinding master system — vehicle, pedestrian, maritime','Safety signage suite — IMO compliant','Facility identification standards — 3 ports','Gate and access control identity','Staff and contractor identification system','Marine operations signage'],stats:{duration:'11 months',scope:'3 port facilities',team:'4 designers + maritime consultant'},tags:['Government','Spatial','Maritime','Wayfinding','Infrastructure'],process:[{title:'IMO Standards Review',text:'Deep audit of all applicable International Maritime Organisation signage requirements. Mapped against all touchpoint types.'},{title:'Port Walk',text:'Full walk of all three facilities with operations teams. 3 ports, 140,000m² combined.'},{title:'Sign Family Design',text:'Sign family developed: all types, all materials, all lighting conditions. IMO compliance verified at every step.'},{title:'Fabrication Tendering',text:'Detailed specifications for fabrication tender. Contractor evaluation and appointment.'},{title:'Installation Oversight',text:'BRANSOL on-site during installation at all three ports. Sign-off documentation for port authority.'}],bigStat:{val:'3',label:'Major port facilities'}},
+  {id:'private-equity-house',num:'13',name:'Private Equity House',sector:'Financial Services',disciplines:['Brand Identity','Credentials'],disciplineLabel:'Brand Identity · Deal Materials',year:'2024',size:'small',accentColor:'var(--violet)',accentHex:'#c77dff',bgStop1:'rgba(199,125,255,.13)',bgStop2:'rgba(124,131,229,.05)',excerpt:'Brand identity and deal document system for a Johannesburg-based private equity house focusing on healthcare and education sector investments across Sub-Saharan Africa.',overview:'Private equity brands face a paradox: they need to project confidence and permanence while operating in an environment where discretion is essential. We designed an identity that says "established" without saying "here is our address" — understated, authoritative, and legible to the institutional investors and management teams the firm engages with.',challenge:'PE houses rarely want to be visible. The identity had to be strong enough to carry authority in deal documents while remaining deliberately subdued in any public-facing context.',deliverables:['Primary identity — mark, typography, colour','Information memorandum template','Management presentation system','Deal announcement formats','Fund overview document','LP reporting template'],stats:{duration:'3 months',scope:'Identity + deal materials',team:'2 designers'},tags:['Financial Services','Private Equity','Brand Identity','Credentials','B2B'],process:[{title:'Audience Mapping',text:'Understanding the full range of PE audiences: LPs, management teams, co-investors, regulators. Each with different needs from the brand.'},{title:'Confidentiality Audit',text:'What can be shown publicly. What must remain private. Brand designed around that boundary.'},{title:'Identity Design',text:'Three directions. All deliberately restrained. Partners selected the most understated — correctly.'},{title:'Deal Materials',text:'IM template, management presentation, fund overview. Tested against actual deal scenarios.'},{title:'Discretion Protocols',text:'Guidelines on what can be shown to whom. Watermarking system for sensitive documents.'}],bigStat:{val:'3',label:'Months — full system delivered'}},
+  {id:'technical-vocational-college',num:'14',name:'Technical Vocational College Network',sector:'Education',disciplines:['Brand Identity','Campaign'],disciplineLabel:'Brand Identity · Student Recruitment',year:'2022',size:'medium',accentColor:'var(--rose)',accentHex:'#ff6b9d',bgStop1:'rgba(255,107,157,.13)',bgStop2:'rgba(255,140,66,.05)',excerpt:'Network-wide identity and student recruitment campaign for a group of 6 TVET colleges — repositioning vocational education as an aspirational career pathway.',overview:'TVET colleges in South Africa carry a perception gap: they are seen as a fallback rather than a first choice. This network commissioned work specifically designed to challenge that perception — a brand and recruitment campaign that positioned technical vocational education as a confident, aspirational choice for young South Africans. The campaign language was written with the students, not for them.',challenge:'The brand had to appeal to 16-year-olds making important decisions under significant family pressure — while also being taken seriously by the DHET and provincial education departments.',deliverables:['Network brand identity — 6 campus sub-brands','Student recruitment campaign — 3 academic years','Campus environmental identity — 6 sites','Digital campaign suite — social, digital OOH','Guidance counsellor toolkit','Parent information system'],stats:{duration:'6 months',scope:'Brand + campaign',team:'3 designers'},tags:['Education','TVET','Campaign','Brand Identity','Youth'],process:[{title:'Student Research',text:'Focus groups with current and prospective students at all 6 campuses. Not surveys — real conversations.'},{title:'Perception Audit',text:'Understanding exactly where the perception gap was. Data from guidance counsellors, parents, employers.'},{title:'Brand Strategy',text:'Repositioning from "fallback" to "first choice". Campaign platform developed before any visual work.'},{title:'Identity Design',text:'Network identity with 6 campus sub-brands. Each distinct, all coherent.'},{title:'Campaign Production',text:'3-year campaign. Tested in Year 1, scaled in Years 2 and 3 based on enrolment data.'}],bigStat:{val:'6',label:'Campus network'}},
+  {id:'insurance-group-rebrand',num:'15',name:'Insurance Group — Brand Refresh',sector:'Financial Services',disciplines:['Brand Identity','Digital Design'],disciplineLabel:'Brand Refresh · Digital Overhaul',year:'2023',size:'small',accentColor:'var(--teal)',accentHex:'#4ecdc4',bgStop1:'rgba(78,205,196,.13)',bgStop2:'rgba(6,214,160,.05)',excerpt:'Brand refresh and digital overhaul for an established short-term insurer — modernising without alienating a 30-year client base.',overview:'Mature insurance brands face a specific design problem: they need to feel contemporary enough to compete for digital-native customers while not alienating the loyal client base that built the business. We designed a brand refresh — not a rebrand — that updated the visual language without breaking brand recognition. The digital overhaul brought the online experience up to the standard of the firm\'s actual product quality.',challenge:'The board was divided on how much change was acceptable. Our process included a brand recognition audit that gave us data to navigate those internal disagreements.',deliverables:['Refreshed primary identity — evolved, not replaced','Digital experience design — website and mobile','Customer communication redesign — 44 document types','Policy document system','Claims process communication materials','Agent portal design'],stats:{duration:'5 months',scope:'Brand refresh + digital',team:'3 designers'},tags:['Financial Services','Insurance','Brand Identity','Digital','Consumer'],process:[{title:'Brand Recognition Audit',text:'Quantitative research with current policyholders. Identifying which elements carry equity and must be preserved.'},{title:'Change Tolerance Workshop',text:'Working session with the board. Using the research data to align on how much change was appropriate.'},{title:'Refresh Design',text:'Evolution, not revolution. Every change justified against the research. Three rounds of board review.'},{title:'Digital Experience',text:'Website and mobile. Information architecture, UX, and visual design.'},{title:'Communications Rollout',text:'44 customer document types redesigned. Phased rollout to avoid operational disruption.'}],bigStat:{val:'44',label:'Customer documents redesigned'}},
+  {id:'water-utility-authority',num:'16',name:'Water Utility Authority',sector:'Government',disciplines:['Campaign','Spatial'],disciplineLabel:'Public Awareness · Infrastructure Campaign',year:'2021',size:'medium',accentColor:'var(--sky)',accentHex:'#45b7d1',bgStop1:'rgba(69,183,209,.14)',bgStop2:'rgba(6,214,160,.05)',excerpt:'Water conservation awareness campaign and infrastructure facility identity for a provincial water utility — designed for a population in active water scarcity.',overview:'Water conservation campaigns face a fundamental communication challenge: the behaviour change required is invisible and private. You cannot photograph someone not running a tap. We designed a campaign built around visible community moments — neighbourhood leaders, school programmes, and community water points — that made conservation social and visible rather than individual and private.',challenge:'Previous conservation campaigns had focused on guilt and fear. The brief was explicitly to try something different — positive social reinforcement rather than scarcity anxiety.',deliverables:['Conservation campaign — phase 1 and 2','School education programme materials','Community leader toolkit','Reservoir and pump station identity','Billing insert campaign system','Billboard and outdoor advertising series'],stats:{duration:'4 months',scope:'Campaign + infrastructure ID',team:'2 designers'},tags:['Government','Public Sector','Campaign','Spatial','Environmental'],process:[{title:'Behavioural Research',text:'Review of water conservation campaign effectiveness literature. Understanding what works and what does not in behaviour change communications.'},{title:'Community Insight',text:'Sessions with community leaders, school principals, and ward councillors. Understanding the social dynamics of water use.'},{title:'Positive Frame Development',text:'Campaign platform built on community pride rather than individual guilt. Tested with focus groups before production.'},{title:'Material Production',text:'Phase 1: outdoor, print, school materials. Phase 2: community leader toolkit, billing inserts.'},{title:'Infrastructure ID',text:'Reservoir and pump station identity system. Functional and communicative.'}],bigStat:{val:'2',label:'Campaign phases delivered'}},
+  {id:'logistics-group-identity',num:'17',name:'Pan-African Logistics Group',sector:'Infrastructure',disciplines:['Brand Identity','Digital Design'],disciplineLabel:'Brand Identity · Digital Platform',year:'2025',size:'large',accentColor:'var(--gold)',accentHex:'#ffd166',bgStop1:'rgba(255,209,102,.14)',bgStop2:'rgba(255,140,66,.06)',excerpt:'Brand identity and customer-facing digital platform design for a logistics group operating across 12 African markets — built to work on low-bandwidth connections.',overview:'Logistics brands have to project reliability above everything else. Every touchpoint — from truck livery to tracking interface — must communicate that when you send something with us, it arrives. We designed an identity that carries that message, and a digital platform designed explicitly for the bandwidth realities of its key markets: Ethiopia, DRC, and Mozambique alongside South Africa.',challenge:'The platform had to perform acceptably on 2G connections. This is a design and engineering constraint that forces radical prioritisation — everything non-essential goes.',deliverables:['Group brand identity — mark, typography, application system','Vehicle livery system — 8 vehicle types','Customer portal design — low-bandwidth optimised','Freight management interface','Mobile application — iOS and Android','12-market rollout materials'],stats:{duration:'8 months',scope:'Full identity + digital',team:'5 designers'},tags:['Infrastructure','Logistics','Brand Identity','Digital','Pan-African'],process:[{title:'Market Research — 12 Countries',text:'Bandwidth audits across all markets. Understanding what connectivity looks like for the actual end user in each country.'},{title:'Brand Strategy',text:'Single positioning across 12 markets. "Arrives." — the entire brand built on one word.'},{title:'Identity Design',text:'Mark, typography, colour. Applied across all 8 vehicle types, all digital surfaces, all 12 markets.'},{title:'Platform Architecture',text:'Low-bandwidth-first design. Every feature justified against 2G performance. No feature that doesn\'t perform at 128kbps.'},{title:'Market Rollout',text:'12-market rollout materials. Local regulatory compliance in each jurisdiction.'}],bigStat:{val:'12',label:'African markets'}},
+  {id:'affordable-housing-developer',num:'18',name:'Affordable Housing Developer',sector:'Infrastructure',disciplines:['Spatial','Campaign'],disciplineLabel:'Development Identity · Sales Campaign',year:'2024',size:'small',accentColor:'var(--rose)',accentHex:'#ff6b9d',bgStop1:'rgba(255,107,157,.12)',bgStop2:'rgba(199,125,255,.05)',excerpt:'Development identity and sales campaign for a 1,200-unit affordable housing scheme on the KZN South Coast — helping first-time buyers see a home, not a housing unit.',overview:'Affordable housing developments have a marketing problem: the word "affordable" signals compromise to the people it is meant to serve. We built a development identity that led with aspiration — a name, a visual world, and a sales campaign that let first-time buyers picture a home and a life, not a square-metre count and a bond repayment.',challenge:'The developer\'s sales team had been struggling to convert appointments to sales. The design had to work in the sales office, at site level, and on a prepaid phone screen.',deliverables:['Development name and identity — "Amathol\'a"','Site hoarding and entrance identity','Sales office environment design','Brochure suite — print and digital','Show unit branding','Digital campaign — Facebook, WhatsApp, local digital OOH'],stats:{duration:'3 months',scope:'Development identity + campaign',team:'2 designers'},tags:['Infrastructure','Housing','Campaign','Spatial','KZN'],process:[{title:'Buyer Research',text:'Sessions with prospective buyers and the sales team. Understanding why appointments were not converting.'},{title:'Naming',text:'"Amathol\'a" — Zulu for "hopes". Tested with buyers. Unanimous positive response.'},{title:'Visual World',text:'Identity, colour, photography art direction. Aspiration without untruth.'},{title:'Sales Environment',text:'Sales office design and show unit branding. The physical experience of imagining yourself living there.'},{title:'Digital Campaign',text:'Facebook and WhatsApp — the channels that actually reach the buyer. Prepaid-data-friendly formats.'}],bigStat:{val:'1200',label:'Housing units'}}
+];
+
+// ═══════════════════════════════════════════════
+// VISUAL GENERATOR
+// ═══════════════════════════════════════════════
+function generateVisual(p, ar) {
+  const shapes = [
+    (c,s1,s2,ar)=>`<svg viewBox="0 0 800 ${Math.round(800/ar)}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(135deg,${s1},${s2});display:block"><line x1="0" y1="${Math.round(400/ar)}" x2="800" y2="${Math.round(400/ar)}" stroke="${c}" stroke-width="1" opacity=".25"/><line x1="400" y1="0" x2="400" y2="${Math.round(800/ar)}" stroke="${c}" stroke-width="1" opacity=".25"/><circle cx="400" cy="${Math.round(400/ar)}" r="220" fill="none" stroke="${c}" stroke-width="1.5" opacity=".35"/><circle cx="400" cy="${Math.round(400/ar)}" r="140" fill="none" stroke="${c}" stroke-width="1" opacity=".25"/><circle cx="400" cy="${Math.round(400/ar)}" r="60" fill="${c}" opacity=".14"/><circle cx="400" cy="${Math.round(400/ar)}" r="10" fill="${c}" opacity=".8"/></svg>`,
+    (c,s1,s2,ar)=>`<svg viewBox="0 0 800 ${Math.round(800/ar)}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(160deg,${s1},${s2});display:block">${[0,1,2,3,4,5,6,7].map(i=>`<line x1="${-200+i*160}" y1="0" x2="${-200+i*160+800}" y2="${Math.round(800/ar)}" stroke="${c}" stroke-width="1.2" opacity=".14"/>`).join('')}<rect x="200" y="${Math.round(800/ar*.12)}" width="400" height="${Math.round(800/ar*.76)}" fill="none" stroke="${c}" stroke-width="2" opacity=".4"/><rect x="260" y="${Math.round(800/ar*.22)}" width="280" height="${Math.round(800/ar*.56)}" fill="${c}" opacity=".07"/></svg>`,
+    (c,s1,s2,ar)=>`<svg viewBox="0 0 800 ${Math.round(800/ar)}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(120deg,${s1},${s2});display:block">${Array.from({length:7},(_,row)=>Array.from({length:12},(_,col)=>`<circle cx="${30+col*66}" cy="${30+row*Math.round(800/ar/7)}" r="${(row+col)%3===0?5:2.5}" fill="${c}" opacity="${(row+col)%3===0?.35:.16}"/>`).join('')).join('')}<line x1="0" y1="${Math.round(800/ar*.5)}" x2="800" y2="${Math.round(800/ar*.5)}" stroke="${c}" stroke-width="1.5" opacity=".25"/></svg>`,
+    (c,s1,s2,ar)=>`<svg viewBox="0 0 800 ${Math.round(800/ar)}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(145deg,${s1},${s2});display:block"><polygon points="400,${Math.round(800/ar*.06)} 700,${Math.round(800/ar*.88)} 100,${Math.round(800/ar*.88)}" fill="none" stroke="${c}" stroke-width="2" opacity=".38"/><polygon points="400,${Math.round(800/ar*.18)} 600,${Math.round(800/ar*.8)} 200,${Math.round(800/ar*.8)}" fill="${c}" opacity=".07"/><circle cx="400" cy="${Math.round(800/ar*.48)}" r="28" fill="${c}" opacity=".4"/><line x1="0" y1="0" x2="800" y2="${Math.round(800/ar)}" stroke="${c}" stroke-width="1" opacity=".12"/></svg>`,
+    (c,s1,s2,ar)=>`<svg viewBox="0 0 800 ${Math.round(800/ar)}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(180deg,${s1},${s2});display:block">${[.14,.26,.38,.50,.62,.74,.86].map((y,i)=>`<rect x="${30+i*6}" y="${Math.round(800/ar*y)}" width="${740-i*12}" height="${Math.round(800/ar*.06)}" fill="${c}" opacity="${.04+i*.035}"/>`).join('')}<rect x="30" y="${Math.round(800/ar*.08)}" width="120" height="${Math.round(800/ar*.84)}" fill="none" stroke="${c}" stroke-width="1.2" opacity=".3"/></svg>`,
+    (c,s1,s2,ar)=>`<svg viewBox="0 0 800 ${Math.round(800/ar)}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(130deg,${s1},${s2});display:block"><line x1="160" y1="${Math.round(800/ar*.3)}" x2="400" y2="${Math.round(800/ar*.5)}" stroke="${c}" stroke-width="1.5" opacity=".3"/><line x1="400" y1="${Math.round(800/ar*.5)}" x2="640" y2="${Math.round(800/ar*.25)}" stroke="${c}" stroke-width="1.5" opacity=".3"/><line x1="400" y1="${Math.round(800/ar*.5)}" x2="560" y2="${Math.round(800/ar*.75)}" stroke="${c}" stroke-width="1.5" opacity=".3"/><line x1="160" y1="${Math.round(800/ar*.3)}" x2="280" y2="${Math.round(800/ar*.72)}" stroke="${c}" stroke-width="1.5" opacity=".22"/><circle cx="160" cy="${Math.round(800/ar*.3)}" r="14" fill="${c}" opacity=".45"/><circle cx="400" cy="${Math.round(800/ar*.5)}" r="22" fill="${c}" opacity=".55"/><circle cx="640" cy="${Math.round(800/ar*.25)}" r="10" fill="${c}" opacity=".38"/><circle cx="560" cy="${Math.round(800/ar*.75)}" r="8" fill="${c}" opacity=".32"/><circle cx="280" cy="${Math.round(800/ar*.72)}" r="7" fill="${c}" opacity=".28"/></svg>`
+  ];
+  const idx = parseInt(p.id.replace(/[^0-9]/g,'').slice(-1)||'0') % shapes.length;
+  return shapes[idx](p.accentHex, p.bgStop1, p.bgStop2, ar||16/9);
+}
+
+// ═══════════════════════════════════════════════
+// SECTOR COLOUR MAP
+// ═══════════════════════════════════════════════
+const SECTOR_COLOR = {
+  'Government':'var(--iris)','Financial Services':'var(--aqua)',
+  'Infrastructure':'var(--gold)','Healthcare':'var(--violet)',
+  'Professional Services':'var(--sky)','Energy':'var(--teal)',
+  'Education':'var(--rose)'
+};
+const SECTOR_BORDER = {
+  'Government':'rgba(124,131,229,.35)','Financial Services':'rgba(6,214,160,.35)',
+  'Infrastructure':'rgba(255,209,102,.35)','Healthcare':'rgba(199,125,255,.35)',
+  'Professional Services':'rgba(69,183,209,.35)','Energy':'rgba(78,205,196,.35)',
+  'Education':'rgba(255,107,157,.35)'
+};
+
+// ═══════════════════════════════════════════════
+// RENDER PAGE
+// ═══════════════════════════════════════════════
+function renderProject(p) {
+  const sc = SECTOR_COLOR[p.sector]||'var(--ter)';
+  const sb = SECTOR_BORDER[p.sector]||'var(--border)';
+
+  // Set accent CSS var and orb colour
+  document.documentElement.style.setProperty('--accent', p.accentColor);
+  document.documentElement.style.setProperty('--accent-hex', p.accentHex);
+  document.getElementById('bgOrb1').style.background = `radial-gradient(circle,${p.bgStop1} 0%,${p.bgStop2} 40%,transparent 70%)`;
+
+  // Update page title + meta
+  document.title = p.name + ' — BRANSOL Work';
+  document.querySelector('meta[name="description"]').content = p.excerpt;
+
+  // Update canonical
+  const canonical = document.querySelector('link[rel="canonical"]');
+  if(canonical) canonical.href = 'https://bransol.com/work/' + p.id;
+
+  // Get 3 related projects (same sector first, then others, exclude self)
+  const related = PROJECTS
+    .filter(r => r.id !== p.id)
+    .sort((a,b) => (b.sector===p.sector)-(a.sector===p.sector))
+    .slice(0, 3);
+
+  // Process steps
+  const processSteps = p.process || [
+    {title:'Discovery',text:'Initial briefing, stakeholder interviews, and audit of existing brand touchpoints.'},
+    {title:'Strategy',text:'Positioning and strategy development. Alignment before design work commences.'},
+    {title:'Design',text:'Identity or campaign development through structured rounds of review.'},
+    {title:'Production',text:'Final artwork, specifications, and asset delivery.'},
+    {title:'Handover',text:'Training, guidelines, and ongoing support.'}
+  ];
+
+  document.getElementById('pageContent').innerHTML = `
+    <!-- HERO -->
+    <section class="cs-hero">
+      <div class="breadcrumb">
+        <a href="/work">Work</a>
+        <span class="bc-sep">·</span>
+        <span>${p.sector}</span>
+        <span class="bc-sep">·</span>
+        <span>${p.name}</span>
+      </div>
+      <div class="hero-split">
+        <div class="hero-left">
+          <div class="hero-sector" style="color:${sc};border-color:${sb}">${p.sector} · ${p.year}</div>
+          <h1 class="hero-title">${p.name}</h1>
+          <span class="hero-discipline">${p.disciplineLabel}</span>
+          <p class="hero-excerpt">${p.excerpt}</p>
+        </div>
+        <div class="hero-right">
+          <div class="stat-pills">
+            <div class="stat-pill">
+              <span class="sp-label">Duration</span>
+              <span class="sp-val">${p.stats.duration}</span>
+            </div>
+            <div class="stat-pill">
+              <span class="sp-label">Scope</span>
+              <span class="sp-val" style="font-size:14px">${p.stats.scope}</span>
+            </div>
+            <div class="stat-pill">
+              <span class="sp-label">Team</span>
+              <span class="sp-val" style="font-size:14px">${p.stats.team}</span>
+            </div>
+            <div class="stat-pill">
+              <span class="sp-label">Year</span>
+              <span class="sp-val">${p.year}</span>
+            </div>
+          </div>
+          <div class="hero-tags">
+            ${p.tags.map(t=>`<span class="hero-tag">${t}</span>`).join('')}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN VISUAL -->
+    <div class="cs-visual reveal">
+      <div class="visual-wrap">
+        ${generateVisual(p, 21/9)}
+      </div>
+      <div class="visual-caption">
+        <span>${p.num} · ${p.name}</span>
+        <span>${p.disciplineLabel} · ${p.year}</span>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="cs-body">
+      <div class="cs-main">
+
+        <!-- Overview -->
+        <div class="cs-section reveal">
+          <span class="section-eyebrow">Overview</span>
+          <div class="cs-text"><p>${p.overview}</p></div>
+        </div>
+
+        <!-- Challenge -->
+        <div class="challenge-block reveal" style="--accent:${p.accentColor};border-left-color:${p.accentHex}">
+          <span class="cb-label">The challenge</span>
+          <p class="cb-text">${p.challenge}</p>
+        </div>
+
+        <!-- Process -->
+        <div class="cs-section reveal">
+          <span class="section-eyebrow">How we worked</span>
+          <h2 class="cs-section-title">Process</h2>
+          <div class="process-steps">
+            ${processSteps.map((s,i)=>`
+              <div class="process-step">
+                <div class="ps-num">0${i+1}</div>
+                <div class="ps-body">
+                  <div class="ps-title">${s.title}</div>
+                  <div class="ps-text">${s.text}</div>
+                </div>
+              </div>`).join('')}
+          </div>
+        </div>
+
+        <!-- Deliverables -->
+        <div class="cs-section reveal">
+          <span class="section-eyebrow">What we delivered</span>
+          <h2 class="cs-section-title">Deliverables</h2>
+          <div class="deliverable-grid">
+            ${p.deliverables.map(d=>`
+              <div class="deliverable-item">
+                <span class="di-dot" style="background:${p.accentHex}"></span>
+                ${d}
+              </div>`).join('')}
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="cs-sidebar">
+        <div class="meta-block reveal">
+          <span class="mb-title">Project details</span>
+          <div class="meta-row"><span class="mr-label">Client sector</span><span class="mr-val">${p.sector}</span></div>
+          <div class="meta-row"><span class="mr-label">Primary discipline</span><span class="mr-val">${p.disciplines[0]}</span></div>
+          ${p.disciplines[1]?`<div class="meta-row"><span class="mr-label">Secondary discipline</span><span class="mr-val">${p.disciplines[1]}</span></div>`:''}
+          <div class="meta-row"><span class="mr-label">Duration</span><span class="mr-val">${p.stats.duration}</span></div>
+          <div class="meta-row"><span class="mr-label">Studio team</span><span class="mr-val">${p.stats.team}</span></div>
+          <div class="meta-row"><span class="mr-label">Completed</span><span class="mr-val">${p.year}</span></div>
+        </div>
+
+        ${p.bigStat ? `
+        <div class="big-stat reveal" style="transition-delay:.1s">
+          <div class="bs-val" style="color:${p.accentHex}">${p.bigStat.val}</div>
+          <span class="bs-label">${p.bigStat.label}</span>
+        </div>` : ''}
+
+        <div class="sidebar-cta reveal" style="transition-delay:.2s">
+          <span class="sc-label">Commission similar work</span>
+          <p class="sc-text">If your organisation has a similar brief, we would be glad to hear about it.</p>
+          <a href="/begin" class="sc-btn">Begin a commission</a>
+        </div>
+      </aside>
+    </div>
+
+    <!-- SECONDARY VISUAL PANELS -->
+    <div class="visual-strip reveal">
+      <div class="vs-panel">${generateVisual(p, 4/3)}</div>
+      <div class="vs-panel">${generateVisual({...p, id:p.id+'a'}, 4/3)}</div>
+      <div class="vs-panel">${generateVisual({...p, id:p.id+'b'}, 4/3)}</div>
+    </div>
+
+    <!-- RELATED -->
+    <section class="related">
+      <div class="related-header reveal">
+        <div>
+          <span class="related-eyebrow">More work</span>
+          <h2 class="related-title">Related<br><span class="chrome-text">projects.</span></h2>
+        </div>
+        <a href="/work" class="related-back">← All work</a>
+      </div>
+      <div class="related-grid">
+        ${related.map((r,i)=>`
+          <a href="/work/${r.id}" class="related-card reveal" style="transition-delay:${i*0.08}s;text-decoration:none;">
+            <div class="rc-visual-wrap">
+              <div class="rc-visual">${generateVisual(r, 3/2)}</div>
+            </div>
+            <div class="rc-info">
+              <span class="rc-sector" style="color:${SECTOR_COLOR[r.sector]||'var(--ter)'};border-color:${SECTOR_BORDER[r.sector]||'var(--border)'}">${r.sector}</span>
+              <div class="rc-name">${r.name}</div>
+              <div class="rc-discipline">${r.disciplineLabel}</div>
+            </div>
+          </a>`).join('')}
+      </div>
+    </section>`;
+
+  // Kick off reveals
+  requestAnimationFrame(() => {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {threshold: 0.06, rootMargin: '0px 0px -30px 0px'});
+    document.querySelectorAll('.reveal, .reveal-left').forEach(el => io.observe(el));
+  });
+}
+
+function renderNotFound(slug) {
+  document.getElementById('pageContent').innerHTML = `
+    <div class="not-found">
+      <div class="nf-code">404</div>
+      <h1 class="nf-title">Project not found</h1>
+      <p class="nf-text">The project <em>${slug}</em> doesn't exist in our archive. It may have been removed or the URL may be incorrect.</p>
+      <a href="/work" class="nf-btn">Back to all work</a>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════
+// ROUTING
+// ═══════════════════════════════════════════════
+function getSlug() {
+  // Supports:
+  // ?slug=national-communications-agency
+  // /work/national-communications-agency (via URL path)
+  const params = new URLSearchParams(window.location.search);
+  if(params.get('slug')) return params.get('slug');
+  // Try path — last segment
+  const parts = window.location.pathname.split('/').filter(Boolean);
+  if(parts.length >= 2 && parts[0]==='work') return parts[1];
+  return null;
+}
+
+function init() {
+  const slug = getSlug();
+  if(!slug) {
+    renderNotFound('(no slug provided)');
+    return;
+  }
+  const project = PROJECTS.find(p => p.id === slug);
+  if(project) {
+    renderProject(project);
+  } else {
+    renderNotFound(slug);
+  }
+}
+
+// Handle related project clicks — navigate without full reload
+document.addEventListener('click', e => {
+  const link = e.target.closest('a[href^="/work/"]');
+  if(link && !link.href.includes('#')) {
+    e.preventDefault();
+    const newSlug = link.href.split('/work/')[1];
+    history.pushState({}, '', '/work/' + newSlug);
+    document.getElementById('pageContent').innerHTML = '';
+    window.scrollTo({top:0,behavior:'smooth'});
+    setTimeout(init, 100);
+  }
+});
+window.addEventListener('popstate', () => { document.getElementById('pageContent').innerHTML=''; init(); });
+
+// ═══════════════════════════════════════════════
+// CURSOR
+// ═══════════════════════════════════════════════
+const cur=document.getElementById('cur'),ring=document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function tick(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick);})();
+document.addEventListener('mouseover',e=>{
+  const h=e.target.closest('a,button,.related-card,.process-step');
+  cur.style.width=cur.style.height=h?'14px':'7px';
+  ring.style.width=ring.style.height=h?'44px':'30px';
+  ring.style.borderColor=h?'rgba(124,131,229,.5)':'rgba(124,131,229,.32)';
+});
+
+// ═══════════════════════════════════════════════
+// NAV + PROGRESS + THEME
+// ═══════════════════════════════════════════════
+const nav=document.getElementById('nav');
+const pb=document.getElementById('progressBar');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',scrollY>40);
+  const doc=document.documentElement;
+  const pct=(scrollY)/(doc.scrollHeight-doc.clientHeight);
+  pb.style.transform='scaleX('+Math.min(pct,1)+')';
+},{passive:true});
+
+(function(){
+  const btn=document.getElementById('themeToggle'),label=document.getElementById('themeLabel'),html=document.documentElement;
+  const saved=localStorage.getItem('bransol-theme');
+  if(saved==='light'){html.setAttribute('data-theme','light');label.textContent='Dark';}
+  btn.addEventListener('click',()=>{
+    const isLight=html.getAttribute('data-theme')==='light';
+    if(isLight){html.removeAttribute('data-theme');label.textContent='Light';localStorage.setItem('bransol-theme','dark');}
+    else{html.setAttribute('data-theme','light');label.textContent='Dark';localStorage.setItem('bransol-theme','light');}
+  });
+})();
+
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+init();
+</script>
+</body>
+</html>

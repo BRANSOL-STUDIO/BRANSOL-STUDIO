@@ -3,6 +3,11 @@ import type { CSSProperties } from "react";
 import type { WorkCaseStudy } from "@/lib/work-case-studies";
 import type { WorkProject } from "@/lib/work-projects";
 import { ProjectCard } from "@/components/site/ProjectCard";
+import WorkGlobtekVehicleBrandingTabs from "@/components/site/WorkGlobtekVehicleBrandingTabs";
+import globtekLogoGrey from "@/images/archive/GLOBTEK/BRANDING/Globtek_Logo__greyscale.png";
+import globtekLogoOnDark from "@/images/archive/GLOBTEK/BRANDING/Globtek_Logo__on-dark-bg.png";
+import globtekLogoColour from "@/images/archive/GLOBTEK/BRANDING/Globtek_Logo__colour.png";
+import laptopMockup from "@/images/Generic Mockups/Laptop-Mockup.png";
 
 export default function WorkGlobtekBrandingView({
   caseStudy,
@@ -98,6 +103,152 @@ export default function WorkGlobtekBrandingView({
         </div>
       </div>
 
+      {/* 01 LOGO DESIGN */}
+      <section className="gb-section" id="logo">
+        <div className="gb-sec-header">
+          <span className="gb-sec-eyebrow">01 — Logo Design</span>
+          <h2 className="gb-sec-title">
+            The mark.
+            <br />
+            <span className="gb-sec-title-accent">Applied ingenuity.</span>
+          </h2>
+        </div>
+
+        <div className="gb-sec-cols">
+          <p className="gb-body-text">
+            The Globtek wordmark pairs a bold sans-serif with a kinetic globe mark — the
+            &lsquo;o&rsquo; in Globtek replaced by a symbol that references both global reach
+            and the fluid, dynamic nature of marine environments. The tagline{" "}
+            <em>Applied Ingenuity</em> positions the brand at the intersection of expertise
+            and innovation.
+          </p>
+          <p className="gb-body-text" style={{ marginTop: 16 }}>
+            The identity works across all contexts the business operates in: vehicle livery
+            at motorway speed, A4 letterhead in a boardroom, and a website header on a
+            phone screen at a port.
+          </p>
+        </div>
+
+        <div className="gb-logo-grid">
+          <div className="gb-ph gb-ph-dark gb-ph-tall">
+            <div className="gb-ph-inner">
+              <img
+                src={globtekLogoOnDark.src}
+                alt=""
+                className="gb-logo-img gb-logo-img-dark"
+              />
+              <span>Wordmark — on dark</span>
+            </div>
+          </div>
+          <div className="gb-ph gb-ph-light gb-ph-tall">
+            <div className="gb-ph-inner">
+              <img
+                src={globtekLogoColour.src}
+                alt=""
+                className="gb-logo-img gb-logo-img-light"
+              />
+              <span>Wordmark — colour</span>
+            </div>
+          </div>
+          <div className="gb-ph gb-ph-red gb-ph-tall">
+            <div className="gb-ph-inner">
+              <img
+                src={globtekLogoGrey.src}
+                alt=""
+                className="gb-logo-img gb-logo-img-red"
+              />
+              <span>Wordmark — greyscale</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="gb-logo-grid gb-mt-3" style={{ gridTemplateColumns: "1fr 1fr" }}>
+          <div className="gb-ph" style={{ minHeight: 160 }}>
+            <div className="gb-ph-inner">
+              <div className="gb-ph-icon">o</div>
+              <span>Globe mark — standalone icon</span>
+            </div>
+          </div>
+          <div className="gb-ph gb-ph-dark" style={{ minHeight: 160 }}>
+            <div className="gb-ph-inner">
+              <div className="gb-ph-icon">#</div>
+              <span>Globtek Rail — sub-brand lockup</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 02 BRAND SYSTEM */}
+      <section className="gb-section" id="brand-system">
+        <div className="gb-sec-header">
+          <span className="gb-sec-eyebrow">02 — Brand System</span>
+          <h2 className="gb-sec-title">
+            The system.
+            <br />
+            <span className="gb-sec-title-accent">Built to scale.</span>
+          </h2>
+        </div>
+
+        <p className="gb-body-text gb-mt-0" style={{ maxWidth: 640 }}>
+          The brand system establishes the rules that keep every touchpoint consistent —
+          colour, typography, the wave motif, spacing, and tone. Documented in a guidelines
+          set that the Globtek team can hand to any supplier and get consistent output.
+        </p>
+
+        {/* Colour palette */}
+        <div className="gb-colour-row">
+          <div className="gb-swatch" style={{ background: "#e43d30" }}>
+            <span className="gb-sw-label">Globtek Red<br />#E43D30</span>
+          </div>
+          <div className="gb-swatch" style={{ background: "#1a1a2e" }}>
+            <span className="gb-sw-label">Deep Navy<br />#1A1A2E</span>
+          </div>
+          <div className="gb-swatch" style={{ background: "#f5f5f5", color: "#1a1a2e" }}>
+            <span className="gb-sw-label" style={{ color: "#1a1a2e" }}>Off-White<br />#F5F5F5</span>
+          </div>
+          <div className="gb-swatch" style={{ background: "#111111" }}>
+            <span className="gb-sw-label">Charcoal<br />#111111</span>
+          </div>
+          <div className="gb-swatch" style={{ background: "rgba(228,61,48,.35)" }}>
+            <span className="gb-sw-label">Red 35%<br />Tint</span>
+          </div>
+        </div>
+
+        {/* Type specimen placeholder */}
+        <div className="gb-type-spec">
+          <div className="gb-ph gb-ph-dark" style={{ minHeight: 200 }}>
+            <div className="gb-ph-inner">
+              <div className="gb-ph-icon" style={{ fontSize: 32 }}>
+                Aa
+              </div>
+              <span>Typography specimen — display + body + mono</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Wave motif / pattern placeholders */}
+        <div className="gb-brand-ph-grid">
+          <div className="gb-ph gb-ph-dark" style={{ minHeight: 220 }}>
+            <div className="gb-ph-inner">
+              <div className="gb-ph-icon">~</div>
+              <span>Wave motif — brand pattern</span>
+            </div>
+          </div>
+          <div className="gb-ph gb-ph-dark" style={{ minHeight: 220 }}>
+            <div className="gb-ph-inner">
+              <div className="gb-ph-icon">||</div>
+              <span>Brand guidelines spread</span>
+            </div>
+          </div>
+          <div className="gb-ph gb-ph-dark" style={{ minHeight: 220 }}>
+            <div className="gb-ph-inner">
+              <div className="gb-ph-icon">||</div>
+              <span>Brand guidelines spread</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* VEHICLE BRANDING */}
       <section className="gb-section" id="fleet">
         <div className="gb-sec-header">
@@ -115,62 +266,31 @@ export default function WorkGlobtekBrandingView({
 
         {vehicle ? (
           <>
-            <div className="gb-img-grid-2">
-              <div className="gb-img-item">
-                <img src={vehicle.left.src} alt="" />
-                <div className="gb-img-cap">BT-50 · Left side</div>
-              </div>
-              <div className="gb-img-item">
-                <img src={vehicle.right.src} alt="" />
-                <div className="gb-img-cap">BT-50 · Right side</div>
-              </div>
+            <WorkGlobtekVehicleBrandingTabs vehicle={vehicle} />
+
+            {/* COLLATERAL (included inside 03 like globtek-branding-3.html) */}
+            <div className="gb-sec-subheader gb-mt-6">
+              <span className="gb-sec-eyebrow">Collateral</span>
+              <h3 className="gb-sub-title">
+                Event gazebo.
+                <br />
+                <span className="gb-sub-title-accent">Two colourways.</span>
+              </h3>
             </div>
 
-            <div className="gb-img-grid-2 gb-mt-3">
-              <div className="gb-img-item">
-                <img src={vehicle.front.src} alt="" />
-                <div className="gb-img-cap">BT-50 · Front 3/4</div>
+            {outdoor ? (
+              <div className="gb-img-grid-2 gb-mt-3">
+                <div className="gb-img-item">
+                  <img src={outdoor.gazebo1.src} alt="" />
+                  <div className="gb-img-cap">Black colourway</div>
+                </div>
+                <div className="gb-img-item">
+                  <img src={outdoor.gazebo2.src} alt="" />
+                  <div className="gb-img-cap">Red colourway</div>
+                </div>
               </div>
-              <div className="gb-img-item">
-                <img src={vehicle.back.src} alt="" />
-                <div className="gb-img-cap">BT-50 · Rear 3/4</div>
-              </div>
-            </div>
-
-            <div className="gb-img-contained gb-mt-3">
-              <img src={vehicle.polo.src} alt="" />
-              <div className="gb-img-cap">Polo · Full wrap</div>
-            </div>
+            ) : null}
           </>
-        ) : null}
-      </section>
-
-      {/* OUTDOOR / EVENT */}
-      <section className="gb-section gb-mt-6" id="outdoor">
-        <div className="gb-sec-header">
-          <span className="gb-sec-eyebrow">Outdoor Collateral</span>
-          <h2 className="gb-sec-title">
-            Two colourways.
-            <br />
-            <span className="gb-sec-title-accent">Same system, two moods.</span>
-          </h2>
-        </div>
-
-        <p className="gb-body-text">
-          Event and environmental applications keep the brand consistent across real-world daylight, materials, and visibility requirements.
-        </p>
-
-        {outdoor ? (
-          <div className="gb-img-grid-2 gb-mt-3">
-            <div className="gb-img-item">
-              <img src={outdoor.gazebo1.src} alt="" />
-              <div className="gb-img-cap">Black colourway</div>
-            </div>
-            <div className="gb-img-item">
-              <img src={outdoor.gazebo2.src} alt="" />
-              <div className="gb-img-cap">Red colourway</div>
-            </div>
-          </div>
         ) : null}
       </section>
 
@@ -203,6 +323,60 @@ export default function WorkGlobtekBrandingView({
         ) : null}
       </section>
 
+      {/* STATIONERY */}
+      <section className="gb-section gb-mt-6" id="stationery">
+        <div className="gb-sec-header">
+          <span className="gb-sec-eyebrow">05 — Stationery</span>
+          <h2 className="gb-sec-title">
+            Every touchpoint.
+            <br />
+            <span className="gb-sec-title-accent">Letterhead to lanyard.</span>
+          </h2>
+        </div>
+
+        <p className="gb-body-text" style={{ maxWidth: 640 }}>
+          The stationery suite carries the Globtek identity into every professional
+          interaction — from the first letter a client receives to the business card
+          handed across a table at a port authority meeting.
+        </p>
+
+        <div className="gb-img-grid-2" style={{ marginTop: 16 }}>
+          <div className="gb-ph gb-ph-dark gb-ph-tall">
+            <div className="gb-ph-inner">
+              <div className="gb-ph-icon">▤</div>
+              <span>Letterhead &amp; compliment slip</span>
+            </div>
+          </div>
+          <div className="gb-ph gb-ph-dark gb-ph-tall">
+            <div className="gb-ph-inner">
+              <div className="gb-ph-icon">■</div>
+              <span>Business cards — front &amp; back</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="gb-brand-ph-grid">
+          <div className="gb-ph gb-ph-dark">
+            <div className="gb-ph-inner">
+              <div className="gb-ph-icon">■</div>
+              <span>Email signature</span>
+            </div>
+          </div>
+          <div className="gb-ph gb-ph-dark">
+            <div className="gb-ph-inner">
+              <div className="gb-ph-icon">■</div>
+              <span>Branded envelope</span>
+            </div>
+          </div>
+          <div className="gb-ph gb-ph-dark">
+            <div className="gb-ph-inner">
+              <div className="gb-ph-icon">■</div>
+              <span>ID lanyard / staff ID card</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* WEBSITE */}
       <section className="gb-section gb-mt-6" id="website">
         <div className="gb-sec-header">
@@ -220,40 +394,57 @@ export default function WorkGlobtekBrandingView({
 
         {website ? (
           <>
-            <div className="gb-web-frame">
-              <div className="gb-web-bar">
-                <div className="gb-dots">
-                  <span />
-                  <span />
-                  <span />
+            {/* WEBSITE — laptop mockups */}
+            <div className="gb-laptop-wrap">
+              <div className="gb-laptop-frame">
+                <div className="gb-laptop-screen gb-laptop-screen-scroll">
+                  <img
+                    src={website.homepage.src}
+                    alt=""
+                    className="gb-laptop-screen-img gb-laptop-screen-img-scroll"
+                  />
                 </div>
-                <div className="gb-url">globtek.co.za</div>
+                <img
+                  src={laptopMockup.src}
+                  alt=""
+                  className="gb-laptop-mockup"
+                />
               </div>
-              <img src={website.homepage.src} alt="" />
             </div>
 
             <div className="gb-img-grid-2 gb-mt-3">
-              <div className="gb-web-frame gb-web-frame-sm">
-                <div className="gb-web-bar gb-web-bar-sm">
-                  <div className="gb-dots gb-dots-sm">
-                    <span />
-                    <span />
-                    <span />
+              <div className="gb-laptop-mini">
+                <div className="gb-laptop-frame gb-laptop-frame-mini">
+                  <div className="gb-laptop-screen">
+                    <img
+                      src={website.megaMenu.src}
+                      alt=""
+                      className="gb-laptop-screen-img"
+                    />
                   </div>
-                  <div className="gb-url gb-url-sm">Mega menu</div>
+                  <img
+                    src={laptopMockup.src}
+                    alt=""
+                    className="gb-laptop-mockup"
+                  />
                 </div>
-                <img src={website.megaMenu.src} alt="" />
               </div>
-              <div className="gb-web-frame gb-web-frame-sm">
-                <div className="gb-web-bar gb-web-bar-sm">
-                  <div className="gb-dots gb-dots-sm">
-                    <span />
-                    <span />
-                    <span />
+
+              <div className="gb-laptop-mini">
+                <div className="gb-laptop-frame gb-laptop-frame-mini">
+                  <div className="gb-laptop-screen">
+                    <img
+                      src={website.railInfra.src}
+                      alt=""
+                      className="gb-laptop-screen-img"
+                    />
                   </div>
-                  <div className="gb-url gb-url-sm">Rail infrastructure</div>
+                  <img
+                    src={laptopMockup.src}
+                    alt=""
+                    className="gb-laptop-mockup"
+                  />
                 </div>
-                <img src={website.railInfra.src} alt="" />
               </div>
             </div>
           </>

@@ -113,7 +113,11 @@ export function WorkPageClient() {
             <ProjectCard
               key={project.id}
               project={project}
-              cardImageSrc={WORK_CASE_STUDIES[project.id]?.images.hero.src ?? null}
+              cardImageSrc={
+                WORK_CASE_STUDIES[project.id]?.images.cardHero?.src ??
+                WORK_CASE_STUDIES[project.id]?.images.hero.src ??
+                null
+              }
             />
           ))}
         </div>

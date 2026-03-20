@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CHY7B35XNP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CHY7B35XNP');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work — BRANSOL</title>
+<meta name="description" content="A selected archive of BRANSOL commissions — brand identity, digital design, campaign creative, credentials, and environmental design across government, financial services, infrastructure, and more.">
+<link rel="canonical" href="https://bransol.com/work">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --void:#060608;--deep:#0d0d12;--surface:#111118;--lift:#18181f;
+  --panel:#1e1e27;--ghost:#2a2a35;--border:rgba(255,255,255,.07);
+  --text:#f0eff5;--sub:rgba(240,239,245,.6);--ter:rgba(240,239,245,.28);--dim:rgba(240,239,245,.1);
+  --iris:#7c83e5;--aqua:#06d6a0;--violet:#c77dff;--rose:#ff6b9d;
+  --gold:#ffd166;--sky:#45b7d1;--teal:#4ecdc4;--ember:#ff8c42;
+  --chrome:linear-gradient(135deg,#ff6b9d,#ff8c42,#ffd166,#06d6a0,#4ecdc4,#45b7d1,#7c83e5,#c77dff);
+  --nav-h:68px;--pad-x:72px;
+}
+html[data-theme="light"]{
+  --void:#f5f4f0;--deep:#eeede8;--surface:#e8e7e1;--lift:#dddcd5;
+  --panel:#d4d3cb;--ghost:#c4c3ba;--border:rgba(0,0,0,.09);
+  --text:#0e0e12;--sub:rgba(14,14,18,.62);--ter:rgba(14,14,18,.38);--dim:rgba(14,14,18,.1);
+}
+html[data-theme="light"] body{background:var(--void);color:var(--text);}
+html[data-theme="light"] nav{background:rgba(245,244,240,.85);border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] nav.scrolled{background:rgba(245,244,240,.97);}
+html[data-theme="light"] .nav-links a{color:var(--sub);}
+html[data-theme="light"] .bg-grid{background-image:linear-gradient(rgba(0,0,0,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.03) 1px,transparent 1px);}
+html[data-theme="light"] .filter-bar{background:rgba(245,244,240,.9);border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] .filter-btn{border-color:rgba(0,0,0,.1);color:var(--ter);}
+html[data-theme="light"] .filter-btn:hover{border-color:rgba(0,0,0,.2);color:var(--sub);}
+html[data-theme="light"] .filter-btn.active{background:rgba(124,131,229,.18);color:var(--iris);border-color:rgba(124,131,229,.4);}
+html[data-theme="light"] .project-card{border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] .project-card:hover{border-color:rgba(0,0,0,.18);}
+html[data-theme="light"] .modal-shell{background:var(--surface);border-color:rgba(0,0,0,.12);}
+html[data-theme="light"] .modal-sidebar{background:var(--deep);border-color:rgba(0,0,0,.08);}
+html[data-theme="light"] .detail-row{border-color:rgba(0,0,0,.07);}
+html[data-theme="light"] .tt-track{background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.12);}
+html[data-theme="light"] footer{background:var(--deep);}
+html[data-theme="light"] .count-label{color:var(--sub);}
+
+body{transition:background-color .4s ease,color .35s ease;}
+nav{transition:background .4s ease,border-color .35s ease,height .3s ease!important;}
+.nav-links a,.theme-toggle,.filter-btn{transition:color .2s,border-color .2s,background .2s;}
+.tt-track{transition:background .3s,border-color .3s;}
+.tt-thumb{transition:transform .3s cubic-bezier(.16,1,.3,1);}
+.project-card{transition:border-color .25s,transform .35s ease,opacity .35s ease;}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+body{background:var(--void);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.65;cursor:none;overflow-x:hidden;}
+html{scroll-behavior:smooth;}
+
+.cur{position:fixed;width:7px;height:7px;border-radius:50%;background:var(--chrome);background-size:300% 300%;animation:cSpin 3s linear infinite;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .18s,height .18s;}
+.cur-ring{position:fixed;width:30px;height:30px;border-radius:50%;border:1px solid rgba(124,131,229,.32);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .15s,height .15s,border-color .2s;}
+
+@keyframes cSpin{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes orbPulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes scanDown{0%{opacity:0;top:0}5%{opacity:1}95%{opacity:1}100%{opacity:0;top:100%}}
+@keyframes modalIn{from{opacity:0;transform:translateY(32px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes cardIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+.chrome-text{background:var(--chrome);background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:cSpin 5s ease infinite;}
+
+.bg-fixed{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.013) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.013) 1px,transparent 1px);background-size:80px 80px;}
+.bg-orb{position:absolute;border-radius:50%;filter:blur(100px);animation:orbPulse 12s ease-in-out infinite;}
+.bg-orb-1{width:800px;height:700px;top:-200px;right:-100px;background:radial-gradient(circle,rgba(124,131,229,.50) 0%,rgba(199,125,255,.18) 40%,transparent 70%);}
+.bg-orb-2{width:600px;height:600px;bottom:10%;left:-80px;background:radial-gradient(circle,rgba(6,214,160,.42) 0%,rgba(69,183,209,.14) 50%,transparent 70%);animation-delay:6s;}
+.bg-scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(124,131,229,.15),rgba(6,214,160,.15),transparent);animation:scanDown 20s ease-in-out 2s infinite;}
+.chrome-edge{position:fixed;left:0;top:0;bottom:0;width:3px;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;z-index:100;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:50;height:var(--nav-h);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 var(--pad-x) 0 calc(var(--pad-x) + 3px);border-bottom:1px solid rgba(255,255,255,.05);background:rgba(6,6,8,.65);backdrop-filter:blur(20px);}
+nav.scrolled{background:rgba(6,6,8,.92);border-color:var(--border);height:58px;}
+.nav-logo{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;letter-spacing:-.02em;text-decoration:none;cursor:none;justify-self:start;}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none;justify-self:center;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--ter);text-decoration:none;cursor:none;}
+.nav-links a:hover,.nav-links a.active{color:var(--sub);}
+.nav-end{display:flex;align-items:center;gap:12px;justify-self:end;}
+.nav-cta{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:#060608!important;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;padding:10px 24px;text-decoration:none;cursor:none;white-space:nowrap;}
+.theme-toggle{display:flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid var(--border);background:transparent;cursor:none;color:var(--ter);font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.22em;text-transform:uppercase;}
+.theme-toggle:hover{border-color:rgba(255,255,255,.15);color:var(--sub);}
+.tt-track{width:28px;height:15px;border-radius:999px;border:1px solid var(--border);position:relative;flex-shrink:0;}
+.tt-thumb{position:absolute;top:2px;left:2px;width:9px;height:9px;border-radius:50%;background:var(--chrome);background-size:300% 300%;animation:cSpin 3s linear infinite;}
+html[data-theme="light"] .tt-thumb{transform:translateX(13px);}
+
+/* ══════════════════ HERO ══════════════════ */
+.hero{
+  position:relative;z-index:1;
+  padding:calc(var(--nav-h) + 80px) var(--pad-x) 0 calc(var(--pad-x) + 3px);
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 55% 70% at 80% 30%,rgba(124,131,229,.18) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 50% at 5% 70%,rgba(6,214,160,.12) 0%,transparent 55%);
+}
+.hero-inner{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:flex-end;
+  padding-bottom:64px;border-bottom:1px solid rgba(255,255,255,.07);
+}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.38em;text-transform:uppercase;color:rgba(240,239,245,.4);display:block;margin-bottom:20px;animation:fadeIn .8s ease .2s both;}
+.hero-title{font-family:'Syne',sans-serif;font-size:clamp(52px,7vw,112px);font-weight:800;letter-spacing:-.055em;line-height:.85;animation:fadeUp .9s cubic-bezier(.16,1,.3,1) .3s both;}
+.hero-right{animation:fadeIn .9s ease .5s both;}
+.hero-desc{font-size:16px;color:var(--sub);line-height:1.8;margin-bottom:28px;}
+.hero-note{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ter);padding:9px 16px;
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.09);
+}
+
+/* ══════════════════ FILTER BAR ══════════════════ */
+.filter-section{
+  position:sticky;top:var(--nav-h);z-index:40;
+  background:rgba(4,4,10,.55);
+  backdrop-filter:blur(28px) saturate(180%);
+  -webkit-backdrop-filter:blur(28px) saturate(180%);
+  border-bottom:1px solid rgba(255,255,255,.09);
+  box-shadow:0 4px 32px rgba(0,0,0,.3);
+  padding:0 var(--pad-x) 0 calc(var(--pad-x) + 3px);
+}
+.filter-inner{
+  display:flex;align-items:center;gap:0;
+  overflow-x:auto;scrollbar-width:none;
+}
+.filter-inner::-webkit-scrollbar{display:none;}
+.filter-group{
+  display:flex;align-items:center;gap:0;
+  padding:16px 0;
+  border-right:1px solid var(--border);
+  padding-right:24px;margin-right:24px;
+  flex-shrink:0;
+}
+.filter-group:last-child{border-right:none;margin-right:0;}
+.filter-group-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--ter);margin-right:14px;white-space:nowrap;}
+.filter-pills{display:flex;gap:6px;flex-wrap:nowrap;}
+.filter-btn{
+  font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;
+  padding:6px 12px;border:1px solid var(--border);background:transparent;
+  color:var(--ter);cursor:none;white-space:nowrap;
+}
+.filter-btn:hover{border-color:rgba(255,255,255,.15);color:var(--sub);}
+.filter-btn.active{background:rgba(124,131,229,.18);color:var(--iris);border-color:rgba(124,131,229,.4);}
+.filter-count{margin-left:auto;padding:16px 0;flex-shrink:0;}
+.count-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--ter);}
+.count-num{color:var(--sub);}
+
+/* ══════════════════ ARCHIVE GRID ══════════════════ */
+.archive{
+  position:relative;z-index:1;
+  padding:64px var(--pad-x) 120px calc(var(--pad-x) + 3px);
+}
+.archive::before{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 50% 40% at 20% 20%,rgba(124,131,229,.08) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 35% at 80% 70%,rgba(6,214,160,.07) 0%,transparent 55%);
+}
+.project-grid{position:relative;z-index:1;}
+
+/* Masonry-style using CSS columns */
+.project-grid{
+  column-count:3;
+  column-gap:2px;
+  column-fill:balance;
+}
+.project-card{
+  break-inside:avoid;
+  border:1px solid rgba(255,255,255,.09);
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(20px) saturate(150%);
+  -webkit-backdrop-filter:blur(20px) saturate(150%);
+  margin-bottom:2px;
+  cursor:none;
+  overflow:hidden;
+  display:block;
+  position:relative;
+  opacity:0;
+  box-shadow:0 4px 24px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.07);
+  transition:border-color .3s,background .3s,transform .4s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+}
+.project-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);
+  z-index:1;pointer-events:none;
+}
+.project-card.animate-in{
+  animation:cardIn .55s cubic-bezier(.16,1,.3,1) both;
+}
+.project-card:hover{
+  border-color:rgba(255,255,255,.18);
+  background:rgba(255,255,255,.07);
+  transform:translateY(-4px);
+  box-shadow:0 16px 48px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.12);
+}
+.project-card:hover .pc-visual{transform:scale(1.04);}
+.project-card:hover .pc-arrow{opacity:1;transform:translateX(0);}
+.project-card:hover .pc-overlay{opacity:1;}
+
+/* Visual area — abstract geometric illustration */
+.pc-visual-wrap{overflow:hidden;position:relative;}
+.pc-visual{
+  width:100%;
+  display:block;
+  transition:transform .5s cubic-bezier(.16,1,.3,1);
+}
+.pc-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 40%,rgba(6,6,8,.7));
+  opacity:0;transition:opacity .3s ease;
+  display:flex;align-items:flex-end;padding:16px;
+}
+.pc-overlay-hint{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:rgba(240,239,245,.7);}
+
+/* Card info */
+.pc-info{padding:20px 22px 24px;}
+.pc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.pc-sector{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.22em;text-transform:uppercase;padding:3px 8px;border:1px solid;border-radius:0;}
+.pc-num{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;color:var(--ter);}
+.pc-name{font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:6px;}
+.pc-discipline{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--ter);margin-bottom:12px;}
+.pc-excerpt{font-size:12px;color:rgba(240,239,245,.55);line-height:1.65;}
+.pc-footer{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.07);}
+.pc-year{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.16em;color:var(--ter);}
+.pc-arrow{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.16em;color:var(--sub);opacity:0;transform:translateX(-6px);transition:opacity .2s,transform .25s ease;display:flex;align-items:center;gap:6px;}
+.pc-arrow svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.8;}
+
+/* Card size variants — large/medium/small */
+.pc-large .pc-visual{aspect-ratio:4/3;}
+.pc-large .pc-name{font-size:22px;}
+.pc-medium .pc-visual{aspect-ratio:3/2;}
+.pc-medium .pc-name{font-size:18px;}
+.pc-small .pc-visual{aspect-ratio:16/9;}
+.pc-small .pc-name{font-size:16px;}
+
+/* ══════════════════ MODAL ══════════════════ */
+.modal-backdrop{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(4,4,10,.75);
+  backdrop-filter:blur(16px) saturate(160%);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);
+  display:flex;align-items:flex-end;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .3s ease;
+}
+.modal-backdrop.open{opacity:1;pointer-events:all;}
+.modal-shell{
+  width:100%;max-width:1100px;
+  max-height:92vh;
+  background:rgba(8,8,16,.6);
+  backdrop-filter:blur(48px) saturate(200%);
+  -webkit-backdrop-filter:blur(48px) saturate(200%);
+  border:1px solid rgba(255,255,255,.14);
+  border-bottom:none;
+  box-shadow:0 -24px 80px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.12);
+  display:grid;grid-template-columns:1fr 360px;
+  animation:modalIn .4s cubic-bezier(.16,1,.3,1) both;
+  overflow:hidden;
+  position:relative;
+}
+.modal-shell::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--chrome);background-size:300% 300%;animation:cSpin 4s ease infinite;z-index:2;}
+
+/* Modal main */
+.modal-main{overflow-y:auto;padding:48px 48px 64px;}
+.modal-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--ter);display:block;margin-bottom:16px;}
+.modal-title{font-family:'Syne',sans-serif;font-size:clamp(28px,3vw,44px);font-weight:800;letter-spacing:-.04em;line-height:.95;margin-bottom:8px;}
+.modal-discipline{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--ter);margin-bottom:32px;display:block;}
+
+/* Visual in modal */
+.modal-visual{width:100%;margin-bottom:40px;border:1px solid var(--border);overflow:hidden;}
+.modal-visual svg{width:100%;display:block;}
+
+/* Detail rows */
+.detail-rows{display:flex;flex-direction:column;margin-bottom:36px;}
+.detail-row{display:grid;grid-template-columns:120px 1fr;gap:24px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06);align-items:baseline;}
+.detail-row:first-child{border-top:1px solid var(--border);}
+.dr-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--ter);}
+.dr-val{font-size:13px;color:var(--sub);}
+
+/* Overview */
+.modal-section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--ter);display:block;margin-bottom:12px;}
+.modal-body{font-size:14px;color:var(--sub);line-height:1.8;margin-bottom:28px;}
+.modal-body p{margin-bottom:14px;}
+
+/* Deliverables list */
+.deliverable-list{display:flex;flex-direction:column;gap:2px;margin-bottom:36px;}
+.deliverable-item{display:flex;align-items:center;gap:12px;padding:10px 14px;background:rgba(255,255,255,.04);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.08);font-size:13px;color:var(--sub);}
+.di-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+
+/* Modal sidebar */
+.modal-sidebar{
+  border-left:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.03);
+  backdrop-filter:blur(24px);
+  overflow-y:auto;
+  padding:48px 32px;
+  display:flex;flex-direction:column;gap:32px;
+}
+.ms-block{}
+.ms-block-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--ter);display:block;margin-bottom:14px;}
+.ms-stat{margin-bottom:16px;}
+.ms-stat-val{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;letter-spacing:-.05em;line-height:1;}
+.ms-stat-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.18em;color:var(--ter);display:block;margin-top:2px;}
+.ms-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.ms-tag{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.18em;text-transform:uppercase;padding:4px 8px;border:1px solid var(--border);color:var(--ter);}
+.modal-close{
+  position:absolute;top:20px;right:20px;z-index:3;
+  width:36px;height:36px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.07);
+  backdrop-filter:blur(12px);
+  display:flex;align-items:center;justify-content:center;cursor:none;
+  transition:border-color .2s,background .2s;
+}
+.modal-close:hover{border-color:rgba(255,255,255,.22);background:rgba(255,255,255,.12);}
+.modal-close svg{width:14px;height:14px;stroke:var(--sub);fill:none;stroke-width:1.8;}
+
+/* ══════════════════ FOOTER ══════════════════ */
+footer{
+  position:relative;z-index:1;overflow:hidden;
+  background:rgba(4,4,10,.6);
+  backdrop-filter:blur(20px);
+  border-top:1px solid rgba(255,255,255,.07);
+  padding:48px var(--pad-x) 32px calc(var(--pad-x) + 3px);
+}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;}
+.footer-copy{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--ter);}
+.footer-links{display:flex;gap:24px;}
+.footer-links a{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ter);text-decoration:none;cursor:none;transition:color .2s;}
+.footer-links a:hover{color:var(--sub);}
+
+@media(max-width:1100px){:root{--pad-x:40px;}.project-grid{column-count:2;}.modal-shell{grid-template-columns:1fr;}.modal-sidebar{display:none;}}
+@media(max-width:768px){:root{--pad-x:24px;}.nav-links{display:none;}.project-grid{column-count:1;}.hero-inner{grid-template-columns:1fr;gap:36px;}}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+<div class="bg-fixed">
+  <div class="bg-grid"></div>
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb" style="width:450px;height:450px;top:40%;right:5%;background:radial-gradient(circle,rgba(255,107,157,.30) 0%,rgba(255,140,66,.10) 50%,transparent 70%);animation-delay:3s;filter:blur(90px);"></div>
+  <div class="bg-scan"></div>
+</div>
+<div class="chrome-edge"></div>
+
+<nav id="nav">
+  <a href="/" class="nav-logo"><span class="chrome-text">BRAN</span><span style="color:var(--text)">SOL</span></a>
+  <ul class="nav-links">
+    <li><a href="/work" class="active">Work</a></li>
+    <li><a href="/expertise">Expertise</a></li>
+    <li><a href="/platform">Platform</a></li>
+    <li><a href="/studio">Studio</a></li>
+    <li><a href="/perspectives">Perspectives</a></li>
+  </ul>
+  <div class="nav-end">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <div class="tt-track"><div class="tt-thumb"></div></div>
+      <span id="themeLabel">Light</span>
+    </button>
+    <a href="/begin" class="nav-cta">Begin</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="hero-eyebrow">Selected Work</span>
+      <h1 class="hero-title">The<br><span class="chrome-text">archive.</span></h1>
+    </div>
+    <div class="hero-right">
+      <p class="hero-desc">A selected record of BRANSOL commissions. We do not publish everything — only work we are prepared to stand behind completely. Each project is shown with the client's knowledge and permission.</p>
+      <p class="hero-note">18 projects · 2019–2026 · Across 7 sectors</p>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-section" id="filterSection">
+  <div class="filter-inner">
+    <div class="filter-group">
+      <span class="filter-group-label">Sector</span>
+      <div class="filter-pills">
+        <button class="filter-btn active" data-filter="sector" data-value="all">All</button>
+        <button class="filter-btn" data-filter="sector" data-value="Government">Government</button>
+        <button class="filter-btn" data-filter="sector" data-value="Financial Services">Financial</button>
+        <button class="filter-btn" data-filter="sector" data-value="Infrastructure">Infrastructure</button>
+        <button class="filter-btn" data-filter="sector" data-value="Professional Services">Prof. Services</button>
+        <button class="filter-btn" data-filter="sector" data-value="Healthcare">Healthcare</button>
+        <button class="filter-btn" data-filter="sector" data-value="Energy">Energy</button>
+        <button class="filter-btn" data-filter="sector" data-value="Education">Education</button>
+      </div>
+    </div>
+    <div class="filter-group">
+      <span class="filter-group-label">Discipline</span>
+      <div class="filter-pills">
+        <button class="filter-btn active" data-filter="discipline" data-value="all">All</button>
+        <button class="filter-btn" data-filter="discipline" data-value="Brand Identity">Identity</button>
+        <button class="filter-btn" data-filter="discipline" data-value="Digital Design">Digital</button>
+        <button class="filter-btn" data-filter="discipline" data-value="Campaign">Campaign</button>
+        <button class="filter-btn" data-filter="discipline" data-value="Credentials">Credentials</button>
+        <button class="filter-btn" data-filter="discipline" data-value="Spatial">Spatial</button>
+      </div>
+    </div>
+    <div class="filter-count">
+      <span class="count-label">Showing <span class="count-num" id="countNum">18</span> projects</span>
+    </div>
+  </div>
+</div>
+
+<!-- ARCHIVE GRID -->
+<section class="archive">
+  <div class="project-grid" id="projectGrid">
+    <!-- cards injected by JS -->
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal-shell" id="modalShell">
+    <button class="modal-close" id="modalClose" aria-label="Close"><svg viewBox="0 0 14 14"><path d="M2 2l10 10M12 2L2 12"/></svg></button>
+    <div class="modal-main" id="modalMain"></div>
+    <div class="modal-sidebar" id="modalSidebar"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 BRANSOL — Ballito, KwaZulu-Natal</span>
+    <div class="footer-links">
+      <a href="/expertise">Expertise</a>
+      <a href="/studio">Studio</a>
+      <a href="/begin">Begin</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─────────────────────────────────────────────
+// PROJECT DATA
+// ─────────────────────────────────────────────
+const PROJECTS = [
+  {
+    id:'national-communications-agency',
+    num:'01',
+    name:'National Communications Agency',
+    sector:'Government',
+    disciplines:['Brand Identity','Digital Design'],
+    disciplineLabel:'Brand Identity · Design System',
+    year:'2025',
+    size:'large',
+    accentColor:'var(--iris)',
+    accentHex:'#7c83e5',
+    bgStop1:'rgba(124,131,229,.18)',
+    bgStop2:'rgba(199,125,255,.06)',
+    excerpt:'Complete brand overhaul for a national government communications body — from identity foundations to a 200-page design system deployed across 14 provincial offices.',
+    overview:'The National Communications Agency required a brand system capable of operating across print, digital, outdoor, and broadcast environments simultaneously — and surviving the political transitions that come with government work. We rebuilt from first principles: a mark that carries authority without looking departmental, a typographic system that reads at highway billboard scale and business card scale equally, and a colour palette that translates cleanly to low-resolution printing environments common in government procurement.',
+    challenge:'Government brands must serve multiple audiences: public trust, ministerial oversight, and operational staff. Most agencies design for one. We designed for all three simultaneously.',
+    deliverables:['Primary identity system — wordmark, icon, clear space rules','Extended colour system with CMYK and Pantone specifications','200-page design system — templates for all 14 provincial offices','Digital asset library — web, social, presentation formats','Brand governance guidelines for in-house teams','Stationery suite — 24 document types'],
+    stats:{duration:'6 months',scope:'Full identity',team:'4 designers'},
+    tags:['Government','Brand Identity','Design System','Print','Digital']
+  },
+  {
+    id:'listed-asset-management-group',
+    num:'02',
+    name:'Listed Asset Management Group',
+    sector:'Financial Services',
+    disciplines:['Credentials','Digital Design'],
+    disciplineLabel:'Design System · Investor Decks',
+    year:'2024',
+    size:'medium',
+    accentColor:'var(--aqua)',
+    accentHex:'#06d6a0',
+    bgStop1:'rgba(6,214,160,.15)',
+    bgStop2:'rgba(69,183,209,.05)',
+    excerpt:'Investor-grade presentation system and quarterly reporting suite for a JSE-listed asset manager with R42bn AUM. Designed to survive the CFO, the board, and the institutional investor in the same room.',
+    overview:'Asset managers live and die by the quality of their investor materials. Weak credentials cost mandates. This group had strong performance numbers buried in mediocre documents — a problem we fixed by building a presentation system that leads with data clarity and institutional credibility. Every template was designed to work with the firm\'s existing PowerPoint workflow, requiring no specialist software for in-house updates.',
+    challenge:'Financial materials must be precise, not decorative. Every design decision had to serve legibility and trust — never aesthetics at the expense of either.',
+    deliverables:['Master investor presentation — 48 slides, 6 chapter templates','Quarterly reporting suite — print and digital versions','Annual report layout system','Board pack template library','Fund factsheet system — 12 fund types','Email signature and digital communication standards'],
+    stats:{duration:'4 months',scope:'Credentials + reporting',team:'3 designers'},
+    tags:['Financial Services','Credentials','Investor Decks','Annual Reports','JSE']
+  },
+  {
+    id:'property-development-consortium',
+    num:'03',
+    name:'Property Development Consortium',
+    sector:'Infrastructure',
+    disciplines:['Spatial','Brand Identity'],
+    disciplineLabel:'Spatial Identity · Wayfinding',
+    year:'2024',
+    size:'large',
+    accentColor:'var(--gold)',
+    accentHex:'#ffd166',
+    bgStop1:'rgba(255,209,102,.14)',
+    bgStop2:'rgba(255,140,66,.06)',
+    excerpt:'Wayfinding and environmental identity for a 340-hectare mixed-use development on the KZN North Coast — from site entrance to individual building identification.',
+    overview:'Large-scale property developments require wayfinding systems that work before the buildings are complete and after they have been repainted three times. We designed a spatial identity system built on durable principles: geometric forms that fabricate cleanly in metal, concrete, and vinyl; a naming hierarchy that scales from precinct to parking bay; and a system flexible enough to accommodate Phase 2 and Phase 3 without a rebrand.',
+    challenge:'The client had four different contractors involved in fabrication across the site. The system had to be simple enough for any of them to implement correctly without a designer on site.',
+    deliverables:['Precinct naming and identity system','Primary entrance monuments — 3 variants','Vehicular directional signage suite — 28 sign types','Pedestrian wayfinding system','Building identification standards','Contractor implementation guide — 140 pages'],
+    stats:{duration:'8 months',scope:'Full spatial rollout',team:'3 designers + fabrication oversight'},
+    tags:['Infrastructure','Spatial','Wayfinding','KZN','Property']
+  },
+  {
+    id:'regional-medical-foundation',
+    num:'04',
+    name:'Regional Medical Foundation',
+    sector:'Healthcare',
+    disciplines:['Campaign','Brand Identity'],
+    disciplineLabel:'Campaign Creative · Print',
+    year:'2023',
+    size:'small',
+    accentColor:'var(--violet)',
+    accentHex:'#c77dff',
+    bgStop1:'rgba(199,125,255,.14)',
+    bgStop2:'rgba(124,131,229,.05)',
+    excerpt:'Public health awareness campaign targeting rural KZN communities — designed to function across print, radio, and community health worker kits with no electricity required.',
+    overview:'Designing for under-resourced environments requires a fundamentally different approach to campaign thinking. Beautiful work that requires a smartphone is useless in a community health worker\'s bag. We stripped the campaign to its essentials: high-contrast, high-legibility print materials; a visual system that works in black and white on cheap paper; and messaging developed in partnership with Zulu-speaking health workers rather than over their heads.',
+    challenge:'The campaign had to work in three languages simultaneously (English, Zulu, Xhosa) without separate print runs for each. We designed a modular typographic system that accommodated all three in the same space.',
+    deliverables:['Campaign identity and visual language','A3 poster series — 8 subjects, 3 languages','Community health worker information kits','Clinic waiting room display system','Branded educational flip charts','Radio script visual reference guides'],
+    stats:{duration:'3 months',scope:'Campaign design',team:'2 designers'},
+    tags:['Healthcare','Campaign','Print','Public Sector','Multilingual']
+  },
+  {
+    id:'pan-african-law-practice',
+    num:'05',
+    name:'Pan-African Law Practice',
+    sector:'Professional Services',
+    disciplines:['Brand Identity','Credentials'],
+    disciplineLabel:'Brand Identity · Credentials',
+    year:'2025',
+    size:'medium',
+    accentColor:'var(--sky)',
+    accentHex:'#45b7d1',
+    bgStop1:'rgba(69,183,209,.14)',
+    bgStop2:'rgba(78,205,196,.05)',
+    excerpt:'Brand identity and business development materials for a 12-office pan-African law firm expanding into East African markets — built to carry authority across 6 jurisdictions.',
+    overview:'Law firms are among the most conservative brand clients — and among the ones with the most to gain from doing it well. This practice had strong regional presence and a credibility gap in new markets. We built a brand that reads as established without looking dated: a mark with institutional weight, a document system that signals seniority in every client touchpoint, and a credentials deck designed to close mandates in Lagos, Nairobi, and Accra simultaneously.',
+    challenge:'The identity had to feel South African in origin but pan-African in application — without defaulting to generic "African" visual tropes that the firm\'s partners rightly rejected.',
+    deliverables:['Primary identity — wordmark, symbol, colour system','Jurisdiction sub-branding system — 6 offices','Capability credentials deck — 60 slides','Practice area one-pagers — 8 disciplines','Proposal template system','Office environmental standards'],
+    stats:{duration:'5 months',scope:'Identity + credentials',team:'3 designers'},
+    tags:['Professional Services','Legal','Brand Identity','Pan-African','Credentials']
+  },
+  {
+    id:'renewable-energy-ipp',
+    num:'06',
+    name:'Renewable Energy IPP',
+    sector:'Energy',
+    disciplines:['Digital Design','Credentials'],
+    disciplineLabel:'Digital Design · Pitch Deck',
+    year:'2023',
+    size:'small',
+    accentColor:'var(--aqua)',
+    accentHex:'#06d6a0',
+    bgStop1:'rgba(6,214,160,.12)',
+    bgStop2:'rgba(78,205,196,.04)',
+    excerpt:'REIPPPP bid documentation and investor pitch deck for a 140MW solar development — designed to meet Department of Energy submission standards while outperforming on visual quality.',
+    overview:'REIPPPP bids are evaluated on technical and financial merit — but presentation quality signals operational competence. A well-designed bid document tells evaluators that the organisation behind it is serious, organised, and capable of delivery. We designed a submission package that met every Department of Energy format requirement while demonstrating a level of document quality that set the bid apart from its competitors.',
+    challenge:'Government tender documents have rigid format requirements. Designing within those constraints while still producing something that looks considered rather than template-generated requires precision.',
+    deliverables:['REIPPPP bid document — 340 pages, DOE format compliant','Investor pitch deck — 36 slides','Executive summary — standalone format','Technical appendix layout system','Financial model presentation format','Due diligence data room structure'],
+    stats:{duration:'6 weeks',scope:'Bid documentation',team:'2 designers'},
+    tags:['Energy','REIPPPP','Government','Credentials','Pitch Deck']
+  },
+  {
+    id:'university-advancement-office',
+    num:'07',
+    name:'University Advancement Office',
+    sector:'Education',
+    disciplines:['Brand Identity','Campaign'],
+    disciplineLabel:'Donor Campaign · Fundraising Materials',
+    year:'2024',
+    size:'medium',
+    accentColor:'var(--violet)',
+    accentHex:'#c77dff',
+    bgStop1:'rgba(199,125,255,.14)',
+    bgStop2:'rgba(124,131,229,.06)',
+    excerpt:'Donor recognition system and capital campaign identity for a university\'s R800m fundraising drive — from naming rights frameworks to individual donor wall design.',
+    overview:'University fundraising occupies a unique design space: the materials must appeal to ultra-high-net-worth individuals while remaining appropriate for institutional academic governance. We designed a campaign identity that carried the weight of the institution\'s history while speaking the visual language of private philanthropy — not a government grant application.',
+    challenge:'Donor recognition requires a tiering system that feels meaningful at every level — a R1m donor and a R50m donor must both feel appropriately honoured without the R1m donor feeling diminished.',
+    deliverables:['Capital campaign identity — "Building Forward"','Donor recognition tier system — 6 levels','Naming rights framework and guidelines','Donor wall design — entrance atrium and faculty buildings','Campaign credentials for major gift officers','Stewardship report template'],
+    stats:{duration:'5 months',scope:'Campaign + donor system',team:'3 designers'},
+    tags:['Education','Fundraising','Donor Recognition','Campaign','Spatial']
+  },
+  {
+    id:'development-finance-institution',
+    num:'08',
+    name:'Development Finance Institution',
+    sector:'Financial Services',
+    disciplines:['Brand Identity','Digital Design'],
+    disciplineLabel:'Brand Identity · Digital Presence',
+    year:'2022',
+    size:'large',
+    accentColor:'var(--iris)',
+    accentHex:'#7c83e5',
+    bgStop1:'rgba(124,131,229,.16)',
+    bgStop2:'rgba(69,183,209,.06)',
+    excerpt:'Full rebrand of a state-supported DFI — repositioning from a perceived grant-giving body to a commercially credible development finance partner for private sector investment.',
+    overview:'Development finance institutions carry a perception problem: they are often seen as government appendages rather than commercially sophisticated partners. This DFI needed a brand that could sit credibly next to private equity firms and commercial banks in a room of institutional investors — while still honouring its development mandate. We rebuilt the identity from scratch, carrying across only the institution\'s name and its core mandate.',
+    challenge:'The rebrand had political dimensions — any significant change to a state entity\'s visual identity requires stakeholder management at ministerial level. Every design decision needed a clear rationale we could defend in writing.',
+    deliverables:['Full identity rebrand — mark, typography, colour, voice','Digital presence — website design and content architecture','Annual report system — print and interactive PDF','Investment prospectus templates','Board and executive presentation system','Staff communication standards'],
+    stats:{duration:'9 months',scope:'Full rebrand',team:'4 designers'},
+    tags:['Financial Services','DFI','Government','Brand Identity','Digital']
+  },
+  {
+    id:'mining-services-group',
+    num:'09',
+    name:'Mining Services Group',
+    sector:'Infrastructure',
+    disciplines:['Brand Identity','Credentials'],
+    disciplineLabel:'Brand Architecture · Subsidiary System',
+    year:'2023',
+    size:'small',
+    accentColor:'var(--gold)',
+    accentHex:'#ffd166',
+    bgStop1:'rgba(255,209,102,.13)',
+    bgStop2:'rgba(255,140,66,.05)',
+    excerpt:'Brand architecture rationalisation for a mining services group with 9 subsidiary entities — from 9 unrelated identities to a coherent endorsed brand structure.',
+    overview:'After three acquisitions in four years, this mining services group had nine entities operating under nine unrelated identities — some inherited, some self-designed, none cohesive. We audited the portfolio, established a brand architecture strategy, and designed an endorsed brand system that allowed each entity to retain operational identity while clearly signalling group membership to procurement teams.',
+    challenge:'Subsidiaries often have strong internal loyalty to their existing identities. The brand architecture had to make the business case for change compelling enough to overcome that resistance.',
+    deliverables:['Brand architecture strategy document','Group master identity','Endorsed sub-brand system — 9 entities','Transition rollout plan — 18 months','Procurement-facing group credentials','Tender cover sheet system'],
+    stats:{duration:'4 months',scope:'Brand architecture',team:'2 designers'},
+    tags:['Infrastructure','Mining','Brand Architecture','Credentials','B2B']
+  },
+  {
+    id:'public-health-department',
+    num:'10',
+    name:'Provincial Health Department',
+    sector:'Government',
+    disciplines:['Campaign','Spatial'],
+    disciplineLabel:'Public Health Campaign · Clinic Rollout',
+    year:'2022',
+    size:'medium',
+    accentColor:'var(--aqua)',
+    accentHex:'#06d6a0',
+    bgStop1:'rgba(6,214,160,.13)',
+    bgStop2:'rgba(78,205,196,.05)',
+    excerpt:'Patient experience campaign rolled out across 240 public health clinics — environmental graphics, patient communication materials, and staff identity systems.',
+    overview:'Public health environments are among the most challenging design contexts: high foot traffic, multiple languages, varied literacy levels, and the constant pressure of institutional budget constraints. We designed a patient experience system that made every touchpoint clearer, warmer, and more navigable — without requiring specialist installation at any of the 240 sites.',
+    challenge:'The system had to be implementable by clinic staff with no design training, using materials available from standard office supply stores. This constraint became the design brief.',
+    deliverables:['Patient communication system — 36 document types','Clinic environmental graphics — self-adhesive installation','Staff identification and role clarity system','Waiting area information hierarchy','Multilingual signage — 4 languages','Implementation guide for clinic managers'],
+    stats:{duration:'7 months',scope:'Clinic rollout system',team:'3 designers'},
+    tags:['Government','Healthcare','Spatial','Campaign','Public Sector']
+  },
+  {
+    id:'infrastructure-fund-manager',
+    num:'11',
+    name:'Infrastructure Fund Manager',
+    sector:'Financial Services',
+    disciplines:['Credentials','Digital Design'],
+    disciplineLabel:'Fund Credentials · Investor Relations',
+    year:'2025',
+    size:'small',
+    accentColor:'var(--sky)',
+    accentHex:'#45b7d1',
+    bgStop1:'rgba(69,183,209,.13)',
+    bgStop2:'rgba(78,205,196,.05)',
+    excerpt:'Investor relations design system for a specialist infrastructure fund manager — built to communicate complex project pipelines to pension fund trustees and institutional allocators.',
+    overview:'Infrastructure fund credentials are notoriously difficult to design: the underlying projects are physical and tangible, but the investment product is abstract and complex. We designed a system that bridges that gap — using project imagery and outcome data to make the investment thesis legible to trustees who are experts in governance rather than infrastructure finance.',
+    challenge:'The fund had not yet deployed capital at the time of the credentials build. We had to communicate future conviction, not past performance.',
+    deliverables:['Fund credentials deck — 44 slides','LP update template — quarterly','Investment committee presentation system','Project case study format','Website design — investment-grade digital presence','Data room index design'],
+    stats:{duration:'3 months',scope:'Investor relations',team:'2 designers'},
+    tags:['Financial Services','Infrastructure','Credentials','Investor Relations','Fund']
+  },
+  {
+    id:'national-ports-authority',
+    num:'12',
+    name:'National Ports Authority',
+    sector:'Government',
+    disciplines:['Spatial','Brand Identity'],
+    disciplineLabel:'Environmental Identity · Port Signage',
+    year:'2021',
+    size:'large',
+    accentColor:'var(--ember)',
+    accentHex:'#ff8c42',
+    bgStop1:'rgba(255,140,66,.14)',
+    bgStop2:'rgba(255,107,157,.05)',
+    excerpt:'Wayfinding and environmental identity system for three major South African port facilities — designed to meet international maritime signage standards while expressing national identity.',
+    overview:'Port signage operates in an environment that most design studios never encounter: heavy industry, extreme weather, multilingual workforces, and international maritime safety standards that are non-negotiable. We designed a system that met every IMO signage requirement while creating a visual environment that reflected the port authority\'s ambition to be recognised as a world-class port operator.',
+    challenge:'Maritime safety standards are written by engineers, not designers. The design constraints were extensive — and working within them while producing something that felt considered rather than compliance-driven was the central challenge.',
+    deliverables:['Port wayfinding master system — vehicle, pedestrian, maritime','Safety signage suite — IMO compliant','Facility identification standards — 3 ports','Gate and access control identity','Staff and contractor identification system','Marine operations signage'],
+    stats:{duration:'11 months',scope:'3 port facilities',team:'4 designers + maritime consultant'},
+    tags:['Government','Spatial','Maritime','Wayfinding','Infrastructure']
+  },
+  {
+    id:'private-equity-house',
+    num:'13',
+    name:'Private Equity House',
+    sector:'Financial Services',
+    disciplines:['Brand Identity','Credentials'],
+    disciplineLabel:'Brand Identity · Deal Materials',
+    year:'2024',
+    size:'small',
+    accentColor:'var(--violet)',
+    accentHex:'#c77dff',
+    bgStop1:'rgba(199,125,255,.13)',
+    bgStop2:'rgba(124,131,229,.05)',
+    excerpt:'Brand identity and deal document system for a Johannesburg-based private equity house focusing on healthcare and education sector investments across Sub-Saharan Africa.',
+    overview:'Private equity brands face a paradox: they need to project confidence and permanence while operating in an environment where discretion is essential. We designed an identity that says "established" without saying "here is our address" — understated, authoritative, and legible to the institutional investors and management teams the firm engages with.',
+    challenge:'PE houses rarely want to be visible. The identity had to be strong enough to carry authority in deal documents while remaining deliberately subdued in any public-facing context.',
+    deliverables:['Primary identity — mark, typography, colour','Information memorandum template','Management presentation system','Deal announcement formats','Fund overview document','LP reporting template'],
+    stats:{duration:'3 months',scope:'Identity + deal materials',team:'2 designers'},
+    tags:['Financial Services','Private Equity','Brand Identity','Credentials','B2B']
+  },
+  {
+    id:'technical-vocational-college',
+    num:'14',
+    name:'Technical Vocational College Network',
+    sector:'Education',
+    disciplines:['Brand Identity','Campaign'],
+    disciplineLabel:'Brand Identity · Student Recruitment',
+    year:'2022',
+    size:'medium',
+    accentColor:'var(--rose)',
+    accentHex:'#ff6b9d',
+    bgStop1:'rgba(255,107,157,.13)',
+    bgStop2:'rgba(255,140,66,.05)',
+    excerpt:'Network-wide identity and student recruitment campaign for a group of 6 TVET colleges — repositioning vocational education as an aspirational career pathway.',
+    overview:'TVET colleges in South Africa carry a perception gap: they are seen as a fallback rather than a first choice. This network commissioned work specifically designed to challenge that perception — a brand and recruitment campaign that positioned technical vocational education as a confident, aspirational choice for young South Africans. The campaign language was written with the students, not for them.',
+    challenge:'The brand had to appeal to 16-year-olds making important decisions under significant family pressure — while also being taken seriously by the DHET and provincial education departments.',
+    deliverables:['Network brand identity — 6 campus sub-brands','Student recruitment campaign — 3 academic years','Campus environmental identity — 6 sites','Digital campaign suite — social, digital OOH','Guidance counsellor toolkit','Parent information system'],
+    stats:{duration:'6 months',scope:'Brand + campaign',team:'3 designers'},
+    tags:['Education','TVET','Campaign','Brand Identity','Youth']
+  },
+  {
+    id:'insurance-group-rebrand',
+    num:'15',
+    name:'Insurance Group — Brand Refresh',
+    sector:'Financial Services',
+    disciplines:['Brand Identity','Digital Design'],
+    disciplineLabel:'Brand Refresh · Digital Overhaul',
+    year:'2023',
+    size:'small',
+    accentColor:'var(--teal)',
+    accentHex:'#4ecdc4',
+    bgStop1:'rgba(78,205,196,.13)',
+    bgStop2:'rgba(6,214,160,.05)',
+    excerpt:'Brand refresh and digital overhaul for an established short-term insurer — modernising without alienating a 30-year client base.',
+    overview:'Mature insurance brands face a specific design problem: they need to feel contemporary enough to compete for digital-native customers while not alienating the loyal client base that built the business. We designed a brand refresh — not a rebrand — that updated the visual language without breaking brand recognition. The digital overhaul brought the online experience up to the standard of the firm\'s actual product quality.',
+    challenge:'The board was divided on how much change was acceptable. Our process included a brand recognition audit that gave us data to navigate those internal disagreements.',
+    deliverables:['Refreshed primary identity — evolved, not replaced','Digital experience design — website and mobile','Customer communication redesign — 44 document types','Policy document system','Claims process communication materials','Agent portal design'],
+    stats:{duration:'5 months',scope:'Brand refresh + digital',team:'3 designers'},
+    tags:['Financial Services','Insurance','Brand Identity','Digital','Consumer']
+  },
+  {
+    id:'water-utility-authority',
+    num:'16',
+    name:'Water Utility Authority',
+    sector:'Government',
+    disciplines:['Campaign','Spatial'],
+    disciplineLabel:'Public Awareness · Infrastructure Campaign',
+    year:'2021',
+    size:'medium',
+    accentColor:'var(--sky)',
+    accentHex:'#45b7d1',
+    bgStop1:'rgba(69,183,209,.14)',
+    bgStop2:'rgba(6,214,160,.05)',
+    excerpt:'Water conservation awareness campaign and infrastructure facility identity for a provincial water utility — designed for a population in active water scarcity.',
+    overview:'Water conservation campaigns face a fundamental communication challenge: the behaviour change required is invisible and private. You cannot photograph someone not running a tap. We designed a campaign built around visible community moments — neighbourhood leaders, school programmes, and community water points — that made conservation social and visible rather than individual and private.',
+    challenge:'Previous conservation campaigns had focused on guilt and fear. The brief was explicitly to try something different — positive social reinforcement rather than scarcity anxiety.',
+    deliverables:['Conservation campaign — phase 1 and 2','School education programme materials','Community leader toolkit','Reservoir and pump station identity','Billing insert campaign system','Billboard and outdoor advertising series'],
+    stats:{duration:'4 months',scope:'Campaign + infrastructure ID',team:'2 designers'},
+    tags:['Government','Public Sector','Campaign','Spatial','Environmental']
+  },
+  {
+    id:'logistics-group-identity',
+    num:'17',
+    name:'Pan-African Logistics Group',
+    sector:'Infrastructure',
+    disciplines:['Brand Identity','Digital Design'],
+    disciplineLabel:'Brand Identity · Digital Platform',
+    year:'2025',
+    size:'large',
+    accentColor:'var(--gold)',
+    accentHex:'#ffd166',
+    bgStop1:'rgba(255,209,102,.14)',
+    bgStop2:'rgba(255,140,66,.06)',
+    excerpt:'Brand identity and customer-facing digital platform design for a logistics group operating across 12 African markets — built to work on low-bandwidth connections.',
+    overview:'Logistics brands have to project reliability above everything else. Every touchpoint — from truck livery to tracking interface — must communicate that when you send something with us, it arrives. We designed an identity that carries that message, and a digital platform designed explicitly for the bandwidth realities of its key markets: Ethiopia, DRC, and Mozambique alongside South Africa.',
+    challenge:'The platform had to perform acceptably on 2G connections. This is a design and engineering constraint that forces radical prioritisation — everything non-essential goes.',
+    deliverables:['Group brand identity — mark, typography, application system','Vehicle livery system — 8 vehicle types','Customer portal design — low-bandwidth optimised','Freight management interface','Mobile application — iOS and Android','12-market rollout materials'],
+    stats:{duration:'8 months',scope:'Full identity + digital',team:'5 designers'},
+    tags:['Infrastructure','Logistics','Brand Identity','Digital','Pan-African']
+  },
+  {
+    id:'affordable-housing-developer',
+    num:'18',
+    name:'Affordable Housing Developer',
+    sector:'Infrastructure',
+    disciplines:['Spatial','Campaign'],
+    disciplineLabel:'Development Identity · Sales Campaign',
+    year:'2024',
+    size:'small',
+    accentColor:'var(--rose)',
+    accentHex:'#ff6b9d',
+    bgStop1:'rgba(255,107,157,.12)',
+    bgStop2:'rgba(199,125,255,.05)',
+    excerpt:'Development identity and sales campaign for a 1,200-unit affordable housing scheme on the KZN South Coast — helping first-time buyers see a home, not a housing unit.',
+    overview:'Affordable housing developments have a marketing problem: the word "affordable" signals compromise to the people it is meant to serve. We built a development identity that led with aspiration — a name, a visual world, and a sales campaign that let first-time buyers picture a home and a life, not a square-metre count and a bond repayment.',
+    challenge:'The developer\'s sales team had been struggling to convert appointments to sales. The design had to work in the sales office, at site level, and on a prepaid phone screen.',
+    deliverables:['Development name and identity — "Amathol\'a"','Site hoarding and entrance identity','Sales office environment design','Brochure suite — print and digital','Show unit branding','Digital campaign — Facebook, WhatsApp, local digital OOH'],
+    stats:{duration:'3 months',scope:'Development identity + campaign',team:'2 designers'},
+    tags:['Infrastructure','Housing','Campaign','Spatial','KZN']
+  }
+];
+
+// ─────────────────────────────────────────────
+// VISUAL GENERATOR — editorial brand compositions
+// ─────────────────────────────────────────────
+function generateVisual(p, aspectRatio) {
+  const c  = p.accentHex;
+  const s1 = p.bgStop1;
+  const s2 = p.bgStop2;
+  const W = 400, H = Math.round(400 / aspectRatio);
+  const cx = W/2, cy = H/2;
+
+  // Per-project visual — keyed to the project's num field
+  const visuals = {
+
+    // 01 — National Communications Agency
+    // Full identity system: bold wordmark slab + systematic grid
+    '01': ()=>`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(150deg,${s1} 0%,${s2} 100%)">
+      <defs><filter id="glow01"><feGaussianBlur stdDeviation="6" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+      <rect x="40" y="${cy-60}" width="${W-80}" height="4" fill="${c}" opacity=".55"/>
+      <rect x="40" y="${cy+56}" width="${W-80}" height="4" fill="${c}" opacity=".55"/>
+      <rect x="40" y="${cy-60}" width="4" height="120" fill="${c}" opacity=".35"/>
+      <rect x="${W-44}" y="${cy-60}" width="4" height="120" fill="${c}" opacity=".35"/>
+      <text x="${cx}" y="${cy+14}" font-family="serif" font-size="52" font-weight="900" fill="${c}" opacity=".22" text-anchor="middle" letter-spacing="-2">NCA</text>
+      <text x="${cx}" y="${cy+14}" font-family="serif" font-size="52" font-weight="900" fill="none" stroke="${c}" stroke-width=".8" opacity=".5" text-anchor="middle" letter-spacing="-2">NCA</text>
+      ${[0,1,2,3,4,5,6,7,8].map(i=>`<rect x="${40+i*(W-80)/8}" y="${cy-60}" width="1" height="120" fill="${c}" opacity="${i%2===0?.08:.04}"/>`).join('')}
+      <rect x="40" y="${cy-60}" width="${W-80}" height="120" fill="${c}" opacity=".025"/>
+      <text x="46" y="${cy-68}" font-family="monospace" font-size="7" fill="${c}" opacity=".4" letter-spacing="3">BRAND IDENTITY SYSTEM</text>
+      <text x="46" y="${cy+78}" font-family="monospace" font-size="7" fill="${c}" opacity=".4" letter-spacing="3">DESIGN SYSTEM · 2025</text>
+    </svg>`,
+
+    // 02 — Listed Asset Management Group
+    // Financial data: chart bars, precision grid, upward trajectory
+    '02': ()=>`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(140deg,${s1} 0%,${s2} 100%)">
+      ${[.45,.62,.38,.71,.55,.80,.66,.90,.74,.95].map((h,i)=>`
+        <rect x="${50+i*30}" y="${H-(H*.12)-(H*.72*h)}" width="18" height="${H*.72*h}" fill="${c}" opacity="${.07+i*.025}"/>
+        <rect x="${50+i*30}" y="${H-(H*.12)-(H*.72*h)}" width="18" height="2" fill="${c}" opacity="${.35+i*.04}"/>
+      `).join('')}
+      <polyline points="${[.45,.62,.38,.71,.55,.80,.66,.90,.74,.95].map((h,i)=>`${59+i*30},${H-(H*.12)-(H*.72*h)}`).join(' ')}" fill="none" stroke="${c}" stroke-width="1.5" opacity=".5" stroke-linejoin="round"/>
+      ${[.45,.62,.38,.71,.55,.80,.66,.90,.74,.95].map((h,i)=>`<circle cx="${59+i*30}" cy="${H-(H*.12)-(H*.72*h)}" r="3" fill="${c}" opacity="${i===9?.9:.3}"/>`).join('')}
+      <line x1="40" y1="${H-(H*.12)}" x2="${W-40}" y2="${H-(H*.12)}" stroke="${c}" stroke-width=".8" opacity=".3"/>
+      <text x="40" y="${H-(H*.12)+18}" font-family="monospace" font-size="7" fill="${c}" opacity=".4" letter-spacing="2">R42BN AUM · INVESTOR CREDENTIALS · 2024</text>
+    </svg>`,
+
+    // 03 — Property Development Consortium
+    // Spatial / architectural: floor plan lines, site grid
+    '03': ()=>`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(155deg,${s1} 0%,${s2} 100%)">
+      <rect x="60" y="${cy-70}" width="130" height="100" fill="none" stroke="${c}" stroke-width="1.2" opacity=".5"/>
+      <rect x="60" y="${cy-70}" width="130" height="100" fill="${c}" opacity=".04"/>
+      <rect x="200" y="${cy-30}" width="110" height="60" fill="none" stroke="${c}" stroke-width="1.2" opacity=".4"/>
+      <rect x="200" y="${cy-30}" width="110" height="60" fill="${c}" opacity=".03"/>
+      <rect x="120" y="${cy+30}" width="70" height="40" fill="none" stroke="${c}" stroke-width=".8" opacity=".35"/>
+      <line x1="190" y1="${cy-70}" x2="190" y2="${cy+30}" stroke="${c}" stroke-width=".8" opacity=".25"/>
+      <line x1="60" y1="${cy-70}" x2="310" y2="${cy-70}" stroke="${c}" stroke-width=".4" opacity=".2"/>
+      ${[0,1,2,3,4].map(i=>`<line x1="${60+i*62}" y1="${cy-70}" x2="${60+i*62}" y2="${cy+70}" stroke="${c}" stroke-width=".3" opacity=".12"/>`).join('')}
+      <circle cx="${cx}" cy="${cy}" r="4" fill="${c}" opacity=".6"/>
+      <circle cx="${cx}" cy="${cy}" r="14" fill="none" stroke="${c}" stroke-width=".8" opacity=".25"/>
+      <text x="64" y="${cy-76}" font-family="monospace" font-size="7" fill="${c}" opacity=".45" letter-spacing="2">SITE PLAN · SPATIAL IDENTITY</text>
+    </svg>`,
+
+    // 04 — Pan-African Law Practice
+    // Precision + authority: architectural column grid, structured
+    '04': ()=>`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(160deg,${s1} 0%,${s2} 100%)">
+      ${[0,1,2,3,4,5,6].map(i=>`
+        <rect x="${52+i*44}" y="${cy-70}" width="20" height="140" fill="${c}" opacity="${i===3?.10:.045}"/>
+        <rect x="${52+i*44}" y="${cy-70}" width="20" height="4" fill="${c}" opacity="${i===3?.5:.18}"/>
+        <rect x="${52+i*44}" y="${cy+66}" width="20" height="4" fill="${c}" opacity="${i===3?.5:.18}"/>
+      `).join('')}
+      <rect x="44" y="${cy-80}" width="${W-88}" height="10" fill="${c}" opacity=".18"/>
+      <rect x="44" y="${cy+70}" width="${W-88}" height="10" fill="${c}" opacity=".18"/>
+      <text x="${cx}" y="${cy+6}" font-family="serif" font-size="11" fill="${c}" opacity=".5" text-anchor="middle" letter-spacing="6">CREDENTIALS</text>
+      <text x="50" y="${cy-86}" font-family="monospace" font-size="7" fill="${c}" opacity=".4" letter-spacing="2">PAN-AFRICAN LAW PRACTICE · EST. 2018</text>
+    </svg>`,
+
+    // 05 — Regional Medical Foundation
+    // Healthcare: clean cross, pulse line, humanity
+    '05': ()=>`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(145deg,${s1} 0%,${s2} 100%)">
+      <rect x="${cx-8}" y="${cy-44}" width="16" height="88" fill="${c}" opacity=".22"/>
+      <rect x="${cx-44}" y="${cy-8}" width="88" height="16" fill="${c}" opacity=".22"/>
+      <rect x="${cx-6}" y="${cy-42}" width="12" height="84" fill="none" stroke="${c}" stroke-width=".8" opacity=".4"/>
+      <rect x="${cx-42}" y="${cy-6}" width="84" height="12" fill="none" stroke="${c}" stroke-width=".8" opacity=".4"/>
+      <polyline points="40,${cy} 80,${cy} 100,${cy-30} 120,${cy+30} 140,${cy-20} 160,${cy+15} 180,${cy} ${W-40},${cy}" fill="none" stroke="${c}" stroke-width="1.2" opacity=".45" stroke-linejoin="round" stroke-linecap="round"/>
+      <circle cx="100" cy="${cy-30}" r="3" fill="${c}" opacity=".5"/>
+      <circle cx="140" cy="${cy-20}" r="3" fill="${c}" opacity=".5"/>
+      <text x="${cx}" y="${H-18}" font-family="monospace" font-size="7" fill="${c}" opacity=".4" text-anchor="middle" letter-spacing="2">CAMPAIGN · PATIENT EXPERIENCE</text>
+    </svg>`,
+
+    // 06 — Renewable Energy IPP
+    // Energy: radiating lines from source, dynamic
+    '06': ()=>`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(135deg,${s1} 0%,${s2} 100%)">
+      ${Array.from({length:12},(_,i)=>{
+        const angle = (i/12)*Math.PI*2 - Math.PI/2;
+        const r1=30, r2=i%3===0?120:i%3===1?90:60;
+        return `<line x1="${cx+Math.cos(angle)*r1}" y1="${cy+Math.sin(angle)*r1}" x2="${cx+Math.cos(angle)*r2}" y2="${cy+Math.sin(angle)*r2}" stroke="${c}" stroke-width="${i%3===0?1.2:.6}" opacity="${i%3===0?.5:.22}"/>`;
+      }).join('')}
+      <circle cx="${cx}" cy="${cy}" r="28" fill="${c}" opacity=".10"/>
+      <circle cx="${cx}" cy="${cy}" r="16" fill="${c}" opacity=".18"/>
+      <circle cx="${cx}" cy="${cy}" r="6" fill="${c}" opacity=".70"/>
+      <circle cx="${cx}" cy="${cy}" r="28" fill="none" stroke="${c}" stroke-width=".8" opacity=".35"/>
+      <circle cx="${cx}" cy="${cy}" r="55" fill="none" stroke="${c}" stroke-width=".4" opacity=".2"/>
+      <text x="${cx}" y="${H-18}" font-family="monospace" font-size="7" fill="${c}" opacity=".4" text-anchor="middle" letter-spacing="2">RENEWABLE ENERGY · PITCH DECK</text>
+    </svg>`,
+
+    // 07 — University Capital Campaign
+    // Education / philanthropy: stacked blocks, aspiration upward
+    '07': ()=>`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(150deg,${s1} 0%,${s2} 100%)">
+      ${[{x:80,y:cy+20,w:240,h:40},{x:100,y:cy-28,w:200,h:40},{x:120,y:cy-76,w:160,h:40},{x:150,y:cy-124,w:100,h:40}].map((r,i)=>`
+        <rect x="${r.x}" y="${r.y}" width="${r.w}" height="${r.h}" fill="${c}" opacity="${.04+i*.02}"/>
+        <rect x="${r.x}" y="${r.y}" width="${r.w}" height="${r.h}" fill="none" stroke="${c}" stroke-width=".9" opacity="${.2+i*.08}"/>
+        <rect x="${r.x}" y="${r.y}" width="${r.w}" height="2" fill="${c}" opacity="${.15+i*.1}"/>
+      `).join('')}
+      <line x1="${cx}" y1="${cy-124}" x2="${cx}" y2="${cy+60}" stroke="${c}" stroke-width=".5" opacity=".2"/>
+      <text x="${cx}" y="${H-14}" font-family="monospace" font-size="7" fill="${c}" opacity=".4" text-anchor="middle" letter-spacing="2">R800M CAPITAL CAMPAIGN · BUILDING FORWARD</text>
+    </svg>`,
+
+    // 08 — Development Finance Institution
+    // DFI: continental map abstraction, network of nodes
+    '08': ()=>`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(140deg,${s1} 0%,${s2} 100%)">
+      ${[[110,cy-40],[180,cy-60],[240,cy-20],[290,cy+30],[220,cy+50],[150,cy+40],[100,cy+10]].map(([x,y],i,a)=>{
+        const next = a[(i+1)%a.length];
+        return `<line x1="${x}" y1="${y}" x2="${next[0]}" y2="${next[1]}" stroke="${c}" stroke-width=".7" opacity=".22"/>`;
+      }).join('')}
+      ${[[110,cy-40],[180,cy-60],[240,cy-20],[290,cy+30],[220,cy+50],[150,cy+40],[100,cy+10]].map(([x,y],i)=>`
+        <circle cx="${x}" cy="${y}" r="${i===1||i===2?8:5}" fill="${c}" opacity="${i===1||i===2?.45:.28}"/>
+        <circle cx="${x}" cy="${y}" r="${i===1||i===2?16:10}" fill="none" stroke="${c}" stroke-width=".5" opacity="${i===1||i===2?.2:.12}"/>
+      `).join('')}
+      <line x1="${cx-30}" y1="${cy-30}" x2="${cx+40}" y2="${cy+40}" stroke="${c}" stroke-width="1.5" opacity=".3" stroke-linecap="round"/>
+      <text x="${cx}" y="${H-14}" font-family="monospace" font-size="7" fill="${c}" opacity=".4" text-anchor="middle" letter-spacing="2">DEVELOPMENT FINANCE · FULL REBRAND</text>
+    </svg>`,
+
+    // 09 — Mining Services Group
+    // Brand architecture: hierarchy diagram, 9 entities
+    '09': ()=>`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(145deg,${s1} 0%,${s2} 100%)">
+      <rect x="${cx-30}" y="${cy-70}" width="60" height="28" fill="${c}" opacity=".20"/>
+      <rect x="${cx-30}" y="${cy-70}" width="60" height="28" fill="none" stroke="${c}" stroke-width="1" opacity=".55"/>
+      <line x1="${cx}" y1="${cy-42}" x2="${cx}" y2="${cy-22}" stroke="${c}" stroke-width=".8" opacity=".35"/>
+      <line x1="70" y1="${cy-22}" x2="${W-70}" y2="${cy-22}" stroke="${c}" stroke-width=".8" opacity=".3"/>
+      ${[0,1,2,3,4,5,6,7,8].map(i=>{
+        const x = 40+i*37;
+        return `<line x1="${x+14}" y1="${cy-22}" x2="${x+14}" y2="${cy-8}" stroke="${c}" stroke-width=".6" opacity=".28"/>
+        <rect x="${x}" y="${cy-8}" width="28" height="16" fill="${c}" opacity="${i===4?.14:.06}"/>
+        <rect x="${x}" y="${cy-8}" width="28" height="16" fill="none" stroke="${c}" stroke-width=".7" opacity="${i===4?.5:.25}"/>`;
+      }).join('')}
+      <text x="${cx}" y="${cy+36}" font-family="monospace" font-size="7" fill="${c}" opacity=".4" text-anchor="middle" letter-spacing="2">BRAND ARCHITECTURE · 9 ENTITIES</text>
+    </svg>`,
+
+    // 10 — Provincial Health Department
+    // Spatial clinic rollout: grid of 12 clinic icons
+    '10': ()=>`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(135deg,${s1} 0%,${s2} 100%)">
+      ${Array.from({length:12},(_,i)=>{
+        const col=i%4, row=Math.floor(i/4);
+        const x=70+col*75, y=cy-48+row*44;
+        const lit = i<9;
+        return `<rect x="${x}" y="${y}" width="36" height="32" fill="${c}" opacity="${lit?.06:.02}"/>
+        <rect x="${x}" y="${y}" width="36" height="32" fill="none" stroke="${c}" stroke-width="${lit?.9:.4}" opacity="${lit?.35:.12}"/>
+        <rect x="${x+14}" y="${y}" width="8" height="10" fill="${c}" opacity="${lit?.25:.06}"/>
+        ${lit?`<rect x="${x+11}" y="${y+14}" width="6" height="10" fill="${c}" opacity=".18"/><rect x="${x+19}" y="${y+14}" width="6" height="10" fill="${c}" opacity=".18"/>`:''}`;
+      }).join('')}
+      <text x="${cx}" y="${H-14}" font-family="monospace" font-size="7" fill="${c}" opacity=".4" text-anchor="middle" letter-spacing="2">240 CLINICS · PATIENT EXPERIENCE ROLLOUT</text>
+    </svg>`,
+
+    // 11 — Infrastructure Fund Manager
+    // Finance + infrastructure: bridge/pipeline abstraction
+    '11': ()=>`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(150deg,${s1} 0%,${s2} 100%)">
+      <line x1="40" y1="${cy}" x2="${W-40}" y2="${cy}" stroke="${c}" stroke-width="2.5" opacity=".35"/>
+      ${[80,140,200,260,320].map(x=>`
+        <line x1="${x}" y1="${cy}" x2="${x}" y2="${cy-50}" stroke="${c}" stroke-width="1.2" opacity=".4"/>
+        <line x1="${x-30}" y1="${cy-50}" x2="${x+30}" y2="${cy-50}" stroke="${c}" stroke-width="1" opacity=".35"/>
+        <circle cx="${x}" cy="${cy-50}" r="4" fill="${c}" opacity=".5"/>
+      `).join('')}
+      <path d="M80,${cy-50} Q${cx},${cy-90} ${W-80},${cy-50}" fill="none" stroke="${c}" stroke-width=".8" opacity=".25"/>
+      <line x1="40" y1="${cy+20}" x2="${W-40}" y2="${cy+20}" stroke="${c}" stroke-width=".5" opacity=".15"/>
+      <text x="${cx}" y="${H-14}" font-family="monospace" font-size="7" fill="${c}" opacity=".4" text-anchor="middle" letter-spacing="2">INFRASTRUCTURE FUND · INVESTOR RELATIONS</text>
+    </svg>`,
+
+    // 12 — National Ports Authority
+    // Maritime / wayfinding: compass rose, directional
+    '12': ()=>`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(135deg,${s1} 0%,${s2} 100%)">
+      ${[0,45,90,135,180,225,270,315].map((deg,i)=>{
+        const r=deg%90===0?80:55, a=deg*Math.PI/180;
+        const major=deg%90===0;
+        return `<line x1="${cx+Math.cos(a)*18}" y1="${cy+Math.sin(a)*18}" x2="${cx+Math.cos(a)*r}" y2="${cy+Math.sin(a)*r}" stroke="${c}" stroke-width="${major?1.5:.8}" opacity="${major?.55:.28}"/>
+        ${major?`<polygon points="${cx+Math.cos(a)*(r+8)},${cy+Math.sin(a)*(r+8)} ${cx+Math.cos(a+.25)*r},${cy+Math.sin(a+.25)*r} ${cx+Math.cos(a-.25)*r},${cy+Math.sin(a-.25)*r}" fill="${c}" opacity=".45"/>`:''}`;
+      }).join('')}
+      <circle cx="${cx}" cy="${cy}" r="18" fill="${c}" opacity=".12"/>
+      <circle cx="${cx}" cy="${cy}" r="8" fill="${c}" opacity=".45"/>
+      <circle cx="${cx}" cy="${cy}" r="45" fill="none" stroke="${c}" stroke-width=".6" opacity=".2"/>
+      <circle cx="${cx}" cy="${cy}" r="80" fill="none" stroke="${c}" stroke-width=".4" opacity=".12"/>
+      <text x="${cx}" y="${H-14}" font-family="monospace" font-size="7" fill="${c}" opacity=".4" text-anchor="middle" letter-spacing="2">PORT WAYFINDING · 3 FACILITIES · 2021</text>
+    </svg>`,
+
+    // 13 — Private Equity House
+    // Discretion + authority: clean shield/mark abstraction, minimal
+    '13': ()=>`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(150deg,${s1} 0%,${s2} 100%)">
+      <path d="M${cx},${cy-62} L${cx+52},${cy-30} L${cx+52},${cy+22} Q${cx+52},${cy+58} ${cx},${cy+68} Q${cx-52},${cy+58} ${cx-52},${cy+22} L${cx-52},${cy-30} Z" fill="${c}" opacity=".06"/>
+      <path d="M${cx},${cy-62} L${cx+52},${cy-30} L${cx+52},${cy+22} Q${cx+52},${cy+58} ${cx},${cy+68} Q${cx-52},${cy+58} ${cx-52},${cy+22} L${cx-52},${cy-30} Z" fill="none" stroke="${c}" stroke-width="1.2" opacity=".45"/>
+      <path d="M${cx},${cy-42} L${cx+34},${cy-18} L${cx+34},${cy+16} Q${cx+34},${cy+40} ${cx},${cy+48} Q${cx-34},${cy+40} ${cx-34},${cy+16} L${cx-34},${cy-18} Z" fill="${c}" opacity=".04"/>
+      <line x1="${cx}" y1="${cy-42}" x2="${cx}" y2="${cy+48}" stroke="${c}" stroke-width=".7" opacity=".2"/>
+      <line x1="${cx-34}" y1="${cy-3}" x2="${cx+34}" y2="${cy-3}" stroke="${c}" stroke-width=".7" opacity=".2"/>
+      <text x="${cx}" y="${H-14}" font-family="monospace" font-size="7" fill="${c}" opacity=".4" text-anchor="middle" letter-spacing="2">PRIVATE EQUITY · DEAL MATERIALS</text>
+    </svg>`,
+
+    // 14 — Technical Vocational College Network
+    // Youth + aspiration: bold overlapping letters, energy
+    '14': ()=>`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(140deg,${s1} 0%,${s2} 100%)">
+      ${[0,1,2,3,4,5].map(i=>{
+        const x=48+i*56, active=i<4;
+        return `<rect x="${x}" y="${cy-55}" width="44" height="55" fill="${c}" opacity="${active?.08:.03}"/>
+        <rect x="${x}" y="${cy-55}" width="44" height="55" fill="none" stroke="${c}" stroke-width="${active?.9:.4}" opacity="${active?.35:.14}"/>
+        <rect x="${x}" y="${cy}" width="44" height="30" fill="${c}" opacity="${active?.05:.02}"/>
+        <rect x="${x}" y="${cy}" width="44" height="30" fill="none" stroke="${c}" stroke-width="${active?.7:.3}" opacity="${active?.28:.10}"/>`;
+      }).join('')}
+      <line x1="40" y1="${cy}" x2="${W-40}" y2="${cy}" stroke="${c}" stroke-width="1.5" opacity=".3"/>
+      <text x="${cx}" y="${H-14}" font-family="monospace" font-size="7" fill="${c}" opacity=".4" text-anchor="middle" letter-spacing="2">6 CAMPUSES · STUDENT RECRUITMENT</text>
+    </svg>`,
+
+    // 15 — Insurance Group Brand Refresh
+    // Continuity + evolution: two overlapping marks, subtle shift
+    '15': ()=>`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(145deg,${s1} 0%,${s2} 100%)">
+      <circle cx="${cx-20}" cy="${cy}" r="62" fill="${c}" opacity=".06"/>
+      <circle cx="${cx-20}" cy="${cy}" r="62" fill="none" stroke="${c}" stroke-width="1.2" opacity=".30"/>
+      <circle cx="${cx+20}" cy="${cy}" r="62" fill="${c}" opacity=".06"/>
+      <circle cx="${cx+20}" cy="${cy}" r="62" fill="none" stroke="${c}" stroke-width="1.2" opacity=".45"/>
+      <path d="M${cx},${cy-44} A62,62 0 0,1 ${cx},${cy+44}" fill="${c}" opacity=".08"/>
+      <line x1="${cx}" y1="${cy-44}" x2="${cx}" y2="${cy+44}" stroke="${c}" stroke-width=".6" opacity=".25"/>
+      <circle cx="${cx+20}" cy="${cy}" r="8" fill="${c}" opacity=".5"/>
+      <circle cx="${cx-20}" cy="${cy}" r="5" fill="${c}" opacity=".3"/>
+      <text x="${cx}" y="${H-14}" font-family="monospace" font-size="7" fill="${c}" opacity=".4" text-anchor="middle" letter-spacing="2">BRAND REFRESH · 44 DOCUMENT TYPES</text>
+    </svg>`,
+
+    // 16 — Water Utility Authority
+    // Water / flow: concentric ripples from a drop, organic
+    '16': ()=>`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(135deg,${s1} 0%,${s2} 100%)">
+      <path d="M${cx},${cy-65} C${cx+28},${cy-30} ${cx+42},${cy} ${cx},${cy+50} C${cx-42},${cy} ${cx-28},${cy-30} ${cx},${cy-65}" fill="${c}" opacity=".14"/>
+      <path d="M${cx},${cy-65} C${cx+28},${cy-30} ${cx+42},${cy} ${cx},${cy+50} C${cx-42},${cy} ${cx-28},${cy-30} ${cx},${cy-65}" fill="none" stroke="${c}" stroke-width="1.4" opacity=".5"/>
+      ${[28,48,68].map(r=>`<ellipse cx="${cx}" cy="${cy+10}" rx="${r}" ry="${r*.4}" fill="none" stroke="${c}" stroke-width=".6" opacity="${.35-r*.003}"/>`).join('')}
+      <circle cx="${cx}" cy="${cy+10}" r="5" fill="${c}" opacity=".6"/>
+      <text x="${cx}" y="${H-14}" font-family="monospace" font-size="7" fill="${c}" opacity=".4" text-anchor="middle" letter-spacing="2">CONSERVATION CAMPAIGN · 2021</text>
+    </svg>`,
+
+    // 17 — Pan-African Logistics Group
+    // Movement across continent: route lines, nodes, bold
+    '17': ()=>`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(140deg,${s1} 0%,${s2} 100%)">
+      ${[[70,cy+20],[130,cy-40],[190,cy+30],[250,cy-20],[310,cy+10],[360,cy-30]].map(([x,y],i,a)=>{
+        if(i===0) return '';
+        const prev=a[i-1];
+        return `<line x1="${prev[0]}" y1="${prev[1]}" x2="${x}" y2="${y}" stroke="${c}" stroke-width="${i===3?2:1.2}" opacity="${.5+i*.04}" stroke-linecap="round"/>`;
+      }).join('')}
+      ${[[70,cy+20],[130,cy-40],[190,cy+30],[250,cy-20],[310,cy+10],[360,cy-30]].map(([x,y],i)=>`
+        <circle cx="${x}" cy="${y}" r="${i===0||i===5?10:6}" fill="${c}" opacity="${i===0||i===5?.55:.35}"/>
+        <circle cx="${x}" cy="${y}" r="${i===0||i===5?20:12}" fill="none" stroke="${c}" stroke-width=".6" opacity="${i===0||i===5?.25:.14}"/>
+      `).join('')}
+      <rect x="40" y="${cy+38}" width="${W-80}" height="1.5" fill="${c}" opacity=".2"/>
+      <text x="${cx}" y="${H-14}" font-family="monospace" font-size="7" fill="${c}" opacity=".4" text-anchor="middle" letter-spacing="2">12 MARKETS · PAN-AFRICAN LOGISTICS</text>
+    </svg>`,
+
+    // 18 — Affordable Housing Developer
+    // Home / aspiration: simple house silhouettes rising, warmth
+    '18': ()=>`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(150deg,${s1} 0%,${s2} 100%)">
+      ${[{x:55,h:70,w:60,lit:false},{x:130,h:90,w:65,lit:true},{x:210,h:105,w:70,lit:true},{x:295,h:80,w:60,lit:false}].map(({x,h,w,lit})=>{
+        const base=cy+45, top=base-h, mid=x+w/2;
+        return `<polygon points="${mid},${top-28} ${x},${top} ${x+w},${top}" fill="${c}" opacity="${lit?.18:.07}"/>
+        <polygon points="${mid},${top-28} ${x},${top} ${x+w},${top}" fill="none" stroke="${c}" stroke-width="${lit?1:.6}" opacity="${lit?.5:.22}"/>
+        <rect x="${x}" y="${top}" width="${w}" height="${h}" fill="${c}" opacity="${lit?.07:.03}"/>
+        <rect x="${x}" y="${top}" width="${w}" height="${h}" fill="none" stroke="${c}" stroke-width="${lit?.9:.5}" opacity="${lit?.38:.16}"/>
+        ${lit?`<rect x="${mid-10}" y="${top+h-30}" width="20" height="30" fill="${c}" opacity=".14"/>`:''}
+        ${lit?`<rect x="${x+8}" y="${top+12}" width="14" height="16" fill="${c}" opacity=".20"/><rect x="${x+w-22}" y="${top+12}" width="14" height="16" fill="${c}" opacity=".20"/>`:''}`;
+      }).join('')}
+      <line x1="40" y1="${cy+45}" x2="${W-40}" y2="${cy+45}" stroke="${c}" stroke-width="1.5" opacity=".3"/>
+      <text x="${cx}" y="${H-14}" font-family="monospace" font-size="7" fill="${c}" opacity=".4" text-anchor="middle" letter-spacing="2">1,200 UNITS · KZN SOUTH COAST · 2024</text>
+    </svg>`,
+  };
+
+  // Fallback for any num not explicitly designed
+  const fallback = ()=>`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(145deg,${s1} 0%,${s2} 100%)">
+    <rect x="60" y="${cy-50}" width="${W-120}" height="100" fill="${c}" opacity=".04"/>
+    <rect x="60" y="${cy-50}" width="${W-120}" height="100" fill="none" stroke="${c}" stroke-width="1" opacity=".35"/>
+    <rect x="60" y="${cy-50}" width="${W-120}" height="3" fill="${c}" opacity=".45"/>
+    ${[0,1,2,3,4,5,6].map(i=>`<rect x="${60+i*((W-120)/6)}" y="${cy-50}" width="1" height="100" fill="${c}" opacity=".08"/>`).join('')}
+    <text x="${cx}" y="${cy+7}" font-family="monospace" font-size="9" fill="${c}" opacity=".5" text-anchor="middle" letter-spacing="4">${p.num}</text>
+    <text x="${cx}" y="${H-14}" font-family="monospace" font-size="7" fill="${c}" opacity=".35" text-anchor="middle" letter-spacing="2">${p.disciplineLabel.toUpperCase()}</text>
+  </svg>`;
+
+  return (visuals[p.num] || fallback)();
+}
+
+// ─────────────────────────────────────────────
+// CARD ANIMATION OBSERVER
+// ─────────────────────────────────────────────
+let cardObserver = null;
+
+function observeCards() {
+  if(cardObserver) cardObserver.disconnect();
+  cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        const card = entry.target;
+        const delay = parseFloat(card.dataset.delay||'0');
+        setTimeout(() => {
+          card.classList.add('animate-in');
+          // keep visible after animation ends
+          card.addEventListener('animationend', () => {
+            card.style.opacity = '1';
+          }, {once:true});
+        }, delay);
+        cardObserver.unobserve(card);
+      }
+    });
+  }, {threshold: 0.06, rootMargin: '0px 0px -20px 0px'});
+
+  document.querySelectorAll('.project-card').forEach(card => {
+    cardObserver.observe(card);
+  });
+}
+
+// ─────────────────────────────────────────────
+// RENDER CARDS
+// ─────────────────────────────────────────────
+function renderCards(projects) {
+  const grid = document.getElementById('projectGrid');
+
+  // Fade out existing cards first
+  const existing = grid.querySelectorAll('.project-card');
+  if(existing.length > 0) {
+    existing.forEach(c => {
+      c.style.transition = 'opacity .18s ease, transform .18s ease';
+      c.style.opacity = '0';
+      c.style.transform = 'translateY(10px)';
+    });
+    setTimeout(() => buildCards(projects), 200);
+  } else {
+    buildCards(projects);
+  }
+}
+
+function buildCards(projects) {
+  const grid = document.getElementById('projectGrid');
+  grid.innerHTML = '';
+
+  projects.forEach((p, i) => {
+    const card = document.createElement('div');
+    // Stagger delay — column-aware: cards in col 0 slightly before col 1 before col 2
+    const col = i % 3;
+    const row = Math.floor(i / 3);
+    const delay = col * 60 + row * 30; // ms
+    card.className = `project-card pc-${p.size}`;
+    card.dataset.sector = p.sector;
+    card.dataset.disciplines = p.disciplines.join(',');
+    card.dataset.id = p.id;
+    card.dataset.delay = delay;
+
+    const sectorColor = {
+      'Government':'var(--iris)','Financial Services':'var(--aqua)',
+      'Infrastructure':'var(--gold)','Healthcare':'var(--violet)',
+      'Professional Services':'var(--sky)','Energy':'var(--teal)',
+      'Education':'var(--rose)'
+    }[p.sector]||'var(--ter)';
+
+    const sectorBorder = {
+      'Government':'rgba(124,131,229,.3)','Financial Services':'rgba(6,214,160,.3)',
+      'Infrastructure':'rgba(255,209,102,.3)','Healthcare':'rgba(199,125,255,.3)',
+      'Professional Services':'rgba(69,183,209,.3)','Energy':'rgba(78,205,196,.3)',
+      'Education':'rgba(255,107,157,.3)'
+    }[p.sector]||'var(--border)';
+
+    const ar = p.size==='large'?4/3:p.size==='medium'?3/2:16/9;
+
+    card.innerHTML = `
+      <div class="pc-visual-wrap">
+        <div class="pc-visual">${generateVisual(p, ar)}</div>
+        <div class="pc-overlay"><span class="pc-overlay-hint">View case study →</span></div>
+      </div>
+      <div class="pc-info">
+        <div class="pc-top">
+          <span class="pc-sector" style="color:${sectorColor};border-color:${sectorBorder}">${p.sector}</span>
+          <span class="pc-num">${p.num}</span>
+        </div>
+        <div class="pc-name">${p.name}</div>
+        <div class="pc-discipline">${p.disciplineLabel}</div>
+        <div class="pc-excerpt">${p.excerpt}</div>
+        <div class="pc-footer">
+          <span class="pc-year">${p.year}</span>
+          <span class="pc-arrow">Case study <svg viewBox="0 0 12 12"><path d="M2 6h8M7 3l3 3-3 3"/></svg></span>
+        </div>
+      </div>`;
+    card.addEventListener('click', ()=>{ window.location.href='bransol-case-study.html?slug='+p.id; });
+    grid.appendChild(card);
+  });
+
+  document.getElementById('countNum').textContent = projects.length;
+
+  // Kick off scroll-triggered animations
+  observeCards();
+}
+
+// ─────────────────────────────────────────────
+// MODAL
+// ─────────────────────────────────────────────
+function openModal(p) {
+  const backdrop = document.getElementById('modalBackdrop');
+  const main = document.getElementById('modalMain');
+  const sidebar = document.getElementById('modalSidebar');
+
+  const ar = 16/9;
+  const sectorColor = {
+    'Government':'var(--iris)','Financial Services':'var(--aqua)',
+    'Infrastructure':'var(--gold)','Healthcare':'var(--violet)',
+    'Professional Services':'var(--sky)','Energy':'var(--teal)',
+    'Education':'var(--rose)'
+  }[p.sector]||'var(--ter)';
+
+  main.innerHTML = `
+    <span class="modal-eyebrow">${p.sector} · ${p.year}</span>
+    <h2 class="modal-title">${p.name}</h2>
+    <span class="modal-discipline">${p.disciplineLabel}</span>
+    <div class="modal-visual">${generateVisual({...p,size:'large'}, 16/9)}</div>
+
+    <div class="detail-rows">
+      <div class="detail-row"><span class="dr-label">Sector</span><span class="dr-val">${p.sector}</span></div>
+      <div class="detail-row"><span class="dr-label">Disciplines</span><span class="dr-val">${p.disciplines.join(' · ')}</span></div>
+      <div class="detail-row"><span class="dr-label">Duration</span><span class="dr-val">${p.stats.duration}</span></div>
+      <div class="detail-row"><span class="dr-label">Scope</span><span class="dr-val">${p.stats.scope}</span></div>
+      <div class="detail-row"><span class="dr-label">Team</span><span class="dr-val">${p.stats.team}</span></div>
+      <div class="detail-row"><span class="dr-label">Year</span><span class="dr-val">${p.year}</span></div>
+    </div>
+
+    <span class="modal-section-label">Overview</span>
+    <div class="modal-body"><p>${p.overview}</p><p><strong style="color:var(--text);font-weight:500">The challenge:</strong> ${p.challenge}</p></div>
+
+    <span class="modal-section-label">Deliverables</span>
+    <div class="deliverable-list">
+      ${p.deliverables.map(d=>`<div class="deliverable-item"><span class="di-dot" style="background:${p.accentHex}"></span>${d}</div>`).join('')}
+    </div>`;
+
+  sidebar.innerHTML = `
+    <div class="ms-block">
+      <span class="ms-block-label">Project Stats</span>
+      <div class="ms-stat">
+        <div class="ms-stat-val" style="color:${sectorColor}">${p.stats.duration}</div>
+        <span class="ms-stat-label">Duration</span>
+      </div>
+      <div class="ms-stat">
+        <div class="ms-stat-val chrome-text">${p.year}</div>
+        <span class="ms-stat-label">Year completed</span>
+      </div>
+      <div class="ms-stat">
+        <div class="ms-stat-val" style="color:var(--sub);font-size:20px">${p.stats.team}</div>
+        <span class="ms-stat-label">Studio team</span>
+      </div>
+    </div>
+    <div class="ms-block">
+      <span class="ms-block-label">Tags</span>
+      <div class="ms-tags">${p.tags.map(t=>`<span class="ms-tag">${t}</span>`).join('')}</div>
+    </div>
+    <div class="ms-block" style="margin-top:auto">
+      <span class="ms-block-label">Commission similar work</span>
+      <a href="/begin" style="display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--sub);border:1px solid var(--border);padding:12px 16px;text-decoration:none;cursor:none;transition:color .2s,border-color .2s;" onmouseenter="this.style.borderColor='rgba(255,255,255,.2)'" onmouseleave="this.style.borderColor='var(--border)'">Begin a commission →</a>
+    </div>`;
+
+  backdrop.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalBackdrop').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalBackdrop').addEventListener('click', e=>{
+  if(e.target===document.getElementById('modalBackdrop')) closeModal();
+});
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+
+// ─────────────────────────────────────────────
+// FILTERING
+// ─────────────────────────────────────────────
+let activeSector = 'all';
+let activeDiscipline = 'all';
+
+function applyFilters() {
+  const filtered = PROJECTS.filter(p => {
+    const sectorMatch = activeSector==='all' || p.sector===activeSector;
+    const discMatch = activeDiscipline==='all' || p.disciplines.includes(activeDiscipline);
+    return sectorMatch && discMatch;
+  });
+  renderCards(filtered);
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const group = btn.dataset.filter;
+    const val = btn.dataset.value;
+    // deactivate siblings
+    document.querySelectorAll(`.filter-btn[data-filter="${group}"]`).forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    if(group==='sector') activeSector=val;
+    else activeDiscipline=val;
+    applyFilters();
+  });
+});
+
+// ─────────────────────────────────────────────
+// NAV, CURSOR, THEME
+// ─────────────────────────────────────────────
+const cur=document.getElementById('cur'),ring=document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function tick(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick);})();
+document.addEventListener('mouseover',e=>{
+  const h=e.target.closest('a,button,.project-card,.filter-btn,.modal-close');
+  cur.style.width=cur.style.height=h?'14px':'7px';
+  ring.style.width=ring.style.height=h?'44px':'30px';
+  ring.style.borderColor=h?'rgba(124,131,229,.5)':'rgba(124,131,229,.32)';
+});
+
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+(function(){
+  const btn=document.getElementById('themeToggle'),label=document.getElementById('themeLabel'),html=document.documentElement;
+  const saved=localStorage.getItem('bransol-theme');
+  if(saved==='light'){html.setAttribute('data-theme','light');label.textContent='Dark';}
+  btn.addEventListener('click',()=>{
+    const isLight=html.getAttribute('data-theme')==='light';
+    if(isLight){html.removeAttribute('data-theme');label.textContent='Light';localStorage.setItem('bransol-theme','dark');}
+    else{html.setAttribute('data-theme','light');label.textContent='Dark';localStorage.setItem('bransol-theme','light');}
+  });
+})();
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+buildCards(PROJECTS);
+
+// Hero reveal
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.05});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

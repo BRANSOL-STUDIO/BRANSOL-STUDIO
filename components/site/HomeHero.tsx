@@ -19,7 +19,7 @@ const colA: CardItem[] = [
   { href: "/work/national-communications-agency", name: "National Communications Agency", discipline: "Brand Identity · Design System", c: "ws-c1", artColor: "var(--iris)", height: "tall" },
   { href: "/work/pan-african-law-practice", name: "Pan-African Law Practice", discipline: "Brand Identity · Credentials", c: "ws-c5", artColor: "var(--sky)", height: "short" },
   { href: "/work/renewable-energy-ipp", name: "Renewable Energy IPP", discipline: "Digital Design · Pitch Deck", c: "ws-c6", artColor: "var(--ember)", height: "default" },
-  { href: "/work/globtek", name: "Globtek Branding", discipline: "Brand Identity · Outdoor · Vehicle", c: "ws-c6", artColor: "var(--ember)", height: "default", imageSrc: WORK_CASE_STUDIES.globtek.images.hero.src },
+  { href: "/work/globtek", name: "Globtek Branding", discipline: "Brand Identity · Outdoor · Vehicle", c: "ws-c6", artColor: "var(--ember)", height: "default", imageSrc: WORK_CASE_STUDIES.globtek.images.cardHero?.src },
   { href: "/work/property-development-consortium", name: "Property Development Consortium", discipline: "Spatial Identity · Wayfinding", c: "ws-c3", artColor: "var(--gold)", height: "tall" },
 ];
 

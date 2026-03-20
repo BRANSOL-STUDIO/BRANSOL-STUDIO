@@ -30,7 +30,7 @@ const colC: Card[] = [
     title: "Globtek",
     scope: "Brand Identity · Outdoor · Vehicle",
     color: "wss-sky",
-    imageSrc: WORK_CASE_STUDIES.globtek.images.hero.src,
+    imageSrc: WORK_CASE_STUDIES.globtek.images.cardHero?.src,
   },
   { href: "/work/listed-insurer", sector: "Financial Services", title: "Listed Short-Term Insurer", scope: "Brand Refresh · Digital", color: "wss-aqua" },
   { href: "/work/development-finance", sector: "Development Finance", title: "Continental DFI", scope: "Identity · Annual Report", color: "wss-gold" },
