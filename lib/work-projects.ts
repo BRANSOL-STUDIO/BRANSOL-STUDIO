@@ -336,4 +336,20 @@ export const PROJECTS: WorkProject[] = [
     excerpt:
       "Development identity and sales campaign for a 1,200-unit affordable housing scheme on the KZN South Coast — helping first-time buyers see a home, not a housing unit.",
   },
+  {
+    id: "globtek",
+    num: "19",
+    name: "Globtek",
+    sector: "Professional Services",
+    disciplines: ["Brand Identity", "Outdoor", "Vehicle", "Design System"],
+    disciplineLabel: "Brand Identity · Outdoor · Vehicle",
+    year: "2025",
+    size: "medium",
+    accentColor: "var(--ember)",
+    accentHex: "#e43d30",
+    bgStop1: "rgba(228,61,48,.14)",
+    bgStop2: "rgba(255,140,66,.06)",
+    excerpt:
+      "Brand identity rollout for Globtek — profiles, outdoor collateral, and vehicle branding, built to stay coherent across production and print constraints.",
+  },
 ];

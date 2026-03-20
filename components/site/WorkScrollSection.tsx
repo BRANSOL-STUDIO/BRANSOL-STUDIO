@@ -2,7 +2,16 @@
 
 import Link from "next/link";
 
-type Card = { href: string; sector: string; title: string; scope: string; color: string };
+import { WORK_CASE_STUDIES } from "@/lib/work-case-studies";
+
+type Card = {
+  href: string;
+  sector: string;
+  title: string;
+  scope: string;
+  color: string;
+  imageSrc?: string;
+};
 
 const colA: Card[] = [
   { href: "/work/national-communications-agency", sector: "Government", title: "National Communications Agency", scope: "Brand Identity · Design System", color: "wss-iris" },
@@ -15,7 +24,14 @@ const colB: Card[] = [
   { href: "/work/renewable-energy-ipp", sector: "Energy", title: "Renewable Energy IPP", scope: "Digital Design · Pitch Deck", color: "wss-ember" },
 ];
 const colC: Card[] = [
-  { href: "/work/ministry-of-trade", sector: "Government", title: "Ministry of Trade & Industry", scope: "Report Design · Campaign", color: "wss-iris" },
+  {
+    href: "/work/globtek",
+    sector: "Professional Services",
+    title: "Globtek",
+    scope: "Brand Identity · Outdoor · Vehicle",
+    color: "wss-sky",
+    imageSrc: WORK_CASE_STUDIES.globtek.images.hero.src,
+  },
   { href: "/work/listed-insurer", sector: "Financial Services", title: "Listed Short-Term Insurer", scope: "Brand Refresh · Digital", color: "wss-aqua" },
   { href: "/work/development-finance", sector: "Development Finance", title: "Continental DFI", scope: "Identity · Annual Report", color: "wss-gold" },
 ];
@@ -27,18 +43,32 @@ function WssCard({ card, duplicate }: { card: Card; duplicate?: boolean }) {
       className={`wss-item ${card.color}`}
       {...(duplicate ? { "aria-hidden": true } : {})}
     >
-      <div className="wss-img-bg" />
-      <div className="wss-img-art">
-        <div className="wia-row">
-          <div className="wia-b tall" />
-          <div className="wia-b tall" style={{ flex: 2 }} />
+      <div
+        className="wss-img-bg"
+        style={
+          card.imageSrc
+            ? {
+                backgroundImage: `url(${card.imageSrc})`,
+                backgroundSize: "cover",
+                backgroundPosition: "top center",
+                backgroundRepeat: "no-repeat",
+              }
+            : undefined
+        }
+      />
+      {card.imageSrc ? null : (
+        <div className="wss-img-art">
+          <div className="wia-row">
+            <div className="wia-b tall" />
+            <div className="wia-b tall" style={{ flex: 2 }} />
+          </div>
+          <div className="wia-line" style={{ width: "65%" }} />
+          <div className="wia-row">
+            <div className="wia-b" style={{ flex: 3 }} />
+            <div className="wia-b" />
+          </div>
         </div>
-        <div className="wia-line" style={{ width: "65%" }} />
-        <div className="wia-row">
-          <div className="wia-b" style={{ flex: 3 }} />
-          <div className="wia-b" />
-        </div>
-      </div>
+      )}
       <div className="wss-item-overlay" />
       <div className="wss-item-info">
         <span className="wss-item-sector">{card.sector}</span>

@@ -5,10 +5,17 @@ import type { WorkProject } from "@/lib/work-projects";
 
 interface ProjectCardProps {
   project: WorkProject;
+  cardImageSrc?: string | null;
 }
 
 /** Editorial-style placeholder visual using project accent (gradient + simple shapes) */
-function CardVisual({ project }: { project: WorkProject }) {
+function CardVisual({
+  project,
+  cardImageSrc,
+}: {
+  project: WorkProject;
+  cardImageSrc?: string | null;
+}) {
   const { accentHex, bgStop1, bgStop2 } = project;
   const w = 400;
   const h = project.size === "large" ? 300 : project.size === "medium" ? 267 : 225;
@@ -19,12 +26,20 @@ function CardVisual({ project }: { project: WorkProject }) {
         background: `linear-gradient(150deg, ${bgStop1} 0%, ${bgStop2} 100%)`,
       }}
     >
+      {cardImageSrc ? (
+        <img
+          src={cardImageSrc}
+          alt=""
+          className="work-pc-visual-img"
+        />
+      ) : null}
       <svg
         viewBox={`0 0 ${w} ${h}`}
         className="work-pc-visual-svg"
         preserveAspectRatio="xMidYMid slice"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden
+        style={cardImageSrc ? { display: "none" } : undefined}
       >
         <rect x="40" y={h / 2 - 40} width={w - 80} height="3" fill={accentHex} opacity="0.4" />
         <rect x="40" y={h / 2 + 37} width={w - 80} height="3" fill={accentHex} opacity="0.4" />
@@ -48,7 +63,7 @@ function CardVisual({ project }: { project: WorkProject }) {
   );
 }
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ project, cardImageSrc = null }: ProjectCardProps) {
   const sizeClass =
     project.size === "large"
       ? "work-pc-large"
@@ -63,7 +78,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       style={{ borderColor: "rgba(255,255,255,0.09)" }}
     >
       <div className="work-pc-visual-wrap">
-        <CardVisual project={project} />
+        <CardVisual project={project} cardImageSrc={cardImageSrc} />
         <div className="work-pc-overlay" aria-hidden>
           <span className="work-pc-overlay-hint">View project</span>
         </div>

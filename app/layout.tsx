@@ -4,6 +4,8 @@ import "@/styles/globals.css";
 /* Site + auth styles before theme-override so layout/fonts win; theme-override only sets bg/color */
 import "@/styles/homepage.css";
 import "@/styles/work.css";
+import "@/styles/work-case-study.css";
+import "@/styles/work-case-study-globtek-branding.css";
 import "@/styles/blog.css";
 import "@/styles/article.css";
 import "@/styles/expertise.css";

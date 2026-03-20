@@ -8,6 +8,7 @@ import {
   disciplineToFilter,
   type WorkProject,
 } from "@/lib/work-projects";
+import { WORK_CASE_STUDIES } from "@/lib/work-case-studies";
 import { ProjectCard } from "@/components/site/ProjectCard";
 
 function projectMatchesSector(p: WorkProject, sector: string): boolean {
@@ -33,6 +34,11 @@ export function WorkPageClient() {
     );
   }, [sector, discipline]);
 
+  const projectYears = PROJECTS.map((p) => Number(p.year)).filter((n) => Number.isFinite(n));
+  const minYear = projectYears.length ? Math.min(...projectYears) : 2019;
+  const maxYear = projectYears.length ? Math.max(...projectYears) : 2026;
+  const sectorsCount = new Set(PROJECTS.map((p) => p.sector)).size;
+
   return (
     <>
       {/* Hero */}
@@ -54,7 +60,7 @@ export function WorkPageClient() {
               permission.
             </p>
             <p className="work-hero-note">
-              18 projects · 2019–2026 · Across 7 sectors
+              {PROJECTS.length} projects · {minYear}–{maxYear} · Across {sectorsCount} sectors
             </p>
           </div>
         </div>
@@ -104,7 +110,11 @@ export function WorkPageClient() {
       <section className="work-archive">
         <div className="work-project-grid">
           {filtered.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+            <ProjectCard
+              key={project.id}
+              project={project}
+              cardImageSrc={WORK_CASE_STUDIES[project.id]?.images.hero.src ?? null}
+            />
           ))}
         </div>
       </section>

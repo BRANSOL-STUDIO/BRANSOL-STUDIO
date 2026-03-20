@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 
+import { WORK_CASE_STUDIES } from "@/lib/work-case-studies";
+
 type CardItem = {
   href: string;
   name: string;
@@ -9,6 +11,7 @@ type CardItem = {
   c: string;
   artColor: string;
   height?: "tall" | "short" | "default";
+  imageSrc?: string;
 };
 
 /* Column A — scroll up */
@@ -16,6 +19,7 @@ const colA: CardItem[] = [
   { href: "/work/national-communications-agency", name: "National Communications Agency", discipline: "Brand Identity · Design System", c: "ws-c1", artColor: "var(--iris)", height: "tall" },
   { href: "/work/pan-african-law-practice", name: "Pan-African Law Practice", discipline: "Brand Identity · Credentials", c: "ws-c5", artColor: "var(--sky)", height: "short" },
   { href: "/work/renewable-energy-ipp", name: "Renewable Energy IPP", discipline: "Digital Design · Pitch Deck", c: "ws-c6", artColor: "var(--ember)", height: "default" },
+  { href: "/work/globtek", name: "Globtek Branding", discipline: "Brand Identity · Outdoor · Vehicle", c: "ws-c6", artColor: "var(--ember)", height: "default", imageSrc: WORK_CASE_STUDIES.globtek.images.hero.src },
   { href: "/work/property-development-consortium", name: "Property Development Consortium", discipline: "Spatial Identity · Wayfinding", c: "ws-c3", artColor: "var(--gold)", height: "tall" },
 ];
 
@@ -50,11 +54,15 @@ function WsArt({ color }: { color: string }) {
   );
 }
 
-function WorkStripCard({ href, name, discipline, c, artColor, height }: CardItem) {
+function WorkStripCard({ href, name, discipline, c, artColor, height, imageSrc }: CardItem) {
   const heightClass = height === "tall" ? "ws-tall" : height === "short" ? "ws-short" : "";
   return (
     <Link href={href} className={`ws-card ${c} ${heightClass}`}>
-      <WsArt color={artColor} />
+      {imageSrc ? (
+        <img src={imageSrc} alt="" className="ws-card-img" />
+      ) : (
+        <WsArt color={artColor} />
+      )}
       <div className="ws-scrim" />
       <div className="ws-overlay" />
       <div className="ws-inner">
