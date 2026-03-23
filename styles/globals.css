@@ -161,3 +161,27 @@ body main {
   background: var(--iris);
   border-radius: 3px;
 }
+
+/* ── Performance: reduce CPU/GPU when tab hidden or user prefers reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .chrome-text,
+  .gb-hero-visual-frame::before,
+  .visual-wrap::before,
+  .nav-links a::after,
+  .nav-link::after,
+  .nav-login::after,
+  .chrome-edge,
+  body.site-cursor-hover .site-cursor-dot,
+  .bg-orb,
+  .bg-aurora,
+  .bg-grain,
+  .bg-scan {
+    animation: none !important;
+  }
+}
+
+body.animations-paused *,
+body.animations-paused *::before,
+body.animations-paused *::after {
+  animation-play-state: paused !important;
+}

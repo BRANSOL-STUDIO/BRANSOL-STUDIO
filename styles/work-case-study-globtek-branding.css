@@ -3,6 +3,7 @@
 .gb-branding-root {
   position: relative;
   z-index: 1;
+  font-family: var(--font-akkurat), sans-serif;
 }
 
 /* HERO */
@@ -59,7 +60,7 @@
 }
 
 .gb-hero-title {
-  font-family: var(--font-syne), sans-serif;
+  font-family: var(--font-nasalization), sans-serif;
   font-size: clamp(44px, 5.8vw, 88px);
   font-weight: 800;
   letter-spacing: -0.055em;
@@ -297,6 +298,119 @@
   font-size: 24px;
   opacity: 0.15;
   line-height: 1;
+}
+
+/* Type specimen showcase (02 — Brand System) — full width like colour row */
+.gb-type-spec {
+  margin-top: 3px;
+}
+
+.gb-type-spec-block {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr 1px 1fr;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.015);
+  width: 100%;
+}
+
+.gb-type-col {
+  padding: 28px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.gb-type-rule {
+  background: var(--border);
+  width: 1px;
+  height: 100%;
+  align-self: stretch;
+}
+
+.gb-type-tag {
+  font-family: var(--font-dm-mono), monospace;
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-hex);
+}
+
+.gb-type-sample {
+  line-height: 1.1;
+  color: var(--text-pri);
+  font-weight: 400;
+}
+
+.gb-type-abc {
+  font-size: 11px;
+  color: var(--ter);
+  letter-spacing: 0.06em;
+  line-height: 1.6;
+}
+
+/* Display — Nasalization */
+.gb-type-font-display {
+  font-family: "Nasalization", var(--font-nasalization), sans-serif;
+  font-size: clamp(18px, 2.2vw, 28px);
+  letter-spacing: 0.06em;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+/* Body — Akkurat Pro */
+.gb-type-font-body {
+  font-family: var(--font-akkurat), sans-serif;
+  font-size: clamp(22px, 2.5vw, 34px);
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.gb-type-weights {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  color: var(--sub);
+  font-family: var(--font-akkurat), sans-serif;
+}
+
+.gb-type-weight-bold {
+  font-weight: 700;
+  color: var(--sub);
+}
+
+.gb-type-weight-regular {
+  font-weight: 400;
+  color: var(--sub);
+}
+
+.gb-type-weight-light {
+  font-weight: 300;
+  color: var(--ter);
+}
+
+/* Mono — DM Mono */
+.gb-type-font-mono {
+  font-family: var(--font-dm-mono), monospace;
+  font-size: clamp(20px, 2.2vw, 30px);
+  letter-spacing: 0.04em;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.gb-type-abc-mono {
+  letter-spacing: 0.14em;
+}
+
+@media (max-width: 800px) {
+  .gb-type-spec-block {
+    grid-template-columns: 1fr;
+  }
+  .gb-type-rule {
+    height: 1px;
+    width: auto;
+  }
 }
 
 .gb-ph-inner span {

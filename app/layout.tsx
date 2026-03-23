@@ -45,6 +45,9 @@ export default function RootLayout({
             gtag('config', '${GA_ID}');
           `}
         </Script>
+        <Script id="pause-animations-hidden" strategy="afterInteractive">
+          {`(function(){var f=function(){document.body.classList.toggle("animations-paused",document.hidden);};document.addEventListener("visibilitychange",f);f();})();`}
+        </Script>
         {children}
         </div>
       </body>

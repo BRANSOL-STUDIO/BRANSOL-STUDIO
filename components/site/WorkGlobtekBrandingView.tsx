@@ -216,16 +216,48 @@ export default function WorkGlobtekBrandingView({
           </div>
         </div>
 
-        {/* Type specimen placeholder */}
+        {/* Type specimen — full width, same as colour row */}
         <div className="gb-type-spec">
-          <div className="gb-ph gb-ph-dark" style={{ minHeight: 200 }}>
-            <div className="gb-ph-inner">
-              <div className="gb-ph-icon" style={{ fontSize: 32 }}>
-                Aa
+          <div className="gb-type-spec-block">
+                {/* Display — Nasalization */}
+                <div className="gb-type-col">
+                  <div className="gb-type-tag">Display &middot; Nasalization</div>
+                  <div className="gb-type-sample gb-type-font-display">
+                    Applied Ingenuity
+                  </div>
+                  <div className="gb-type-abc gb-type-font-display">
+                    ABCDEFG 0123456789
+                  </div>
+                </div>
+
+                <div className="gb-type-rule" aria-hidden />
+
+                {/* Body — Akkurat Pro */}
+                <div className="gb-type-col">
+                  <div className="gb-type-tag">Body &middot; Akkurat Pro</div>
+                  <div className="gb-type-sample gb-type-font-body">
+                    Every touchpoint.
+                  </div>
+                  <div className="gb-type-weights gb-type-font-body">
+                    <span className="gb-type-weight-bold">Bold</span>
+                    <span className="gb-type-weight-regular">Regular</span>
+                    <span className="gb-type-weight-light">Light</span>
+                  </div>
+                </div>
+
+                <div className="gb-type-rule" aria-hidden />
+
+                {/* Mono — DM Mono */}
+                <div className="gb-type-col">
+                  <div className="gb-type-tag">Mono &middot; DM Mono</div>
+                  <div className="gb-type-sample gb-type-font-mono">
+                    Aa 0123456789
+                  </div>
+                  <div className="gb-type-abc gb-type-font-mono gb-type-abc-mono">
+                    TAGS &middot; LABELS &middot; UI
+                  </div>
+                </div>
               </div>
-              <span>Typography specimen — display + body + mono</span>
-            </div>
-          </div>
         </div>
 
         {/* Wave motif / pattern placeholders */}

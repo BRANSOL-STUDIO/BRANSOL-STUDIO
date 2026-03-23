@@ -1,10 +1,59 @@
 /* BRANSOL — Typography (Next.js: use CSS vars for font-family) */
 
 @import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap");
+@import url("https://fonts.cdnfonts.com/css/nasalization-2");
 
 :root {
   --font-syne: "Syne", sans-serif;
   --font-dm-sans: "DM Sans", sans-serif;
   --font-dm-mono: "DM Mono", monospace;
   --font-instrument: "Instrument Serif", serif;
+  --font-nasalization: "Nasalization", sans-serif;
+  --font-akkurat: "Akkurat Pro", "Akkurat", "aktiv-grotesk", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Akkurat Pro (licensed) */
+@font-face {
+  font-family: "Akkurat Pro";
+  src: url("https://rean.co.za/fonts/AkkuratPro-Regular.woff2") format("woff2"),
+    url("https://rean.co.za/fonts/AkkuratPro-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Akkurat Pro";
+  src: url("https://rean.co.za/fonts/AkkuratPro-Light.woff2") format("woff2"),
+    url("https://rean.co.za/fonts/AkkuratPro-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Akkurat Pro";
+  src: url("https://rean.co.za/fonts/AkkuratPro-Bold.woff2") format("woff2"),
+    url("https://rean.co.za/fonts/AkkuratPro-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Akkurat Pro";
+  src: url("https://rean.co.za/fonts/AkkuratPro-Black.woff2") format("woff2"),
+    url("https://rean.co.za/fonts/AkkuratPro-Black.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Akkurat Pro";
+  src: url("https://rean.co.za/fonts/AkkuratPro-Italic.woff2") format("woff2"),
+    url("https://rean.co.za/fonts/AkkuratPro-Italic.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
 }
