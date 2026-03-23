@@ -9,13 +9,19 @@ import globtekHeroBanner from "@/images/archive/GLOBTEK/Globtek_Hero_Banner.png"
 
 import globtekBrandProfiles from "@/images/archive/GLOBTEK/BRANDING/Globtek_Profiles_Mockup.png";
 import globtekRailProfile from "@/images/archive/GLOBTEK/BRANDING/Globtek_Rail-Profile_Mockup.png";
+import globtekMugMockup from "@/images/archive/GLOBTEK/BRANDING/Globtek_Mug_Mockup.jpg";
 import globtekOutdoorGazebo1 from "@/images/archive/GLOBTEK/OUTDOOR/GLOBTEK_Gazebo_Mockup_1_Q325.jpg";
 import globtekOutdoorGazebo2 from "@/images/archive/GLOBTEK/OUTDOOR/GLOBTEK_Gazebo_Mockup_2_Q325.jpg";
+import globtekStationeryDiaries from "@/images/archive/GLOBTEK/Stationery/Globtek_Stationery_Diaries.jpg";
 import globtekVehicleBakkie from "@/images/archive/GLOBTEK/VEHICLE/Globtek_Vehicle-Branding_Bakkie.png";
+import globtekVehicleBakkieFinal from "@/images/archive/GLOBTEK/VEHICLE/Globtek_Vehicle-Branding_Bakkie_final.jpg";
 import globtekVehicleBakkieRight from "@/images/archive/GLOBTEK/VEHICLE/Globtek_Vehicle-Branding_Bakkie_right.png";
 import globtekVehicleBakkieFront from "@/images/archive/GLOBTEK/VEHICLE/Untitled-3.png";
 import globtekVehicleBakkieBack from "@/images/archive/GLOBTEK/VEHICLE/Globtek_Vehicle-Branding_Bakkie_back.png";
-import globtekVehiclePolo from "@/images/archive/GLOBTEK/VEHICLE/Globtek_Vehicle-Branding_Polo.png";
+import globtekVehicleBmwRight from "@/images/archive/GLOBTEK/VEHICLE/Globtek_Hatchback_Car_Mockup_BMW_Right-Side.jpg";
+import globtekVehicleBmwFront from "@/images/archive/GLOBTEK/VEHICLE/Globtek_Hatchback_Car_Mockup_BMW_Front-Side.jpg";
+import globtekVehicleBmwBack from "@/images/archive/GLOBTEK/VEHICLE/Globtek_Hatchback_Car_Mockup_BMW_Back.jpg";
+import globtekVehicleBmwBackSide from "@/images/archive/GLOBTEK/VEHICLE/Globtek_Hatchback_Car_Mockup_BMW_Back-Side.jpg";
 
 export interface WorkCaseStudyProcessStep {
   title: string;
@@ -37,12 +43,23 @@ export interface WorkCaseStudyImages {
   hero: StaticImageData;
   cardHero?: StaticImageData;
   panels?: StaticImageData[];
+  mug?: StaticImageData;
+  stationery?: {
+    diaries: StaticImageData;
+  };
   vehicle?: {
-    left: StaticImageData;
-    right: StaticImageData;
-    front: StaticImageData;
-    back: StaticImageData;
-    polo: StaticImageData;
+    bt50: {
+      left: StaticImageData;
+      right: StaticImageData;
+      front: StaticImageData;
+      back: StaticImageData;
+    };
+    bmw: {
+      right: StaticImageData;
+      rear3q: StaticImageData;
+      rear: StaticImageData;
+      front3q: StaticImageData;
+    };
   };
   outdoor?: {
     gazebo1: StaticImageData;
@@ -146,11 +163,22 @@ export const WORK_CASE_STUDIES: Record<string, WorkCaseStudy> = {
       hero: globtekHeroBanner,
       cardHero: globtekHeroPreview,
       vehicle: {
-        left: globtekVehicleBakkie,
-        right: globtekVehicleBakkieRight,
-        front: globtekVehicleBakkieFront,
-        back: globtekVehicleBakkieBack,
-        polo: globtekVehiclePolo,
+        bt50: {
+          left: globtekVehicleBakkieFinal,
+          right: globtekVehicleBakkieRight,
+          front: globtekVehicleBakkieFront,
+          back: globtekVehicleBakkieBack,
+        },
+        bmw: {
+          right: globtekVehicleBmwRight,
+          rear3q: globtekVehicleBmwBackSide,
+          rear: globtekVehicleBmwBack,
+          front3q: globtekVehicleBmwFront,
+        },
+      },
+      mug: globtekMugMockup,
+      stationery: {
+        diaries: globtekStationeryDiaries,
       },
       outdoor: {
         gazebo1: globtekOutdoorGazebo1,

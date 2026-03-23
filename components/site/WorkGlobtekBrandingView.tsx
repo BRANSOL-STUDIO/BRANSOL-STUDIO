@@ -25,6 +25,8 @@ export default function WorkGlobtekBrandingView({
   const outdoor = caseStudy.images.outdoor;
   const profiles = caseStudy.images.profiles;
   const website = caseStudy.images.website;
+  const mug = caseStudy.images.mug;
+  const stationery = caseStudy.images.stationery;
 
   return (
     <div className="gb-branding-root" style={cssVars}>
@@ -234,12 +236,21 @@ export default function WorkGlobtekBrandingView({
               <span>Wave motif — brand pattern</span>
             </div>
           </div>
-          <div className="gb-ph gb-ph-dark" style={{ minHeight: 220 }}>
-            <div className="gb-ph-inner">
-              <div className="gb-ph-icon">||</div>
-              <span>Brand guidelines spread</span>
+          {mug ? (
+            <div className="gb-ph gb-ph-dark" style={{ minHeight: 220 }}>
+              <div className="gb-ph-inner">
+                <img src={mug.src} alt="" className="gb-ph-media" />
+                <span>Merch mockup — mug</span>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="gb-ph gb-ph-dark" style={{ minHeight: 220 }}>
+              <div className="gb-ph-inner">
+                <div className="gb-ph-icon">||</div>
+                <span>Brand guidelines spread</span>
+              </div>
+            </div>
+          )}
           <div className="gb-ph gb-ph-dark" style={{ minHeight: 220 }}>
             <div className="gb-ph-inner">
               <div className="gb-ph-icon">||</div>
@@ -260,12 +271,14 @@ export default function WorkGlobtekBrandingView({
           </h2>
         </div>
 
-        <p className="gb-body-text">
-          The fleet wrap applies the Globtek wave motif across vehicle models — designed for maximum road presence while staying true to the brand identity.
-        </p>
-
         {vehicle ? (
           <>
+            <p className="gb-body-text" style={{ maxWidth: 640 }}>
+              The fleet wrap applies the Globtek wave motif across vehicle models
+              — designed for maximum road presence while staying true to the brand
+              identity.
+            </p>
+
             <WorkGlobtekVehicleBrandingTabs vehicle={vehicle} />
 
             {/* COLLATERAL (included inside 03 like globtek-branding-3.html) */}
@@ -341,10 +354,23 @@ export default function WorkGlobtekBrandingView({
         </p>
 
         <div className="gb-img-grid-2" style={{ marginTop: 16 }}>
-          <div className="gb-ph gb-ph-dark gb-ph-tall">
-            <div className="gb-ph-inner">
-              <div className="gb-ph-icon">▤</div>
-              <span>Letterhead &amp; compliment slip</span>
+          <div className="gb-ph gb-ph-dark gb-ph-media-full-tile">
+            <div className="gb-ph-inner gb-ph-inner-media-full">
+              {stationery?.diaries ? (
+                <>
+                  <img
+                    src={stationery.diaries.src}
+                    alt=""
+                    className="gb-ph-media gb-ph-media-full"
+                  />
+                  <span>Stationery diary mockup</span>
+                </>
+              ) : (
+                <>
+                  <div className="gb-ph-icon">▤</div>
+                  <span>Letterhead &amp; compliment slip</span>
+                </>
+              )}
             </div>
           </div>
           <div className="gb-ph gb-ph-dark gb-ph-tall">

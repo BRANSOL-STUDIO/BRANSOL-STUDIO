@@ -230,8 +230,12 @@ body.site-cursor-active * {
   height: 7px;
   background: var(--chrome);
   background-size: 300% 300%;
-  animation: cSpin 3s linear infinite;
+  animation: none;
   transition: width 0.18s, height 0.18s;
+}
+
+body.site-cursor-hover .site-cursor-dot {
+  animation: cSpin 3s linear infinite;
 }
 .site-cursor-ring {
   width: 30px;
