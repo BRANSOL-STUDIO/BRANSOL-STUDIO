@@ -10,8 +10,9 @@ import globtekHeroBanner from "@/images/archive/GLOBTEK/Globtek_Hero_Banner.png"
 import globtekBrandProfiles from "@/images/archive/GLOBTEK/BRANDING/Globtek_Profiles_Mockup.png";
 import globtekRailProfile from "@/images/archive/GLOBTEK/BRANDING/Globtek_Rail-Profile_Mockup.png";
 import globtekMugMockup from "@/images/archive/GLOBTEK/BRANDING/Globtek_Mug_Mockup.jpg";
-import globtekOutdoorGazebo1 from "@/images/archive/GLOBTEK/OUTDOOR/GLOBTEK_Gazebo_Mockup_1_Q325.jpg";
-import globtekOutdoorGazebo2 from "@/images/archive/GLOBTEK/OUTDOOR/GLOBTEK_Gazebo_Mockup_2_Q325.jpg";
+import globtekBrandPattern from "@/images/archive/GLOBTEK/GLOBTEK_brand-pattern.png";
+import globtekOutdoorGazebo1 from "@/images/archive/GLOBTEK/OUTDOOR/GLOBTEK_Gazebo_Mockup_2_Q325.jpg";
+import globtekOutdoorGazebo2 from "@/images/archive/GLOBTEK/OUTDOOR/GLOBTEK_Gazebo_Mockup_3_Q325.jpg";
 import globtekStationeryDiaries from "@/images/archive/GLOBTEK/Stationery/Globtek_Stationery_Diaries.jpg";
 import globtekVehicleBakkie from "@/images/archive/GLOBTEK/VEHICLE/Globtek_Vehicle-Branding_Bakkie.png";
 import globtekVehicleBakkieFinal from "@/images/archive/GLOBTEK/VEHICLE/Globtek_Vehicle-Branding_Bakkie_final.jpg";
@@ -74,6 +75,7 @@ export interface WorkCaseStudyImages {
     megaMenu: StaticImageData;
     railInfra: StaticImageData;
   };
+  brandPattern?: StaticImageData;
 }
 
 export interface WorkCaseStudy {
@@ -193,6 +195,7 @@ export const WORK_CASE_STUDIES: Record<string, WorkCaseStudy> = {
         megaMenu: globtekMegaMenu,
         railInfra: globtekPanelRail,
       },
+      brandPattern: globtekBrandPattern,
     },
   },
 };

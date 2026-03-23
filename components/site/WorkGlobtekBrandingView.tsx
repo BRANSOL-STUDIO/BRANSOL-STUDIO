@@ -27,6 +27,7 @@ export default function WorkGlobtekBrandingView({
   const website = caseStudy.images.website;
   const mug = caseStudy.images.mug;
   const stationery = caseStudy.images.stationery;
+  const brandPattern = caseStudy.images.brandPattern;
 
   return (
     <div className="gb-branding-root" style={cssVars}>
@@ -262,12 +263,21 @@ export default function WorkGlobtekBrandingView({
 
         {/* Wave motif / pattern placeholders */}
         <div className="gb-brand-ph-grid">
-          <div className="gb-ph gb-ph-dark" style={{ minHeight: 220 }}>
-            <div className="gb-ph-inner">
-              <div className="gb-ph-icon">~</div>
-              <span>Wave motif — brand pattern</span>
+          {brandPattern ? (
+            <div className="gb-ph gb-ph-dark" style={{ minHeight: 220 }}>
+              <div className="gb-ph-inner">
+                <img src={brandPattern.src} alt="" className="gb-ph-media" />
+                <span>Wave motif — brand pattern</span>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="gb-ph gb-ph-dark" style={{ minHeight: 220 }}>
+              <div className="gb-ph-inner">
+                <div className="gb-ph-icon">~</div>
+                <span>Wave motif — brand pattern</span>
+              </div>
+            </div>
+          )}
           {mug ? (
             <div className="gb-ph gb-ph-dark" style={{ minHeight: 220 }}>
               <div className="gb-ph-inner">
