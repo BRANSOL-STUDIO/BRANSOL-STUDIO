@@ -1,8 +1,20 @@
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { fmtCurrency, fmtDate } from "@/lib/utils";
+import { fmtDate } from "@/lib/utils";
+import { BillingToolbar } from "@/components/admin/BillingToolbar";
 
 type BillingTab = "all" | "invoices" | "quotes";
+
+/** Match prototype: ZAR with 2 decimals (narrow space may appear per locale). */
+function fmtBillingZAR(amount: number): string {
+  return new Intl.NumberFormat("en-ZA", {
+    style: "currency",
+    currency: "ZAR",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(amount);
+}
 
 function statusLabel(status: string | null | undefined): string {
   const s = (status ?? "").toLowerCase();
@@ -101,8 +113,11 @@ export default async function AdminBillingPage({
 
   const invoiceDocs: BillingDoc[] = (invoices ?? []).map((inv) => {
     const items =
-      ((inv as unknown as { invoice_items?: { quantity: number | null; rate: number | null; name?: string | null }[] })
-        .invoice_items ?? []);
+      ((
+        inv as unknown as {
+          invoice_items?: { quantity: number | null; rate: number | null; name?: string | null }[];
+        }
+      ).invoice_items ?? []);
     const amount = items.reduce(
       (sum, item) => sum + Number(item.quantity ?? 0) * Number(item.rate ?? 0),
       0
@@ -113,8 +128,8 @@ export default async function AdminBillingPage({
       status: inv.status as string | null,
       description: items[0]?.name ?? "Invoice document",
       client:
-        ((inv as unknown as { organisations?: { name?: string | null } }).organisations
-          ?.name as string | undefined) ?? "—",
+        ((inv as unknown as { organisations?: { name?: string | null } }).organisations?.name as string | undefined) ??
+        "—",
       amount,
       date: (inv as { date?: string | null }).date ?? null,
       dueLabel: fmtDate((inv as { due_date?: string | null }).due_date ?? null),
@@ -124,8 +139,11 @@ export default async function AdminBillingPage({
 
   const quoteDocs: BillingDoc[] = (quotes ?? []).map((q) => {
     const items =
-      ((q as unknown as { quote_items?: { quantity: number | null; rate: number | null; name?: string | null }[] })
-        .quote_items ?? []);
+      ((
+        q as unknown as {
+          quote_items?: { quantity: number | null; rate: number | null; name?: string | null }[];
+        }
+      ).quote_items ?? []);
     const amount = items.reduce(
       (sum, item) => sum + Number(item.quantity ?? 0) * Number(item.rate ?? 0),
       0
@@ -136,8 +154,8 @@ export default async function AdminBillingPage({
       status: q.status as string | null,
       description: items[0]?.name ?? "Quote document",
       client:
-        ((q as unknown as { organisations?: { name?: string | null } }).organisations
-          ?.name as string | undefined) ?? "—",
+        ((q as unknown as { organisations?: { name?: string | null } }).organisations?.name as string | undefined) ??
+        "—",
       amount,
       date: (q as { date?: string | null }).date ?? null,
       dueLabel: fmtDate((q as { valid_until?: string | null }).valid_until ?? null),
@@ -153,67 +171,75 @@ export default async function AdminBillingPage({
   const totalPaid = paidInvoices.reduce((sum, d) => sum + d.amount, 0);
   const totalPending = pendingInvoices.reduce((sum, d) => sum + d.amount, 0);
   const totalQuoted = quoteDocs.reduce((sum, d) => sum + d.amount, 0);
-  const paidPct = totalBilled > 0 ? Math.round((totalPaid / totalBilled) * 100) : 0;
+  const paidPct =
+    totalBilled > 0 ? Math.round((totalPaid / totalBilled) * 100) : 0;
+  const outPct = totalBilled > 0 ? 100 - paidPct : 0;
 
   const docs =
     tab === "invoices"
       ? invoiceDocs
       : tab === "quotes"
         ? quoteDocs
-        : [...invoiceDocs, ...quoteDocs].sort((a, b) =>
-            new Date(b.date ?? 0).getTime() - new Date(a.date ?? 0).getTime()
+        : [...invoiceDocs, ...quoteDocs].sort(
+            (a, b) => new Date(b.date ?? 0).getTime() - new Date(a.date ?? 0).getTime()
           );
 
   return (
     <>
-      <header style={{ marginBottom: 24 }}>
-        <h2
-          style={{
-            fontFamily: "var(--font-syne), sans-serif",
-            fontSize: 22,
-            fontWeight: 800,
-            letterSpacing: "-.03em",
-            marginBottom: 3,
-          }}
-        >
-          Billing
-        </h2>
-        <div
-          style={{
-            fontFamily: "var(--font-dm-mono), monospace",
-            fontSize: 11,
-            color: "var(--text-ter)",
-            letterSpacing: ".14em",
-          }}
-        >
-          {invoiceDocs.length} invoices · {quoteDocs.length} quotes
+      <header className="billing-page-header">
+        <div>
+          <h2
+            style={{
+              fontFamily: "var(--font-syne), sans-serif",
+              fontSize: 22,
+              fontWeight: 800,
+              letterSpacing: "-.03em",
+              marginBottom: 3,
+            }}
+          >
+            Billing
+          </h2>
+          <div
+            style={{
+              fontFamily: "var(--font-dm-mono), monospace",
+              fontSize: 11,
+              color: "var(--text-ter)",
+              letterSpacing: ".14em",
+            }}
+          >
+            {invoiceDocs.length} invoices · {quoteDocs.length} quotes
+          </div>
         </div>
+        <BillingToolbar />
       </header>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 3, marginBottom: 24 }}>
+      <div className="billing-kpi-grid">
         <div className="billing-kpi-card">
           <div className="billing-kpi-label">Total Billed</div>
-          <div className="billing-kpi-value">{fmtCurrency(totalBilled)}</div>
+          <div className="billing-kpi-value">{fmtBillingZAR(totalBilled)}</div>
           <div className="billing-kpi-sub">{invoiceDocs.length} invoices raised</div>
         </div>
         <div className="billing-kpi-card">
           <div className="billing-kpi-label">Collected</div>
           <div className="billing-kpi-value" style={{ color: "var(--r4)" }}>
-            {fmtCurrency(totalPaid)}
+            {fmtBillingZAR(totalPaid)}
           </div>
           <div className="billing-kpi-sub">{paidPct}% of billed</div>
         </div>
         <div className="billing-kpi-card">
           <div className="billing-kpi-label">Outstanding</div>
-          <div className="billing-kpi-value" style={{ color: totalPending > 0 ? "var(--r3)" : "var(--text-ter)" }}>
-            {fmtCurrency(totalPending)}
+          <div
+            className="billing-kpi-value"
+            style={{ color: totalPending > 0 ? "var(--r3)" : "var(--text-ter)" }}
+          >
+            {fmtBillingZAR(totalPending)}
           </div>
           <div className="billing-kpi-sub">{pendingInvoices.length} pending</div>
         </div>
         <div className="billing-kpi-card">
           <div className="billing-kpi-label">Open Quotes</div>
           <div className="billing-kpi-value" style={{ color: "var(--iris)" }}>
-            {fmtCurrency(totalQuoted)}
+            {fmtBillingZAR(totalQuoted)}
           </div>
           <div className="billing-kpi-sub">
             {openQuotes.length} open · {acceptedQuotes.length} accepted
@@ -222,7 +248,14 @@ export default async function AdminBillingPage({
       </div>
 
       <div style={{ marginBottom: 24 }}>
-        <div className="dashboard-progress-track" style={{ height: 3, borderRadius: 2 }}>
+        <div
+          style={{
+            height: 3,
+            background: "var(--glass-border)",
+            borderRadius: 2,
+            overflow: "hidden",
+          }}
+        >
           <div
             style={{
               height: "100%",
@@ -237,7 +270,7 @@ export default async function AdminBillingPage({
           <span className="billing-progress-label" style={{ color: "var(--r4)" }}>
             {paidPct}% collected
           </span>
-          <span className="billing-progress-label">{100 - paidPct}% outstanding</span>
+          <span className="billing-progress-label">{outPct}% outstanding</span>
         </div>
       </div>
 
@@ -265,126 +298,188 @@ export default async function AdminBillingPage({
               }}
             >
               {tabItem.label}
-              {tabItem.count != null ? ` ${tabItem.count}` : ""}
+              {tabItem.count != null ? (
+                <span style={{ opacity: 0.6 }}> {tabItem.count}</span>
+              ) : null}
             </Link>
           );
         })}
       </div>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "90px 1fr 160px 140px 110px",
-          gap: 0,
-          padding: "8px 16px",
-          background: "rgba(255,255,255,.02)",
-          border: "1px solid var(--glass-border)",
-          borderBottom: "none",
-        }}
-      >
-        {["Ref", "Description", "Client", "Amount", "Status"].map((h) => (
-          <div key={h} className="billing-table-head">
-            {h}
+      <div className="billing-table-scroll">
+        <div className="billing-table-inner">
+          {docs.length > 0 ? (
+            <>
+          <div className="billing-table-head-row">
+            {["Ref", "Description", "Client", "Amount", "Status", ""].map((h) => (
+              <div key={h || "actions"} className="billing-table-head">
+                {h}
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
 
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        {docs.map((d, i) => {
-          const tone = statusTone(d.status);
-          const showBottomBorder = i < docs.length - 1;
-          return (
-            <Link
-              key={`${d.type}-${d.id}`}
-              href={d.href}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "90px 1fr 160px 140px 110px",
-                gap: 0,
-                padding: "14px 16px",
-                border: "1px solid var(--glass-border)",
-                borderBottom: showBottomBorder ? "none" : "1px solid var(--glass-border)",
-                background: "var(--surface)",
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {docs.map((d) => {
+              const tone = statusTone(d.status);
+              const statusNorm = (d.status ?? "").toLowerCase();
+              const actionBtn: CSSProperties = {
+                padding: "5px 10px",
+                fontSize: 10,
                 textDecoration: "none",
-                color: "inherit",
-              }}
-            >
-              <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: 3 }}>
-                <div className="billing-ref">{d.id}</div>
-                <div style={{ display: "inline-flex" }}>
-                  <span
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+              };
+              return (
+                <div key={`${d.type}-${d.id}`} className="billing-row-wrap">
+                  <Link href={d.href} style={{ display: "contents" }} aria-label={`Open ${d.id}`}>
+                    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: 3 }}>
+                      <div className="billing-ref">{d.id}</div>
+                      <div style={{ display: "inline-flex" }}>
+                        <span
+                          style={{
+                            fontFamily: "var(--font-dm-mono), monospace",
+                            fontSize: 9,
+                            letterSpacing: ".16em",
+                            textTransform: "uppercase",
+                            padding: "2px 7px",
+                            color: d.type === "invoice" ? "var(--iris)" : "var(--teal)",
+                            border: `1px solid ${
+                              d.type === "invoice"
+                                ? "rgba(124,131,229,.25)"
+                                : "rgba(78,205,196,.25)"
+                            }`,
+                            background:
+                              d.type === "invoice"
+                                ? "rgba(124,131,229,.06)"
+                                : "rgba(78,205,196,.06)",
+                          }}
+                        >
+                          {d.type === "invoice" ? "INV" : "QUO"}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        gap: 3,
+                        paddingRight: 12,
+                        minWidth: 0,
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontSize: 13,
+                          color: "var(--text-pri)",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        {d.description}
+                      </div>
+                      <div className="billing-row-sub">
+                        {fmtDate(d.date)}
+                        {d.dueLabel !== "—" ? ` · Due ${d.dueLabel}` : ""}
+                      </div>
+                    </div>
+
+                    <div style={{ display: "flex", alignItems: "center", paddingRight: 12, minWidth: 0 }}>
+                      <div
+                        style={{
+                          fontSize: 12,
+                          color: "var(--text-sec)",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        {d.client}
+                      </div>
+                    </div>
+
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <div
+                        style={{
+                          fontFamily: "var(--font-syne), sans-serif",
+                          fontSize: 14,
+                          fontWeight: 700,
+                          letterSpacing: "-.02em",
+                        }}
+                      >
+                        {fmtBillingZAR(d.amount)}
+                      </div>
+                    </div>
+
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
+                      <span
+                        style={{
+                          fontFamily: "var(--font-dm-mono), monospace",
+                          fontSize: 9,
+                          letterSpacing: ".18em",
+                          textTransform: "uppercase",
+                          padding: "3px 8px",
+                          color: tone.color,
+                          border: `1px solid ${tone.border}`,
+                          background: tone.background,
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {statusLabel(d.status)}
+                      </span>
+                    </div>
+                  </Link>
+
+                  <div
                     style={{
-                      fontFamily: "var(--font-dm-mono), monospace",
-                      fontSize: 9,
-                      letterSpacing: ".16em",
-                      textTransform: "uppercase",
-                      padding: "2px 7px",
-                      color: d.type === "invoice" ? "var(--iris)" : "var(--r6)",
-                      border: `1px solid ${d.type === "invoice" ? "rgba(124,131,229,.25)" : "rgba(78,205,196,.25)"}`,
-                      background: d.type === "invoice" ? "rgba(124,131,229,.06)" : "rgba(78,205,196,.06)",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 6,
+                      justifyContent: "flex-end",
+                      flexWrap: "wrap",
                     }}
                   >
-                    {d.type === "invoice" ? "INV" : "QUO"}
-                  </span>
+                    {d.type === "invoice" && statusNorm === "pending" ? (
+                      <span
+                        className="dashboard-tb-btn"
+                        style={{
+                          ...actionBtn,
+                          color: "var(--r4)",
+                          borderColor: "rgba(6,214,160,.25)",
+                          cursor: "not-allowed",
+                          opacity: 0.65,
+                        }}
+                        title="Mark paid — connect workflow in settings"
+                      >
+                        Mark Paid
+                      </span>
+                    ) : null}
+                    {d.type === "quote" && statusNorm === "accepted" ? (
+                      <Link
+                        href={`/admin/billing/invoices/new?fromQuote=${encodeURIComponent(d.id)}`}
+                        className="dashboard-tb-btn"
+                        style={actionBtn}
+                      >
+                        → Invoice
+                      </Link>
+                    ) : null}
+                    <Link href={d.href} className="dashboard-tb-btn" style={actionBtn}>
+                      Edit
+                    </Link>
+                  </div>
                 </div>
-              </div>
-
-              <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: 3, paddingRight: 12 }}>
-                <div style={{ fontSize: 13, color: "var(--text-pri)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                  {d.description}
-                </div>
-                <div className="billing-row-sub">
-                  {fmtDate(d.date)}{d.dueLabel !== "—" ? ` · Due ${d.dueLabel}` : ""}
-                </div>
-              </div>
-
-              <div style={{ display: "flex", alignItems: "center", paddingRight: 12 }}>
-                <div style={{ fontSize: 12, color: "var(--text-sec)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                  {d.client}
-                </div>
-              </div>
-
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <div style={{ fontFamily: "var(--font-syne), sans-serif", fontSize: 14, fontWeight: 700, letterSpacing: "-.02em" }}>
-                  {fmtCurrency(d.amount)}
-                </div>
-              </div>
-
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <span
-                  style={{
-                    fontFamily: "var(--font-dm-mono), monospace",
-                    fontSize: 9,
-                    letterSpacing: ".18em",
-                    textTransform: "uppercase",
-                    padding: "3px 8px",
-                    color: tone.color,
-                    border: `1px solid ${tone.border}`,
-                    background: tone.background,
-                  }}
-                >
-                  {statusLabel(d.status)}
-                </span>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
-
-      {docs.length === 0 && (
-        <div
-          style={{
-            padding: 48,
-            textAlign: "center",
-            fontFamily: "var(--font-dm-mono), monospace",
-            fontSize: 11,
-            color: "var(--text-ter)",
-            letterSpacing: ".2em",
-          }}
-        >
-          NO DOCUMENTS
+              );
+            })}
+          </div>
+            </>
+          ) : (
+            <div className="billing-empty">NO DOCUMENTS</div>
+          )}
         </div>
-      )}
+      </div>
     </>
   );
 }

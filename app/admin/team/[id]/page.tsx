@@ -171,7 +171,7 @@ export default async function AdminMemberProfilePage({
     (profile.name || profile.email || "Member").length > 18
       ? (profile.name || profile.email || "Member")
           .split(" ")
-          .map((word, idx) => (idx === 0 ? word : `${word[0]}.`))
+          .map((word: string, idx: number) => (idx === 0 ? word : `${word[0]}.`))
           .join(" ")
       : profile.name || profile.email || "Member";
 

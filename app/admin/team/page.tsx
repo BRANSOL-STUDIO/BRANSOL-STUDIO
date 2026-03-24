@@ -24,7 +24,6 @@ export default async function AdminTeamPage() {
     if (r.profile_id) projectCountByProfile[r.profile_id] = (projectCountByProfile[r.profile_id] ?? 0) + 1;
   });
 
-  const studioRoles = ["admin", "super_admin"] as const;
   function normalizeRole(role: string | null): UserRole {
     const normalized = (role ?? "client")
       .toLowerCase()
@@ -33,19 +32,22 @@ export default async function AdminTeamPage() {
     if (normalized === "admin" || normalized === "super_admin") return normalized;
     return "client";
   }
-  const members: MemberForList[] = (profiles ?? []).map((p, i) => ({
-    role: normalizeRole(p.role),
+  const members: MemberForList[] = (profiles ?? []).map((p, i) => {
+    const role = normalizeRole(p.role);
+    return {
+    role,
     id: p.id,
     name: p.name ?? null,
     email: p.email ?? null,
-    type: studioRoles.includes(normalizeRole(p.role)) ? "studio" : "client",
+    type: role === "admin" || role === "super_admin" ? "studio" : "client",
     orgName: p.organisation_id ? orgMap.get(p.organisation_id) ?? null : null,
     avatar: getInitials(p.name, p.email),
     avatarUrl: p.avatar ?? null,
     color: getAvatarColor(i),
     projectCount: projectCountByProfile[p.id] ?? 0,
     joinedDate: p.created_at ? fmtDate(p.created_at) : null,
-  }));
+    };
+  });
 
   const studioCount = members.filter((m) => m.type === "studio").length;
   const clientCount = members.filter((m) => m.type === "client").length;

@@ -36,6 +36,12 @@ const icons = {
       <line x1="12" y1="22.08" x2="12" y2="12" />
     </svg>
   ),
+  review: (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M9 11l3 3L22 4" />
+      <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+    </svg>
+  ),
   team: (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
@@ -73,6 +79,7 @@ const adminNav = [
   { href: "/admin/clients", label: "Clients", iconKey: "clients" as const },
   { href: "/admin/projects", label: "Projects", iconKey: "projects" as const },
   { href: "/admin/deliverables", label: "Deliverables", iconKey: "deliverables" as const },
+  { href: "/admin/review", label: "Review Board", iconKey: "review" as const },
   { href: "/admin/onboard", label: "Onboard Client", iconKey: "onboard" as const },
   { href: "/admin/subscriptions", label: "Subscriptions", iconKey: "subscriptions" as const },
   { divider: true, label: "Management" as const },
