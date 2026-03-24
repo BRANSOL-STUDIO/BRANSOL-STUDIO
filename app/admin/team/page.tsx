@@ -1,6 +1,6 @@
 import { createClient, createServiceClient } from "@/lib/supabase/server";
 import { MembersView, type MemberForList } from "@/components/admin/MembersView";
-import { getInitials, getAvatarColor } from "@/lib/utils";
+import { fmtDate, getInitials, getAvatarColor } from "@/lib/utils";
 import type { UserRole } from "@/lib/types";
 
 export default async function AdminTeamPage() {
@@ -9,7 +9,7 @@ export default async function AdminTeamPage() {
 
   const { data: profiles } = await service
     .from("profiles")
-    .select("id, name, email, role, organisation_id, avatar")
+    .select("id, name, email, role, organisation_id, avatar, created_at")
     .order("role", { ascending: false });
 
   const orgIds = Array.from(new Set((profiles ?? []).map((p) => p.organisation_id).filter(Boolean))) as string[];
@@ -44,23 +44,16 @@ export default async function AdminTeamPage() {
     avatarUrl: p.avatar ?? null,
     color: getAvatarColor(i),
     projectCount: projectCountByProfile[p.id] ?? 0,
+    joinedDate: p.created_at ? fmtDate(p.created_at) : null,
   }));
 
   const studioCount = members.filter((m) => m.type === "studio").length;
   const clientCount = members.filter((m) => m.type === "client").length;
-
   return (
-    <div className="space-y-0">
-      <div className="flex items-center justify-end gap-4 mb-6">
-        <button type="button" className="dashboard-tb-btn primary">
-          + Invite Admin
-        </button>
-      </div>
-      <MembersView
-        members={members}
-        studioCount={studioCount}
-        clientCount={clientCount}
-      />
-    </div>
+    <MembersView
+      members={members}
+      studioCount={studioCount}
+      clientCount={clientCount}
+    />
   );
 }

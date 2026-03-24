@@ -55,9 +55,11 @@ export default async function AdminLayout({
     redirect("/dashboard");
   }
   return (
-    <div className="flex h-screen overflow-hidden bg-[var(--void)]">
+    <div className="dashboard-shell">
       <AdminSidebar />
-      <main className="flex-1 overflow-auto p-6">{children}</main>
+      <div className="dashboard-main">
+        <div className="dashboard-content">{children}</div>
+      </div>
     </div>
   );
 }

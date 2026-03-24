@@ -73,26 +73,19 @@ const adminNav = [
   { href: "/admin/clients", label: "Clients", iconKey: "clients" as const },
   { href: "/admin/projects", label: "Projects", iconKey: "projects" as const },
   { href: "/admin/deliverables", label: "Deliverables", iconKey: "deliverables" as const },
+  { href: "/admin/onboard", label: "Onboard Client", iconKey: "onboard" as const },
+  { href: "/admin/subscriptions", label: "Subscriptions", iconKey: "subscriptions" as const },
+  { divider: true, label: "Management" as const },
   { href: "/admin/team", label: "Members", iconKey: "team" as const },
   { href: "/admin/billing", label: "Billing", iconKey: "billing" as const },
-  { href: "/admin/onboard", label: "Onboard", iconKey: "onboard" as const },
-  { href: "/admin/subscriptions", label: "Subscriptions", iconKey: "subscriptions" as const },
-];
+] as const;
 
 export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside
-      className="w-56 flex-shrink-0 flex flex-col border-r overflow-y-auto dashboard-sidebar"
-      style={{
-        background: "rgba(4,4,10,.55)",
-        backdropFilter: "blur(28px)",
-        WebkitBackdropFilter: "blur(28px)",
-        borderColor: "rgba(255,255,255,.12)",
-      }}
-    >
-      <div className="p-4 border-b" style={{ borderColor: "var(--glass-border)" }}>
+    <aside className="w-56 flex-shrink-0 flex flex-col border-r overflow-y-auto dashboard-sidebar">
+      <div className="dashboard-sidebar-logo">
         <Link
           href="/admin/overview"
           className="font-extrabold text-sm no-underline"
@@ -101,27 +94,44 @@ export function AdminSidebar() {
           <span className="chrome-text">BRAN</span>
           <span style={{ color: "var(--text-pri)" }}>SOL</span>
         </Link>
-        <span className="block text-[9px] tracking-wider uppercase mt-1" style={{ color: "var(--text-ter)" }}>
-          Studio
-        </span>
+        <span className="dashboard-role-tag">Studio</span>
       </div>
       <nav className="dashboard-nav-section flex-1 p-2">
-        {adminNav.map(({ href, label, iconKey }) => {
+        {adminNav.map((item) => {
+          if ("divider" in item) {
+            return (
+              <div key={item.label} className="dashboard-nav-divider">
+                <span>{item.label}</span>
+              </div>
+            );
+          }
+
           const active =
-            pathname === href ||
-            (href !== "/admin/overview" && pathname?.startsWith(href));
+            pathname === item.href ||
+            (item.href !== "/admin/overview" && pathname?.startsWith(item.href));
+
           return (
             <Link
-              key={href}
-              href={href}
+              key={item.href}
+              href={item.href}
               className={`dashboard-nav-item ${active ? "active" : ""}`}
+              aria-current={active ? "page" : undefined}
             >
-              <span className="dashboard-nav-icon">{icons[iconKey]}</span>
-              <span>{label}</span>
+              <span className="dashboard-nav-icon">{icons[item.iconKey]}</span>
+              <span>{item.label}</span>
             </Link>
           );
         })}
       </nav>
+      <div className="dashboard-sidebar-footer">
+        <div className="dashboard-user-chip">
+          <div className="dashboard-user-avatar">SA</div>
+          <div>
+            <div className="dashboard-user-name">Studio Admin</div>
+            <div className="dashboard-user-org">BRANSOL HQ</div>
+          </div>
+        </div>
+      </div>
     </aside>
   );
 }
