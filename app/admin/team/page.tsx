@@ -1,10 +1,13 @@
-import { createClient } from "@/lib/supabase/server";
+import { createClient, createServiceClient } from "@/lib/supabase/server";
 import { MembersView, type MemberForList } from "@/components/admin/MembersView";
 import { getInitials, getAvatarColor } from "@/lib/utils";
+import type { UserRole } from "@/lib/types";
 
 export default async function AdminTeamPage() {
   const supabase = await createClient();
-  const { data: profiles } = await supabase
+  const service = createServiceClient();
+
+  const { data: profiles } = await service
     .from("profiles")
     .select("id, name, email, role, organisation_id, avatar")
     .order("role", { ascending: false });
@@ -21,13 +24,21 @@ export default async function AdminTeamPage() {
     if (r.profile_id) projectCountByProfile[r.profile_id] = (projectCountByProfile[r.profile_id] ?? 0) + 1;
   });
 
-  const studioRoles = ["admin", "super_admin"];
+  const studioRoles = ["admin", "super_admin"] as const;
+  function normalizeRole(role: string | null): UserRole {
+    const normalized = (role ?? "client")
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, "_");
+    if (normalized === "admin" || normalized === "super_admin") return normalized;
+    return "client";
+  }
   const members: MemberForList[] = (profiles ?? []).map((p, i) => ({
+    role: normalizeRole(p.role),
     id: p.id,
     name: p.name ?? null,
     email: p.email ?? null,
-    role: p.role as "client" | "admin" | "super_admin",
-    type: studioRoles.includes(p.role) ? "studio" : "client",
+    type: studioRoles.includes(normalizeRole(p.role)) ? "studio" : "client",
     orgName: p.organisation_id ? orgMap.get(p.organisation_id) ?? null : null,
     avatar: getInitials(p.name, p.email),
     avatarUrl: p.avatar ?? null,

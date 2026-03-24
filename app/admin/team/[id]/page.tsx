@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { createClient, createServiceClient } from "@/lib/supabase/server";
 import { getInitials } from "@/lib/utils";
 import { fmtDate } from "@/lib/utils";
 
@@ -17,16 +17,17 @@ export default async function AdminMemberProfilePage({
 }) {
   const { id } = await params;
   const supabase = await createClient();
+  const service = createServiceClient();
 
   const { data: authData } = await supabase.auth.getUser();
   const currentUserId = authData?.user?.id;
   const currentProfile = currentUserId
-    ? await supabase.from("profiles").select("role").eq("id", currentUserId).maybeSingle()
+    ? await service.from("profiles").select("role").eq("id", currentUserId).maybeSingle()
     : { data: null };
   const isSuperAdmin =
     (currentProfile.data?.role as string)?.toLowerCase() === "super_admin";
 
-  const { data: profile } = await supabase
+  const { data: profile } = await service
     .from("profiles")
     .select("id, name, email, role, organisation_id, created_at, avatar")
     .eq("id", id)
@@ -38,7 +39,7 @@ export default async function AdminMemberProfilePage({
 
   let orgName: string | null = null;
   if (profile.organisation_id) {
-    const { data: org } = await supabase
+    const { data: org } = await service
       .from("organisations")
       .select("name")
       .eq("id", profile.organisation_id)
@@ -46,14 +47,14 @@ export default async function AdminMemberProfilePage({
     orgName = org?.name ?? null;
   }
 
-  const { data: teamRows } = await supabase
+  const { data: teamRows } = await service
     .from("project_team")
     .select("project_id")
     .eq("profile_id", id);
   const projectIds = (teamRows ?? []).map((r) => r.project_id).filter(Boolean);
   const { data: projects } =
     projectIds.length > 0
-      ? await supabase
+      ? await service
           .from("projects")
           .select("id, title, status, progress, color, organisations(name)")
           .in("id", projectIds)
